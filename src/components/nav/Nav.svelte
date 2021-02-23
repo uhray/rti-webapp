@@ -21,6 +21,13 @@
         href="blog">blog</a
       >
     </li>
+    <li>
+      <a
+        rel="prefetch"
+        aria-current={segment === 'blog' ? 'page' : undefined}
+        href="components">components</a
+      >
+    </li>
   </ul>
 </nav>
 

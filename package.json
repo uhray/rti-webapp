@@ -15,7 +15,8 @@
     "polka": "next",
     "postcss": "^8.2.6",
     "postcss-scss": "^3.0.4",
-    "sirv": "^1.0.0"
+    "sirv": "^1.0.0",
+    "uikit": "^3.6.16"
   },
   "devDependencies": {
     "@tsconfig/svelte": "^1.0.10",
