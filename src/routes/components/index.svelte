@@ -7,8 +7,7 @@
   <title>Components</title>
 </svelte:head>
 
-<div>
-  <h1>Components Page</h1>
+<h1>Components Page</h1>
 
 <h3>Search Bar</h3>
 <SearchBar />
@@ -19,21 +18,3 @@
 <Checkbox />
 <br />
 <br />
-
-<ul class="uk-breadcrumb">
-  <li>
-    <a href="#">Home</a>
-  </li>
-  <li>
-    <a href="#">Linked Category</a>
-  </li>
-  <li class="uk-disabled">
-    <a>Disabled Category</a>
-  </li>
-  <li>
-    <span>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    </span>
-  </li>
-</ul>
