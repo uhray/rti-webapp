@@ -2,16 +2,11 @@
   // javascript //
 </script>
 
-<style src="./Checkbox.scss">
-  .uk-checkbox {
-    color: #a6adc4;
+<style src="./Button.scss">
 
-    border-radius: 4px;
-  }
 </style>
 
 <!-- HTML -->
-<span uk-search-icon />
 <input class="uk-checkbox" type="checkbox" />
 
 <!-- ==== -->
