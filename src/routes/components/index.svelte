@@ -6,6 +6,8 @@
   <title>Components</title>
 </svelte:head>
 
-<h1>Components Page</h1>
+<div>
+  <h1>Components Page</h1>
 
-<SearchBar />
+  <SearchBar />
+</div>
