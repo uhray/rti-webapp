@@ -17,13 +17,13 @@
 <h1>Components Page</h1>
 
 <!-- ===================================================== -->
-<h3>Search Bar</h3>
+<h2>Search Bar</h2>
 <SearchBar />
 <br />
 <br />
 
 <!-- ===================================================== -->
-<h3>Cards</h3>
+<h2>Cards</h2>
 <h5>Default Card</h5>
 <Card type="default" />
 <br />
@@ -40,7 +40,7 @@
 <br />
 
 <!-- ===================================================== -->
-<h3>Icons</h3>
+<h2>Icons</h2>
 <Icon type="default-avatar" />
 <br />
 <Icon type="tag" />
@@ -69,7 +69,7 @@
 <br />
 
 <!-- ===================================================== -->
-<h3>Drop Down</h3>
+<h2>Drop Down</h2>
 <DropDown
   type="default"
   text="Dropdown"
@@ -80,31 +80,31 @@
 <br />
 
 <!-- ===================================================== -->
-<h3>Dividers</h3>
+<h2>Dividers</h2>
 <Divider type="default" />
 <br />
 <br />
 
 <!-- ===================================================== -->
-<h3>Progress Bar</h3>
+<h2>Progress Bar</h2>
 <ProgressBar />
 <br />
 <br />
 
 <!-- ===================================================== -->
-<h3>Radio Group</h3>
+<h2>Radio Group</h2>
 <Radios options={['A', 'B', 'C', 'D', 'E']} />
 <br />
 <br />
 
 <!-- ===================================================== -->
-<h3>Checkbox</h3>
+<h2>Checkbox</h2>
 <Checkbox />
 <br />
 <br />
 
 <!-- ===================================================== -->
-<h3>Button</h3>
+<h2>Button</h2>
 <Button disabled>Disabled</Button>
 <Button primary>Primary</Button>
 <Button secondary>Secondary</Button>
