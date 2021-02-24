@@ -1,0 +1,8 @@
+button {
+  border-radius: 4px;
+
+  &:disabled {
+    background-color: rgba(36, 62, 147, 0.15);
+    color: #fff;
+  }
+}

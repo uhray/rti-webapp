@@ -2,7 +2,7 @@
   // javascript //
 </script>
 
-<style src="./Button.scss">
+<style src="./Checkbox.scss">
 
 </style>
 
