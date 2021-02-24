@@ -1,0 +1,66 @@
+.Card {
+  .Card-container {
+    border-radius: 10px;
+  }
+  .Card-header {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .Card-headerFeed {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .Card-subTitle {
+  }
+  .Card-subTitleFeed {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 20px;
+    color: #73767f;
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .Card-body {
+    padding-top: 25px;
+    padding-bottom: 20px;
+    padding: 15px;
+  }
+  .Card-content {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .Card-feedBottomSection {
+    padding-left: 25px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .Card-iconGroup {
+    margin-left: 35px;
+    margin-right: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .Card-subSectionIcon {
+    margin-right: 13px;
+    margin-left: 13px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .Card-reportScore {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #2e5ff6;
+  }
+}

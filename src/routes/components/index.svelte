@@ -4,6 +4,9 @@
   import ProgressBar from '../../components/progressbar/ProgressBar.svelte';
   import Radios from '../../components/radios/Radios.svelte';
   import Button from '../../components/button/Button.svelte';
+  import Card from '../../components/card/Card.svelte';
+  import Divider from '../../components/divider/Divider.svelte';
+  import Icon from '../../components/icon/Icon.svelte';
 </script>
 
 <svelte:head>
@@ -14,6 +17,40 @@
 
 <h3>Search Bar</h3>
 <SearchBar />
+<br />
+<br />
+
+<h3>Card</h3>
+<Card type="default" />
+<br />
+<Card type="feed" />
+<br />
+<br />
+
+<h3>Icons</h3>
+<Icon type="default-avatar" />
+<br />
+<Icon type="tag" />
+<br />
+<Icon type="slash-eye" />
+<br />
+<Icon type="trashcan" />
+<br />
+<Icon type="green-check-circle" />
+<br />
+<Icon type="list-inactive" />
+<br />
+<Icon type="list-active" />
+<br />
+<Icon type="drawer-inactive" />
+<br />
+<Icon type="drawer-active" />
+<br />
+<br />
+<br />
+
+<h3>Dividers</h3>
+<Divider type="default" />
 <br />
 <br />
 
