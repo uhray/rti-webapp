@@ -16,11 +16,13 @@
 
 <h1>Components Page</h1>
 
+<!-- ===================================================== -->
 <h3>Search Bar</h3>
 <SearchBar />
 <br />
 <br />
 
+<!-- ===================================================== -->
 <h3>Cards</h3>
 <h5>Default Card</h5>
 <Card type="default" />
@@ -29,10 +31,15 @@
 <Card type="feed" />
 <br />
 <h5>Feed Card with Image</h5>
-<Card type="feed-image" />
+<div class="uk-flex uk-child-width-1-3">
+  <Card type="feed-image" />
+  <Card type="feed-image" />
+  <Card type="feed-image" />
+</div>
 <br />
 <br />
 
+<!-- ===================================================== -->
 <h3>Icons</h3>
 <Icon type="default-avatar" />
 <br />
@@ -61,35 +68,42 @@
 <br />
 <br />
 
+<!-- ===================================================== -->
 <h3>Drop Down</h3>
 <DropDown
   type="default"
   text="Dropdown"
   choiceHeader="Some Choices"
-  choices={['A Choice', 'Another Choice', 'A Third Choice']} />
+  choices={['A Choice', 'Another Choice', 'A Third Choice']}
+/>
 <br />
 <br />
 
+<!-- ===================================================== -->
 <h3>Dividers</h3>
 <Divider type="default" />
 <br />
 <br />
 
+<!-- ===================================================== -->
 <h3>Progress Bar</h3>
 <ProgressBar />
 <br />
 <br />
 
+<!-- ===================================================== -->
 <h3>Radio Group</h3>
-<Radios numOfOpts={['A', 'B', 'C', 'D', 'E']} />
+<Radios options={['A', 'B', 'C', 'D', 'E']} />
 <br />
 <br />
 
+<!-- ===================================================== -->
 <h3>Checkbox</h3>
 <Checkbox />
 <br />
 <br />
 
+<!-- ===================================================== -->
 <h3>Button</h3>
 <Button disabled>Disabled</Button>
 <Button primary>Primary</Button>
@@ -115,3 +129,5 @@
 
 <br />
 <br />
+
+<!-- ===================================================== -->

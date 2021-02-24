@@ -66,7 +66,7 @@
     </div>
   {/if}
   {#if type === 'feed-image'}
-    <div class="uk-child-width-1-3">
+    <div class="uk-child-width-1-1">
       <div class="uk-card uk-card-default uk-flex Card-container">
         <div class="uk-card-body uk-width-1-1 Card-body">
           <div class="uk-flex">
@@ -96,6 +96,7 @@
               </div>
             </div>
           </div>
+          <br />
           <div class="uk-flex uk-child-width-1-4 Card-tabGroup">
             <div class="Card-tabGroupNormal"><Icon type="tag" /></div>
             <div class="Card-tabGroupNormal"><Icon type="slash-eye" /></div>
