@@ -38,10 +38,7 @@
     line-height: 20px;
   }
   .Card-feedBottomSection {
-    padding-left: 25px;
-    padding-right: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    min-height: 35px;
   }
   .Card-iconGroup {
     margin-left: 35px;
@@ -54,6 +51,15 @@
     margin-left: 13px;
     margin-top: auto;
     margin-bottom: auto;
+  }
+  .Card-subSectionText {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    text-align: center;
   }
   .Card-reportScore {
     font-family: SF Pro Display;

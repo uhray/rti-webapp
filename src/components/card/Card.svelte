@@ -1,6 +1,7 @@
 <script>
   import Icon from '../icon/Icon.svelte';
   import Divider from '../divider/Divider.svelte';
+  import DropDown from '../dropdown/DropDown.svelte';
 </script>
 
 <!-- HTML -->
@@ -31,6 +32,19 @@
         <div class="uk-flex uk-width-1-1 Card-feedBottomSection">
           <div class="uk-position-bottom-left Card-iconGroup uk-flex">
             <Icon type="tag" />
+            <DropDown
+              type="default"
+              text="add tag"
+              choiceHeader="Tags"
+              choices={['Flagged', 'Ok', 'Neat']}
+            />
+            <p class="uk-text-justify-center Card-subSectionText">Action</p>
+            <DropDown
+              type="default"
+              text="Actions"
+              choiceHeader="Actions"
+              choices={['Dismiss', 'Delete', 'Allow']}
+            />
           </div>
           <div
             class="uk-position-bottom-right Card-iconGroup uk-flex Card-sectionIconGroup"

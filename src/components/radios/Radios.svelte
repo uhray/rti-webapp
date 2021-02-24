@@ -1,14 +1,16 @@
 <script>
   // javascript //
-  const optionsArray = $$props.numOfOpts;
+  export let numOfOpts;
 </script>
 
 <!-- HTML -->
 <section class="RadioGroup">
   <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-    {#each optionsArray as option, index}
+    {#each numOfOpts as option}
       <label
-        ><input class="uk-radio" type="radio" name={`radio1`} />{option}</label
+        ><input class="uk-radio" type="radio" name={`radio1`} /><span
+          class="RadioGroup-spanLabels">{option}</span
+        ></label
       >
     {/each}
   </div>

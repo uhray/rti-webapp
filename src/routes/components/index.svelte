@@ -7,6 +7,7 @@
   import Card from '../../components/card/Card.svelte';
   import Divider from '../../components/divider/Divider.svelte';
   import Icon from '../../components/icon/Icon.svelte';
+  import DropDown from '../../components/dropdown/DropDown.svelte';
 </script>
 
 <svelte:head>
@@ -46,6 +47,16 @@
 <br />
 <Icon type="drawer-active" />
 <br />
+<br />
+<br />
+
+<h3>Drop Down</h3>
+<DropDown
+  type="default"
+  text="Dropdown"
+  choiceHeader="Some Choices"
+  choices={['A Choice', 'Another Choice', 'A Third Choice']}
+/>
 <br />
 <br />
 
