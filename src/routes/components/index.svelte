@@ -85,3 +85,22 @@
 <Button secondary>Secondary</Button>
 <br />
 <br />
+
+<Button disabled outline>Disabled</Button>
+<Button primary outline>Primary</Button>
+<Button secondary outline>Secondary</Button>
+<br />
+<br />
+
+<Button disabled large>Disabled</Button>
+<Button primary large>Primary</Button>
+<Button secondary large>Secondary</Button>
+<br />
+<br />
+
+<Button disabled large outline>Disabled</Button>
+<Button primary large outline>Primary</Button>
+<Button secondary large outline>Secondary</Button>
+
+<br />
+<br />
