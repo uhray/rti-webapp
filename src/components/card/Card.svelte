@@ -2,11 +2,13 @@
   import Icon from '../icon/Icon.svelte';
   import Divider from '../divider/Divider.svelte';
   import DropDown from '../dropdown/DropDown.svelte';
+
+  export let type;
 </script>
 
 <!-- HTML -->
 <section class="Card">
-  {#if $$props.type === 'default'}
+  {#if type === 'default'}
     <div class="uk-card uk-card-default uk-flex Card-container">
       <div class="uk-card-body">
         <div class="uk-flex">
@@ -16,7 +18,7 @@
       </div>
     </div>
   {/if}
-  {#if $$props.type === 'feed'}
+  {#if type === 'feed'}
     <div class="uk-card uk-card-default uk-flex Card-container">
       <div class="uk-card-body uk-width-1-1 Card-body">
         <div class="uk-flex">
@@ -56,6 +58,49 @@
               <Icon type="trashcan" />
             </div>
             <div class="Card-subSectionIcon">
+              <Icon type="green-check-circle" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {/if}
+  {#if type === 'feed-image'}
+    <div class="uk-child-width-1-3">
+      <div class="uk-card uk-card-default uk-flex Card-container">
+        <div class="uk-card-body uk-width-1-1 Card-body">
+          <div class="uk-flex">
+            <Icon type="default-avatar" />
+            <div>
+              <h3 class="uk-card-title Card-header Card-headerFeed">Name</h3>
+              <h4 class="Card-subTitle Card-subTitleFeed">Timeago</h4>
+            </div>
+          </div>
+          <p class="Card-content">Post Content</p>
+          <p class="Card-reportScore">Report Score: 13</p>
+          <br />
+          <img src="/images/stock.jpg" alt="some dougnuts" class="Card-image" />
+          <br />
+          <div class="uk-flex Card-imageIconGroup">
+            <div class="uk-width-1-2">
+              <Icon type="box-arrow" />
+            </div>
+            <div class="uk-width-1-2 uk-flex">
+              <div class="uk-flex uk-width-1-2">
+                <Icon type="thumbs-up" />
+                <span class="Card-imageIconGroupText">300</span>
+              </div>
+              <div class="uk-flex uk-width-1-2">
+                <Icon type="chat" />
+                <span class="Card-imageIconGroupText">190</span>
+              </div>
+            </div>
+          </div>
+          <div class="uk-flex uk-child-width-1-4 Card-tabGroup">
+            <div class="Card-tabGroupNormal"><Icon type="tag" /></div>
+            <div class="Card-tabGroupNormal"><Icon type="slash-eye" /></div>
+            <div class="Card-tabGroupRed"><Icon type="trashcan" /></div>
+            <div class="Card-tabGroupGreen">
               <Icon type="green-check-circle" />
             </div>
           </div>

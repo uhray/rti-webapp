@@ -21,10 +21,15 @@
 <br />
 <br />
 
-<h3>Card</h3>
+<h3>Cards</h3>
+<h5>Default Card</h5>
 <Card type="default" />
 <br />
+<h5>Feed Card</h5>
 <Card type="feed" />
+<br />
+<h5>Feed Card with Image</h5>
+<Card type="feed-image" />
 <br />
 <br />
 
@@ -46,6 +51,12 @@
 <Icon type="drawer-inactive" />
 <br />
 <Icon type="drawer-active" />
+<br />
+<Icon type="box-arrow" />
+<br />
+<Icon type="thumbs-up" />
+<br />
+<Icon type="chat" />
 <br />
 <br />
 <br />

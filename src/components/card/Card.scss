@@ -69,4 +69,40 @@
     line-height: 20px;
     color: #2e5ff6;
   }
+  .Card-image {
+    height: 300px;
+  }
+  .Card-imageIconGroup {
+    margin-top: 10px !important;
+  }
+  .Card-imageIconGroupText {
+    font-family: Graphik App;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 125%;
+    margin: auto;
+    padding: none;
+  }
+  .Card-tabGroup {
+    .Card-tabGroupNormal {
+      height: 40px;
+    }
+    .Card-tabGroupGreen {
+      background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 255, 255, 0.9)
+        ),
+        #3dbc6f;
+    }
+    .Card-tabGroupRed {
+      background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 255, 255, 0.9)
+        ),
+        #ea4335;
+    }
+  }
 }
