@@ -1,8 +1,19 @@
+@import '../../theme/variables.scss';
+
+button[primary='true'] {
+  background-color: $color--primary;
+}
+
+button[secondary='true'] {
+  background-color: $color--secondary;
+}
+
 button {
   border-radius: 4px;
+  color: #fff;
+  padding: 10px, 15px, 10px, 15px;
 
   &:disabled {
-    background-color: rgba(36, 62, 147, 0.15);
-    color: #fff;
+    background-color: $color--disabled;
   }
 }
