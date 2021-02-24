@@ -23,16 +23,16 @@
             {#if choices.length > 0}
               <li class="uk-active"><a>{choiceHeader}</a></li>
               {#each choices as choice}
-                <li><a onclick={console.log('clicked')}>{choice}</a></li>
+                <li><a>{choice}</a></li>
               {/each}
             {:else}
               <li class="uk-active"><a>Choices</a></li>
-              <li><a onclick={console.log('clicked')}>A Choice</a></li>
+              <li><a>A Choice</a></li>
               <li>
-                <a onclick={console.log('clicked')}>Another Choice</a>
+                <a>Another Choice</a>
               </li>
               <li>
-                <a onclick={console.log('clicked')}>A Third Choice</a>
+                <a>A Third Choice</a>
               </li>
             {/if}
           </ul>
