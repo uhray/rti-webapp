@@ -12,6 +12,7 @@
   import Error from '../../components/error/Error.svelte';
   import Table from '../../components/table/Table.svelte';
   import Status from '../../components/status/Status.svelte';
+  import TabMenu from '../../components/tabmenu/TabMenu.svelte';
 </script>
 
 <svelte:head>
@@ -23,6 +24,20 @@
 <!-- ===================================================== -->
 <h2>Search Bar</h2>
 <SearchBar />
+<br />
+<br />
+
+<!-- ===================================================== -->
+<h2>Tab Menu</h2>
+<h5>Default Tabs</h5>
+<TabMenu
+  type="default"
+  tabs={[
+    { name: 'First', url: 'components' },
+    { name: 'Second', url: 'components' },
+    { name: 'Third', url: 'components' },
+  ]}
+/>
 <br />
 <br />
 
