@@ -1,2 +1,13 @@
 .TabMenu {
+  .uk-tab {
+    .uk-active {
+      a {
+        border-color: #2e5ff6 !important;
+        border-bottom: 2px solid #2e5ff6 !important;
+      }
+    }
+  }
+  .TabMenu-linkText {
+    text-transform: none !important;
+  }
 }
