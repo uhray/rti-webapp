@@ -10,14 +10,14 @@
 <section class="DropDown">
   {#if type === 'default'}
     <button
-      class="uk-button uk-button-small uk-flex uk-button-default DropDown-button"
+      class="uk-button-small uk-flex uk-button-default DropDown-button"
       type="button"
-      >{text}
+      ><span class="DropDown-text">{text}</span>
       <span class="DropDown-chevIcon"><Icon type="chevron-down" /></span
       ></button
     >
-    <div class="uk-width-large" uk-dropdown>
-      <div uk-dropdown-grid class="uk-child-width-1-2@m" uk-grid>
+    <div class="uk-width-large" uk-dropdown="mode: click">
+      <div class="uk-child-width-1-2@m" uk-grid>
         <div>
           <ul class="uk-nav uk-dropdown-nav">
             {#if choices.length > 0}

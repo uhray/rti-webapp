@@ -37,7 +37,7 @@
             <Icon type="tag" />
             <DropDown
               type="default"
-              text="add tag"
+              text="Add Tag"
               choiceHeader="Tags"
               choices={['Flagged', 'Ok', 'Neat']}
             />
@@ -77,7 +77,7 @@
             <Icon type="tag" />
             <DropDown
               type="default"
-              text="add tag"
+              text="Add Tag"
               choiceHeader="Tags"
               choices={['Flagged', 'Ok', 'Neat']}
             />
