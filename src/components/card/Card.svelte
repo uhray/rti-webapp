@@ -79,7 +79,11 @@
           <p class="Card-content">Post Content</p>
           <p class="Card-reportScore">Report Score: 13</p>
           <br />
-          <img src="/images/stock.jpg" alt="some dougnuts" class="Card-image" />
+          <img
+            src="/images/stock.jpg"
+            alt="some doughnuts"
+            class="Card-image"
+          />
           <br />
           <div class="uk-flex Card-imageIconGroup">
             <div class="uk-width-1-2">
