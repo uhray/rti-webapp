@@ -8,6 +8,7 @@
   import Divider from '../../components/divider/Divider.svelte';
   import Icon from '../../components/icon/Icon.svelte';
   import DropDown from '../../components/dropdown/DropDown.svelte';
+  import Input from '../../components/input/Input.svelte';
 </script>
 
 <svelte:head>
@@ -19,6 +20,17 @@
 <!-- ===================================================== -->
 <h2>Search Bar</h2>
 <SearchBar />
+<br />
+<br />
+
+<!-- ===================================================== -->
+<h2>Inputs</h2>
+<h5>Default Input</h5>
+<Input type="default" />
+<br />
+<Input type="selector" options={['Option 1', 'Option 2']} />
+<br />
+<Input type="textarea" rows={4} placeholder="placeholder.." />
 <br />
 <br />
 
