@@ -9,6 +9,7 @@
   import Icon from '../../components/icon/Icon.svelte';
   import DropDown from '../../components/dropdown/DropDown.svelte';
   import Input from '../../components/input/Input.svelte';
+  import Error from '../../components/error/Error.svelte';
 </script>
 
 <svelte:head>
@@ -55,6 +56,7 @@
 <br />
 <br />
 
+<!-- ===================================================== -->
 <h2>Tool Tips</h2>
 <p>This is just a modifier from uk that can be added to anything.</p>
 <p>uk-tooltip="See? A Tool Tip. Wow." Add this as an attribute to anything.</p>
@@ -67,6 +69,15 @@
     Hover Over Me!
   </h4>
 </div>
+<br />
+<br />
+
+<!-- ===================================================== -->
+<h2>Error Messages</h2>
+<h4>Valiation Error</h4>
+<Error type="validation-error" text="time" />
+<br />
+
 <br />
 <br />
 
@@ -96,6 +107,8 @@
   <Icon type="thumbs-up" />
   <br />
   <Icon type="chat" />
+  <br />
+  <Icon type="warning" />
   <br />
 </div>
 
