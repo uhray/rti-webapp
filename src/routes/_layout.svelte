@@ -10,13 +10,19 @@
   <slot />
 </main>
 
-<style>
+<style lang="scss">
   main {
     position: relative;
-    max-width: 56em;
+    max-width: 80em;
     background-color: white;
     padding: 2em;
-    margin: 0 auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 20px;
+    margin-left: auto;
     box-sizing: border-box;
+    @media only screen and (max-width: 1200px) {
+      width: 50em;
+    }
   }
 </style>

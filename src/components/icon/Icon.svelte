@@ -278,6 +278,79 @@
       />
     </svg>
   {/if}
+  <!-- THIS IS THE SECTION OF STATUS ICONS -->
+  {#if type === 'success-status'}
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="Icon-defaultSpacing"
+    >
+      <ellipse
+        cx="8.00005"
+        cy="7.99998"
+        rx="3.33334"
+        ry="3.33333"
+        fill="#3CC13B"
+      />
+    </svg>
+  {/if}
+  {#if type === 'warning-status'}
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="Icon-defaultSpacing"
+    >
+      <ellipse
+        cx="8.00005"
+        cy="7.99998"
+        rx="3.33334"
+        ry="3.33333"
+        fill="#F03738"
+      />
+    </svg>
+  {/if}
+  {#if type === 'caution-status'}
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="Icon-defaultSpacing"
+    >
+      <ellipse
+        cx="8.00005"
+        cy="7.99999"
+        rx="3.33334"
+        ry="3.33333"
+        fill="#F3BB1C"
+      />
+    </svg>
+  {/if}
+  {#if type === 'default-status'}
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="Icon-defaultSpacing"
+    >
+      <ellipse
+        cx="8.00005"
+        cy="7.99998"
+        rx="3.33334"
+        ry="3.33333"
+        fill="#989AA2"
+      />
+    </svg>
+  {/if}
 </section>
 
 <!-- ==== -->
