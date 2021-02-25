@@ -1,13 +1,13 @@
 .Icon {
-  margin-top: auto;
-  margin-bottom: auto;
   .Icon-defaultAvatar {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: none;
-    margin-right: 10px;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    margin-left: none !important;
+    margin-right: 10px !important;
   }
-  .Icon-tag {
-    margin-bottom: none;
+  .Icon-defaultSpacing {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
   }
 }

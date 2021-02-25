@@ -8,6 +8,14 @@ button[secondary='true'] {
   background-color: $color--secondary;
 }
 
+button[warning='true'] {
+  background-color: $color--warning;
+}
+
+button[success='true'] {
+  background-color: $color--success;
+}
+
 button {
   flex: 1;
   border-radius: 4px;

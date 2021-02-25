@@ -24,16 +24,20 @@
 
 <!-- ===================================================== -->
 <h2>Cards</h2>
-<h5>Default Card</h5>
+<h5>Default Card - (type="default")</h5>
 <Card type="default" />
 <br />
-<h5>Feed Card</h5>
+<h5>Feed Card (type="feed")</h5>
 <Card type="feed" />
 <br />
-<h5>Feed Card with Image</h5>
+<h5>Feed Card with Action Dropdown (type="feed-action")</h5>
+<Card type="feed-action" />
+<br />
+<h5>News Card with Buttons (type="news-wbuttons")</h5>
+<Card type="news-wbuttons" />
+<br />
+<h5>Feed Card with Image (type="feed-image")</h5>
 <div class="uk-flex uk-child-width-1-3">
-  <Card type="feed-image" />
-  <Card type="feed-image" />
   <Card type="feed-image" />
 </div>
 <br />
@@ -41,30 +45,33 @@
 
 <!-- ===================================================== -->
 <h2>Icons</h2>
-<Icon type="default-avatar" />
-<br />
-<Icon type="tag" />
-<br />
-<Icon type="slash-eye" />
-<br />
-<Icon type="trashcan" />
-<br />
-<Icon type="green-check-circle" />
-<br />
-<Icon type="list-inactive" />
-<br />
-<Icon type="list-active" />
-<br />
-<Icon type="drawer-inactive" />
-<br />
-<Icon type="drawer-active" />
-<br />
-<Icon type="box-arrow" />
-<br />
-<Icon type="thumbs-up" />
-<br />
-<Icon type="chat" />
-<br />
+<div class="uk-width-1-4">
+  <Icon type="default-avatar" />
+  <br />
+  <Icon type="tag" />
+  <br />
+  <Icon type="slash-eye" />
+  <br />
+  <Icon type="trashcan" />
+  <br />
+  <Icon type="green-check-circle" />
+  <br />
+  <Icon type="list-inactive" />
+  <br />
+  <Icon type="list-active" />
+  <br />
+  <Icon type="drawer-inactive" />
+  <br />
+  <Icon type="drawer-active" />
+  <br />
+  <Icon type="box-arrow" />
+  <br />
+  <Icon type="thumbs-up" />
+  <br />
+  <Icon type="chat" />
+  <br />
+</div>
+
 <br />
 <br />
 
