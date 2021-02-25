@@ -55,6 +55,21 @@
 <br />
 <br />
 
+<h2>Tool Tips</h2>
+<p>This is just a modifier from uk that can be added to anything.</p>
+<p>uk-tooltip="See? A Tool Tip. Wow." Add this as an attribute to anything.</p>
+<p>Hover over text below to see example.</p>
+<div class="uk-width-1-4" style="border: 1px solid black;">
+  <h4
+    uk-tooltip="See? A Tool Tip. Wow."
+    style="margin: auto; padding: auto; text-align: center;"
+  >
+    Hover Over Me!
+  </h4>
+</div>
+<br />
+<br />
+
 <!-- ===================================================== -->
 <h2>Icons</h2>
 <div class="uk-width-1-4">
