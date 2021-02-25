@@ -10,6 +10,9 @@
   import DropDown from '../../components/dropdown/DropDown.svelte';
   import Input from '../../components/input/Input.svelte';
   import Error from '../../components/error/Error.svelte';
+  import Table from '../../components/table/Table.svelte';
+  import Status from '../../components/status/Status.svelte';
+  import TabMenu from '../../components/tabmenu/TabMenu.svelte';
 </script>
 
 <svelte:head>
@@ -21,6 +24,20 @@
 <!-- ===================================================== -->
 <h2>Search Bar</h2>
 <SearchBar />
+<br />
+<br />
+
+<!-- ===================================================== -->
+<h2>Tab Menu</h2>
+<h5>Default Tabs</h5>
+<TabMenu
+  type="default"
+  tabs={[
+    { name: 'First', url: 'components' },
+    { name: 'Second', url: 'components' },
+    { name: 'Third', url: 'components' },
+  ]}
+/>
 <br />
 <br />
 
@@ -77,6 +94,25 @@
 <Error type="validation-error" text="time" />
 <br />
 
+<br />
+<br />
+
+<!-- ===================================================== -->
+<h2>Tables</h2>
+<h4>Default Table</h4>
+<Table type="default" />
+<br />
+<br />
+
+<!-- ===================================================== -->
+<h2>Status Labels</h2>
+<Status type="success" text="Active" />
+<br />
+<Status type="warning" text="Expired" />
+<br />
+<Status type="caution" text="Pending" />
+<br />
+<Status type="default" text="Draft" />
 <br />
 <br />
 
