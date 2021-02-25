@@ -3,20 +3,9 @@
 </script>
 
 <nav class="Nav">
-  <ul>
-    <li>
-      <a aria-current={segment === undefined ? 'page' : undefined} href="."
-        >home</a
-      >
-    </li>
-    <li>
-      <a
-        rel="prefetch"
-        aria-current={segment === 'blog' ? 'page' : undefined}
-        href="components">components</a
-      >
-    </li>
-  </ul>
+  <a href="">home</a>
+
+  <a rel="prefetch" href="components">components</a>
 </nav>
 
 <style src="./Nav.scss">
