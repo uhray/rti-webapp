@@ -64,8 +64,7 @@
 <div class="uk-width-1-4" style="border: 1px solid black;">
   <h4
     uk-tooltip="See? A Tool Tip. Wow."
-    style="margin: auto; padding: auto; text-align: center;"
-  >
+    style="margin: auto; padding: auto; text-align: center;">
     Hover Over Me!
   </h4>
 </div>
@@ -121,8 +120,7 @@
   type="default"
   text="Dropdown"
   choiceHeader="Some Choices"
-  choices={['A Choice', 'Another Choice', 'A Third Choice']}
-/>
+  choices={['A Choice', 'Another Choice', 'A Third Choice']} />
 <br />
 <br />
 
@@ -155,12 +153,16 @@
 <Button disabled>Disabled</Button>
 <Button primary>Primary</Button>
 <Button secondary>Secondary</Button>
+<Button warning>Warning</Button>
+<Button success>Success</Button>
 <br />
 <br />
 
 <Button disabled outline>Disabled</Button>
 <Button primary outline>Primary</Button>
 <Button secondary outline>Secondary</Button>
+<Button warning outline>Warning</Button>
+<Button success outline>Success</Button>
 <br />
 <br />
 
@@ -168,11 +170,17 @@
 <Button primary large>Primary</Button>
 <Button secondary large>Secondary</Button>
 <br />
+<Button warning large>Warning</Button>
+<Button success large>Success</Button>
+<br />
 <br />
 
 <Button disabled large outline>Disabled</Button>
 <Button primary large outline>Primary</Button>
 <Button secondary large outline>Secondary</Button>
+<br />
+<Button warning large outline>Warning</Button>
+<Button success large outline>Success</Button>
 
 <br />
 <br />
