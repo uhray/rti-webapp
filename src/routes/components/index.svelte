@@ -21,207 +21,263 @@
 
 <h1>Components Page</h1>
 
-<!-- ===================================================== -->
-<h2>Search Bar</h2>
-<SearchBar />
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Tab Menu</h2>
-<h5>Default Tabs</h5>
-<TabMenu
-  type="default"
-  tabs={[
-    { name: 'First', url: 'components' },
-    { name: 'Second', url: 'components' },
-    { name: 'Third', url: 'components' },
-  ]}
-/>
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Inputs</h2>
-<h5>Default Input</h5>
-<Input type="default" />
-<br />
-<Input type="selector" options={['Option 1', 'Option 2']} />
-<br />
-<Input type="textarea" rows={4} placeholder="placeholder.." />
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Cards</h2>
-<h5>Default Card - (type="default")</h5>
-<Card type="default" header="Card" content="Content" />
-<br />
-<h5>Feed Card (type="feed")</h5>
-<Card
-  type="feed"
-  name="Name"
-  timeago="23"
-  content="Content"
-  linkText="Report Score: 13"
-/>
-<br />
-<h5>Feed Card with Action Dropdown (type="feed-action")</h5>
-<Card
-  type="feed-action"
-  name="Name"
-  timeago="23"
-  content="Content"
-  linkText="Report Score: 13"
-/>
-<br />
-<h5>News Card with Buttons (type="news-wbuttons")</h5>
-<Card
-  type="news-wbuttons"
-  name="Name"
-  timeago="23"
-  content="Content"
-  linkText="www.website.com"
-/>
-<br />
-<h5>Feed Card with Image (type="feed-image")</h5>
-<div class="uk-flex uk-child-width-1-3">
-  <Card
-    type="feed-image"
-    name="Name"
-    timeago="23"
-    content="Content"
-    linkText="Report Score: 13"
-    imageUrl="/images/stock.jpg"
-  />
-</div>
-<br />
-<h5>News Card with Image (type="news-image")</h5>
-<div class="uk-flex uk-child-width-1-3">
-  <Card
-    type="news-image"
-    header="A big time news header."
-    content="Some additional content, in regards to the big time news header previously mentioned. Some additional content, in regards to the big time news header previously mentioned. Some additional content, in regards to the big time news header previously mentioned."
-    name="Name"
-    timeago="23"
-    imageUrl="/images/stock.jpg"
-  />
-</div>
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Tool Tips</h2>
-<p>This is just a modifier from uk that can be added to anything.</p>
-<p>uk-tooltip="See? A Tool Tip. Wow." Add this as an attribute to anything.</p>
-<p>Hover over text below to see example.</p>
-<div class="uk-width-1-4" style="border: 1px solid black;">
-  <h4
-    uk-tooltip="See? A Tool Tip. Wow."
-    style="margin: auto; padding: auto; text-align: center;"
-  >
-    Hover Over Me!
-  </h4>
-</div>
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Error Messages</h2>
-<h4>Valiation Error</h4>
-<Error type="validation-error" text="time" />
-<br />
-
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Tables</h2>
-<h4>Default Table</h4>
-<Table type="default" />
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Status Labels</h2>
-<Status type="success" text="Active" />
-<br />
-<Status type="warning" text="Expired" />
-<br />
-<Status type="caution" text="Pending" />
-<br />
-<Status type="default" text="Draft" />
-<br />
-<br />
-
-<!-- ===================================================== -->
 <h2>Icons</h2>
-<div class="uk-width-1-4">
-  <Icon type="default-avatar" />
-  <br />
-  <Icon type="tag" />
-  <br />
-  <Icon type="slash-eye" />
-  <br />
-  <Icon type="trashcan" />
-  <br />
-  <Icon type="green-check-circle" />
-  <br />
-  <Icon type="list-inactive" />
-  <br />
-  <Icon type="list-active" />
-  <br />
-  <Icon type="drawer-inactive" />
-  <br />
-  <Icon type="drawer-active" />
-  <br />
-  <Icon type="box-arrow" />
-  <br />
-  <Icon type="thumbs-up" />
-  <br />
-  <Icon type="chat" />
-  <br />
-  <Icon type="warning" />
-  <br />
+<div class="uk-flex">
+  <div style="margin: 5px;">
+    <Icon type="notification" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="account" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="message" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="settings" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="users" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="dashboard" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="orders" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="macro" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="automation" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="clock" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="sortup" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="sortdown" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="edit-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="edit-hover" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="delete-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="delete-hover" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="show" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="hide" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="search-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="search-active" />
+  </div>
+</div>
+<div class="uk-flex">
+  <div style="margin: 5px;">
+    <Icon type="toggle-disabled" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="toggle-active" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="filter" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="add" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="check" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="caretup" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="caretdown" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="caretright" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="arrow-right" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="arrow-left" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="location-start" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="location-end" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="user" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="overflow" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="file" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="trailer" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="vehicle" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="calendar" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="reload" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="path" />
+  </div>
+</div>
+<div class="uk-flex">
+  <div style="margin: 5px;">
+    <Icon type="chev-right" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="chev-up" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="chev-down" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="chev-left" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="table" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="columns" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="close" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="logout" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="send-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="send-active" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="indicator" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="goto-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="goto-hover" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="archive" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="reply" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="loading" />
+  </div>
 </div>
 
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Drop Down</h2>
-<DropDown
-  type="default"
-  text="Dropdown"
-  choiceHeader="Some Choices"
-  choices={['A Choice', 'Another Choice', 'A Third Choice']}
-/>
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Dividers</h2>
-<Divider type="default" />
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Progress Bar</h2>
-<ProgressBar />
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Radio Group</h2>
-<Radios options={['A', 'B', 'C', 'D', 'E']} />
-<br />
-<br />
-
-<!-- ===================================================== -->
-<h2>Checkbox</h2>
-<Checkbox />
-<br />
-<br />
+<div class="uk-flex">
+  <div style="margin: 5px;">
+    <Icon type="bold-disabled" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="bold-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="bold-hover" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="bold-active" />
+  </div>
+</div>
+<div class="uk-flex">
+  <div style="margin: 5px;">
+    <Icon type="italic-disabled" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="italic-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="italic-hover" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="italic-active" />
+  </div>
+</div>
+<div class="uk-flex">
+  <div style="margin: 5px;">
+    <Icon type="strike-disabled" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="strike-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="strike-hover" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="strike-active" />
+  </div>
+</div>
+<div class="uk-flex">
+  <div style="margin: 5px;">
+    <Icon type="link-disabled" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="link-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="link-hover" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="link-active" />
+  </div>
+</div>
+<div class="uk-flex">
+  <div style="margin: 5px;">
+    <Icon type="list-disabled" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="list-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="list-hover" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="list-active" />
+  </div>
+</div>
+<div class="uk-flex">
+  <div style="margin: 5px;">
+    <Icon type="attach-default" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="attach-hover" />
+  </div>
+  <div style="margin: 5px;">
+    <Icon type="attach-active" />
+  </div>
+</div>
 
 <!-- ===================================================== -->
 <h2>Button</h2>
