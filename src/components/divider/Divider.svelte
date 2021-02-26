@@ -7,6 +7,9 @@
   {#if $$props.type === 'default'}
     <div class="Divider-default" />
   {/if}
+  {#if $$props.type === 'for-tabs'}
+    <div class="Divider-forTabs" />
+  {/if}
 </section>
 
 <!-- ==== -->

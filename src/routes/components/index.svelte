@@ -50,25 +50,57 @@
 <!-- ===================================================== -->
 <h2>Cards</h2>
 <h5>Default Card - (type="default")</h5>
-<Card type="default" />
+<Card type="default" header="Card" content="Content" />
 <br />
 <h5>Feed Card (type="feed")</h5>
-<Card type="feed" />
+<Card
+  type="feed"
+  name="Name"
+  timeago="23"
+  content="Content"
+  linkText="Report Score: 13"
+/>
 <br />
 <h5>Feed Card with Action Dropdown (type="feed-action")</h5>
-<Card type="feed-action" />
+<Card
+  type="feed-action"
+  name="Name"
+  timeago="23"
+  content="Content"
+  linkText="Report Score: 13"
+/>
 <br />
 <h5>News Card with Buttons (type="news-wbuttons")</h5>
-<Card type="news-wbuttons" />
+<Card
+  type="news-wbuttons"
+  name="Name"
+  timeago="23"
+  content="Content"
+  linkText="www.website.com"
+/>
 <br />
 <h5>Feed Card with Image (type="feed-image")</h5>
 <div class="uk-flex uk-child-width-1-3">
-  <Card type="feed-image" />
+  <Card
+    type="feed-image"
+    name="Name"
+    timeago="23"
+    content="Content"
+    linkText="Report Score: 13"
+    imageUrl="/images/stock.jpg"
+  />
 </div>
 <br />
 <h5>News Card with Image (type="news-image")</h5>
 <div class="uk-flex uk-child-width-1-3">
-  <Card type="news-image" />
+  <Card
+    type="news-image"
+    header="A big time news header."
+    content="Some additional content, in regards to the big time news header previously mentioned. Some additional content, in regards to the big time news header previously mentioned. Some additional content, in regards to the big time news header previously mentioned."
+    name="Name"
+    timeago="23"
+    imageUrl="/images/stock.jpg"
+  />
 </div>
 <br />
 <br />

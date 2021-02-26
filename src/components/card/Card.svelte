@@ -5,6 +5,12 @@
   import Button from '../button/Button.svelte';
 
   export let type;
+  export let header;
+  export let content;
+  export let name;
+  export let timeago;
+  export let linkText;
+  export let imageUrl;
 </script>
 
 <!-- HTML -->
@@ -13,9 +19,9 @@
     <div class="uk-card uk-card-default uk-flex Card-container">
       <div class="uk-card-body">
         <div class="uk-flex">
-          <h3 class="uk-card-title Card-header">Card</h3>
+          <h3 class="uk-card-title Card-header">{header}</h3>
         </div>
-        <p class="Card-content">Content</p>
+        <p class="Card-content">{content}</p>
       </div>
     </div>
   {/if}
@@ -25,12 +31,12 @@
         <div class="uk-flex">
           <Icon type="default-avatar" />
           <div>
-            <h3 class="uk-card-title Card-header Card-headerFeed">Name</h3>
-            <h4 class="Card-subTitle Card-subTitleFeed">Timeago</h4>
+            <h3 class="uk-card-title Card-header Card-headerFeed">{name}</h3>
+            <h4 class="Card-subTitle Card-subTitleFeed">{timeago} min ago</h4>
           </div>
         </div>
-        <p class="Card-content">Post Content</p>
-        <p class="Card-linkText">Report Score: 13</p>
+        <p class="Card-content">{content}</p>
+        <p class="Card-linkText">{linkText}</p>
         <Divider type="default" />
         <div class="uk-flex uk-width-1-1 Card-feedBottomSection">
           <div class="uk-position-bottom-left Card-iconGroup uk-flex">
@@ -65,12 +71,12 @@
         <div class="uk-flex">
           <Icon type="default-avatar" />
           <div>
-            <h3 class="uk-card-title Card-header Card-headerFeed">Name</h3>
-            <h4 class="Card-subTitle Card-subTitleFeed">Timeago</h4>
+            <h3 class="uk-card-title Card-header Card-headerFeed">{name}</h3>
+            <h4 class="Card-subTitle Card-subTitleFeed">{timeago} min ago</h4>
           </div>
         </div>
-        <p class="Card-content">Post Content</p>
-        <p class="Card-linkText">Report Score: 13</p>
+        <p class="Card-content">{content}</p>
+        <p class="Card-linkText">{linkText}</p>
         <Divider type="default" />
         <div class="uk-flex uk-width-1-1 Card-feedBottomSection">
           <div class="uk-position-bottom-left Card-iconGroup uk-flex">
@@ -99,12 +105,12 @@
         <div class="uk-flex">
           <Icon type="default-avatar" />
           <div>
-            <h3 class="uk-card-title Card-header Card-headerFeed">Name</h3>
-            <h4 class="Card-subTitle Card-subTitleFeed">Timeago</h4>
+            <h3 class="uk-card-title Card-header Card-headerFeed">{name}</h3>
+            <h4 class="Card-subTitle Card-subTitleFeed">{timeago} min ago</h4>
           </div>
         </div>
-        <p class="Card-content">Post Content</p>
-        <p class="Card-linkText">www.cdllife.com</p>
+        <p class="Card-content">{content}</p>
+        <p class="Card-linkText">{linkText}</p>
         <Divider type="default" />
         <div class="Card-buttonGroup uk-align-right">
           <Button warning
@@ -128,12 +134,12 @@
   {/if}
   {#if type === 'news-image'}
     <div class="uk-card uk-card-default uk-flex Card-container">
-      <div class="uk-card-body uk-width-1-1 Card-body">
-        <div class="uk-flex">
+      <div class="uk-card-body uk-width-1-1 Card-bodyImage">
+        <div class="uk-flex Card-setSideSpacing">
           <Icon type="default-avatar" />
           <div>
-            <h3 class="uk-card-title Card-header Card-headerFeed">Name</h3>
-            <h4 class="Card-subTitle Card-subTitleFeed">Timeago</h4>
+            <h3 class="uk-card-title Card-header Card-headerFeed">{name}</h3>
+            <h4 class="Card-subTitle Card-subTitleFeed">{timeago} min ago</h4>
           </div>
           <div class="uk-align-right Card-headerIcon">
             <!-- icon goes here, aligned right -->
@@ -142,38 +148,31 @@
         </div>
         <Divider type="default" />
         <!-- Header Section -->
-        <div class="uk-width-1-1">
+        <div class="uk-width-1-1 Card-setSideSpacing">
           <h2 class="Card-newsHeader">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
-            quisquam.
+            {header}
           </h2>
         </div>
-        <div class="uk-flex Card-newsSubHeader">
+        <div class="uk-flex Card-newsSubHeader Card-setSideSpacing">
           <div class="Card-newsSubSpacing">
             <Icon type="default-avatar-small" />
           </div>
           <div class="Card-newsSubSpacing">
-            <span class="Card-newsNameText">Name</span>
+            <span class="Card-news{name}Text">{name}</span>
           </div>
           <div class="Card-newsSubSpacing">
             <Icon type="dot" />
           </div>
           <div class="Card-newsSubSpacing">
-            <span class="Card-subTitle Card-subTitleFeed">Timeago</span>
+            <span class="Card-subTitle Card-subTitleFeed">{timeago} min</span>
           </div>
         </div>
         <div class="uk-width-1-1">
-          <img
-            src="/images/stock.jpg"
-            alt="some doughnuts"
-            class="Card-image"
-          />
+          <img src={imageUrl} alt="some doughnuts" class="Card-image" />
         </div>
-        <div class="Card-newsSubContent">
+        <div class="Card-newsSubContent Card-setSideSpacing">
           <p class="Card-newsSubContentText">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quos
-            exercitationem consectetur assumenda accusantium vel, placeat
-            repellat ex.
+            {content}
           </p>
         </div>
         <div class="uk-flex uk-child-width-1-2 Card-tabGroup">
@@ -190,22 +189,18 @@
   {#if type === 'feed-image'}
     <div class="uk-child-width-1-1">
       <div class="uk-card uk-card-default uk-flex Card-container">
-        <div class="uk-card-body uk-width-1-1 Card-body">
-          <div class="uk-flex">
+        <div class="uk-card-body uk-width-1-1 Card-bodyImage">
+          <div class="uk-flex Card-setSideSpacing ">
             <Icon type="default-avatar" />
             <div>
-              <h3 class="uk-card-title Card-header Card-headerFeed">Name</h3>
-              <h4 class="Card-subTitle Card-subTitleFeed">Timeago</h4>
+              <h3 class="uk-card-title Card-header Card-headerFeed">{name}</h3>
+              <h4 class="Card-subTitle Card-subTitleFeed">{timeago} min ago</h4>
             </div>
           </div>
-          <p class="Card-content">Post Content</p>
-          <p class="Card-linkText">Report Score: 13</p>
+          <p class="Card-content Card-setSideSpacing ">{content}</p>
+          <p class="Card-linkText Card-setSideSpacing ">{linkText}</p>
           <br />
-          <img
-            src="/images/stock.jpg"
-            alt="some doughnuts"
-            class="Card-image"
-          />
+          <img src={imageUrl} alt="some doughnuts" class="Card-image" />
           <br />
           <div class="uk-flex Card-imageIconGroup">
             <div class="uk-width-1-4">
@@ -223,7 +218,7 @@
               </div>
             </div>
           </div>
-          <Divider type="default" />
+          <Divider type="for-tabs" />
           <div class="uk-flex uk-child-width-1-4 Card-tabGroup">
             <div class="Card-tabGroupNormal">
               <Icon type="tag" />
