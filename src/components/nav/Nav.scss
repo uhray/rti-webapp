@@ -7,34 +7,82 @@
   width: 208px;
   height: 100vh;
   background: $color--nav;
+  // transition: width 0.5s;
 
-  // @media only screen and (max-width: 1200px) {
-  //   width: 125px;
-  // }
+  font-size: 15px;
+  font-family: 'Poppins';
+  color: #fff;
 
-  ul {
-    margin: 0;
-    padding: 0;
+  a {
+    text-decoration: none;
+    color: white;
   }
 
-  /* clearfix */
-  ul::after {
-    content: '';
-    display: block;
-    clear: both;
+  .collapse {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    font-size: 15px;
+    color: #fff;
+
+    max-width: 100%;
+    height: 56px;
+    border-bottom: 1px solid $color--gray;
+
+    margin-bottom: 19px;
+    padding-left: 24px;
+
+    span {
+      margin-left: 5px;
+    }
+
+    span:hover {
+      cursor: pointer;
+    }
   }
 
-  li {
-    display: block;
-    float: left;
+  .line {
+    margin: 10px 15px;
+    border-bottom: 1px solid $color--gray;
+  }
+}
+
+.Nav-closed {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 64px;
+  height: 100vh;
+  background: $color--nav;
+  transition: width 0.75s;
+
+  span {
+    display: none;
   }
 
   a {
     text-decoration: none;
     color: white;
-    padding: 1em 0.5em;
-    display: block;
-    margin: 10px auto;
-    text-align: center;
+  }
+
+  .collapse {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    color: #fff;
+
+    padding-left: 24px;
+
+    max-width: 100%;
+    height: 56px;
+    border-bottom: 1px solid $color--gray;
+
+    margin-bottom: 19px;
+  }
+
+  .line {
+    margin: 10px 15px;
+    border-bottom: 1px solid $color--gray;
   }
 }
