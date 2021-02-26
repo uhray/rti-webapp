@@ -30,6 +30,9 @@
 <h2>Search Bars</h2>
 <SearchBar />
 
+<h2>Inputs and Textareas</h2>
+<Input type="default" />
+
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />
 

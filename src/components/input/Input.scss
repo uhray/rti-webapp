@@ -1,7 +1,13 @@
 .Input {
   .Input-default {
-    border-radius: 7px;
+    border-radius: 4px;
     border: 1px solid #e1e1e1;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 22px;
+    color: #15224b;
   }
   .Input-selector {
     border-radius: 7px;
@@ -11,4 +17,37 @@
     border-radius: 7px;
     border: 1px solid #e1e1e1;
   }
+}
+
+::-webkit-input-placeholder {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  color: #595f76;
+}
+::-moz-placeholder {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  color: #595f76;
+}
+:-ms-input-placeholder {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  color: #595f76;
+}
+:-moz-placeholder {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  color: #595f76;
 }
