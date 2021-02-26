@@ -32,7 +32,12 @@
 <h5>Default Tabs</h5>
 <TabMenu
   type="default"
-  tabs={[{ name: 'First', url: 'components' }, { name: 'Second', url: 'components' }, { name: 'Third', url: 'components' }]} />
+  tabs={[
+    { name: 'First', url: 'components' },
+    { name: 'Second', url: 'components' },
+    { name: 'Third', url: 'components' },
+  ]}
+/>
 <br />
 <br />
 
@@ -66,6 +71,11 @@
   <Card type="feed-image" />
 </div>
 <br />
+<h5>News Card with Image (type="news-image")</h5>
+<div class="uk-flex uk-child-width-1-3">
+  <Card type="news-image" />
+</div>
+<br />
 <br />
 
 <!-- ===================================================== -->
@@ -76,7 +86,8 @@
 <div class="uk-width-1-4" style="border: 1px solid black;">
   <h4
     uk-tooltip="See? A Tool Tip. Wow."
-    style="margin: auto; padding: auto; text-align: center;">
+    style="margin: auto; padding: auto; text-align: center;"
+  >
     Hover Over Me!
   </h4>
 </div>
@@ -151,7 +162,8 @@
   type="default"
   text="Dropdown"
   choiceHeader="Some Choices"
-  choices={['A Choice', 'Another Choice', 'A Third Choice']} />
+  choices={['A Choice', 'Another Choice', 'A Third Choice']}
+/>
 <br />
 <br />
 

@@ -126,6 +126,67 @@
       </div>
     </div>
   {/if}
+  {#if type === 'news-image'}
+    <div class="uk-card uk-card-default uk-flex Card-container">
+      <div class="uk-card-body uk-width-1-1 Card-body">
+        <div class="uk-flex">
+          <Icon type="default-avatar" />
+          <div>
+            <h3 class="uk-card-title Card-header Card-headerFeed">Name</h3>
+            <h4 class="Card-subTitle Card-subTitleFeed">Timeago</h4>
+          </div>
+          <div class="uk-align-right Card-headerIcon">
+            <!-- icon goes here, aligned right -->
+            <Icon type="ellipse-dots" />
+          </div>
+        </div>
+        <Divider type="default" />
+        <!-- Header Section -->
+        <div class="uk-width-1-1">
+          <h2 class="Card-newsHeader">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+            quisquam.
+          </h2>
+        </div>
+        <div class="uk-flex Card-newsSubHeader">
+          <div class="Card-newsSubSpacing">
+            <Icon type="default-avatar-small" />
+          </div>
+          <div class="Card-newsSubSpacing">
+            <span class="Card-newsNameText">Name</span>
+          </div>
+          <div class="Card-newsSubSpacing">
+            <Icon type="dot" />
+          </div>
+          <div class="Card-newsSubSpacing">
+            <span class="Card-subTitle Card-subTitleFeed">Timeago</span>
+          </div>
+        </div>
+        <div class="uk-width-1-1">
+          <img
+            src="/images/stock.jpg"
+            alt="some doughnuts"
+            class="Card-image"
+          />
+        </div>
+        <div class="Card-newsSubContent">
+          <p class="Card-newsSubContentText">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quos
+            exercitationem consectetur assumenda accusantium vel, placeat
+            repellat ex.
+          </p>
+        </div>
+        <div class="uk-flex uk-child-width-1-2 Card-tabGroup">
+          <div class="Card-tabGroupRedDark">
+            <Icon type="slash-eye-white" />
+          </div>
+          <div class="Card-tabGroupGreenDark">
+            <Icon type="white-check-circle" />
+          </div>
+        </div>
+      </div>
+    </div>
+  {/if}
   {#if type === 'feed-image'}
     <div class="uk-child-width-1-1">
       <div class="uk-card uk-card-default uk-flex Card-container">

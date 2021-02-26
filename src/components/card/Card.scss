@@ -6,6 +6,46 @@
     margin-top: auto;
     margin-bottom: auto;
   }
+  .Card-newsHeader {
+    font-family: Graphik App;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 120%;
+    color: #262626;
+  }
+  .Card-newsSubHeader {
+    margin-bottom: 8px;
+  }
+  .Card-newsSubSpacing {
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .Card-newsSubContent {
+    margin-top: 8px;
+  }
+  .Card-newsSubContentText {
+    font-family: Graphik App;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 142.86%;
+    color: #262626;
+  }
+  .Card-newsNameText {
+    font-family: Graphik App;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 133.33%;
+    color: #73767f;
+  }
+  .Card-headerIcon {
+    margin-bottom: 0px;
+    margin-left: auto;
+  }
   .Card-headerFeed {
     font-family: SF Pro Display;
     font-style: normal;
@@ -69,6 +109,7 @@
   }
   .Card-image {
     height: 300px;
+    width: 100%;
   }
   .Card-imageIconGroup {
     margin-top: 10px !important;
@@ -110,6 +151,14 @@
           rgba(255, 255, 255, 0.9)
         ),
         #ea4335;
+    }
+    .Card-tabGroupGreenDark {
+      height: 40px;
+      background: #3dbc6f;
+    }
+    .Card-tabGroupRedDark {
+      height: 40px;
+      background: #ea4335;
     }
   }
 }
