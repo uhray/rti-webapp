@@ -1,5 +1,27 @@
-.uk-checkbox {
-  color: #a6adc4;
+@import '../../theme/variables.scss';
 
+.uk-checkbox {
+  color: $color--darkblue;
+  border-color: $color--darkblue;
   border-radius: 4px;
+
+  &:disabled {
+    background-color: transparent;
+    border: 1px solid $color--checkdisabled;
+    color: $color--checkdisabled;
+  }
+}
+
+.uk-checkbox[primary='true'] {
+  &:checked {
+    background-color: $color--darkblue;
+  }
+  border-color: $color--darkblue;
+}
+
+.uk-checkbox[secondary='true'] {
+  &:checked {
+    background-color: $color--secondary;
+  }
+  border-color: $color--secondary;
 }

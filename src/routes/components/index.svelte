@@ -32,12 +32,7 @@
 <h5>Default Tabs</h5>
 <TabMenu
   type="default"
-  tabs={[
-    { name: 'First', url: 'components' },
-    { name: 'Second', url: 'components' },
-    { name: 'Third', url: 'components' },
-  ]}
-/>
+  tabs={[{ name: 'First', url: 'components' }, { name: 'Second', url: 'components' }, { name: 'Third', url: 'components' }]} />
 <br />
 <br />
 
@@ -86,8 +81,7 @@
 <div class="uk-width-1-4" style="border: 1px solid black;">
   <h4
     uk-tooltip="See? A Tool Tip. Wow."
-    style="margin: auto; padding: auto; text-align: center;"
-  >
+    style="margin: auto; padding: auto; text-align: center;">
     Hover Over Me!
   </h4>
 </div>
@@ -162,8 +156,7 @@
   type="default"
   text="Dropdown"
   choiceHeader="Some Choices"
-  choices={['A Choice', 'Another Choice', 'A Third Choice']}
-/>
+  choices={['A Choice', 'Another Choice', 'A Third Choice']} />
 <br />
 <br />
 
@@ -187,7 +180,9 @@
 
 <!-- ===================================================== -->
 <h2>Checkbox</h2>
-<Checkbox />
+<Checkbox primary />
+<Checkbox secondary />
+<Checkbox disabled />
 <br />
 <br />
 
