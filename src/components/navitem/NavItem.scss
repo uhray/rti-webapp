@@ -1,0 +1,17 @@
+@import '../../theme/variables.scss';
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Regular.ttf') format('ttf');
+}
+
+.NavItem {
+  width: 100%;
+
+  display: flex;
+  flex-flow: row nowrap;
+
+  font-size: 15px;
+  font-family: 'Poppins';
+
+  padding-left: 20px;
+}

@@ -1,14 +1,15 @@
 @import '../../theme/variables.scss';
+
 .Nav {
-  position: fixed;
+  // position: fixed;
   z-index: 999;
-  width: 319px;
+  width: 208px;
   height: 100vh;
-  margin-right: 20px;
-  background: $nav--color;
-  @media only screen and (max-width: 1200px) {
-    width: 125px;
-  }
+  background: $color--nav;
+
+  // @media only screen and (max-width: 1200px) {
+  //   width: 125px;
+  // }
 
   ul {
     margin: 0;

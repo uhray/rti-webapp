@@ -32,12 +32,7 @@
 <h5>Default Tabs</h5>
 <TabMenu
   type="default"
-  tabs={[
-    { name: 'First', url: 'components' },
-    { name: 'Second', url: 'components' },
-    { name: 'Third', url: 'components' },
-  ]}
-/>
+  tabs={[{ name: 'First', url: 'components' }, { name: 'Second', url: 'components' }, { name: 'Third', url: 'components' }]} />
 <br />
 <br />
 

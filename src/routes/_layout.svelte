@@ -4,25 +4,29 @@
   export let segment: string;
 </script>
 
-<Nav {segment} />
-
-<main>
-  <slot />
-</main>
-
 <style lang="scss">
+  .wrapper {
+    min-height: 100vh;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
   main {
-    position: relative;
-    max-width: 80em;
+    width: 100%;
     background-color: white;
     padding: 2em;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-right: 20px;
-    margin-left: auto;
     box-sizing: border-box;
-    @media only screen and (max-width: 1200px) {
-      width: 50em;
-    }
   }
 </style>
+
+<div class="wrapper">
+
+  <Nav {segment} />
+
+  <main>
+    <slot />
+  </main>
+</div>
