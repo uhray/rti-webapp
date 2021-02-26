@@ -134,8 +134,8 @@
   {/if}
   {#if type === 'news-image'}
     <div class="uk-card uk-card-default uk-flex Card-container">
-      <div class="uk-card-body uk-width-1-1 Card-body">
-        <div class="uk-flex">
+      <div class="uk-card-body uk-width-1-1 Card-bodyImage">
+        <div class="uk-flex Card-setSideSpacing">
           <Icon type="default-avatar" />
           <div>
             <h3 class="uk-card-title Card-header Card-headerFeed">{name}</h3>
@@ -148,12 +148,12 @@
         </div>
         <Divider type="default" />
         <!-- Header Section -->
-        <div class="uk-width-1-1">
+        <div class="uk-width-1-1 Card-setSideSpacing">
           <h2 class="Card-newsHeader">
             {header}
           </h2>
         </div>
-        <div class="uk-flex Card-newsSubHeader">
+        <div class="uk-flex Card-newsSubHeader Card-setSideSpacing">
           <div class="Card-newsSubSpacing">
             <Icon type="default-avatar-small" />
           </div>
@@ -170,7 +170,7 @@
         <div class="uk-width-1-1">
           <img src={imageUrl} alt="some doughnuts" class="Card-image" />
         </div>
-        <div class="Card-newsSubContent">
+        <div class="Card-newsSubContent Card-setSideSpacing">
           <p class="Card-newsSubContentText">
             {content}
           </p>
@@ -189,16 +189,16 @@
   {#if type === 'feed-image'}
     <div class="uk-child-width-1-1">
       <div class="uk-card uk-card-default uk-flex Card-container">
-        <div class="uk-card-body uk-width-1-1 Card-body">
-          <div class="uk-flex">
+        <div class="uk-card-body uk-width-1-1 Card-bodyImage">
+          <div class="uk-flex Card-setSideSpacing ">
             <Icon type="default-avatar" />
             <div>
               <h3 class="uk-card-title Card-header Card-headerFeed">{name}</h3>
               <h4 class="Card-subTitle Card-subTitleFeed">{timeago} min ago</h4>
             </div>
           </div>
-          <p class="Card-content">{content}</p>
-          <p class="Card-linkText">{linkText}</p>
+          <p class="Card-content Card-setSideSpacing ">{content}</p>
+          <p class="Card-linkText Card-setSideSpacing ">{linkText}</p>
           <br />
           <img src={imageUrl} alt="some doughnuts" class="Card-image" />
           <br />
@@ -218,7 +218,7 @@
               </div>
             </div>
           </div>
-          <Divider type="default" />
+          <Divider type="for-tabs" />
           <div class="uk-flex uk-child-width-1-4 Card-tabGroup">
             <div class="Card-tabGroupNormal">
               <Icon type="tag" />

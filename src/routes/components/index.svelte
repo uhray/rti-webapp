@@ -101,7 +101,7 @@
   <Card
     type="news-image"
     header="A big time news header."
-    content="Some additional content, in regards to the big time news header previously mentioned."
+    content="Some additional content, in regards to the big time news header previously mentioned. Some additional content, in regards to the big time news header previously mentioned. Some additional content, in regards to the big time news header previously mentioned."
     name="Name"
     timeago="23"
     imageUrl="/images/stock.jpg"
