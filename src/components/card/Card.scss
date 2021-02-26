@@ -64,8 +64,6 @@
     margin-bottom: 3px;
   }
   .Card-body {
-    padding-top: 25px;
-    padding-bottom: 20px;
     padding: 15px;
   }
   .Card-content {
@@ -124,7 +122,10 @@
     padding: none;
   }
   .Card-buttonText {
-    margin: auto 5px 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-family: Font Awesome 5 Pro;
     font-size: 14px;
     line-height: 20px;
