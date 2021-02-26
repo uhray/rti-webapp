@@ -9,7 +9,7 @@
     <input
       class="uk-search-input SearchBar-defaultSearch"
       type="search"
-      placeholder=""
+      placeholder="Search..."
     />
   </form>
 </section>

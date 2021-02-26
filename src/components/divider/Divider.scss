@@ -1,16 +1,7 @@
 .Divider {
   .Divider-default {
-    width: 100%;
-    height: 1px;
-    background: #e1e1e1;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .Divider-forTabs {
-    width: 100%;
-    height: 1px;
-    background: #e1e1e1;
-    margin-top: 5px;
-    margin-bottom: 0px;
+    height: 0.5px;
+    border: 1px solid rgba(166, 173, 196, 0.5);
+    box-sizing: border-box;
   }
 }

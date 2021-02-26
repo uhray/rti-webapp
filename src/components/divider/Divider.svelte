@@ -1,14 +1,11 @@
 <script>
-  import Icon from '../icon/Icon.svelte';
+  export let type;
 </script>
 
 <!-- HTML -->
 <section class="Divider">
-  {#if $$props.type === 'default'}
+  {#if type === 'default'}
     <div class="Divider-default" />
-  {/if}
-  {#if $$props.type === 'for-tabs'}
-    <div class="Divider-forTabs" />
   {/if}
 </section>
 

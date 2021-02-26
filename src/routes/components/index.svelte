@@ -21,6 +21,18 @@
 
 <h1>Components Page</h1>
 
+<h2>Divider</h2>
+<Divider type="default" />
+
+<h2>Progress Bar</h2>
+<ProgressBar progress="35" />
+
+<h2>Search Bars</h2>
+<SearchBar />
+
+<h2>Radios</h2>
+<Radios options={['A', 'B', 'C']} />
+
 <h2>Icons</h2>
 <div class="uk-flex">
   <div style="margin: 5px;">

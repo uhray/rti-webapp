@@ -1,10 +1,10 @@
 <script>
-  // javascript //
+  export let progress;
 </script>
 
 <!-- HTML -->
 <section class="ProgressBar">
-  <progress class="uk-progress ProgressBar-bar" value="50" max="100" />
+  <progress class="uk-progress ProgressBar-bar" value={progress} max="100" />
 </section>
 
 <!-- ==== -->

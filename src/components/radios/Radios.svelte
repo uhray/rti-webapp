@@ -9,8 +9,8 @@
     {#each options as option}
       <label
         ><input class="uk-radio" type="radio" name={`radio1`} /><span
-          class="RadioGroup-spanLabels">{option}</span
-        ></label
+          class="RadioGroup-spanLabels"
+        /></label
       >
     {/each}
   </div>

@@ -1,10 +1,45 @@
 .SearchBar {
   .SearchBar-formContainer {
-    width: 100%;
+    width: 50%;
     margin: 10px auto;
   }
   .SearchBar-defaultSearch {
-    border-radius: 7px;
+    border: 0.5px solid #15224b;
+    box-sizing: border-box;
+    border-radius: 4px;
     width: 100%;
   }
+}
+
+::-webkit-input-placeholder {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  color: #595f76;
+}
+::-moz-placeholder {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  color: #595f76;
+}
+:-ms-input-placeholder {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  color: #595f76;
+}
+:-moz-placeholder {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  color: #595f76;
 }
