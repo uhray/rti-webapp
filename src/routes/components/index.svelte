@@ -31,7 +31,9 @@
 <SearchBar />
 
 <h2>Inputs and Textareas</h2>
-<Input type="default" />
+<Input type="input" />
+<br />
+<Input type="textarea-plain" placeholder="Start typing.." rows={2} />
 
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />
