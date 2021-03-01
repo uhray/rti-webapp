@@ -2,17 +2,17 @@
 
 .uk-checkbox {
   color: $color--darkblue;
-  border-color: $color--checkdisabled;
+  border-color: $color--lightgray;
   border-radius: 4px;
   margin-top: 1px;
 
   &:disabled {
     background-color: transparent;
-    border: 1px solid $color--checkdisabled;
-    color: $color--checkdisabled;
+    border: 1px solid $color--lightgray;
+    color: $color--lightgray;
 
     &:hover {
-      border-color: $color--checkdisabled;
+      border-color: $color--lightgray;
     }
   }
 
@@ -27,7 +27,7 @@
 }
 
 .uk-checkbox[primary='true'] {
-  border-color: $color--checkdisabled;
+  border-color: $color--lightgray;
 
   &:checked {
     background-color: $color--darkblue;
@@ -40,7 +40,7 @@
 }
 
 .uk-checkbox[secondary='true'] {
-  border-color: $color--checkdisabled;
+  border-color: $color--lightgray;
 
   &:checked {
     background-color: $color--secondary;
