@@ -35,6 +35,14 @@
 <br />
 <Input type="textarea-plain" placeholder="Start typing.." rows={2} />
 
+<h2>Drop Downs</h2>
+<DropDown
+  type="default"
+  text="Drop Down"
+  choiceHeader="Choice Header"
+  choices={['Choice One', 'Choice Two']}
+/>
+
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />
 

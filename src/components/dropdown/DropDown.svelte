@@ -13,8 +13,7 @@
       class="uk-button-small uk-flex uk-button-default DropDown-button"
       type="button"
       ><span class="DropDown-text">{text}</span>
-      <span class="DropDown-chevIcon"><Icon type="chevron-down" /></span
-      ></button
+      <span class="DropDown-chevIcon"><Icon type="chev-down" /></span></button
     >
     <div class="uk-width-large" uk-dropdown="mode: click">
       <div class="uk-child-width-1-2@m" uk-grid>
