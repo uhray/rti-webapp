@@ -10,11 +10,11 @@
 
 <!-- HTML -->
 <section class="Input">
-  {#if type === 'input'}
+  {#if type === 'input-inactive'}
     {#if isValid}
       <div class="uk-inline uk-width-1-1">
         <input
-          class="uk-input Input-default"
+          class="uk-input Input-inactive"
           type="text"
           placeholder="Placeholder Text"
         />
@@ -36,9 +36,70 @@
       <Error type="default-error" text="Something is wrong" />
     {/if}
   {/if}
-  {#if type === 'textarea-plain'}
+  {#if type === 'input-active-filled'}
+    {#if isValid}
+      <div class="uk-inline uk-width-1-1">
+        <input
+          class="uk-input Input-activeFilled"
+          type="text"
+          placeholder="Placeholder Text"
+        />
+        <span class="uk-form-icon uk-form-icon-flip"
+          ><Icon type="rocket" /></span
+        >
+      </div>
+    {:else}
+      <div class="uk-inline uk-width-1-1">
+        <input
+          class="uk-input Input-notValid"
+          type="text"
+          placeholder="Placeholder Text"
+        />
+        <span class="uk-form-icon uk-form-icon-flip"
+          ><Icon type="close-red" /></span
+        >
+      </div>
+      <Error type="default-error" text="Something is wrong" />
+    {/if}
+  {/if}
+  {#if type === 'input-active-outlined'}
+    {#if isValid}
+      <div class="uk-inline uk-width-1-1">
+        <input
+          class="uk-input Input-activeOutlined"
+          type="text"
+          placeholder="Placeholder Text"
+        />
+        <span class="uk-form-icon uk-form-icon-flip"
+          ><Icon type="rocket" /></span
+        >
+      </div>
+    {:else}
+      <div class="uk-inline uk-width-1-1">
+        <input
+          class="uk-input Input-notValid"
+          type="text"
+          placeholder="Placeholder Text"
+        />
+        <span class="uk-form-icon uk-form-icon-flip"
+          ><Icon type="close-red" /></span
+        >
+      </div>
+      <Error type="default-error" text="Something is wrong" />
+    {/if}
+  {/if}
+  {#if type === 'textarea-plain-active'}
     <div class="uk-margin">
-      <textarea class="uk-textarea Input-textarea" {rows} {placeholder} />
+      <textarea class="uk-textarea Input-textareaActive" {rows} {placeholder} />
+    </div>
+  {/if}
+  {#if type === 'textarea-plain-inactive'}
+    <div class="uk-margin">
+      <textarea
+        class="uk-textarea Input-textareaInactive"
+        {rows}
+        {placeholder}
+      />
     </div>
   {/if}
   {#if type === 'textarea-full'}

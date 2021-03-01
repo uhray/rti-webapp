@@ -1,5 +1,5 @@
 .Input {
-  .Input-default {
+  .Input-inactive {
     border-radius: 4px;
     border: 1px solid #e1e1e1;
     font-family: Poppins;
@@ -8,6 +8,25 @@
     font-size: 15px;
     line-height: 22px;
     color: #15224b;
+  }
+  .Input-activeFilled {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 9px 15px 7px;
+    background: #f8f9fc;
+    border: 0.5px solid #15224b;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  .Input-activeOutlined {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 9px 15px 7px;
+    border: 0.5px solid #15224b;
+    box-sizing: border-box;
+    border-radius: 4px;
   }
   .Input-notValid {
     display: flex;
@@ -22,7 +41,15 @@
     border-radius: 4px;
     border: 1px solid #e1e1e1;
   }
-  .Input-textarea {
+  .Input-textareaActive {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background: #ffffff;
+    border: 0.5px solid #15224b;
+    border-radius: 4px;
+  }
+  .Input-textareaInactive {
     border-radius: 4px;
     border: 1px solid #e1e1e1;
   }
