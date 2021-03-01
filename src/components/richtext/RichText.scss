@@ -1,5 +1,86 @@
 @import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
 .RichText {
+  .RichText-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px;
+    background: #ffffff;
+    border: 0.5px solid #15224b;
+    border-radius: 4px;
+  }
+  .RichText-editor {
+    border: none;
+    min-height: 56px;
+    width: 100%;
+    font-size: 1rem;
+    .ql-editor {
+      * {
+        color: darkgray a {
+          color: blue, strong, em, s {
+            color: blue !important;
+          }
+        }
+      }
+      &.ql-blank {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 22px;
+        display: flex;
+        align-items: flex-end;
+        color: #a6adc4;
+        &::before {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 15px;
+          line-height: 22px;
+          display: flex;
+          align-items: flex-end;
+          color: #a6adc4;
+          font-style: normal;
+        }
+      }
+    }
+  }
+  .RichText-toolbar {
+    position: relative;
+    padding: 10px 0;
+    width: 100%;
+    border: none !important;
+    background: #f8f9fc;
+    border-top: 1px solid lightgray !important;
+    button {
+      padding: 0 !important;
+      margin: 0 10px 0 0;
+      &:disabled {
+        cursor: default;
+      }
+      &:last-of-type {
+        margin: 0;
+      }
+      &:first-of-type {
+        margin-left: 10px;
+      }
+      svg {
+        transform: scale(1.2);
+      }
+    }
+    .ql-active {
+      svg {
+        path {
+          fill: blue !important;
+        }
+      }
+    }
+    .aligned-right {
+      position: absolute;
+      right: 0;
+      margin-right: 10px;
+    }
+  }
   .RichText-textareaActive {
     display: flex;
     flex-direction: column;
@@ -21,71 +102,6 @@
     font-size: 15px;
     line-height: 22px;
     color: #15224b;
-  }
-  .chat-container {
-    border: 1px solid gray;
-    background: white;
-    border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    #editor.chat-msg-box {
-      border: none;
-      min-height: 56px;
-      width: 100%;
-      font-size: 1rem;
-      .ql-editor {
-        * {
-          color: darkgray;
-          a {
-            color: blue;
-            strong,
-            em,
-            s {
-              color: blue !important;
-            }
-          }
-        }
-        &.ql-blank {
-          font-family: 'Lato', sans-serif;
-          &::before {
-            color: gray !important;
-            font-style: normal;
-          }
-        }
-      }
-    }
-    .editor-toolbar {
-      position: relative;
-      padding: 10px 0;
-      width: 95%;
-      border: none !important;
-      border-top: 1px solid lightgray !important;
-      button {
-        padding: 0 !important;
-        margin: 0 10px 0 0;
-        &:disabled {
-          cursor: default;
-        }
-        &:last-of-type {
-          margin: 0;
-        }
-        svg {
-          transform: scale(1.2);
-        }
-      }
-      .ql-active {
-        svg {
-          path {
-            fill: blue !important;
-          }
-        }
-      }
-      .send-msg {
-        position: absolute;
-        right: 0;
-      }
-    }
   }
 }
 
