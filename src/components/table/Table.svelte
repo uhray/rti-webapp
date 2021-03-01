@@ -52,7 +52,7 @@
                     <a href="">View</a>
                   {:else if header.header == 'actions'}
                     <div class="Table-row-actions">
-                      <Icon type="delete-default" />
+                      <Icon type="delete" hover />
                       <Checkbox secondary />
                     </div>
                   {:else}{item[header.header]}{/if}
@@ -63,12 +63,6 @@
           {/each}
         </tbody>
       </table>
-
-      <!-- Put subsection for pagination here -->
-      <div class="Table-subSection">
-        <div class="uk-align-left Table-subText">Showing 1-20 of 60 items</div>
-        <div class="uk-align-right Table-subText">1 / 3</div>
-      </div>
     </div>
   </div>
 </section>

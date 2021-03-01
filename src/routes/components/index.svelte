@@ -188,16 +188,10 @@
     <Icon type="sortdown" />
   </div>
   <div style="margin: 5px;">
-    <Icon type="edit-default" />
+    <Icon type="edit" />
   </div>
   <div style="margin: 5px;">
-    <Icon type="edit-hover" />
-  </div>
-  <div style="margin: 5px;">
-    <Icon type="delete-default" />
-  </div>
-  <div style="margin: 5px;">
-    <Icon type="delete-hover" />
+    <Icon type="delete" />
   </div>
   <div style="margin: 5px;">
     <Icon type="show" />
@@ -309,10 +303,7 @@
     <Icon type="indicator" />
   </div>
   <div style="margin: 5px;">
-    <Icon type="goto-default" />
-  </div>
-  <div style="margin: 5px;">
-    <Icon type="goto-hover" />
+    <Icon type="goto" />
   </div>
   <div style="margin: 5px;">
     <Icon type="archive" />
