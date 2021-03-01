@@ -13,6 +13,61 @@
   import Label from '../../components/label/Label.svelte';
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
   import ToolTip from '../../components/tooltip/ToolTip.svelte';
+
+  // custom header to inject html
+  const tableData = {
+    headers: [
+      { header: 'order', text: 'Order' },
+      { header: 'status', text: 'Status' },
+      { header: 'vehicle', text: 'Vehicle' },
+      { header: 'startPoint', text: 'Start Point' },
+      { header: 'endPoint', text: 'End Point' },
+      { header: 'view', text: 'View' },
+      { header: 'actions', text: 'Actions' },
+    ],
+    data: [
+      {
+        order: '0102031',
+        orderDate: 'Jan 23, 2020',
+        status: 'pending',
+        vehicle: '1XY001',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Seattle, WA 01652',
+      },
+      {
+        order: '0102032',
+        orderDate: 'Jan 24, 2020',
+        status: 'completed',
+        vehicle: '1XY123',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Atlanta, GA 01652',
+      },
+      {
+        order: '0102032',
+        orderDate: 'Jan 24, 2020',
+        status: 'declined',
+        vehicle: '1XY123',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Atlanta, GA 01652',
+      },
+      {
+        order: '0102032',
+        orderDate: 'Jan 24, 2020',
+        status: 'dispatched',
+        vehicle: '1XY123',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Atlanta, GA 01652',
+      },
+      {
+        order: '0102032',
+        orderDate: 'Jan 24, 2020',
+        status: 'in progress',
+        vehicle: '1XY123',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Atlanta, GA 01652',
+      },
+    ],
+  };
 </script>
 
 <svelte:head>
@@ -20,6 +75,9 @@
 </svelte:head>
 
 <h1>Components Page</h1>
+
+<h2>Table</h2>
+<Table data={tableData} />
 
 <h2>Divider</h2>
 <Divider type="default" />
@@ -56,14 +114,12 @@
   type="default"
   text="Drop Down"
   choiceHeader="Choice Header"
-  choices={['Choice One', 'Choice Two']}
-/>
+  choices={['Choice One', 'Choice Two']} />
 
 <h2>Tab Menu</h2>
 <TabMenu
   type="default"
-  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']}
-/>
+  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']} />
 
 <h2>Labels</h2>
 <Label type="active" text="active" />
@@ -87,8 +143,7 @@
 <Error type="password-validation-error" />
 <Error
   type="default-error"
-  text="This error takes a text prop, and can say anything"
-/>
+  text="This error takes a text prop, and can say anything" />
 
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />
