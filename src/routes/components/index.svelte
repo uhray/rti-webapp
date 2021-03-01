@@ -13,6 +13,7 @@
   import Label from '../../components/label/Label.svelte';
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
   import ToolTip from '../../components/tooltip/ToolTip.svelte';
+  import RichText from '../../components/richtext/RichText.svelte';
 
   // custom header to inject html
   const tableData = {
@@ -91,7 +92,7 @@
 <h2>Search Bars</h2>
 <SearchBar />
 
-<h2>Inputs and Textareas</h2>
+<h2>Inputs and Plain Textareas</h2>
 <Input type="input-inactive" isValid={true} />
 <br />
 <Input type="input-inactive" isValid={false} />
@@ -99,27 +100,26 @@
 <Input type="input-active-filled" isValid={true} />
 <br />
 <Input type="input-active-outlined" isValid={true} />
-<h4>These will be our text areas without toolbars, just plain</h4>
+<br />
 <Input type="textarea-plain-inactive" placeholder="Type something.." rows={2} />
 <Input type="textarea-plain-active" placeholder="Type something.." rows={2} />
-<h4>These will be our text areas with toolbars (not finished)</h4>
-<Input type="textarea-full-inactive" placeholder="Type something.." rows={2} />
-<Input type="textarea-full-active" placeholder="Type something.." rows={2} />
 
-<br />
-<Input type="testing-quill" />
+<!-- <h2>Rich Text Tex Area</h2>
+<RichText /> -->
 
 <h2>Drop Downs</h2>
 <DropDown
   type="default"
   text="Drop Down"
   choiceHeader="Choice Header"
-  choices={['Choice One', 'Choice Two']} />
+  choices={['Choice One', 'Choice Two']}
+/>
 
 <h2>Tab Menu</h2>
 <TabMenu
   type="default"
-  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']} />
+  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']}
+/>
 
 <h2>Labels</h2>
 <Label type="active" text="active" />
@@ -143,7 +143,8 @@
 <Error type="password-validation-error" />
 <Error
   type="default-error"
-  text="This error takes a text prop, and can say anything" />
+  text="This error takes a text prop, and can say anything"
+/>
 
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />
