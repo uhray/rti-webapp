@@ -13,7 +13,8 @@
   <div class="Table-card uk-padding-remove">
     <div class="uk-card-body Table-cardBody">
       <table
-        class="uk-table uk-table-divider uk-table-middle Table-tableContainer">
+        class="uk-table uk-table-divider uk-table-middle Table-tableContainer "
+        uk-table-scrollable="height: 200px">
         <thead>
           <tr class="Table-headerRow">
             {#each data.headers as header}
@@ -27,9 +28,19 @@
               {#each data.headers as header}
                 <td class="Table-defaultBodyText">
                   {#if header.header == 'status'}
-                    <Label type="warning" text="pending" />
+                    {#if item.status == 'pending'}
+                      <Label type="warning" text="Pending" />
+                    {:else if item.status == 'completed'}
+                      <Label type="success" text="Completed" />
+                    {:else if item.status == 'declined'}
+                      <Label type="danger" text="Declined" />
+                    {:else if item.status == 'dispatched'}
+                      <Label type="default" text="Dispatched" />
+                    {:else if item.status == 'in progress'}
+                      <Label type="active" text="In Progress" />
+                    {/if}
                   {:else if item.header == 'order'}
-                    {item[header.header]}
+                    {header.header} hello {item[header.header]}
                     <br />
                     {item.orderDate}
                   {:else if header.header == 'view'}
