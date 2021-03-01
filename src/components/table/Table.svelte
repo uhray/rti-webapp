@@ -26,7 +26,7 @@
           {#each data.data as item}
             <tr class="Table-row">
               {#each data.headers as header}
-                <td class="Table-defaultBodyText">
+                <td>
                   {#if header.header == 'status'}
                     {#if item.status == 'pending'}
                       <Label type="warning" text="Pending" />
@@ -39,10 +39,10 @@
                     {:else if item.status == 'in progress'}
                       <Label type="active" text="In Progress" />
                     {/if}
-                  {:else if item.header == 'order'}
-                    {header.header} hello {item[header.header]}
+                  {:else if header.header == 'order'}
+                    <span class="Table-row-orderNumber">{item.order}</span>
                     <br />
-                    {item.orderDate}
+                    <span class="Table-row-orderDate">{item.orderDate}</span>
                   {:else if header.header == 'view'}
                     hello
                   {:else if header.header == 'actions'}
