@@ -18,7 +18,11 @@
         <thead>
           <tr class="Table-headerRow">
             {#each data.headers as header}
-              <th class="Table-headerRow-headerCell">{header.text}</th>
+              <th class="Table-headerRow-headerCell">
+                {#if header.header == 'view' || header.header == 'actions'}
+                  {''}
+                {:else}{header.text}{/if}
+              </th>
             {/each}
           </tr>
         </thead>
