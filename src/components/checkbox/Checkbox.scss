@@ -2,26 +2,52 @@
 
 .uk-checkbox {
   color: $color--darkblue;
-  border-color: $color--darkblue;
+  border-color: $color--checkdisabled;
   border-radius: 4px;
+  margin-top: 1px;
 
   &:disabled {
     background-color: transparent;
     border: 1px solid $color--checkdisabled;
     color: $color--checkdisabled;
+
+    &:hover {
+      border-color: $color--checkdisabled;
+    }
+  }
+
+  &:checked {
+    background-color: $color--darkblue;
+    border-color: $color--darkblue;
+  }
+
+  &:hover {
+    border-color: $color--darkblue;
   }
 }
 
 .uk-checkbox[primary='true'] {
+  border-color: $color--checkdisabled;
+
   &:checked {
     background-color: $color--darkblue;
+    border-color: $color--darkblue;
   }
-  border-color: $color--darkblue;
+
+  &:hover {
+    border-color: $color--darkblue;
+  }
 }
 
 .uk-checkbox[secondary='true'] {
+  border-color: $color--checkdisabled;
+
   &:checked {
     background-color: $color--secondary;
+    border-color: $color--secondary;
   }
-  border-color: $color--secondary;
+
+  &:hover {
+    border-color: $color--secondary;
+  }
 }

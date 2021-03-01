@@ -408,7 +408,9 @@
 </div>
 
 <h2>Checkbox</h2>
-<Checkbox />
+<Checkbox primary />
+<Checkbox secondary />
+<Checkbox disabled />
 
 <!-- ===================================================== -->
 <h2>Button</h2>
