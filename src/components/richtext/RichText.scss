@@ -22,6 +22,71 @@
     line-height: 22px;
     color: #15224b;
   }
+  .chat-container {
+    border: 1px solid gray;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    #editor.chat-msg-box {
+      border: none;
+      min-height: 56px;
+      width: 100%;
+      font-size: 1rem;
+      .ql-editor {
+        * {
+          color: darkgray;
+          a {
+            color: blue;
+            strong,
+            em,
+            s {
+              color: blue !important;
+            }
+          }
+        }
+        &.ql-blank {
+          font-family: 'Lato', sans-serif;
+          &::before {
+            color: gray !important;
+            font-style: normal;
+          }
+        }
+      }
+    }
+    .editor-toolbar {
+      position: relative;
+      padding: 10px 0;
+      width: 95%;
+      border: none !important;
+      border-top: 1px solid lightgray !important;
+      button {
+        padding: 0 !important;
+        margin: 0 10px 0 0;
+        &:disabled {
+          cursor: default;
+        }
+        &:last-of-type {
+          margin: 0;
+        }
+        svg {
+          transform: scale(1.2);
+        }
+      }
+      .ql-active {
+        svg {
+          path {
+            fill: blue !important;
+          }
+        }
+      }
+      .send-msg {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
 }
 
 ::-webkit-richtext-placeholder {

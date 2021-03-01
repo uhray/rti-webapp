@@ -104,8 +104,8 @@
 <Input type="textarea-plain-inactive" placeholder="Type something.." rows={2} />
 <Input type="textarea-plain-active" placeholder="Type something.." rows={2} />
 
-<!-- <h2>Rich Text Tex Area</h2>
-<RichText /> -->
+<h2>Rich Text Tex Area</h2>
+<RichText />
 
 <h2>Drop Downs</h2>
 <DropDown

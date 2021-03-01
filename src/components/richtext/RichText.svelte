@@ -3,54 +3,30 @@
 
   // ========================= Quill.js Config ================== //
   let quill;
+  let htmlContent;
+  let content;
 
   onMount(async () => {
-    const { quill } = await import('svelte-quill');
-    quill = quill;
-  });
+    //   import Quill after mount so that document object is defined
+    const { default: Quill } = await import('quill');
 
-  let options = {
-    modules: {
-      toolbar: [
-        [{ header: [1, 2, 3, false] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        ['link', 'code-block'],
-      ],
-    },
-    placeholder: 'Type something...',
-    theme: 'snow',
+    quill = new Quill('#editor', {
+      theme: 'snow',
+    });
+  });
+  const updateContent = () => {
+    content = quill.getText();
+    htmlContent = quill.root.innerHTML;
   };
-  let content = { html: '', text: '' };
   // =========================================================== //
 </script>
 
 <!-- HTML -->
 <section class="RichText">
-  <!-- {#if type === 'textarea-full-inactive'}
-    <div class="uk-margin">
-      <textarea
-        class="uk-textarea RichText-textareaInactive"
-        {rows}
-        {placeholder}
-      />
-    </div>
-  {/if}
-  {#if type === 'textarea-full-active'}
-    <div class="uk-margin">
-      <textarea class="uk-textarea RichText-textareaActive" {rows} {placeholder} />
-    </div>
-  {/if} -->
-
-  <div
-    class="editor"
-    use:quill={options}
-    on:text-change={e => (content = e.detail)}
-  />
+  <div id="editor" on:keyup={updateContent} />
 
   <br />
-  Resulting HTML:
-
-  {@html content.html}
+  Resulting HTML: {@html htmlContent}
 </section>
 
 <style src="./RichText.scss">
