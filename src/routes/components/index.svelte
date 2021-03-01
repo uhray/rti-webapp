@@ -14,6 +14,7 @@
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
   import ToolTip from '../../components/tooltip/ToolTip.svelte';
   import RichText from '../../components/richtext/RichText.svelte';
+  import Card from '../../components/card/Card.svelte';
 
   // custom header to inject html
   const tableData = {
@@ -104,7 +105,7 @@
 <Input type="textarea-plain-inactive" placeholder="Type something.." rows={2} />
 <Input type="textarea-plain-active" placeholder="Type something.." rows={2} />
 
-<h2>Rich Text Tex Area</h2>
+<h2>Rich Text Text Area</h2>
 <RichText />
 
 <h2>Drop Downs</h2>
@@ -113,6 +114,25 @@
   text="Drop Down"
   choiceHeader="Choice Header"
   choices={['Choice One', 'Choice Two']}
+/>
+
+<h2>Cards</h2>
+<Card
+  type="card-gray-border"
+  header="Lorem"
+  content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero laborum iusto qui, incidunt nam repudiandae expedita architecto vel recusandae!"
+/>
+<br />
+<Card
+  type="card-gray-bg"
+  header="Lorem"
+  content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero laborum iusto qui, incidunt nam repudiandae expedita architecto vel recusandae!"
+/>
+<br />
+<Card
+  type="card-default"
+  header="Lorem"
+  content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero laborum iusto qui, incidunt nam repudiandae expedita architecto vel recusandae!"
 />
 
 <h2>Tab Menu</h2>
