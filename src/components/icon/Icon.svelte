@@ -1,5 +1,6 @@
 <script>
   export let type;
+  export let hover;
 </script>
 
 <style src="./Icon.scss">
@@ -7,7 +8,7 @@
 </style>
 
 <!-- HTML -->
-<section class="Icon">
+<section class="Icon" {hover}>
   <!-- icons -->
   {#if type === 'notification'}
     <svg

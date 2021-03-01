@@ -52,7 +52,7 @@
                     <a href="">View</a>
                   {:else if header.header == 'actions'}
                     <div class="Table-row-actions">
-                      <Icon type="delete" />
+                      <Icon type="delete" hover />
                       <Checkbox secondary />
                     </div>
                   {:else}{item[header.header]}{/if}

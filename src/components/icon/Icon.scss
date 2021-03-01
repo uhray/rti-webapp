@@ -3,8 +3,13 @@
 .Icon {
   fill: $color--darkgray;
 
-  svg:hover {
+  &[hover='true'] {
+    svg:hover {
+      cursor: pointer;
+    }
+  }
+
+  & svg:hover {
     fill: $color--secondary;
-    cursor: pointer;
   }
 }
