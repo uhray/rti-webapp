@@ -43,6 +43,14 @@
   choices={['Choice One', 'Choice Two']}
 />
 
+<h2>Error Messages</h2>
+<Error type="email-validation-error" />
+<Error type="password-validation-error" />
+<Error
+  type="default-error"
+  text="This error takes a text prop, and can say anything"
+/>
+
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />
 
