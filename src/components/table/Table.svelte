@@ -1,6 +1,5 @@
 <script>
   import Checkbox from '../checkbox/Checkbox.svelte';
-  import Status from '../status/Status.svelte';
   export let type;
 </script>
 

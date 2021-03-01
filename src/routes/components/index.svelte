@@ -11,7 +11,7 @@
   import Input from '../../components/input/Input.svelte';
   import Error from '../../components/error/Error.svelte';
   import Table from '../../components/table/Table.svelte';
-  import Status from '../../components/status/Status.svelte';
+  import Label from '../../components/label/Label.svelte';
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
 </script>
 
@@ -42,6 +42,23 @@
   choiceHeader="Choice Header"
   choices={['Choice One', 'Choice Two']}
 />
+
+<h2>Labels</h2>
+<Label type="active" text="active" />
+<br />
+<Label type="success" text="success" />
+<br />
+<Label type="disabled" text="disabled" />
+<br />
+<Label type="warning" text="warning" />
+<br />
+<Label type="danger" text="danger" />
+<br />
+<Label type="default" text="default" />
+<br />
+<Label type="dis-icon-blue" text="disabled" />
+<br />
+<Label type="dis-icon-default" text="disabled" />
 
 <h2>Error Messages</h2>
 <Error type="email-validation-error" />
