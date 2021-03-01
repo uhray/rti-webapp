@@ -1,17 +1,24 @@
 <!-- Script -->
 <script>
-  import Icon from '../icon/Icon.svelte';
-
   export let type;
   export let text;
 </script>
 
 <!-- HTML HERE -->
 <section class="Error">
-  {#if type === 'validation-error'}
-    <div class="uk-flex uk-width-small">
-      <Icon type="warning" />
-      <p class="Error-validationText">Invalid {text}</p>
+  {#if type === 'email-validation-error'}
+    <div class="uk-flex">
+      <p class="Error-validationText">Please enter a valid email address</p>
+    </div>
+  {/if}
+  {#if type === 'password-validation-error'}
+    <div class="uk-flex">
+      <p class="Error-validationText">Please enter a correct password</p>
+    </div>
+  {/if}
+  {#if type === 'default-error'}
+    <div class="uk-flex">
+      <p class="Error-validationText">{text}</p>
     </div>
   {/if}
 </section>

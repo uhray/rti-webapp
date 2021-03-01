@@ -1,0 +1,24 @@
+.ToolTip {
+  .ToolTip-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6px 8px 8px;
+    background: #f8f9fc;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+  }
+  .ToolTip-text {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: #15224b;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 4px 0px;
+  }
+}

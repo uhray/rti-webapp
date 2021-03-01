@@ -2,12 +2,13 @@
   .uk-tab {
     .uk-active {
       a {
-        border-color: #2e5ff6 !important;
-        border-bottom: 2px solid #2e5ff6 !important;
+        border-color: #243e93, 100% !important;
+        border-bottom: 2px solid #243e93 !important;
       }
     }
   }
   .TabMenu-linkText {
-    text-transform: none !important;
+    text-transform: uppercase !important;
+    color: #243e93;
   }
 }

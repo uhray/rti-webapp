@@ -1,0 +1,79 @@
+.Label {
+  // Label Text Styles
+  .Label-regText {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.03em;
+    text-transform: capitalize;
+    text-align: center;
+    color: #ffffff;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+  .Label-blackText {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.03em;
+    text-transform: capitalize;
+    color: #15224b;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+  .Label-blueText {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.03em;
+    text-transform: capitalize;
+    color: #243e93;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+  // Label Div/Background Styles
+  .Label-divs {
+    min-height: 25px;
+    max-width: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5.5px 8px;
+    border-radius: 4px;
+  }
+  .Label-divsIcons {
+    min-height: 25px;
+    max-width: 95px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5.5px 8px;
+    border-radius: 4px;
+  }
+  .Label-active {
+    background: #243e93;
+  }
+  .Label-success {
+    background: #5dca91;
+  }
+  .Label-disabled {
+    background: rgba(36, 62, 147, 0.05);
+  }
+  .Label-warning {
+    background: #ffba5e;
+  }
+  .Label-danger {
+    background: #e86172;
+  }
+  .Label-default {
+    background: #4973f1;
+  }
+}

@@ -4,19 +4,27 @@
   import ProgressBar from '../../components/progressbar/ProgressBar.svelte';
   import Radios from '../../components/radios/Radios.svelte';
   import Button from '../../components/button/Button.svelte';
-  import Card from '../../components/card/Card.svelte';
   import Divider from '../../components/divider/Divider.svelte';
   import Icon from '../../components/icon/Icon.svelte';
   import DropDown from '../../components/dropdown/DropDown.svelte';
   import Input from '../../components/input/Input.svelte';
   import Error from '../../components/error/Error.svelte';
   import Table from '../../components/table/Table.svelte';
-  import Status from '../../components/status/Status.svelte';
+  import Label from '../../components/label/Label.svelte';
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
+  import ToolTip from '../../components/tooltip/ToolTip.svelte';
 
   // custom header to inject html
   const tableData = {
-    headers: ['Order', 'Status', 'Start Point', 'End Point', 'View', 'Actions'],
+    headers: [
+      { header: 'order', text: 'Order' },
+      { header: 'status', text: 'Status' },
+      { header: 'vehicle', text: 'Vehicle' },
+      { header: 'startPoint', text: 'Start Point' },
+      { header: 'endPoint', text: 'End Point' },
+      { header: 'view', text: 'View' },
+      { header: 'actions', text: 'Actions' },
+    ],
     data: [
       {
         order: '0102031',
@@ -27,36 +35,12 @@
         endPoint: 'Seattle, WA 01652',
       },
       {
-        order: '0102031',
-        orderDate: 'Jan 23, 2020',
+        order: '0102032',
+        orderDate: 'Jan 24, 2020',
         status: 'pending',
-        vehicle: '1XY001',
+        vehicle: '1XY123',
         startPoint: 'Seattle, WA 02476',
-        endPoint: 'Seattle, WA 01652',
-      },
-      {
-        order: '0102031',
-        orderDate: 'Jan 23, 2020',
-        status: 'pending',
-        vehicle: '1XY001',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Seattle, WA 01652',
-      },
-      {
-        order: '0102031',
-        orderDate: 'Jan 23, 2020',
-        status: 'pending',
-        vehicle: '1XY001',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Seattle, WA 01652',
-      },
-      {
-        order: '0102031',
-        orderDate: 'Jan 23, 2020',
-        status: 'pending',
-        vehicle: '1XY001',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Seattle, WA 01652',
+        endPoint: 'Atlanta, GA 01652',
       },
     ],
   };
@@ -77,6 +61,9 @@
 <h2>Progress Bar</h2>
 <ProgressBar progress="35" />
 
+<h2>Tool Tip</h2>
+<ToolTip text="Tool tip text will go here, rendered through a prop." />
+
 <h2>Search Bars</h2>
 <SearchBar />
 
@@ -91,6 +78,35 @@
   text="Drop Down"
   choiceHeader="Choice Header"
   choices={['Choice One', 'Choice Two']} />
+
+<h2>Tab Menu</h2>
+<TabMenu
+  type="default"
+  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']} />
+
+<h2>Labels</h2>
+<Label type="active" text="active" />
+<br />
+<Label type="success" text="success" />
+<br />
+<Label type="disabled" text="disabled" />
+<br />
+<Label type="warning" text="warning" />
+<br />
+<Label type="danger" text="danger" />
+<br />
+<Label type="default" text="default" />
+<br />
+<Label type="dis-icon-blue" text="disabled" />
+<br />
+<Label type="dis-icon-default" text="disabled" />
+
+<h2>Error Messages</h2>
+<Error type="email-validation-error" />
+<Error type="password-validation-error" />
+<Error
+  type="default-error"
+  text="This error takes a text prop, and can say anything" />
 
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />
@@ -352,6 +368,9 @@
     <Icon type="attach-active" />
   </div>
 </div>
+
+<h2>Checkbox</h2>
+<Checkbox />
 
 <!-- ===================================================== -->
 <h2>Button</h2>
