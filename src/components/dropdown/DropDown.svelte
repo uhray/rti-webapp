@@ -15,24 +15,20 @@
       ><span class="DropDown-text">{text}</span>
       <span class="DropDown-chevIcon"><Icon type="chev-down" /></span></button
     >
-    <div class="uk-width-large" uk-dropdown="mode: click">
-      <div class="uk-child-width-1-2@m" uk-grid>
+    <div class="uk-width-medium" uk-dropdown="mode: click">
+      <div class="uk-child-width-1-1" uk-grid>
         <div>
           <ul class="uk-nav uk-dropdown-nav">
             {#if choices.length > 0}
-              <li class="uk-active"><a>{choiceHeader}</a></li>
+              <li class="uk-active DropDown-header"><a>{choiceHeader}</a></li>
               {#each choices as choice}
-                <li><a>{choice}</a></li>
+                <li class="uk-flex DropDown-listItem">
+                  <Icon type="rocket" /><a class="DropDown-choice">{choice}</a>
+                  <div class="DropDown-spacing"><Icon type="rocket" /></div>
+                </li>
               {/each}
             {:else}
-              <li class="uk-active"><a>Choices</a></li>
-              <li><a>A Choice</a></li>
-              <li>
-                <a>Another Choice</a>
-              </li>
-              <li>
-                <a>A Third Choice</a>
-              </li>
+              <p>Add a choices array as prop</p>
             {/if}
           </ul>
         </div>

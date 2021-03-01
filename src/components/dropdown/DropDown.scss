@@ -13,11 +13,45 @@
     padding-left: 8px;
     padding-right: 8px;
   }
+  .DropDown-listItem {
+    margin-top: 9px;
+    margin-bottom: 9px;
+  }
+  .DropDown-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 20px 4px 15px;
+    background: #f6f7fb;
+    border-radius: 2px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #15224b;
+  }
   .DropDown-text {
     font-family: SF Pro Display;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     color: #73767f;
+  }
+  .DropDown-choice {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #15224b;
+    margin-left: 9px;
+  }
+  .DropDown-spacing {
+    margin-left: auto;
   }
 }
