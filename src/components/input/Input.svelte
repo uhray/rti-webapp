@@ -1,6 +1,26 @@
 <script>
   import Error from '../error/Error.svelte';
   import Icon from '../icon/Icon.svelte';
+  import { onMount } from 'svelte';
+
+  // ========================= Quill.js Config ================== //
+  // onMount(async () => {
+  //   const { quill } = await import('svelte-quill');
+
+  //   let options = {
+  //     modules: {
+  //       toolbar: [
+  //         [{ header: [1, 2, 3, false] }],
+  //         ['bold', 'italic', 'underline', 'strike'],
+  //         ['link', 'code-block'],
+  //       ],
+  //     },
+  //     placeholder: 'Type something...',
+  //     theme: 'snow',
+  //   };
+  // });
+  // let content = { html: '', text: '' };
+  // =========================================================== //
 
   export let isValid;
   export let type;
@@ -102,10 +122,32 @@
       />
     </div>
   {/if}
-  {#if type === 'textarea-full'}
-    <!-- TODO: Talk with Matt on what we're going to do with the rich text editor -->
-    <!-- using a plugin, or building from scratch -->
+  <!-- {#if type === 'textarea-full-inactive'}
+    <div class="uk-margin">
+      <textarea
+        class="uk-textarea Input-textareaInactive"
+        {rows}
+        {placeholder}
+      />
+    </div>
   {/if}
+  {#if type === 'textarea-full-active'}
+    <div class="uk-margin">
+      <textarea class="uk-textarea Input-textareaActive" {rows} {placeholder} />
+    </div>
+  {/if} -->
+  <!-- {#if type === 'testing-quill'}
+    <div
+      class="editor"
+      use:quill={options}
+      on:text-change={e => (content = e.detail)}
+    />
+
+    <br />
+    Resulting HTML:
+
+    {@html content.html}
+  {/if} -->
 </section>
 
 <style src="./Input.scss">
