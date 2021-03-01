@@ -1,2 +1,10 @@
+@import '../../theme/variables.scss';
+
 .Icon {
+  fill: $color--darkgray;
+
+  svg:hover {
+    fill: $color--secondary;
+    cursor: pointer;
+  }
 }
