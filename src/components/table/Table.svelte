@@ -1,6 +1,7 @@
 <script>
   import Checkbox from '../checkbox/Checkbox.svelte';
   import Label from '../label/Label.svelte';
+  import Icon from '../icon/Icon.svelte';
   export let data;
 </script>
 
@@ -48,10 +49,14 @@
                     <br />
                     <span class="Table-row-orderDate">{item.orderDate}</span>
                   {:else if header.header == 'view'}
-                    hello
+                    <a href="">View</a>
                   {:else if header.header == 'actions'}
-                    goodbye
+                    <div class="Table-row-actions">
+                      <Icon type="delete-default" />
+                      <Checkbox secondary />
+                    </div>
                   {:else}{item[header.header]}{/if}
+
                 </td>
               {/each}
             </tr>

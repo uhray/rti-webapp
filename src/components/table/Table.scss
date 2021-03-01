@@ -23,11 +23,23 @@
     background-color: #fff;
     color: $color--darkblue;
 
+    a {
+      color: $color--secondary;
+      text-decoration: underline;
+    }
+
     .Table-row-orderNumber {
       font-weight: 600;
     }
     .Table-row-orderDate {
       font-size: 12px;
+    }
+
+    .Table-row-actions {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
     }
   }
 
