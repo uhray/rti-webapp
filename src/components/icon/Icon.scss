@@ -7,9 +7,9 @@
     svg:hover {
       cursor: pointer;
     }
-  }
 
-  & svg:hover {
-    fill: $color--secondary;
+    & svg:hover {
+      fill: $color--secondary;
+    }
   }
 }

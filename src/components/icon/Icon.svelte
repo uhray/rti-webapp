@@ -1,6 +1,7 @@
 <script>
   export let type;
   export let hover;
+  export let color = '#a6adc4';
 </script>
 
 <style src="./Icon.scss">
@@ -8,14 +9,14 @@
 </style>
 
 <!-- HTML -->
-<section class="Icon" {hover}>
+<section class="Icon" {hover} {color}>
   <!-- icons -->
   {#if type === 'notification'}
     <svg
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12 18.75C12.957 18.75 13.7227 17.9844 13.7227 17H10.25C10.25 17.9844
@@ -35,7 +36,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12 2.8125C6.64844 2.8125 2.3125 7.14844 2.3125 12.5C2.3125 17.8516
@@ -57,7 +58,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M15.5 10.875V6.5C15.5 5.54297 14.707 4.75 13.75 4.75H5.875C4.89062
@@ -68,8 +69,7 @@
         13.5H9.375V15.25C9.375 16.2344 10.1406 17 11.125 17H14.543L16.8125
         18.7227C16.9766 18.832 17.25 18.7227 17.25 18.5039V17H18.125C19.082 17
         19.875 16.2344 19.875 15.25V10.875C19.875 9.91797 19.082 9.125 18.125
-        9.125Z"
-        fill="#595F76" />
+        9.125Z" />
     </svg>
   {/if}
   {#if type === 'settings'}
@@ -77,7 +77,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.3164 13.3906L17.1406 12.7344C17.2773 12.0781 17.2773 11.4492
@@ -101,8 +101,7 @@
         13.6367 18.4531 13.4727 18.3164 13.3906ZM12 13.9375C10.7695 13.9375
         9.8125 12.9805 9.8125 11.75C9.8125 10.5469 10.7695 9.5625 12
         9.5625C13.2031 9.5625 14.1875 10.5469 14.1875 11.75C14.1875 12.9805
-        13.2031 13.9375 12 13.9375Z"
-        fill="#595F76" />
+        13.2031 13.9375 12 13.9375Z" />
     </svg>
   {/if}
   {#if type === 'users'}
@@ -110,7 +109,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M8.5 11.75C10.168 11.75 11.5625 10.3828 11.5625 8.6875C11.5625
@@ -128,8 +127,7 @@
         12.7891 13.5312 13.0625C14.1875 13.7734 14.625 14.7305 14.625
         15.7969V16.8359C14.625 16.8906 14.5977 16.9453 14.5977
         17H19.4375C20.1484 17 20.75 16.4258 20.75 15.6875C20.75 14.0195 19.3555
-        12.625 17.6875 12.625Z"
-        fill="#595F76" />
+        12.625 17.6875 12.625Z" />
     </svg>
   {/if}
   {#if type === 'dashboard'}
@@ -137,7 +135,6 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M17.6055 12.625H11.125V6.14453C11.125 5.89844 10.8789 5.67969 10.6328
@@ -155,7 +152,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M19.6289 11.4219L16.7578 7.10156C16.5117 6.74609 16.1016 6.5 15.6641
@@ -164,8 +161,7 @@
         16.4258 4.69922 17 5.4375 17H18.5625C19.2734 17 19.875 16.4258 19.875
         15.6875V12.1602C19.875 11.8867 19.793 11.6406 19.6289 11.4219ZM8.55469
         8.25H15.418L17.7695 11.75H14.4062L13.5312 13.5H10.4688L9.59375
-        11.75H6.20312L8.55469 8.25Z"
-        fill="#595F76" />
+        11.75H6.20312L8.55469 8.25Z" />
     </svg>
   {/if}
   {#if type === 'macro'}
@@ -173,7 +169,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M8.5 11.75C6.55859 11.75 5 13.3359 5 15.25C5 17.1914 6.55859 18.75
@@ -184,8 +180,7 @@
         11.75 19.2461 10.9297 18.8633 10.2734ZM18.125 12.625H13.75C13.2578
         12.625 12.875 13.0352 12.875 13.5V17.875C12.875 18.3672 13.2578 18.75
         13.75 18.75H18.125C18.5898 18.75 19 18.3672 19 17.875V13.5C19 13.0352
-        18.5898 12.625 18.125 12.625Z"
-        fill="#595F76" />
+        18.5898 12.625 18.125 12.625Z" />
     </svg>
   {/if}
   {#if type === 'automation'}
@@ -193,7 +188,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M8.0625 10.875C8.19922 10.875 8.33594 10.875 8.5 10.8477L7.51562
@@ -238,7 +233,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812 7.71875 19.75
@@ -258,7 +253,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M15.75 13H12.25C12.0938 13 12 13.125 12 13.25V13.75C12 13.9062
@@ -287,7 +282,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12.25 14H17.75C17.875 14 18 13.9062 18 13.75V13.25C18 13.125 17.875
@@ -357,37 +352,12 @@
         11.5 8.75V17.25C11.5 17.4062 11.5938 17.5 11.75 17.5Z" />
     </svg>
   {/if}
-  <!-- {#if type === 'delete-hover'}
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M14.25 17.5H14.75C14.875 17.5 15 17.4062 15 17.25V8.75C15 8.625
-        14.875 8.5 14.75 8.5H14.25C14.0938 8.5 14 8.625 14 8.75V17.25C14 17.4062
-        14.0938 17.5 14.25 17.5ZM9.25 17.5H9.75C9.875 17.5 10 17.4062 10
-        17.25V8.75C10 8.625 9.875 8.5 9.75 8.5H9.25C9.09375 8.5 9 8.625 9
-        8.75V17.25C9 17.4062 9.09375 17.5 9.25 17.5ZM18.75 6H15.5L14.4375
-        4.625C14.1562 4.25 13.7188 4 13.25 4H10.75C10.25 4 9.8125 4.25 9.53125
-        4.625L8.5 6H5.25C5.09375 6 5 6.125 5 6.25V6.75C5 6.90625 5.09375 7 5.25
-        7H6V18.5C6 19.3438 6.65625 20 7.5 20H16.5C17.3125 20 18 19.3438 18
-        18.5V7H18.75C18.875 7 19 6.90625 19 6.75V6.25C19 6.125 18.875 6 18.75
-        6ZM10.3438 5.21875C10.4375 5.09375 10.5625 5.03125 10.75 5H13.25C13.4062
-        5.03125 13.5312 5.09375 13.625 5.21875L14.25 6H9.75L10.3438 5.21875ZM17
-        18.5C17 18.7812 16.75 19 16.5 19H7.5C7.21875 19 7 18.7812 7
-        18.5V7H17V18.5ZM11.75 17.5H12.25C12.375 17.5 12.5 17.4062 12.5
-        17.25V8.75C12.5 8.625 12.375 8.5 12.25 8.5H11.75C11.5938 8.5 11.5 8.625
-        11.5 8.75V17.25C11.5 17.4062 11.5938 17.5 11.75 17.5Z"
-        fill="#2B8AF7" />
-    </svg>
-  {/if} -->
   {#if type === 'show'}
     <svg
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M11.8631 7C9.123 7 6.31226 8.5859 4.09953 11.7577C4.03637 11.8492
@@ -414,7 +384,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.1876 18.7501C18.1137 18.7502 18.0405 18.7357 17.9723
@@ -486,7 +456,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.8906 17.9297L15.3633 14.4023C15.3086 14.3477 15.2266 14.3203
@@ -507,7 +477,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.8906 17.9297L15.3633 14.4023C15.3086 14.3477 15.2266 14.3203
@@ -528,7 +498,7 @@
       width="28"
       height="24"
       viewBox="0 0 28 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <g opacity="0.5">
         <path
@@ -545,7 +515,7 @@
       width="28"
       height="24"
       viewBox="0 0 28 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.5 3H9.5C4.53125 3 0.5 7.03125 0.5 12C0.5 16.9688 4.53125 21 9.5
@@ -560,7 +530,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M19.75 16H10V14.75C10 14.3438 9.65625 14 9.25 14H7.75C7.3125 14 7
@@ -586,7 +556,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M17.75 11.25H12.75V6.25C12.75 6.125 12.625 6 12.5 6H11.5C11.3438 6
@@ -602,7 +572,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M17.5938 6.625L9.375 14.8438L6.375 11.8125C6.21875 11.6875 5.96875
@@ -618,7 +588,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M16 15C16.5625 15 16.8438 14.3438 16.4375 13.9375L12.4375
@@ -632,7 +602,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M7.96875 10C7.40625 10 7.125 10.6875 7.53125 11.0938L11.5312
@@ -646,7 +616,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M9 16.0312C9 16.5938 9.65625 16.875 10.0625 16.4688L14.0625
@@ -660,7 +630,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M3.25 19.0625C3.25 19.6094 3.64062 20 4.1875 20H5.125C5.63281 20
@@ -669,8 +639,7 @@
         15H13.25V18.4375C13.25 19.1406 14.0703 19.4922 14.5781 18.9844L20.5156
         13.0469C20.7891 12.7734 20.7891 12.2656 20.5156 11.9922L14.5781
         6.05469C14.0703 5.54688 13.25 5.89844 13.25 6.60156V10H7.9375C7.39062 10
-        7 10.4297 7 10.9375V14.0625C7 14.6094 7.39062 15 7.9375 15Z"
-        fill="#595F76" />
+        7 10.4297 7 10.9375V14.0625C7 14.6094 7.39062 15 7.9375 15Z" />
     </svg>
   {/if}
   {#if type === 'arrow-left'}
@@ -678,7 +647,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M20.75 5.9375C20.75 5.42969 20.3203 5 19.8125 5H18.875C18.3281 5
@@ -687,8 +656,7 @@
         10H10.75V6.60156C10.75 5.89844 9.89062 5.54688 9.38281 6.05469L3.44531
         11.9922C3.17188 12.2656 3.17188 12.7734 3.44531 13.0469L9.38281
         18.9844C9.89062 19.4922 10.75 19.1406 10.75 18.4375V15H16.0625C16.5703
-        15 17 14.6094 17 14.0625V10.9375C17 10.4297 16.5703 10 16.0625 10Z"
-        fill="#595F76" />
+        15 17 14.6094 17 14.0625V10.9375C17 10.4297 16.5703 10 16.0625 10Z" />
     </svg>
   {/if}
   {#if type === 'location-start'}
@@ -696,7 +664,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12 7C10.3438 7 9 8.375 9 10C9 11.6562 10.3438 13 12 13C13.625 13 15
@@ -716,7 +684,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12 4C8.65625 4 6 6.6875 6 10C6 12.4375 6.8125 13.125 11.375
@@ -733,7 +701,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M9.21875 13C10.125 13 10.5312 13.5 12 13.5C13.5 13.5 13.9062 13
@@ -754,7 +722,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M13.5 12C13.5 11.1875 12.8125 10.5 12 10.5C11.1562 10.5 10.5 11.1875
@@ -772,7 +740,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.2227 6.69531L15.3047 3.74219C14.9883 3.42578 14.5312 3.25 14.1094
@@ -793,7 +761,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M21.75 15H19V7C19 6.46875 18.5312 6 18 6H3C2.4375 6 2 6.46875 2
@@ -824,7 +792,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M21.75 16H21V12.625C21 12.125 20.7812 11.5938 20.4062 11.2188L17.7812
@@ -854,7 +822,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M17.5 6H16V4.25C16 4.125 15.875 4 15.75 4H15.25C15.0938 4 15 4.125 15
@@ -874,7 +842,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M19.625 4.25H18.75C18.5312 4.25 18.375 4.4375 18.375 4.65625L18.4375
@@ -895,7 +863,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12 4.96875C8.25391 4.96875 5.21875 8.00391 5.21875 11.75C5.21875
@@ -912,7 +880,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M15.1992 12.5664C15.375 12.3906 15.375 12.1445 15.1992
@@ -929,7 +897,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M11.6836 15.4844C11.8594 15.6602 12.1055 15.6602 12.2812
@@ -946,7 +914,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M8.76562 11.9688C8.58984 12.1445 8.58984 12.3906 8.76562
@@ -963,7 +931,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12.2812 9.05078C12.1055 8.875 11.8594 8.875 11.6836 9.05078L6.48047
@@ -980,7 +948,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M5.8125 16.1875H3.5625C3.24609 16.1875 3 16.4688 3 16.75V19C3 19.3164
@@ -1010,7 +978,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M20.125 3.75H3.875C2.82031 3.75 2 4.60938 2 5.625V19.375C2 20.4297
@@ -1025,7 +993,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812 7.71875 19.75
@@ -1049,7 +1017,7 @@
       width="25"
       height="24"
       viewBox="0 0 25 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12.2112 4.25C7.92993 4.25 4.46118 7.71875 4.46118 12C4.46118 16.2812
@@ -1074,7 +1042,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M5.5 6C4.65625 6 4 6.6875 4 7.5V16.5C4 17.3438 4.65625 18 5.5
@@ -1096,7 +1064,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.0156 4.85938L5.32812 12.1602C4.83594 12.4336 4.89062 13.1445
@@ -1113,7 +1081,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.0156 4.85938L5.32812 12.1602C4.83594 12.4336 4.89062 13.1445
@@ -1130,7 +1098,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12 4.96875C8.25391 4.96875 5.21875 8.00391 5.21875 11.75C5.21875
@@ -1166,7 +1134,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M18.5 5H5.5C4.65625 5 4 5.6875 4 6.5V8.5C4 8.78125 4.21875 9 4.5
@@ -1185,7 +1153,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M4.42578 11.6406L9.23828 16.6719C9.89453 17.3828 11.125 16.918 11.125
@@ -1208,7 +1176,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M13 5.25V5.75C13 6.09375 13.2188 6.375 13.5312 6.46875C15.9688
@@ -1226,7 +1194,7 @@
       width="40"
       height="40"
       viewBox="0 0 40 40"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M36.6386 30.2944C36.3661 29.8607 36.01 29.4857 35.5909
@@ -1292,7 +1260,7 @@
       width="17"
       height="21"
       viewBox="0 0 17 21"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 8.5C0 3.80558 3.80558 0 8.5 0C13.1944 0 17 3.80558 17 8.5V12.5C17
@@ -1308,7 +1276,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M19.7812 4.625C19.7188 4.4375 19.5625 4.28125 19.375 4.21875C18.375 4
@@ -1342,7 +1310,7 @@
       width="40"
       height="40"
       viewBox="0 0 40 40"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         fill-rule="evenodd"
@@ -1465,7 +1433,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M15.3359 11.2852C15.9648 10.6836 16.375 9.86328 16.375 8.90625C16.375
@@ -1486,7 +1454,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M15.3359 11.2852C15.9648 10.6836 16.375 9.86328 16.375 8.90625C16.375
@@ -1507,7 +1475,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -1532,7 +1500,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -1559,7 +1527,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M16.375 6.0625C16.375 5.84375 16.1562 5.625 15.9375
@@ -1577,7 +1545,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M16.375 6.0625C16.375 5.84375 16.1562 5.625 15.9375
@@ -1595,7 +1563,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -1617,7 +1585,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -1641,7 +1609,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M9.10156 10.4375H12.1914L10.9336 9.80859C10.5234 9.61719 10.2227
@@ -1675,7 +1643,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M9.10156 10.4375H12.1914L10.9336 9.80859C10.5234 9.61719 10.2227
@@ -1709,7 +1677,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -1747,7 +1715,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -1787,7 +1755,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M13.2305 15.5508C14.5977 14.1836 14.5977 11.9141 13.2305
@@ -1822,7 +1790,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M13.2305 15.5508C14.5977 14.1836 14.5977 11.9141 13.2305
@@ -1857,7 +1825,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -1896,7 +1864,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -1937,7 +1905,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M7.40625 6.28125H6.09375C5.84766 6.28125 5.65625 6.5 5.65625
@@ -1970,7 +1938,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M7.40625 6.28125H6.09375C5.84766 6.28125 5.65625 6.5 5.65625
@@ -2003,7 +1971,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -2040,7 +2008,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -2079,7 +2047,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M9.07422 18.75C9.97656 18.75 10.8789 18.4219 11.5625 17.7383L17.5234
@@ -2105,7 +2073,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
@@ -2135,7 +2103,7 @@
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24
