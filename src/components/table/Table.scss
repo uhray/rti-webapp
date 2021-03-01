@@ -1,57 +1,26 @@
+@import '../../theme/variables.scss';
+
 .Table {
   .Table-card {
     border-radius: 8px;
   }
-  .Table-defaultRow {
-    border: 1px solid #f4f5f8;
-    border-top: none !important;
-    border-left: none;
-    border-right: none;
+  .Table-cardBody {
+    border: 4px solid $color--tablegray;
+    border-radius: 8px;
+    padding: 0;
+    background-color: $color--tablegray;
   }
-  .Table-defaultHeaderText {
-    font-family: SF Pro Display;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
-    color: #262626;
-  }
-  .Table-defaultBodyText {
-    font-family: SF Pro Display;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
-    color: #262626;
-  }
-  .Table-defaultBody {
-    :last-child {
-      border-bottom: none !important;
+  .Table-headerRow {
+    .Table-headerRow-headerCell {
+      color: $color--darkblue;
+      font-weight: 600;
+      font-size: 15px;
     }
   }
-  .Table-tableContainer {
-    border-radius: 25px !important;
-  }
-  .Table-cardBody {
-    border-radius: 25px !important;
-    padding-top: 0px;
-    padding-bottom: 20px;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-  .Table-subSection {
-    margin: auto;
-    padding: 6px;
-  }
-  .Table-subText {
-    font-family: SF Pro Display;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
-    color: #989aa2;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-bottom: 5px !important;
+  .Table-row {
+    border: 2px solid $color--tablegray;
+    border-radius: 8px;
+    background-color: #fff;
+    color: $color--darkblue;
   }
 }

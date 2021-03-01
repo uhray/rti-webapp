@@ -13,6 +13,53 @@
   import Table from '../../components/table/Table.svelte';
   import Status from '../../components/status/Status.svelte';
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
+
+  // custom header to inject html
+  const tableData = {
+    headers: ['Order', 'Status', 'Start Point', 'End Point', 'View', 'Actions'],
+    data: [
+      {
+        order: '0102031',
+        orderDate: 'Jan 23, 2020',
+        status: 'pending',
+        vehicle: '1XY001',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Seattle, WA 01652',
+      },
+      {
+        order: '0102031',
+        orderDate: 'Jan 23, 2020',
+        status: 'pending',
+        vehicle: '1XY001',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Seattle, WA 01652',
+      },
+      {
+        order: '0102031',
+        orderDate: 'Jan 23, 2020',
+        status: 'pending',
+        vehicle: '1XY001',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Seattle, WA 01652',
+      },
+      {
+        order: '0102031',
+        orderDate: 'Jan 23, 2020',
+        status: 'pending',
+        vehicle: '1XY001',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Seattle, WA 01652',
+      },
+      {
+        order: '0102031',
+        orderDate: 'Jan 23, 2020',
+        status: 'pending',
+        vehicle: '1XY001',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Seattle, WA 01652',
+      },
+    ],
+  };
 </script>
 
 <svelte:head>
@@ -20,6 +67,9 @@
 </svelte:head>
 
 <h1>Components Page</h1>
+
+<h2>Table</h2>
+<Table data={tableData} />
 
 <h2>Divider</h2>
 <Divider type="default" />
@@ -40,8 +90,7 @@
   type="default"
   text="Drop Down"
   choiceHeader="Choice Header"
-  choices={['Choice One', 'Choice Two']}
-/>
+  choices={['Choice One', 'Choice Two']} />
 
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />
