@@ -4,7 +4,6 @@
   import ProgressBar from '../../components/progressbar/ProgressBar.svelte';
   import Radios from '../../components/radios/Radios.svelte';
   import Button from '../../components/button/Button.svelte';
-  import Card from '../../components/card/Card.svelte';
   import Divider from '../../components/divider/Divider.svelte';
   import Icon from '../../components/icon/Icon.svelte';
   import DropDown from '../../components/dropdown/DropDown.svelte';
@@ -13,6 +12,7 @@
   import Table from '../../components/table/Table.svelte';
   import Label from '../../components/label/Label.svelte';
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
+  import ToolTip from '../../components/tooltip/ToolTip.svelte';
 </script>
 
 <svelte:head>
@@ -26,6 +26,9 @@
 
 <h2>Progress Bar</h2>
 <ProgressBar progress="35" />
+
+<h2>Tool Tip</h2>
+<ToolTip text="Tool tip text will go here, rendered through a prop." />
 
 <h2>Search Bars</h2>
 <SearchBar />
@@ -334,6 +337,9 @@
     <Icon type="attach-active" />
   </div>
 </div>
+
+<h2>Checkbox</h2>
+<Checkbox />
 
 <!-- ===================================================== -->
 <h2>Button</h2>
