@@ -99,9 +99,15 @@
 <Input type="input-active-filled" isValid={true} />
 <br />
 <Input type="input-active-outlined" isValid={true} />
-<br />
+<h4>These will be our text areas without toolbars, just plain</h4>
 <Input type="textarea-plain-inactive" placeholder="Type something.." rows={2} />
 <Input type="textarea-plain-active" placeholder="Type something.." rows={2} />
+<h4>These will be our text areas with toolbars (not finished)</h4>
+<Input type="textarea-full-inactive" placeholder="Type something.." rows={2} />
+<Input type="textarea-full-active" placeholder="Type something.." rows={2} />
+
+<br />
+<Input type="testing-quill" />
 
 <h2>Drop Downs</h2>
 <DropDown

@@ -40,7 +40,7 @@
   // Label Div/Background Styles
   .Label-divs {
     min-height: 25px;
-    max-width: 70px;
+    width: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -50,7 +50,7 @@
   }
   .Label-divsIcons {
     min-height: 25px;
-    max-width: 95px;
+    width: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: center;
