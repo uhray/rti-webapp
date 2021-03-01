@@ -43,6 +43,12 @@
   choices={['Choice One', 'Choice Two']}
 />
 
+<h2>Tab Menu</h2>
+<TabMenu
+  type="default"
+  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']}
+/>
+
 <h2>Labels</h2>
 <Label type="active" text="active" />
 <br />
