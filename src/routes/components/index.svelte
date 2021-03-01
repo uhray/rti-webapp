@@ -34,9 +34,11 @@
 <SearchBar />
 
 <h2>Inputs and Textareas</h2>
-<Input type="input" />
+<Input type="input" isValid={true} />
 <br />
-<Input type="textarea-plain" placeholder="Start typing.." rows={2} />
+<Input type="input" isValid={false} />
+<br />
+<Input type="textarea-plain" placeholder="Type something.." rows={2} />
 
 <h2>Drop Downs</h2>
 <DropDown

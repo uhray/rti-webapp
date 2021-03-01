@@ -1,7 +1,9 @@
 <script>
+  import Error from '../error/Error.svelte';
   import Icon from '../icon/Icon.svelte';
+
+  export let isValid;
   export let type;
-  export let options;
   export let rows;
   export let placeholder;
 </script>
@@ -9,17 +11,30 @@
 <!-- HTML -->
 <section class="Input">
   {#if type === 'input'}
-    <input
-      class="uk-input Input-default"
-      type="text"
-      placeholder="Placeholder Text"
-    />
-    <span class="uk-form-icon" uk-icon="icon: rocket" />
-    <!-- TODO: Get the Rocket Icon inside the input, and the far right of the input -->
-    <!-- You can add new icons to uikit by placing them in /custom/icons -->
-    <!-- You can then call it named as the file like above span -->
-    <!-- But we need to get off the cdn and starting using our own actual uikit from the package for this to work -->
-    <!-- This will be a common theme among the inputs -->
+    {#if isValid}
+      <div class="uk-inline uk-width-1-1">
+        <input
+          class="uk-input Input-default"
+          type="text"
+          placeholder="Placeholder Text"
+        />
+        <span class="uk-form-icon uk-form-icon-flip"
+          ><Icon type="rocket" /></span
+        >
+      </div>
+    {:else}
+      <div class="uk-inline uk-width-1-1">
+        <input
+          class="uk-input Input-notValid"
+          type="text"
+          placeholder="Placeholder Text"
+        />
+        <span class="uk-form-icon uk-form-icon-flip"
+          ><Icon type="close-red" /></span
+        >
+      </div>
+      <Error type="default-error" text="Something is wrong" />
+    {/if}
   {/if}
   {#if type === 'textarea-plain'}
     <div class="uk-margin">
