@@ -1,15 +1,17 @@
 @import '../../theme/variables.scss';
 
 .Table {
-  .Table-card {
+  .Table-outer {
     border-radius: 8px;
   }
-  .Table-cardBody {
+
+  .Table-inner {
     border: 4px solid $color--tablegray;
     border-radius: 8px;
     padding: 0;
     background-color: $color--tablegray;
   }
+
   .Table-headerRow {
     .Table-headerRow-headerCell {
       color: $color--darkblue;
@@ -17,6 +19,7 @@
       font-size: 15px;
     }
   }
+
   .Table-row {
     border: 2px solid $color--tablegray;
     border-radius: 8px;
@@ -45,5 +48,35 @@
 
   .Table-subSection {
     padding: 0 10px;
+  }
+}
+
+// Set height of Table-inner to enable scrolling
+.uk-table-scrollable {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+
+  thead {
+    flex: 0 0 auto;
+    display: table;
+
+    tr {
+      table-layout: fixed;
+    }
+  }
+
+  tbody {
+    flex: 1 1 auto;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    tr {
+      width: 100%;
+      display: table;
+      table-layout: fixed;
+    }
   }
 }

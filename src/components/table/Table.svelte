@@ -3,6 +3,7 @@
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
   export let data;
+  export let height;
 </script>
 
 <style src="./Table.scss">
@@ -11,15 +12,16 @@
 
 <!-- HTML -->
 <section class="Table">
-  <div class="Table-card uk-padding-remove">
-    <div class="uk-card-body Table-cardBody">
+
+  <div class="Table-outer">
+    <div class="Table-inner" style={`height: ${height}vh`}>
+
       <table
-        class="uk-table uk-table-divider uk-table-middle Table-tableContainer "
-        uk-table-scrollable="height: 200px">
+        class="uk-table uk-table-middle Table-container uk-table-scrollable">
         <thead>
           <tr class="Table-headerRow">
             {#each data.headers as header}
-              <th class="Table-headerRow-headerCell">
+              <th scope="col" class="Table-headerRow-headerCell">
                 {#if header.header == 'view' || header.header == 'actions'}
                   {''}
                 {:else}{header.text}{/if}
