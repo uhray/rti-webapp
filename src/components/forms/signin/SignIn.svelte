@@ -4,6 +4,10 @@
   import Button from '../../button/Button.svelte';
 </script>
 
+<style src="./SignIn.scss">
+
+</style>
+
 <section class="SignInForm">
   <div class="SignInForm-formContainer">
     <form class="SignInForm-form">
@@ -24,10 +28,8 @@
         <a href="home" class="SignInForm-forgotText">Forgot Password?</a>
       </div>
       <div class="SignInForm-button">
-        <Button primary fillWidth large>Sign In</Button>
+        <Button primary fill large>Sign In</Button>
       </div>
     </form>
   </div>
 </section>
-
-<style src="./SignIn.scss"></style>
