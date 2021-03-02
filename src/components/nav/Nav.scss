@@ -52,3 +52,35 @@
   margin: 10px 0;
   border-bottom: 1px solid $color--gray;
 }
+
+.Nav-footer {
+  display: flex;
+  flex-flow: row nowrap;
+  position: absolute;
+  bottom: 18px;
+  left: 20px;
+  right: 20px;
+
+  .Nav-footer-text {
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .Nav-footer-logo {
+    border-radius: 100%;
+    background-color: #fff;
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 90%;
+      height: auto;
+    }
+  }
+}
