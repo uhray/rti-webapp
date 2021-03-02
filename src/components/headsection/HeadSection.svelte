@@ -1,15 +1,16 @@
-<script>
-  export let header;
-  export let subHeader;
+<script lang="ts">
+  export let segment: string;
 </script>
 
 <section class="HeadSection">
+  {#if segment === 'settings'}
   <div class="HeadSection-container">
     <div class="HeadSection-content">
-      <h2 class="HeadSection-header">{header}</h2>
-      <p class="HeadSection-subHeader">{subHeader}</p>
+      <h2 class="HeadSection-header">App Settings</h2>
+      <p class="HeadSection-subHeader">A short sentence about some application settings</p>
     </div>
   </div>
+  {/if}
 </section>
 
 <style src="./HeadSection.scss"></style>

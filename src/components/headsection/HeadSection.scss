@@ -1,16 +1,15 @@
 .HeadSection {
   .HeadSection-container {
-    height: 15vh;
+    height: 175px;
     width: 100%;
     background: #f8f9fc;
     position: relative;
   }
   .HeadSection-content {
     position: absolute;
-    height: fit-content;
-    margin-top: auto;
-    margin-bottom: 4px;
-    margin-left: 5px;
+    margin-top: 95px;
+    margin-bottom: 5px;
+    margin-left: 10px;
   }
   .HeadSection-header {
     font-family: Poppins;
