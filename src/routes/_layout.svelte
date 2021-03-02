@@ -4,23 +4,9 @@
   export let segment: string;
 </script>
 
-{#if segment === 'signin'}
-  <div class="wrapper-forSignin">
-    <main>
-      <slot />
-    </main>
-  </div>
-{:else}
-  <div class="wrapper">
-    <Nav {segment} />
+<style lang="scss" global>
+  @import '../theme/theme.scss';
 
-    <main>
-      <slot />
-    </main>
-  </div>
-{/if}
-
-<style lang="scss">
   .wrapper {
     min-height: 100vh;
 
@@ -46,3 +32,19 @@
     box-sizing: border-box;
   }
 </style>
+
+{#if segment === 'signin'}
+  <div class="wrapper-forSignin">
+    <main>
+      <slot />
+    </main>
+  </div>
+{:else}
+  <div class="wrapper">
+    <Nav {segment} />
+
+    <main>
+      <slot />
+    </main>
+  </div>
+{/if}
