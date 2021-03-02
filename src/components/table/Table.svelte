@@ -17,7 +17,7 @@
     <div class="Table-inner" style={`height: ${height}vh`}>
 
       <table
-        class="uk-table uk-table-middle Table-container uk-table-scrollable">
+        class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
         <thead>
           <tr class="Table-headerRow">
             {#each data.headers as header}

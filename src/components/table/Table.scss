@@ -59,10 +59,13 @@
   width: 100%;
 
   thead {
-    flex: 0 0 auto;
-    display: table;
+    flex: 1 1 auto;
+    display: block;
+    padding-right: 15px;
 
     tr {
+      width: 100%;
+      display: table;
       table-layout: fixed;
     }
   }
