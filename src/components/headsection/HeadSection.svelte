@@ -11,6 +11,13 @@
     </div>
   </div>
   {/if}
+  {#if segment === 'components'}
+  <div class="HeadSection-container">
+    <div class="HeadSection-content">
+      <h2 class="HeadSection-header">Hopefully the Comp Page</h2>
+    </div>
+  </div>
+  {/if}
 </section>
 
 <style src="./HeadSection.scss"></style>
