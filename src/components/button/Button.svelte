@@ -15,7 +15,7 @@
 
 <!-- HTML -->
 <button
-  class={fill ? 'uk-button uk-width-1-1' : ''}
+  class={fill ? 'uk-button uk-width-1-1' : 'uk-button'}
   {primary}
   {secondary}
   {warning}
