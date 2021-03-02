@@ -78,8 +78,6 @@
 
 <h1>Components Page</h1>
 
-<div class="test">TEST</div>
-
 <h2>Table</h2>
 <Table data={tableData} />
 
