@@ -35,8 +35,6 @@
 
   <div class="linefull" />
 
-  <br />
-
   {#each items as item}
     {#if item.text == 'line'}
       <div class="line" />
