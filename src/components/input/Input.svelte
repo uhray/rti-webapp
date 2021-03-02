@@ -3,6 +3,7 @@
   import Icon from '../icon/Icon.svelte';
 
   export let isValid;
+  export let icon;
   export let type;
   export let rows;
   export let placeholder;
@@ -13,14 +14,8 @@
   {#if type === 'input-inactive'}
     {#if isValid}
       <div class="uk-inline uk-width-1-1">
-        <input
-          class="uk-input Input-inactive"
-          type="text"
-          placeholder="Placeholder Text"
-        />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="rocket" /></span
-        >
+        <input class="uk-input Input-inactive" type="text" {placeholder} />
+        <span class="uk-form-icon uk-form-icon-flip"><Icon type={icon} /></span>
       </div>
     {:else}
       <div class="uk-inline uk-width-1-1">
