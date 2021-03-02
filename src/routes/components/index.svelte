@@ -68,6 +68,38 @@
         startPoint: 'Seattle, WA 02476',
         endPoint: 'Atlanta, GA 01652',
       },
+      {
+        order: '0102032',
+        orderDate: 'Jan 24, 2020',
+        status: 'in progress',
+        vehicle: '1XY123',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Atlanta, GA 01652',
+      },
+      {
+        order: '0102032',
+        orderDate: 'Jan 24, 2020',
+        status: 'in progress',
+        vehicle: '1XY123',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Atlanta, GA 01652',
+      },
+      {
+        order: '0102032',
+        orderDate: 'Jan 24, 2020',
+        status: 'in progress',
+        vehicle: '1XY123',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Atlanta, GA 01652',
+      },
+      {
+        order: '0102032',
+        orderDate: 'Jan 24, 2020',
+        status: 'in progress',
+        vehicle: '1XY123',
+        startPoint: 'Seattle, WA 02476',
+        endPoint: 'Atlanta, GA 01652',
+      },
     ],
   };
 </script>
@@ -79,7 +111,12 @@
 <h1>Components Page</h1>
 
 <h2>Table</h2>
-<Table data={tableData} />
+
+<!------------------ VERTICAL SCROLLING ---------------------------
+can set height based of vh units ( height={100} -> height: 100vh )
+defaults to [height: 100%] with no scrolling if no height value
+------------------------------------------------------------------>
+<Table data={tableData} height={50} />
 
 <h2>Divider</h2>
 <Divider type="default" />
