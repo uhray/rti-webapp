@@ -1,10 +1,15 @@
 .HeadSection {
   .HeadSection-container {
-    height: 156px;
+    height: 15vh;
     width: 100%;
     background: #f8f9fc;
+    position: relative;
   }
   .HeadSection-content {
+    position: absolute;
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: 4px;
     margin-left: 5px;
   }
   .HeadSection-header {
@@ -15,6 +20,7 @@
     line-height: 34px;
     color: #15224b;
     margin: 5px;
+    margin-bottom: 0px;
   }
   .HeadSection-subHeader {
     font-family: Poppins;
@@ -24,5 +30,6 @@
     line-height: 22px;
     color: #15224b;
     margin: 5px;
+    margin-top: 0px;
   }
 }
