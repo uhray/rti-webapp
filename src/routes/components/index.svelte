@@ -78,6 +78,8 @@
 
 <h1>Components Page</h1>
 
+<div class="test">TEST</div>
+
 <h2>Table</h2>
 <Table data={tableData} />
 
@@ -113,33 +115,37 @@
   type="default"
   text="Drop Down"
   choiceHeader="Choice Header"
-  choices={['Choice One', 'Choice Two']}
-/>
+  choices={['Choice One', 'Choice Two']} />
 
 <h2>Cards</h2>
 <Card
   type="card-gray-border"
   header="Lorem"
-  content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero laborum iusto qui, incidunt nam repudiandae expedita architecto vel recusandae!"
-/>
+  content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo
+  praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
+  laborum iusto qui, incidunt nam repudiandae expedita architecto vel
+  recusandae!" />
 <br />
 <Card
   type="card-gray-bg"
   header="Lorem"
-  content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero laborum iusto qui, incidunt nam repudiandae expedita architecto vel recusandae!"
-/>
+  content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo
+  praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
+  laborum iusto qui, incidunt nam repudiandae expedita architecto vel
+  recusandae!" />
 <br />
 <Card
   type="card-default"
   header="Lorem"
-  content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero laborum iusto qui, incidunt nam repudiandae expedita architecto vel recusandae!"
-/>
+  content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo
+  praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
+  laborum iusto qui, incidunt nam repudiandae expedita architecto vel
+  recusandae!" />
 
 <h2>Tab Menu</h2>
 <TabMenu
   type="default"
-  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']}
-/>
+  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']} />
 
 <h2>Labels</h2>
 <Label type="active" text="active" />
@@ -163,8 +169,7 @@
 <Error type="password-validation-error" />
 <Error
   type="default-error"
-  text="This error takes a text prop, and can say anything"
-/>
+  text="This error takes a text prop, and can say anything" />
 
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />

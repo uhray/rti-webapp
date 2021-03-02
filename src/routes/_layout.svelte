@@ -4,7 +4,9 @@
   export let segment: string;
 </script>
 
-<style lang="scss">
+<style lang="scss" global>
+  @import '../theme/theme.scss';
+
   .wrapper {
     min-height: 100vh;
 
