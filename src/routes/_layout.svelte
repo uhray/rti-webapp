@@ -15,20 +15,36 @@
     justify-content: flex-start;
     align-items: flex-start;
   }
+  .wrapper-forSignin {
+    min-height: 100vh;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 
   main {
     width: 100%;
+    height: 100%;
     background-color: white;
     padding: 2em;
     box-sizing: border-box;
   }
 </style>
 
-<div class="wrapper">
+{#if segment === 'signin'}
+  <div class="wrapper-forSignin">
+    <main>
+      <slot />
+    </main>
+  </div>
+{:else}
+  <div class="wrapper">
+    <Nav {segment} />
 
-  <Nav {segment} />
-
-  <main>
-    <slot />
-  </main>
-</div>
+    <main>
+      <slot />
+    </main>
+  </div>
+{/if}

@@ -1,4 +1,5 @@
 <script>
+  export let fill;
   export let disabled;
   export let primary;
   export let secondary;
@@ -8,20 +9,20 @@
   export let large;
 </script>
 
+<style src="./Button.scss">
+
+</style>
+
 <!-- HTML -->
 <button
-  class="uk-button"
+  class={fill ? 'uk-button uk-width-1-1' : ''}
   {primary}
   {secondary}
   {warning}
   {success}
   {disabled}
   {outline}
-  {large}
->
+  {large}>
   <slot />
 </button>
-
 <!-- ==== -->
-<style src="./Button.scss">
-</style>
