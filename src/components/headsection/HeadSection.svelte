@@ -3,8 +3,8 @@
 <section class="HeadSection">
   <div class="HeadSection-container">
     <div class="HeadSection-content">
-      <h2 class="HeadSection">Some Stuff</h2>
-      <p>Some Other Stuff</p>
+      <h2 class="HeadSection-header">Some Stuff</h2>
+      <p class="HeadSection-subHeader">Some Other Stuff</p>
     </div>
   </div>
 </section>
