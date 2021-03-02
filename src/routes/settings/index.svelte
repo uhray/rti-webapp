@@ -1,7 +1,11 @@
 <script>
-  import HeadSection from '../../components/headsection/HeadSection.svelte';
 </script>
 
-<!-- <HeadSection header="App Settings" subHeader="Change and customize the appearance of the driver’s application." /> -->
+<section>
+  <!-- Upload Logo Section -->
+  <p>I am a logo</p>
+  <!-- Change Theme Section -->
+  <p>I am a theme</p>
+</section>
 
 <style></style>

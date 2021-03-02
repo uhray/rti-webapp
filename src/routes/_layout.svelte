@@ -29,8 +29,10 @@
     width: 100%;
     height: 100%;   
     background-color: white;
-    padding: 2em;
     box-sizing: border-box;
+  }
+  .main-content {
+    padding: 2em;
   }
 </style>
 
@@ -45,7 +47,9 @@
     <Nav {segment} />
     <main>
     <HeadSection segment={segment} />
+    <div class="main-content">
       <slot />
+    </div>
     </main>
   </div>
 {/if}
