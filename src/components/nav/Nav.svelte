@@ -1,6 +1,7 @@
 <script>
   import Icon from '../icon/Icon.svelte';
   import NavItem from '../navitem/NavItem.svelte';
+  import Logo from '../../../static/images/rti.png';
   export let segment;
   export let isOpen = true;
 
@@ -27,6 +28,7 @@
 </style>
 
 <nav class={isOpen ? 'Nav' : 'Nav-closed'}>
+
   <div class="collapse" on:click={menuToggle}>
     <NavItem {isOpen} icon={isOpen ? 'arrow-left' : 'arrow-right'}>
       <span>Collapse</span>
@@ -34,8 +36,6 @@
   </div>
 
   <div class="linefull" />
-
-  <br />
 
   {#each items as item}
     {#if item.text == 'line'}
@@ -48,4 +48,15 @@
       </a>
     {/if}
   {/each}
+
+  <div class="Nav-footer">
+    <div class="Nav-footer-logo">
+      <img src={Logo} alt="Riverside Trucking" />
+    </div>
+    <div class="Nav-footer-text">
+      Riverside
+      <br />
+      Transport Inc.
+    </div>
+  </div>
 </nav>
