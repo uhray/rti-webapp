@@ -21,17 +21,3 @@ body {
 label {
   font-size: 12px;
 }
-
-.row {
-  display: inline-flex;
-  flex-flow: row nowrap;
-  width: 100%;
-
-  section {
-    margin-right: 10px;
-    width: 100%;
-  }
-  section:last-child {
-    margin-right: 0;
-  }
-}
