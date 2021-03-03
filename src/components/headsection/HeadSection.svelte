@@ -7,16 +7,11 @@
 <section class="HeadSection">
   {#if segment === 'settings'}
     <div class="HeadSection-container">
-      <div class="HeadSection-topNav uk-flex">
-        <Icon type="account" />
-        <span class="HeadSection-navName">John Smith</span>
-        <Icon type="chev-down" />
-      </div>
       <div class="HeadSection-content uk-flex">
         <div>
           <h2 class="HeadSection-header">App Settings</h2>
           <p class="HeadSection-subHeader">
-            A short sentence about some application settings
+            Change and customize the appearance of the driver’s application.
           </p>
         </div>
         <div class="HeadSection-buttonGroup uk-flex">

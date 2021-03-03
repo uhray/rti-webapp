@@ -1,0 +1,27 @@
+.ColorPicker {
+  .ColorPicker-container {
+    // margin: 15px;
+    // padding: 5px;
+    height: 40px;
+    width: 150px;
+  }
+  .ColorPicker-colorBox {
+    height: 100%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  .ColorPicker-hexBox {
+    height: 100%;
+  }
+  .ColorPicker-hexText {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 22px;
+    color: #15224b;
+    margin: auto;
+    margin-top: 9px;
+    text-align: center;
+  }
+}
