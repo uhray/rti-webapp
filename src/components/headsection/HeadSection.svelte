@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Icon from '../icon/Icon.svelte';
   import Button from '../button/Button.svelte';
   export let segment: string;
 </script>
