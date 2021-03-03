@@ -15,115 +15,9 @@
   import ToolTip from '../../components/tooltip/ToolTip.svelte';
   import RichText from '../../components/richtext/RichText.svelte';
   import Card from '../../components/card/Card.svelte';
+  import { tableData, tableDataSmall } from '../../data/fakeTableData';
 
   // custom header to inject html
-  const tableData = {
-    headers: [
-      { header: 'order', text: 'Order' },
-      { header: 'status', text: 'Status' },
-      { header: 'vehicle', text: 'Vehicle' },
-      { header: 'startPoint', text: 'Start Point' },
-      { header: 'endPoint', text: 'End Point' },
-      { header: 'view', text: 'View' },
-      { header: 'actions', text: 'Actions' },
-    ],
-    data: [
-      {
-        order: '0102031',
-        orderDate: 'Jan 23, 2020',
-        status: 'pending',
-        vehicle: '1XY001',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Seattle, WA 01652',
-      },
-      {
-        order: '0102032',
-        orderDate: 'Jan 24, 2020',
-        status: 'completed',
-        vehicle: '1XY123',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Atlanta, GA 01652',
-      },
-      {
-        order: '0102032',
-        orderDate: 'Jan 24, 2020',
-        status: 'declined',
-        vehicle: '1XY123',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Atlanta, GA 01652',
-      },
-      {
-        order: '0102032',
-        orderDate: 'Jan 24, 2020',
-        status: 'dispatched',
-        vehicle: '1XY123',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Atlanta, GA 01652',
-      },
-      {
-        order: '0102032',
-        orderDate: 'Jan 24, 2020',
-        status: 'in progress',
-        vehicle: '1XY123',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Atlanta, GA 01652',
-      },
-      {
-        order: '0102032',
-        orderDate: 'Jan 24, 2020',
-        status: 'in progress',
-        vehicle: '1XY123',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Atlanta, GA 01652',
-      },
-      {
-        order: '0102032',
-        orderDate: 'Jan 24, 2020',
-        status: 'in progress',
-        vehicle: '1XY123',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Atlanta, GA 01652',
-      },
-      {
-        order: '0102032',
-        orderDate: 'Jan 24, 2020',
-        status: 'in progress',
-        vehicle: '1XY123',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Atlanta, GA 01652',
-      },
-      {
-        order: '0102032',
-        orderDate: 'Jan 24, 2020',
-        status: 'in progress',
-        vehicle: '1XY123',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Atlanta, GA 01652',
-      },
-    ],
-  };
-
-  const tableDataSmall = {
-    headers: [
-      { header: 'order', text: 'Order' },
-      { header: 'status', text: 'Status' },
-      { header: 'vehicle', text: 'Vehicle' },
-      { header: 'startPoint', text: 'Start Point' },
-      { header: 'endPoint', text: 'End Point' },
-      { header: 'view', text: 'View' },
-      { header: 'actions', text: 'Actions' },
-    ],
-    data: [
-      {
-        order: '0102031',
-        orderDate: 'Jan 23, 2020',
-        status: 'pending',
-        vehicle: '1XY001',
-        startPoint: 'Seattle, WA 02476',
-        endPoint: 'Seattle, WA 01652',
-      },
-    ],
-  };
 </script>
 
 <svelte:head>
@@ -174,7 +68,8 @@ defaults to [height: 100%] with no scrolling if no height value
   type="default"
   text="Drop Down"
   choiceHeader="Choice Header"
-  choices={['Choice One', 'Choice Two']} />
+  choices={['Choice One', 'Choice Two']}
+/>
 
 <h2>Cards</h2>
 <Card
@@ -183,7 +78,8 @@ defaults to [height: 100%] with no scrolling if no height value
   content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo
   praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
   laborum iusto qui, incidunt nam repudiandae expedita architecto vel
-  recusandae!" />
+  recusandae!"
+/>
 <br />
 <Card
   type="card-gray-bg"
@@ -191,7 +87,8 @@ defaults to [height: 100%] with no scrolling if no height value
   content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo
   praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
   laborum iusto qui, incidunt nam repudiandae expedita architecto vel
-  recusandae!" />
+  recusandae!"
+/>
 <br />
 <Card
   type="card-default"
@@ -199,12 +96,14 @@ defaults to [height: 100%] with no scrolling if no height value
   content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo
   praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
   laborum iusto qui, incidunt nam repudiandae expedita architecto vel
-  recusandae!" />
+  recusandae!"
+/>
 
 <h2>Tab Menu</h2>
 <TabMenu
   type="default"
-  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']} />
+  tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']}
+/>
 
 <h2>Labels</h2>
 <Label type="active" text="active" />
@@ -228,7 +127,8 @@ defaults to [height: 100%] with no scrolling if no height value
 <Error type="password-validation-error" />
 <Error
   type="default-error"
-  text="This error takes a text prop, and can say anything" />
+  text="This error takes a text prop, and can say anything"
+/>
 
 <h2>Radios</h2>
 <Radios options={['A', 'B', 'C']} />

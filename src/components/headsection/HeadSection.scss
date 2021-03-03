@@ -12,6 +12,9 @@
     margin-top: 95px;
     margin-bottom: 5px;
     margin-left: 25px;
+    &.with-tabs {
+      margin-top: 75px !important;
+    }
   }
   .HeadSection-header {
     font-family: Poppins;

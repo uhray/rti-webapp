@@ -2,22 +2,19 @@
   import Checkbox from '../checkbox/Checkbox.svelte';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
-  export let data;
-  export let height;
+  export let data = undefined;
+  export let height = undefined;
 </script>
-
-<style src="./Table.scss">
-
-</style>
 
 <!-- HTML -->
 <section class="Table">
-
   <div class="Table-outer">
     <div class="Table-inner" style={`height: ${height}vh`}>
-
       <table
-        class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
+        class={`uk-table uk-table-middle Table-container ${
+          height ? 'uk-table-scrollable' : ''
+        }`}
+      >
         <thead>
           <tr class="Table-headerRow">
             {#each data.headers as header}
@@ -45,6 +42,10 @@
                       <Label type="default" text="Dispatched" />
                     {:else if item.status == 'in progress'}
                       <Label type="active" text="In Progress" />
+                    {:else if item.status == 'active'}
+                      <Label type="default" text="Active" />
+                    {:else if item.status == 'inactive'}
+                      <Label type="disabled" text="Inactive" />
                     {/if}
                   {:else if header.header == 'order'}
                     <span class="Table-row-orderNumber">{item.order}</span>
@@ -58,7 +59,6 @@
                       <Checkbox secondary />
                     </div>
                   {:else}{item[header.header]}{/if}
-
                 </td>
               {/each}
             </tr>
@@ -70,3 +70,5 @@
 </section>
 
 <!-- ==== -->
+<style src="./Table.scss">
+</style>

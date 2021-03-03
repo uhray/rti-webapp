@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from '../button/Button.svelte';
   import SearchBar from '../searchbar/SearchBar.svelte';
+  import TabMenu from '../tabmenu/TabMenu.svelte';
   export let segment = undefined;
 </script>
 
@@ -24,12 +25,13 @@
   {/if}
   {#if segment === 'manage'}
     <div class="HeadSection-container">
-      <div class="HeadSection-content uk-flex">
+      <div class="HeadSection-content with-tabs uk-flex">
         <div>
           <h2 class="HeadSection-header">User Manangement</h2>
           <p class="HeadSection-subHeader">
             Here you can manage your active users.
           </p>
+          <TabMenu type="default" tabs={['Users', 'Admins']} />
         </div>
         <div class="HeadSection-buttonGroup uk-flex">
           <!-- FIXME: Search Bar width and button icon displaying underneath -->
