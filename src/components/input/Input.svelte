@@ -5,7 +5,6 @@
 
   export let fill = undefined;
   export let icon = undefined;
-  export let active = false;
   export let invalid = false;
   export let error = 'Error';
   export let label = undefined;

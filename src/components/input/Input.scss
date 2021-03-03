@@ -14,10 +14,6 @@
     color: $color--darkgray;
   }
 
-  input[active='true'] {
-    border: 1px solid black;
-  }
-
   input[invalid='true'] {
     border: 1px solid $color--warning;
   }
