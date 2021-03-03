@@ -168,7 +168,6 @@ defaults to [height: 100%] with no scrolling if no height value
 <Input
   fill
   placeholder="Hello there!"
-  active={false}
   error="APOCALYPTIC ERROR TIME"
   invalid
   label="Test"
@@ -177,7 +176,7 @@ defaults to [height: 100%] with no scrolling if no height value
 <div style={'display: flex; flex-flow:row nowrap'}>
   <Input label="Test 3" invalid={error} error={errorMessage} icon="upload" />
   <button on:click={errorTest}>Error Test</button>
-  <Input label="Error Message For Test 3" {onInput} {errorMessage} />
+  <Input label="Error Message For Test 3" {onInput} />
   {errorMessage}
 </div>
 <Input label="Test 4" icon="upload" />

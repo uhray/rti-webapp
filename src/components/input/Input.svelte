@@ -9,7 +9,7 @@
   export let error = 'Error';
   export let label = undefined;
   export let placeholder = undefined;
-  export let onInput;
+  export let onInput = undefined;
 
   let isFocused = false;
   const onFocus = () => {

@@ -2,8 +2,8 @@
   import Checkbox from '../checkbox/Checkbox.svelte';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
-  export let data;
-  export let height;
+  export let data = undefined;
+  export let height = undefined;
 </script>
 
 <style src="./Table.scss">

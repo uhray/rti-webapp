@@ -57,16 +57,13 @@
 
   <form class="uk-form-stacked">
     <div class="row">
-      <Input type="input-active-outlined" label="First Name" isValid={true} />
-      <Input type="input-active-outlined" label="Last Name" isValid={true} />
+      <Input label="First Name" />
+      <Input label="Last Name" />
     </div>
     <br />
     <div class="row">
-      <Input type="input-active-outlined" label="Email" isValid={true} />
-      <Input
-        type="input-active-outlined"
-        label="Driver Manager"
-        isValid={true} />
+      <Input label="Email" />
+      <Input label="Driver Manager" />
     </div>
   </form>
 
@@ -79,22 +76,13 @@
 
     <div class="half">
       <div class="row">
-        <Input
-          type="input-active-outlined"
-          label="Current Password"
-          isValid={true} />
+        <Input label="Current Password" />
       </div>
       <div class="row">
-        <Input
-          type="input-active-outlined"
-          label="New Password"
-          isValid={true} />
+        <Input label="New Password" />
       </div>
       <div class="row">
-        <Input
-          type="input-active-outlined"
-          label="Confirm Password"
-          isValid={true} />
+        <Input label="Confirm Password" />
       </div>
       <br />
       <Button primary>Save Password</Button>

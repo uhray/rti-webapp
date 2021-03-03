@@ -1,6 +1,10 @@
 <script>
-  export let text;
+  export let text = undefined;
 </script>
+
+<style src="./ToolTip.scss">
+
+</style>
 
 <!-- HTML HERE -->
 <section class="ToolTip">
@@ -11,4 +15,3 @@
 <!-- ========= -->
 
 <!-- Style -->
-<style src="./ToolTip.scss"></style>
