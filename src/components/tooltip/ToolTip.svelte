@@ -1,5 +1,5 @@
 <script>
-  export let text;
+  export let text = undefined;
 </script>
 
 <!-- HTML HERE -->

@@ -1,7 +1,7 @@
 <script lang="ts">
   import Button from '../button/Button.svelte';
   import SearchBar from '../searchbar/SearchBar.svelte';
-  export let segment: string;
+  export let segment = undefined;
 </script>
 
 <section class="HeadSection">

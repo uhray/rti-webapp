@@ -2,11 +2,11 @@
   import Error from '../error/Error.svelte';
   import Icon from '../icon/Icon.svelte';
 
-  export let isValid;
-  export let icon;
-  export let type;
-  export let rows;
-  export let placeholder;
+  export let isValid = undefined;
+  export let icon = undefined;
+  export let type = undefined;
+  export let rows = undefined;
+  export let placeholder = undefined;
 </script>
 
 <!-- HTML -->

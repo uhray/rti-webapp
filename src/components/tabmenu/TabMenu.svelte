@@ -1,6 +1,6 @@
 <script>
-  export let type;
-  export let tabs;
+  export let type = undefined;
+  export let tabs = undefined;
 </script>
 
 <!-- HTML -->

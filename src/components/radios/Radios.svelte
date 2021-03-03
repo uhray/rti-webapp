@@ -1,6 +1,6 @@
 <script>
   // javascript //
-  export let options;
+  export let options = undefined;
 </script>
 
 <!-- HTML -->
