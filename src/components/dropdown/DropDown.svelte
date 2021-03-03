@@ -35,6 +35,23 @@
       </div>
     </div>
   {/if}
+  {#if type === 'top-nav'}
+    <slot />
+    <div class="uk-width-medium DropDown-container" uk-dropdown="mode: click">
+      <div class="uk-child-width-1-1" uk-grid>
+        <div>
+          <ul class="uk-nav uk-dropdown-nav">
+            <li class="uk-flex DropDown-listItem">
+              <Icon type="user" /><a class="DropDown-choice">View Profile</a>
+            </li>
+            <li class="uk-flex DropDown-listItem">
+              <Icon type="logout" /><a class="DropDown-choice">Log Out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  {/if}
 </section>
 
 <!-- ==== -->
