@@ -1,4 +1,5 @@
 <script>
+  import Icon from '../icon/Icon.svelte';
   export let fill;
   export let disabled;
   export let primary;
@@ -7,11 +8,8 @@
   export let success;
   export let outline;
   export let large;
+  export let icon;
 </script>
-
-<style src="./Button.scss">
-
-</style>
 
 <!-- HTML -->
 <button
@@ -22,7 +20,12 @@
   {success}
   {disabled}
   {outline}
-  {large}>
+  {large}
+>
   <slot />
+  {#if icon}<Icon type={icon} />{/if}
 </button>
+
 <!-- ==== -->
+<style src="./Button.scss">
+</style>
