@@ -23,13 +23,6 @@
     width: 100%;
     max-width: 1000px;
     margin-bottom: 10px;
-
-    section {
-      margin-right: 10px;
-    }
-    section:last-child {
-      margin-right: 0;
-    }
   }
   .half {
     width: 50%;
