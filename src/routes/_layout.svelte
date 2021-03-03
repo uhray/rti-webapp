@@ -6,7 +6,7 @@
   export let segment: string;
 </script>
 
-{#if segment === 'signin'}
+{#if segment === 'signin' || segment === 'signup'}
   <div class="wrapper-forSignin">
     <main>
       <slot />
