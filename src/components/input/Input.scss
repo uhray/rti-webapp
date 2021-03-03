@@ -1,118 +1,58 @@
+@import '../../theme/variables.scss';
+
 .Input {
   margin-right: 10px;
-  width: 100%;
+  margin-bottom: 5px;
 
-  .Input-inactive {
+  &[invalid='true'] {
+    margin-bottom: 0;
+  }
+
+  input {
     border-radius: 4px;
-    border: 1px solid #e1e1e1;
+    border: 1px solid $color--lightgray;
+    color: $color--darkgray;
+  }
+
+  input[invalid='true'] {
+    border: 1px solid $color--warning;
+  }
+
+  input[isFocused='true'][invalid='false'] {
+    border: 1px solid $color--darkblue;
+    background-color: $color--silver;
+  }
+
+  ::-webkit-input-placeholder {
     font-family: Poppins;
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
     line-height: 22px;
-    color: #15224b;
+    color: #595f76;
   }
-  .Input-activeFilled {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 9px 15px 7px;
-    background: #f8f9fc;
-    border: 0.5px solid #15224b;
-    box-sizing: border-box;
-    border-radius: 4px;
+  ::-moz-placeholder {
     font-family: Poppins;
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
     line-height: 22px;
-    color: #15224b;
+    color: #595f76;
   }
-  .Input-activeOutlined {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 9px 15px 7px;
-    border: 0.5px solid #15224b;
-    box-sizing: border-box;
-    border-radius: 4px;
+  :-ms-input-placeholder {
+    font-family: Poppins;
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
     line-height: 22px;
-    color: #15224b;
+    color: #595f76;
   }
-  .Input-notValid {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 9px 15px 7px;
-    border: 0.5px solid #e86172;
-    box-sizing: border-box;
-    border-radius: 4px;
+  :-moz-placeholder {
+    font-family: Poppins;
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
     line-height: 22px;
-    color: #15224b;
+    color: #595f76;
   }
-  .Input-selector {
-    border-radius: 4px;
-    border: 1px solid #e1e1e1;
-  }
-  .Input-textareaActive {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    background: #ffffff;
-    border: 0.5px solid #15224b;
-    border-radius: 4px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 22px;
-    color: #15224b;
-  }
-  .Input-textareaInactive {
-    border-radius: 4px;
-    border: 1px solid #e1e1e1;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 22px;
-    color: #15224b;
-  }
-}
-
-::-webkit-input-placeholder {
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 22px;
-  color: #595f76;
-}
-::-moz-placeholder {
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 22px;
-  color: #595f76;
-}
-:-ms-input-placeholder {
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 22px;
-  color: #595f76;
-}
-:-moz-placeholder {
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 22px;
-  color: #595f76;
 }
