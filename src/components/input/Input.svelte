@@ -53,3 +53,5 @@
     <Error type="default-error" text={error && error} />
   {/if}
 </div>
+
+<style src="./Input.scss"></style>
