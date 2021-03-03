@@ -15,6 +15,7 @@
     { text: 'line' },
     { icon: 'home', text: 'Home', link: '' },
     { icon: 'components', text: 'Components', link: 'components' },
+    { text: 'Account', link: 'account' },
   ];
 
   function menuToggle() {
