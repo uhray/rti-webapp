@@ -3,12 +3,18 @@
   import Button from '../../button/Button.svelte';
 </script>
 
+<style src="./SignUp.scss">
+
+</style>
+
 <section class="SignUpForm">
   <div class="SignUpForm-formContainer">
     <form class="SignUpForm-form">
       <h3 class="SignUpForm-formHeader">Create an account</h3>
       <p class="SignUpForm-formSubHeader">
-        Welcome to RTI, Create your account below <br />Already have an account?
+        Welcome to RTI! Create your account below.
+        <br />
+        Already have an account?
         <a href="signin">Log In</a>
       </p>
       <span class="SignUpForm-inputLabel">Full Name</span>
@@ -24,10 +30,8 @@
       <Input type="input-inactive" isValid placeholder="" icon="hide" />
       <br />
       <div class="SignUpForm-button">
-        <Button primary fill large>Sign In</Button>
+        <Button primary fill large>Create Account</Button>
       </div>
     </form>
   </div>
 </section>
-
-<style src="./SignUp.scss"></style>
