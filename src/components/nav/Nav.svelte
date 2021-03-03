@@ -11,7 +11,7 @@
     { icon: 'message', text: 'Messages', amount: 999 },
     { text: 'line' },
     { icon: 'users', text: 'User Management' },
-    { icon: 'settings', text: 'Settings' },
+    { icon: 'settings', text: 'Settings', link: 'settings' },
     { text: 'line' },
     { icon: 'home', text: 'Home', link: '' },
     { icon: 'components', text: 'Components', link: 'components' },
