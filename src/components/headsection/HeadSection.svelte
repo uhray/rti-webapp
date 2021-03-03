@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from '../button/Button.svelte';
+  import SearchBar from '../searchbar/SearchBar.svelte';
   export let segment: string;
 </script>
 
@@ -17,6 +18,26 @@
           <Button outline>Cancel</Button>
           <div style="margin-left: 4px;" />
           <Button primary>Save</Button>
+        </div>
+      </div>
+    </div>
+  {/if}
+  {#if segment === 'manage'}
+    <div class="HeadSection-container">
+      <div class="HeadSection-content uk-flex">
+        <div>
+          <h2 class="HeadSection-header">User Manangement</h2>
+          <p class="HeadSection-subHeader">
+            Here you can manage your active users.
+          </p>
+        </div>
+        <div class="HeadSection-buttonGroup uk-flex">
+          <!-- FIXME: Search Bar width and button icon displaying underneath -->
+          <SearchBar />
+
+          <Button outline icon="filter">Filter</Button>
+          <div style="margin-left: 4px;" />
+          <Button outline icon="sortup">Search</Button>
         </div>
       </div>
     </div>

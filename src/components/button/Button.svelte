@@ -9,10 +9,6 @@
   export let large = undefined;
 </script>
 
-<style src="./Button.scss">
-
-</style>
-
 <!-- HTML -->
 <button
   class={fill ? 'uk-button uk-width-1-1' : 'uk-button'}
@@ -22,7 +18,11 @@
   {success}
   {disabled}
   {outline}
-  {large}>
+  {large}
+>
   <slot />
 </button>
+
 <!-- ==== -->
+<style src="./Button.scss">
+</style>
