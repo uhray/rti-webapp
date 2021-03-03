@@ -7,6 +7,7 @@
   export let type = undefined;
   export let rows = undefined;
   export let placeholder = undefined;
+  export let label = undefined;
 </script>
 
 <!-- HTML -->
@@ -15,7 +16,9 @@
     {#if isValid}
       <div class="uk-inline uk-width-1-1">
         <input class="uk-input Input-inactive" type="text" {placeholder} />
-        <span class="uk-form-icon uk-form-icon-flip"><Icon type={icon} /></span>
+        <span class="uk-form-icon uk-form-icon-flip">
+          <Icon type={icon} />
+        </span>
       </div>
     {:else}
       <div class="uk-inline uk-width-1-1">
@@ -24,9 +27,9 @@
           type="text"
           placeholder="Placeholder Text"
         />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="close-red" /></span
-        >
+        <span class="uk-form-icon uk-form-icon-flip">
+          <Icon type="close-red" />
+        </span>
       </div>
       <Error type="default-error" text="Something is wrong" />
     {/if}
@@ -39,9 +42,9 @@
           type="text"
           placeholder="Placeholder Text"
         />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="rocket" /></span
-        >
+        <span class="uk-form-icon uk-form-icon-flip">
+          <Icon type="rocket" />
+        </span>
       </div>
     {:else}
       <div class="uk-inline uk-width-1-1">
@@ -50,24 +53,27 @@
           type="text"
           placeholder="Placeholder Text"
         />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="close-red" /></span
-        >
+        <span class="uk-form-icon uk-form-icon-flip">
+          <Icon type="close-red" />
+        </span>
       </div>
       <Error type="default-error" text="Something is wrong" />
     {/if}
   {/if}
   {#if type === 'input-active-outlined'}
     {#if isValid}
+      {#if label}
+        <label>{label}</label>
+      {/if}
       <div class="uk-inline uk-width-1-1">
         <input
           class="uk-input Input-activeOutlined"
           type="text"
           placeholder="Placeholder Text"
         />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="rocket" /></span
-        >
+        <span class="uk-form-icon uk-form-icon-flip">
+          <Icon type="rocket" />
+        </span>
       </div>
     {:else}
       <div class="uk-inline uk-width-1-1">
@@ -76,9 +82,9 @@
           type="text"
           placeholder="Placeholder Text"
         />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="close-red" /></span
-        >
+        <span class="uk-form-icon uk-form-icon-flip">
+          <Icon type="close-red" />
+        </span>
       </div>
       <Error type="default-error" text="Something is wrong" />
     {/if}

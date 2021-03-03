@@ -1,10 +1,10 @@
 <script>
   import Icon from '../../components/icon/Icon.svelte';
 
-  export let segment;
-  export let icon;
-  export let isOpen;
-  export let amount;
+  export const segment = undefined;
+  export let icon = undefined;
+  export let isOpen = undefined;
+  export let amount = undefined;
 </script>
 
 <style src="./NavItem.scss">
