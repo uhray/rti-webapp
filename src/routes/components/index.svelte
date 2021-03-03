@@ -17,6 +17,16 @@
   import Card from '../../components/card/Card.svelte';
   import { tableData, tableDataSmall } from '../../data/fakeTableData';
 
+  let error = false;
+  let errorMessage = 'test';
+  const errorTest = () => {
+    error = !error;
+  };
+  const onInput = e => {
+    console.log(e.target.value);
+    errorMessage = e.target.value;
+  };
+
   // custom header to inject html
 </script>
 
@@ -49,16 +59,22 @@ defaults to [height: 100%] with no scrolling if no height value
 <SearchBar />
 
 <h2>Inputs and Plain Textareas</h2>
-<Input type="input-inactive" isValid={true} />
-<br />
-<Input type="input-inactive" isValid={false} />
-<br />
-<Input type="input-active-filled" isValid={true} />
-<br />
-<Input type="input-active-outlined" isValid={true} />
-<br />
-<Input type="textarea-plain-inactive" placeholder="Type something.." rows={2} />
-<Input type="textarea-plain-active" placeholder="Type something.." rows={2} />
+<Input
+  fill
+  placeholder="Hello there!"
+  error="APOCALYPTIC ERROR TIME"
+  invalid
+  label="Test"
+  icon="rocket" />
+<Input placeholder="Test 2" invalid label="No Error Message Test" />
+<div style={'display: flex; flex-flow:row nowrap'}>
+  <Input label="Test 3" invalid={error} error={errorMessage} icon="upload" />
+  <button on:click={errorTest}>Error Test</button>
+  <Input label="Error Message For Test 3" {onInput} />
+  {errorMessage}
+</div>
+<Input label="Test 4" icon="upload" />
+<Input label="Test 5" icon="upload" />
 
 <h2>Rich Text Text Area</h2>
 <RichText />

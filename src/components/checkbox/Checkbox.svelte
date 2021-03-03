@@ -1,7 +1,7 @@
 <script>
-  export let disabled;
-  export let primary;
-  export let secondary;
+  export let disabled = undefined;
+  export let primary = undefined;
+  export let secondary = undefined;
 </script>
 
 <style src="./Checkbox.scss">

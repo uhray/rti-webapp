@@ -1,9 +1,9 @@
 <script>
   import Icon from '../icon/Icon.svelte';
-  export let type;
-  export let text;
-  export let choiceHeader;
-  export let choices;
+  export let type = undefined;
+  export let text = undefined;
+  export let choiceHeader = undefined;
+  export let choices = undefined;
 </script>
 
 <style src="./DropDown.scss">

@@ -1,7 +1,7 @@
 <script>
   import Icon from '../icon/Icon.svelte';
-  export let type;
-  export let text;
+  export let type = undefined;
+  export let text = undefined;
 </script>
 
 <!-- HTML -->

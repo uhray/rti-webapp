@@ -1,17 +1,25 @@
 <script>
-  export let type;
-  export let header;
-  export let content;
-  export let nospace;
+  export let type = undefined;
+  export let header = undefined;
+  export let content = undefined;
+  export let nospace = undefined;
 </script>
+
+<style src="./Card.scss">
+
+</style>
 
 <!-- HTML -->
 <section class="Card">
   {#if type === 'card-gray-border'}
     <div class="uk-card Card-grayBorder">
       <div class={nospace ? 'uk-card-body uk-padding-remove' : 'uk-card-body'}>
-        {#if header}<h3 class="uk-card-title Card-header">{header}</h3>{/if}
-        {#if content}<p class="Card-content">{content}</p>{/if}
+        {#if header}
+          <h3 class="uk-card-title Card-header">{header}</h3>
+        {/if}
+        {#if content}
+          <p class="Card-content">{content}</p>
+        {/if}
         <slot />
       </div>
     </div>
@@ -35,5 +43,3 @@
 </section>
 
 <!-- ==== -->
-<style src="./Card.scss">
-</style>
