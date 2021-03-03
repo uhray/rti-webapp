@@ -1,12 +1,12 @@
 <script>
-  export let fill;
-  export let disabled;
-  export let primary;
-  export let secondary;
-  export let warning;
-  export let success;
-  export let outline;
-  export let large;
+  export let fill = undefined;
+  export let disabled = undefined;
+  export let primary = undefined;
+  export let secondary = undefined;
+  export let warning = undefined;
+  export let success = undefined;
+  export let outline = undefined;
+  export let large = undefined;
 </script>
 
 <style src="./Button.scss">

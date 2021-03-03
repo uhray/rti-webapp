@@ -12,4 +12,12 @@
       fill: $color--secondary;
     }
   }
+
+  &[slotend='true'] {
+    margin-left: 5px;
+  }
+
+  &[primary='true'] {
+    color: $color--primary;
+  }
 }

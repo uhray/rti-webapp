@@ -480,6 +480,9 @@ defaults to [height: 100%] with no scrolling if no height value
   <div style="margin: 5px;">
     <Icon type="attach-active" />
   </div>
+  <div style="margin: 5px; border: 5px solid green">
+    <Icon type="upload" />
+  </div>
 </div>
 
 <h2>Checkbox</h2>
