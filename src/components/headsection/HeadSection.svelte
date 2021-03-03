@@ -31,15 +31,19 @@
           <p class="HeadSection-subHeader">
             Here you can manage your active users.
           </p>
-          <TabMenu type="default" tabs={['Users', 'Admins']} />
+          <div class="HeadSection-tabMenu">
+            <TabMenu type="default" tabs={['Users', 'Admins']} />
+          </div>
         </div>
         <div class="HeadSection-buttonGroup uk-flex">
-          <!-- FIXME: Search Bar width and button icon displaying underneath -->
           <SearchBar />
-
-          <Button outline icon="filter">Filter</Button>
           <div style="margin-left: 4px;" />
-          <Button outline icon="sortup">Search</Button>
+          <div class="HeadSection-buttons uk-flex">
+            <Button outline>Filter</Button>
+            <div style="margin-left: 4px;" />
+            <!-- FIXME: Button can't have a space, or it next lines the second word or item -->
+            <Button outline>Sort_By</Button>
+          </div>
         </div>
       </div>
     </div>

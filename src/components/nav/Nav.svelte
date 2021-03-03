@@ -10,7 +10,7 @@
     { icon: 'macro', text: 'Driver Macros', amount: 3 },
     { icon: 'message', text: 'Messages', amount: 999 },
     { text: 'line' },
-    { icon: 'users', text: 'User Management' },
+    { icon: 'users', text: 'User Management', link: 'manage' },
     { icon: 'settings', text: 'Settings', link: 'settings' },
     { text: 'line' },
     { icon: 'home', text: 'Home', link: '' },
@@ -24,12 +24,7 @@
   }
 </script>
 
-<style src="./Nav.scss">
-
-</style>
-
 <nav class={isOpen ? 'Nav' : 'Nav-closed'}>
-
   <div class="collapse" on:click={menuToggle}>
     <NavItem {isOpen} icon={isOpen ? 'arrow-left' : 'arrow-right'}>
       <span>Collapse</span>
@@ -61,3 +56,6 @@
     </div>
   </div>
 </nav>
+
+<style src="./Nav.scss">
+</style>
