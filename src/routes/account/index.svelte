@@ -7,12 +7,6 @@
 </script>
 
 <style lang="scss">
-  .test {
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    background-color: green;
-  }
   .Account {
     display: flex;
     flex-flow: column;
@@ -27,14 +21,18 @@
     display: inline-flex;
     flex-flow: row nowrap;
     width: 100%;
+    max-width: 1000px;
+    margin-bottom: 10px;
 
     section {
       margin-right: 10px;
-      width: 100%;
     }
     section:last-child {
       margin-right: 0;
     }
+  }
+  .half {
+    width: 50%;
   }
 </style>
 
@@ -67,6 +65,45 @@
     <div class="row">
       <Input type="input-active-outlined" label="First Name" isValid={true} />
       <Input type="input-active-outlined" label="Last Name" isValid={true} />
+    </div>
+    <br />
+    <div class="row">
+      <Input type="input-active-outlined" label="Email" isValid={true} />
+      <Input
+        type="input-active-outlined"
+        label="Driver Manager"
+        isValid={true} />
+    </div>
+  </form>
+
+  <br />
+  <Divider type="default" />
+
+  <h3>Password</h3>
+
+  <form class="uk-form-stacked">
+
+    <div class="half">
+      <div class="row">
+        <Input
+          type="input-active-outlined"
+          label="Current Password"
+          isValid={true} />
+      </div>
+      <div class="row">
+        <Input
+          type="input-active-outlined"
+          label="New Password"
+          isValid={true} />
+      </div>
+      <div class="row">
+        <Input
+          type="input-active-outlined"
+          label="Confirm Password"
+          isValid={true} />
+      </div>
+      <br />
+      <Button primary>Save Password</Button>
     </div>
   </form>
 </div>
