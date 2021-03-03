@@ -35,7 +35,6 @@
       class="uk-input"
       type="text"
       {placeholder}
-      {active}
       {invalid}
       {isFocused}
       on:input={onInput}
