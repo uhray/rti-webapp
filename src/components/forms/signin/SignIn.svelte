@@ -4,16 +4,14 @@
   import Button from '../../button/Button.svelte';
 </script>
 
-<style src="./SignIn.scss">
-
-</style>
-
 <section class="SignInForm">
   <div class="SignInForm-formContainer">
     <form class="SignInForm-form">
       <h3 class="SignInForm-formHeader">Sign Into Your Account</h3>
       <p class="SignInForm-formSubHeader">
-        Welcome to RTI, Get started by signing in below.
+        Welcome to RTI, Get started by signing in below. <br />Don't have an
+        account?
+        <a href="signup">Sign Up</a>
       </p>
       <span class="SignInForm-inputLabel">User ID</span>
       <Input type="input-inactive" isValid placeholder="" icon="user" />
@@ -33,3 +31,5 @@
     </form>
   </div>
 </section>
+
+<style src="./SignIn.scss"></style>
