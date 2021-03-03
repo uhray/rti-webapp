@@ -1,4 +1,5 @@
 .HeadSection {
+  // Styles for All Head Sections, On All Pages
   .HeadSection-container {
     height: 175px;
     width: 100%;
@@ -7,6 +8,7 @@
   }
   .HeadSection-content {
     position: absolute;
+    width: 98%;
     margin-top: 95px;
     margin-bottom: 5px;
     margin-left: 10px;
@@ -30,5 +32,11 @@
     color: #15224b;
     margin: 5px;
     margin-top: 0px;
+  }
+  // Styles for Settings Page Head Section
+  .HeadSection-buttonGroup {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
   }
 }
