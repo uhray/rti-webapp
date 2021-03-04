@@ -47,12 +47,12 @@
                       <Label type="active" text="In Progress" />
                     {/if}
                   {:else if header.header == 'order'}
-                    <span class="Table-row-orderNumber">{item.order}</span>
+                    <span class="Table-row-orderNumber">{item.id}</span>
                     <br />
                     <span class="Table-row-orderDate">{item.orderDate}</span>
                   {:else if header.header == 'view'}
                     <div class="alignRight">
-                      <a href="">View</a>
+                      <a href={`/${data.type}/${item.id}`}>View</a>
                     </div>
                   {:else if header.header == 'actions'}
                     <div class="Table-row-actions alignRight">

@@ -1,6 +1,8 @@
 <script>
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
+  import Label from '../../components/label/Label.svelte';
+  export let order = undefined;
 </script>
 
 <style lang="scss">
@@ -22,6 +24,13 @@
     }
     .Header-titles {
       width: 100%;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+
+      :first-child {
+        margin-right: 10px;
+      }
 
       .Header-title {
         font-family: Poppins;
@@ -30,22 +39,14 @@
         font-size: 24px;
         line-height: 34px;
         color: #15224b;
-        margin: 5px;
-        margin-bottom: 0px;
-      }
-      .Header-subtitle {
-        font-family: Poppins;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 15px;
-        line-height: 22px;
-        color: #15224b;
-        margin: 5px;
-        margin-top: 0px;
+        margin: 5px 15px 0 5px;
+        // margin-bottom: 0px;
       }
     }
 
     .Header-actions {
+      width: 100%;
+
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-end;
@@ -57,6 +58,10 @@
       }
     }
   }
+
+  .Orders {
+    padding: 2em;
+  }
 </style>
 
 <svelte:head>
@@ -67,18 +72,27 @@
   <div class="Header-container">
     <div class="Header-content">
       <div class="Header-titles">
-        <h2 class="Header-title">App Settings</h2>
-        <p class="Header-subtitle">
-          Change and customize the appearance of the driver's application.
-        </p>
+        <h2 class="Header-title">Order #{order.id}</h2>
+        {#if order.status == 'pending'}
+          <Label type="warning" text="Pending" />
+        {:else if order.status == 'completed'}
+          <Label type="success" text="Completed" />
+        {:else if order.status == 'declined'}
+          <Label type="danger" text="Declined" />
+        {:else if order.status == 'dispatched'}
+          <Label type="default" text="Dispatched" />
+        {:else if order.status == 'in progress'}
+          <Label type="active" text="In Progress" />
+        {/if}
+
       </div>
 
       <div class="Header-actions">
         <div>
-          <Button outline>Cancel</Button>
+          <Button outline>Back</Button>
         </div>
         <div>
-          <Button primary>Save</Button>
+          <Button primary>Send Message</Button>
         </div>
       </div>
     </div>

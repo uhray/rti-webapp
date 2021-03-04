@@ -13,7 +13,7 @@
     }
     .Header-content {
       box-sizing: border-box;
-      width: 98%;
+      width: 100%;
       padding: 95px 30px 5px 30px;
 
       display: flex;

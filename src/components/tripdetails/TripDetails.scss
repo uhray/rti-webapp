@@ -1,0 +1,62 @@
+@import '../../theme/variables.scss';
+
+.TripDetails {
+  background-color: $color--tablegray;
+  border-radius: 4px;
+  padding: 22px 20px;
+
+  .TripDetails-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 20px;
+
+    h3 {
+      font-weight: 500;
+    }
+
+    .TripDetails-header-toggle {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end;
+      align-items: center;
+
+      font-size: 12px;
+      font-weight: 500;
+
+      :hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .TripDetails-content {
+    .TripDetails-content-row {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-right: 20px;
+    }
+
+    .TripDetails-content-cell {
+      width: 20%;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      h4 {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+
+      span {
+        font-size: 15px;
+        font-weight: 400;
+      }
+    }
+  }
+}
