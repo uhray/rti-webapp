@@ -6,25 +6,6 @@
   export let segment: string;
 </script>
 
-{#if segment === 'signin' || segment === 'signup'}
-  <div class="wrapper-forSignin">
-    <main>
-      <slot />
-    </main>
-  </div>
-{:else}
-  <div class="wrapper">
-    <Nav {segment} />
-    <main>
-      <TopNav />
-      <HeadSection {segment} />
-      <div class="main-content">
-        <slot />
-      </div>
-    </main>
-  </div>
-{/if}
-
 <style lang="scss" global>
   @import '../theme/theme.scss';
 
@@ -52,6 +33,25 @@
     box-sizing: border-box;
   }
   .main-content {
-    padding: 2em;
+    // padding: 2em;
   }
 </style>
+
+{#if segment === 'signin' || segment === 'signup'}
+  <div class="wrapper-forSignin">
+    <main>
+      <slot />
+    </main>
+  </div>
+{:else}
+  <div class="wrapper">
+    <Nav {segment} />
+    <main>
+      <TopNav />
+      <!-- <HeadSection {segment} /> -->
+      <div class="main-content">
+        <slot />
+      </div>
+    </main>
+  </div>
+{/if}

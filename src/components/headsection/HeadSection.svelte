@@ -4,6 +4,10 @@
   export let segment: string;
 </script>
 
+<style src="./HeadSection.scss">
+
+</style>
+
 <section class="HeadSection">
   {#if segment === 'settings'}
     <div class="HeadSection-container">
@@ -49,6 +53,5 @@
       </div>
     </div>
   {/if}
-</section>
 
-<style src="./HeadSection.scss"></style>
+</section>
