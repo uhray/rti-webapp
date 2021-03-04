@@ -447,9 +447,8 @@ defaults to [height: 100%] with no scrolling if no height value
 </div>
 
 <!-- ===================================================== -->
-
-<svelte:head lang="scss">
+<style lang="scss">
   .Components {
     padding: 2em;
   }
-</svelte:head>
+</style>

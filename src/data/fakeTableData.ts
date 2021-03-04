@@ -113,6 +113,7 @@ export const usersTable = {
     { header: 'driverMngr', text: 'DRIVER MANAGER' },
     { header: 'vehicle', text: 'VEHICLE' },
     { header: 'status', text: 'STATUS' },
+    { header: 'user-actions', text: 'Actions' },
   ],
   data: [
     {
@@ -277,6 +278,7 @@ export const adminsTable = {
     { header: 'fullName', text: 'FULL NAME' },
     { header: 'email', text: 'EMAIL' },
     { header: 'lastLogin', text: 'LAST LOGIN DATE' },
+    { header: 'actions', text: 'Actions' },
   ],
   data: [
     {
