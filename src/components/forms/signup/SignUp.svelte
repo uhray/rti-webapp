@@ -18,16 +18,16 @@
         <a href="signin">Log In</a>
       </p>
       <span class="SignUpForm-inputLabel">Full Name</span>
-      <Input type="input-inactive" isValid placeholder="" />
+      <Input fill placeholder="" />
       <br />
       <span class="SignUpForm-inputLabel">User ID</span>
-      <Input type="input-inactive" isValid placeholder="" />
+      <Input fill placeholder="" />
       <br />
       <span class="SignUpForm-inputLabel">Password</span>
-      <Input type="input-inactive" isValid placeholder="" icon="hide" />
+      <Input fill placeholder="" icon="hide" />
       <br />
       <span class="SignUpForm-inputLabel">Confirm Password</span>
-      <Input type="input-inactive" isValid placeholder="" icon="hide" />
+      <Input fill placeholder="" icon="hide" />
       <br />
       <div class="SignUpForm-button">
         <Button primary fill large>Create Account</Button>

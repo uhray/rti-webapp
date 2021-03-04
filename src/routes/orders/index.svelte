@@ -20,5 +20,5 @@
 <Header />
 
 <div class="Orders">
-  <Table {data} height={80} />
+  <Table {data} height={75} />
 </div>
