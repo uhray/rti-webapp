@@ -1,8 +1,12 @@
 .SearchBar {
   .SearchBar-formContainer {
-    width: 50%;
     margin: 10px auto;
+
+    &[fill='true'] {
+      width: 100%;
+    }
   }
+
   .SearchBar-defaultSearch {
     border: 0.5px solid #15224b;
     box-sizing: border-box;

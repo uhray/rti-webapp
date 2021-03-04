@@ -6,7 +6,7 @@
   export let isOpen = true;
 
   const items = [
-    { icon: 'orders', text: 'Orders' },
+    { icon: 'orders', text: 'Orders', link: 'orders' },
     { icon: 'macro', text: 'Driver Macros', amount: 3 },
     { icon: 'message', text: 'Messages', amount: 999 },
     { text: 'line' },

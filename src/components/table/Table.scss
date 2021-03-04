@@ -41,7 +41,7 @@
     .Table-row-actions {
       display: flex;
       flex-flow: row nowrap;
-      justify-content: center;
+      // justify-content: flex-end;
       align-items: center;
     }
   }
@@ -82,4 +82,10 @@
       table-layout: fixed;
     }
   }
+}
+
+.alignRight {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
 }
