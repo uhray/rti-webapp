@@ -1,6 +1,5 @@
 <script lang="ts">
   import Nav from '../components/nav/Nav.svelte';
-  import HeadSection from '../components/headsection/HeadSection.svelte';
   import TopNav from '../components/topnav/TopNav.svelte';
 
   export let segment: string;
@@ -17,7 +16,6 @@
     <Nav {segment} />
     <main>
       <TopNav />
-      <HeadSection {segment} />
       <div class="main-content">
         <slot />
       </div>
@@ -52,6 +50,6 @@
     box-sizing: border-box;
   }
   .main-content {
-    padding: 2em;
+    // padding: 2em;
   }
 </style>

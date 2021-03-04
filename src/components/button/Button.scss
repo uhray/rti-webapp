@@ -18,9 +18,9 @@ button[success='true'] {
 
 button {
   flex: 1;
+  min-width: 100px;
   border-radius: 4px;
   color: #fff;
-  margin: 1px;
   padding: 0 10px;
   line-height: 34px;
   height: 34px;
@@ -34,39 +34,40 @@ button {
   display: inline-flex;
   flex-flow: row nowrap;
   justify-content: center;
+  align-items: center;
 
   &:disabled {
     background-color: $color--disabled;
   }
 
   &[outline='true'] {
-    background-color: #ffffffff;
+    background-color: transparent;
     color: #15224b;
     border: 1px solid #15224b;
 
     &:disabled {
-      background-color: #ffffffff;
+      background-color: transparent;
       border: 1px solid $color--disabled;
       color: $color--disabled;
     }
 
     &[primary='true'] {
-      background-color: #ffffffff !important;
+      background-color: transparent !important;
       color: #15224b;
       border: 1px solid #15224b;
     }
     &[secondary='true'] {
-      background-color: #ffffffff !important;
+      background-color: transparent !important;
       color: #243e93;
       border: 1px solid #243e93;
     }
     &[warning='true'] {
-      background-color: #ffffffff !important;
+      background-color: transparent !important;
       color: $color--warning;
       border: 1px solid $color--warning;
     }
     &[success='true'] {
-      background-color: #ffffffff !important;
+      background-color: transparent !important;
       color: $color--success;
       border: 1px solid $color--success;
     }

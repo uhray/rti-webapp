@@ -4,12 +4,14 @@
   import Icon from '../../components/icon/Icon.svelte';
   import Divider from '../../components/divider/Divider.svelte';
   import Input from '../../components/input/Input.svelte';
+  import Header from './Header.svelte';
 </script>
 
 <style lang="scss">
   .Account {
     display: flex;
     flex-flow: column;
+    padding: 2em;
 
     .Account-photo {
       width: 80px;
@@ -33,6 +35,8 @@
 <svelte:head>
   <title>Account/User Profile</title>
 </svelte:head>
+
+<Header />
 
 <div class="Account">
   <h3>Profile Photo</h3>

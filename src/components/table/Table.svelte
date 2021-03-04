@@ -52,9 +52,11 @@
                     <br />
                     <span class="Table-row-orderDate">{item.orderDate}</span>
                   {:else if header.header == 'view'}
-                    <a href="">View</a>
+                    <div class="alignRight">
+                      <a href="">View</a>
+                    </div>
                   {:else if header.header == 'actions'}
-                    <div class="Table-row-actions">
+                    <div class="Table-row-actions alignRight">
                       <Icon type="delete" hover />
                       <Checkbox secondary />
                     </div>
