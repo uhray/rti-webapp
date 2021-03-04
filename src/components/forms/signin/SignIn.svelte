@@ -4,20 +4,25 @@
   import Button from '../../button/Button.svelte';
 </script>
 
+<style src="./SignIn.scss">
+
+</style>
+
 <section class="SignInForm">
   <div class="SignInForm-formContainer">
     <form class="SignInForm-form">
       <h3 class="SignInForm-formHeader">Sign Into Your Account</h3>
       <p class="SignInForm-formSubHeader">
-        Welcome to RTI, Get started by signing in below. <br />Don't have an
-        account?
+        Welcome to RTI, Get started by signing in below.
+        <br />
+        Don't have an account?
         <a href="signup">Sign Up</a>
       </p>
       <span class="SignInForm-inputLabel">User ID</span>
-      <Input type="input-inactive" isValid placeholder="" icon="user" />
+      <Input fill placeholder="" icon="user" />
       <br />
       <span class="SignInForm-inputLabel">Password</span>
-      <Input type="input-inactive" isValid placeholder="" icon="hide" />
+      <Input fill placeholder="" icon="hide" />
       <div class="uk-flex">
         <div class="uk-flex SignInForm-subGroup">
           <Checkbox secondary />
@@ -31,5 +36,3 @@
     </form>
   </div>
 </section>
-
-<style src="./SignIn.scss"></style>

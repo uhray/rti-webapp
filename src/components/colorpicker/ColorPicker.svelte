@@ -1,6 +1,6 @@
 <script>
   import Card from '../card/Card.svelte';
-  export let hex;
+  export let hex = undefined;
 </script>
 
 <!-- html -->

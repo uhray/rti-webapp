@@ -1,103 +1,54 @@
 <script>
   import Error from '../error/Error.svelte';
   import Icon from '../icon/Icon.svelte';
+  import { colors } from '../../theme/variables';
 
-  export let isValid;
-  export let icon;
-  export let type;
-  export let rows;
-  export let placeholder;
+  export let fill = undefined;
+  export let icon = undefined;
+  export let invalid = false;
+  export let error = 'Error';
+  export let label = undefined;
+  export let placeholder = undefined;
+  export let onInput = undefined;
+
+  let isFocused = false;
+  const onFocus = () => {
+    isFocused = true;
+  };
+  const onBlur = () => {
+    isFocused = false;
+  };
 </script>
 
-<!-- HTML -->
-<section class="Input">
-  {#if type === 'input-inactive'}
-    {#if isValid}
-      <div class="uk-inline uk-width-1-1">
-        <input class="uk-input Input-inactive" type="text" {placeholder} />
-        <span class="uk-form-icon uk-form-icon-flip"><Icon type={icon} /></span>
-      </div>
-    {:else}
-      <div class="uk-inline uk-width-1-1">
-        <input
-          class="uk-input Input-notValid"
-          type="text"
-          placeholder="Placeholder Text"
-        />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="close-red" /></span
-        >
-      </div>
-      <Error type="default-error" text="Something is wrong" />
-    {/if}
-  {/if}
-  {#if type === 'input-active-filled'}
-    {#if isValid}
-      <div class="uk-inline uk-width-1-1">
-        <input
-          class="uk-input Input-activeFilled"
-          type="text"
-          placeholder="Placeholder Text"
-        />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="rocket" /></span
-        >
-      </div>
-    {:else}
-      <div class="uk-inline uk-width-1-1">
-        <input
-          class="uk-input Input-notValid"
-          type="text"
-          placeholder="Placeholder Text"
-        />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="close-red" /></span
-        >
-      </div>
-      <Error type="default-error" text="Something is wrong" />
-    {/if}
-  {/if}
-  {#if type === 'input-active-outlined'}
-    {#if isValid}
-      <div class="uk-inline uk-width-1-1">
-        <input
-          class="uk-input Input-activeOutlined"
-          type="text"
-          placeholder="Placeholder Text"
-        />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="rocket" /></span
-        >
-      </div>
-    {:else}
-      <div class="uk-inline uk-width-1-1">
-        <input
-          class="uk-input Input-notValid"
-          type="text"
-          placeholder="Placeholder Text"
-        />
-        <span class="uk-form-icon uk-form-icon-flip"
-          ><Icon type="close-red" /></span
-        >
-      </div>
-      <Error type="default-error" text="Something is wrong" />
-    {/if}
-  {/if}
-  {#if type === 'textarea-plain-active'}
-    <div class="uk-margin">
-      <textarea class="uk-textarea Input-textareaActive" {rows} {placeholder} />
-    </div>
-  {/if}
-  {#if type === 'textarea-plain-inactive'}
-    <div class="uk-margin">
-      <textarea
-        class="uk-textarea Input-textareaInactive"
-        {rows}
-        {placeholder}
-      />
-    </div>
-  {/if}
-</section>
-
 <style src="./Input.scss">
+
 </style>
+
+<!-- HTML -->
+<div>
+  {#if label}
+    <label>{label}</label>
+    <br />
+  {/if}
+  <div class={`Input uk-inline ${fill && 'uk-width-1-1'}`} {invalid}>
+    <input
+      class="uk-input"
+      type="text"
+      {placeholder}
+      {invalid}
+      {isFocused}
+      on:input={onInput}
+      on:focus={onFocus}
+      on:blur={onBlur} />
+
+    <span class="uk-form-icon uk-form-icon-flip">
+      <Icon
+        type={invalid ? 'close' : icon}
+        color={invalid ? colors.warning : isFocused ? colors.darkblue : colors.lightgray} />
+    </span>
+
+  </div>
+  {#if invalid}
+    <Error type="default-error" text={error && error} />
+  {/if}
+</div>

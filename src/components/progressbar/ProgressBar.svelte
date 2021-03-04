@@ -1,6 +1,10 @@
 <script>
-  export let progress;
+  export let progress = undefined;
 </script>
+
+<style src="./ProgressBar.scss">
+
+</style>
 
 <!-- HTML -->
 <section class="ProgressBar">
@@ -8,5 +12,3 @@
 </section>
 
 <!-- ==== -->
-<style src="./ProgressBar.scss">
-</style>

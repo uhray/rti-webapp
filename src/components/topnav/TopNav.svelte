@@ -3,6 +3,10 @@
   import DropDown from '../dropdown/DropDown.svelte';
 </script>
 
+<style src="./TopNav.scss">
+
+</style>
+
 <!-- TODO: MOVE TOP NAV TO COMP, RENDER AT LAYOUT LEVEL -->
 <section class="TopNav">
   <DropDown type="top-nav" choices={['choice', 'choice']}>
@@ -15,4 +19,3 @@
 </section>
 
 <!-- ================================================== -->
-<style src="./TopNav.scss"></style>

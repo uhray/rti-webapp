@@ -2,8 +2,8 @@
   import Checkbox from '../checkbox/Checkbox.svelte';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
-  export let data;
-  export let height;
+  export let data = undefined;
+  export let height = undefined;
 </script>
 
 <style src="./Table.scss">
@@ -51,9 +51,11 @@
                     <br />
                     <span class="Table-row-orderDate">{item.orderDate}</span>
                   {:else if header.header == 'view'}
-                    <a href="">View</a>
+                    <div class="alignRight">
+                      <a href="">View</a>
+                    </div>
                   {:else if header.header == 'actions'}
-                    <div class="Table-row-actions">
+                    <div class="Table-row-actions alignRight">
                       <Icon type="delete" hover />
                       <Checkbox secondary />
                     </div>

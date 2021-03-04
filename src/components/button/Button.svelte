@@ -1,31 +1,36 @@
 <script>
   import Icon from '../icon/Icon.svelte';
-  export let fill;
-  export let disabled;
-  export let primary;
-  export let secondary;
-  export let warning;
-  export let success;
-  export let outline;
-  export let large;
-  export let icon;
+  export let fill = undefined;
+  export let disabled = undefined;
+  export let primary = undefined;
+  export let secondary = undefined;
+  export let warning = undefined;
+  export let success = undefined;
+  export let outline = undefined;
+  export let large = undefined;
+  export let icon = undefined;
+  export let height = undefined;
 </script>
+
+<style src="./Button.scss">
+
+</style>
 
 <!-- HTML -->
 <button
   class={fill ? 'uk-button uk-width-1-1' : 'uk-button'}
+  style={`${height && `height: ${height}`}`}
   {primary}
   {secondary}
   {warning}
   {success}
   {disabled}
   {outline}
-  {large}
->
+  {large}>
   <slot />
-  {#if icon}<Icon type={icon} />{/if}
+  {#if icon}
+    <Icon type={icon} />
+  {/if}
 </button>
 
 <!-- ==== -->
-<style src="./Button.scss">
-</style>
