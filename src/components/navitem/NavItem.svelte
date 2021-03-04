@@ -5,13 +5,17 @@
   export let icon = undefined;
   export let isOpen = undefined;
   export let amount = undefined;
+  export let isActive = false;
 </script>
 
 <style src="./NavItem.scss">
 
 </style>
 
-<div class={isOpen ? 'NavItem' : 'NavItem closed'}>
+<div class={`${isOpen ? 'NavItem' : 'NavItem closed'} ${isActive && 'active'}`}>
+  {#if isActive}
+    <div class="NavItem-activeBar" />
+  {/if}
   <Icon type={icon} color="#fff" />
   <span>
     <slot />
