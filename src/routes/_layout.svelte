@@ -1,10 +1,27 @@
 <script lang="ts">
   import Nav from '../components/nav/Nav.svelte';
-  import HeadSection from '../components/headsection/HeadSection.svelte';
   import TopNav from '../components/topnav/TopNav.svelte';
 
   export let segment: string;
 </script>
+
+{#if segment === 'signin' || segment === 'signup'}
+  <div class="wrapper-forSignin">
+    <main>
+      <slot />
+    </main>
+  </div>
+{:else}
+  <div class="wrapper">
+    <Nav {segment} />
+    <main>
+      <TopNav />
+      <div class="main-content">
+        <slot />
+      </div>
+    </main>
+  </div>
+{/if}
 
 <style lang="scss" global>
   @import '../theme/theme.scss';
@@ -36,21 +53,3 @@
     // padding: 2em;
   }
 </style>
-
-{#if segment === 'signin' || segment === 'signup'}
-  <div class="wrapper-forSignin">
-    <main>
-      <slot />
-    </main>
-  </div>
-{:else}
-  <div class="wrapper">
-    <Nav {segment} />
-    <main>
-      <TopNav />
-      <div class="main-content">
-        <slot />
-      </div>
-    </main>
-  </div>
-{/if}
