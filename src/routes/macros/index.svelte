@@ -14,7 +14,7 @@
   <div class="uk-width-1-3">
     <TabMenu type="default" nospace tabs={['Active', 'Inactive']} />
   </div>
-  <Table {data} height={72} />
+  <Table {data} height={71} />
 </section>
 
 <style>

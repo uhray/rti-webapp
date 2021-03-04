@@ -9,6 +9,10 @@
     border: 0.5px solid #15224b;
     border-radius: 4px;
   }
+  // TODO ---> Get IsFocused Styles done for rich text
+  .RichText-container[isFocused='true'] {
+    background-color: red;
+  }
   .RichText-editor {
     border: none;
     min-height: 56px;

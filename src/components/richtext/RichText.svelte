@@ -45,15 +45,24 @@
     console.log('send button clicked');
   };
   // =========================================================== //
+
+  let isFocused = false;
+  const onFocus = () => {
+    isFocused = true;
+  };
+  const onBlur = () => {
+    isFocused = false;
+  };
 </script>
-
-<style src="./RichText.scss">
-
-</style>
 
 <!-- HTML -->
 <section class="RichText">
-  <div class="RichText-container">
+  <div
+    class="RichText-container"
+    {isFocused}
+    on:focus={onFocus}
+    on:blur={onBlur}
+  >
     <div id="editor" class="RichText-editor" on:keyup={updateContent} />
     <div id="toolbar" class="RichText-toolbar">
       <button class="ql-bold" />
@@ -69,7 +78,8 @@
             height="25"
             viewBox="0 0 24 25"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M18.0156 5.35938L5.32812 12.6602C4.83594 12.9336 4.89062
               13.6445 5.38281 13.8359L8.30859 15.0664L16.1562 8.14844C16.293
@@ -78,14 +88,14 @@
               19.0312L12.7109 16.8984L16.1016 18.3477C16.4844 18.5117 16.9492
               18.2656 17.0039 17.8281L18.9727 6.01562C19.082 5.46875 18.4805
               5.08594 18.0156 5.35938Z"
-              fill="#243E93" />
+              fill="#243E93"
+            />
           </svg>
         </button>
       </div>
     </div>
   </div>
-
-  <br />
-  Resulting HTML:
-  {@html htmlContent}
 </section>
+
+<style src="./RichText.scss">
+</style>
