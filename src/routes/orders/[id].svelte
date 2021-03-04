@@ -13,7 +13,21 @@
 <script>
   import OrderHeader from './OrderHeader.svelte';
   import TripDetails from '../../components/tripdetails/TripDetails.svelte';
+  import Table from '../../components/table/Table.svelte';
   export let order;
+
+  const headers = [
+    { header: 'filename', text: 'File Name' },
+    { header: 'size', text: 'Size' },
+    { header: 'location', text: 'Location' },
+    { header: 'uploaded_at', text: 'Time Uploaded' },
+    { header: 'view', text: 'View' },
+    { header: 'actions', text: 'Actions' },
+  ];
+
+  console.log(headers);
+
+  console.log(order.documents);
 </script>
 
 <style lang="scss">
@@ -30,4 +44,10 @@
 
 <div class="Order">
   <TripDetails {order} />
+
+  {#if order.documents}
+    <h3>Uploaded Documents</h3>
+
+    <Table {headers} data={order.documents} height={28} />
+  {/if}
 </div>

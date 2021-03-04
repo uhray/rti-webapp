@@ -2,6 +2,7 @@
   import Checkbox from '../checkbox/Checkbox.svelte';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
+  export let headers = undefined;
   export let data = undefined;
   export let height = undefined;
 </script>
@@ -20,7 +21,7 @@
         class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
         <thead>
           <tr class="Table-headerRow">
-            {#each data.headers as header}
+            {#each headers as header}
               <th scope="col" class="Table-headerRow-headerCell">
                 {#if header.header == 'view' || header.header == 'actions'}
                   {''}
@@ -32,7 +33,7 @@
         <tbody class="Table-body">
           {#each data.data as item}
             <tr class="Table-row">
-              {#each data.headers as header}
+              {#each headers as header}
                 <td>
                   {#if header.header == 'status'}
                     {#if item.status == 'pending'}
@@ -58,6 +59,14 @@
                     <div class="Table-row-actions alignRight">
                       <Icon type="delete" hover />
                       <Checkbox secondary />
+                    </div>
+                  {:else if header.header == 'filename'}
+                    <div class="Table-row-filename">
+                      <div>
+                        <Icon type="file" color="#15224B" />
+                      </div>
+
+                      <div>{item.filename}</div>
                     </div>
                   {:else}{item[header.header]}{/if}
 

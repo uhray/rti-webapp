@@ -27,6 +27,15 @@
   };
 
   // custom header to inject html
+  const headers = [
+    { header: 'order', text: 'Order' },
+    { header: 'status', text: 'Status' },
+    { header: 'vehicle', text: 'Vehicle' },
+    { header: 'startPoint', text: 'Start Point' },
+    { header: 'endPoint', text: 'End Point' },
+    { header: 'view', text: 'View' },
+    { header: 'actions', text: 'Actions' },
+  ];
   const tableData = {
     headers: [
       { header: 'order', text: 'Order' },
@@ -39,7 +48,7 @@
     ],
     data: [
       {
-        order: '0102031',
+        id: '0102031',
         orderDate: 'Jan 23, 2020',
         status: 'pending',
         vehicle: '1XY001',
@@ -47,7 +56,7 @@
         endPoint: 'Seattle, WA 01652',
       },
       {
-        order: '0102032',
+        id: '0102032',
         orderDate: 'Jan 24, 2020',
         status: 'completed',
         vehicle: '1XY123',
@@ -55,7 +64,7 @@
         endPoint: 'Atlanta, GA 01652',
       },
       {
-        order: '0102032',
+        id: '0102032',
         orderDate: 'Jan 24, 2020',
         status: 'declined',
         vehicle: '1XY123',
@@ -63,7 +72,7 @@
         endPoint: 'Atlanta, GA 01652',
       },
       {
-        order: '0102032',
+        id: '0102032',
         orderDate: 'Jan 24, 2020',
         status: 'dispatched',
         vehicle: '1XY123',
@@ -71,7 +80,7 @@
         endPoint: 'Atlanta, GA 01652',
       },
       {
-        order: '0102032',
+        id: '0102032',
         orderDate: 'Jan 24, 2020',
         status: 'in progress',
         vehicle: '1XY123',
@@ -79,7 +88,7 @@
         endPoint: 'Atlanta, GA 01652',
       },
       {
-        order: '0102032',
+        id: '0102032',
         orderDate: 'Jan 24, 2020',
         status: 'in progress',
         vehicle: '1XY123',
@@ -87,7 +96,7 @@
         endPoint: 'Atlanta, GA 01652',
       },
       {
-        order: '0102032',
+        id: '0102032',
         orderDate: 'Jan 24, 2020',
         status: 'in progress',
         vehicle: '1XY123',
@@ -95,7 +104,7 @@
         endPoint: 'Atlanta, GA 01652',
       },
       {
-        order: '0102032',
+        id: '0102032',
         orderDate: 'Jan 24, 2020',
         status: 'in progress',
         vehicle: '1XY123',
@@ -103,7 +112,7 @@
         endPoint: 'Atlanta, GA 01652',
       },
       {
-        order: '0102032',
+        id: '0102032',
         orderDate: 'Jan 24, 2020',
         status: 'in progress',
         vehicle: '1XY123',
@@ -125,7 +134,7 @@
     ],
     data: [
       {
-        order: '0102031',
+        id: '0102031',
         orderDate: 'Jan 23, 2020',
         status: 'pending',
         vehicle: '1XY001',
@@ -155,9 +164,9 @@
 can set height based of vh units ( height={100} -> height: 100vh )
 defaults to [height: 100%] with no scrolling if no height value
 ------------------------------------------------------------------>
-  <Table data={tableDataSmall} />
+  <Table {headers} data={tableDataSmall} />
   <br />
-  <Table data={tableData} height={50} />
+  <Table {headers} data={tableData} height={50} />
 
   <h2>Divider</h2>
   <Divider type="default" />

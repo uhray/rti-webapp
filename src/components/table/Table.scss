@@ -37,7 +37,16 @@
     .Table-row-orderDate {
       font-size: 12px;
     }
-
+    .Table-row-filename {
+      display: flex;
+      flex-flow: row nowrap;
+      // justify-content: flex-end;
+      align-items: center;
+      :first-child {
+        margin-right: 5px;
+        padding-bottom: 3px;
+      }
+    }
     .Table-row-actions {
       display: flex;
       flex-flow: row nowrap;
