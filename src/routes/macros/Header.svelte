@@ -22,6 +22,8 @@
           <SearchBar fill />
         </div>
         <Button height="40px" outline icon="sortup" fill>Sort By</Button>
+        <div style="margin-left: 4px;" />
+        <Button height="40px" primary fill>New Macro</Button>
       </div>
     </div>
   </div>

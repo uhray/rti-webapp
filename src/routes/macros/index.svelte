@@ -1,5 +1,8 @@
 <script>
   import Header from './Header.svelte';
+  import Table from '../../components/table/Table.svelte';
+  import TabMenu from '../../components/tabmenu/TabMenu.svelte';
+  import { data } from './data';
 </script>
 
 <svelte:head>
@@ -8,7 +11,10 @@
 
 <Header />
 <section class="MacroPage">
-  <h2>Macro Page</h2>
+  <div class="uk-width-1-3">
+    <TabMenu type="default" nospace tabs={['Active', 'Inactive']} />
+  </div>
+  <Table {data} height={72} />
 </section>
 
 <style>
