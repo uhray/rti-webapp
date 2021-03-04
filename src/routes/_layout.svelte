@@ -48,7 +48,6 @@
     <Nav {segment} />
     <main>
       <TopNav />
-      <!-- <HeadSection {segment} /> -->
       <div class="main-content">
         <slot />
       </div>
