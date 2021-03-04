@@ -48,6 +48,6 @@
   {#if order.documents}
     <h3>Uploaded Documents</h3>
 
-    <Table {headers} data={order.documents} height={28} />
+    <Table {headers} data={order.documents} height={30} />
   {/if}
 </div>
