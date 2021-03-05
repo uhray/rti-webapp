@@ -53,10 +53,16 @@
   const onBlur = () => {
     isFocused = false;
   };
+
+  export let label = undefined;
 </script>
 
 <!-- HTML -->
 <section class="RichText">
+  {#if label}
+    <label>{label}</label>
+    <br />
+  {/if}
   <div
     class="RichText-container"
     {isFocused}

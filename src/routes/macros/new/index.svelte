@@ -5,14 +5,23 @@
   import RichText from '../../../components/richtext/RichText.svelte';
   import Card from '../../../components/card/Card.svelte';
   import Button from '../../../components/button/Button.svelte';
+  import DropDown from '../../../components/dropdown/DropDown.svelte';
 </script>
 
 <Header />
 <section class="NewMacro">
   <h3>Macro Information</h3>
-  <Input label="Title" placeholder="Enter Macro Title" />
+  <div class="uk-flex">
+    <Input label="Title" placeholder="Enter Macro Title" />
+    <DropDown
+      type="logo"
+      label="Icon"
+      text="Text"
+      choices={['choice', 'anotherchoice']}
+    />
+  </div>
   <br />
-  <RichText />
+  <RichText label="Helper Note (Optional)" />
 
   <h3>Macro Configurations</h3>
   <Card type="card-gray-bg">
@@ -24,7 +33,7 @@
         </div>
         <div style="margin-left: 4px;" />
         <div class="uk-width-1-4 input-space">
-          <Input placeholder="Enter Field Type" fill icon="chev-down" />
+          <Input placeholder="Enter Field Type" fill icon="caretdown" />
         </div>
         <div class="NewMacro-deleteIcon">
           <Icon type="close-red" />
@@ -45,7 +54,7 @@
           <Input
             placeholder="Type or Select Recipients"
             fill
-            icon="chev-down"
+            icon="caretdown"
           />
         </div>
       </div>
