@@ -6,9 +6,7 @@
 </script>
 
 <Header />
-<!-- TODO: -> Edit Submission Modal Goes Here -->
 <TimeOff />
-<!-- ======================================== -->
 <section class="MacroSubmissionsPage">
   <Table expand height={75} {data} />
 </section>
