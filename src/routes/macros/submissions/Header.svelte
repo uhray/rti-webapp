@@ -21,13 +21,10 @@
         <div class="uk-width-1-1 Header-actions-search">
           <SearchBar fill />
         </div>
-        <!-- Show This On Both Tabs -->
-        <Button height="40px" outline icon="sortup" fill>Sort By</Button>
-        <div style="margin-left: 5px;" />
-        <!-- Show This On User Tab -->
         <Button height="40px" outline icon="filter" fill>Filter</Button>
         <div style="margin-left: 5px;" />
-        <!-- Show this On Admin Tab -->
+        <Button height="40px" outline icon="sortup" fill>Sort By</Button>
+        <div style="margin-left: 5px;" />
         <Button height="40px" primary fill>Delete</Button>
       </div>
     </div>
@@ -81,16 +78,13 @@
         margin-top: 0px;
       }
     }
-
     .Header-actions {
       width: 100%;
-
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-end;
       align-items: center;
       position: relative;
-
       .Header-actions-search {
         margin-right: 5px;
       }
