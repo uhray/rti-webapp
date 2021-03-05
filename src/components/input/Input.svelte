@@ -20,10 +20,6 @@
   };
 </script>
 
-<style src="./Input.scss">
-
-</style>
-
 <!-- HTML -->
 <div>
   {#if label}
@@ -39,16 +35,23 @@
       {isFocused}
       on:input={onInput}
       on:focus={onFocus}
-      on:blur={onBlur} />
+      on:blur={onBlur}
+    />
 
     <span class="uk-form-icon uk-form-icon-flip">
       <Icon
         type={invalid ? 'close' : icon}
-        color={invalid ? colors.warning : isFocused ? colors.darkblue : colors.lightgray} />
+        color={invalid
+          ? colors.warning
+          : isFocused
+          ? colors.darkblue
+          : colors.lightgray}
+      />
     </span>
-
   </div>
   {#if invalid}
     <Error type="default-error" text={error && error} />
   {/if}
 </div>
+
+<style src="./Input.scss"></style>

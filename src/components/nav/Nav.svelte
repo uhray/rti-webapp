@@ -24,12 +24,7 @@
   }
 </script>
 
-<style src="./Nav.scss">
-
-</style>
-
 <nav class={isOpen ? 'Nav' : 'Nav-closed'}>
-
   <div class="collapse" on:click={menuToggle}>
     <NavItem {isOpen} icon={isOpen ? 'arrow-left' : 'arrow-right'}>
       <span>Collapse</span>
@@ -65,3 +60,6 @@
     </div>
   </div>
 </nav>
+
+<style src="./Nav.scss">
+</style>
