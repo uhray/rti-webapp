@@ -3,9 +3,7 @@
 </script>
 
 <Header />
-<section class="MacroSubmissionsPage">
-  <h3>Time Off Submissions</h3>
-</section>
+<section class="MacroSubmissionsPage" />
 
 <style lang="scss">
   .MacroSubmissionsPage {

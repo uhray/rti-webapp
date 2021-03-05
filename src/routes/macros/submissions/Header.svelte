@@ -1,5 +1,8 @@
 <script>
   import NavLabel from '../../../components/navlabel/NavLabel.svelte';
+  import SearchBar from '../../../components/searchbar/SearchBar.svelte';
+  import TabMenu from '../../../components/tabmenu/TabMenu.svelte';
+  import Button from '../../../components/button/Button.svelte';
 </script>
 
 <svelte:head>
@@ -12,7 +15,24 @@
     <div class="Header-content">
       <div class="Header-titles">
         <h2 class="Header-title">Time Off</h2>
+        <p class="Header-subtitle" />
       </div>
+      <div class="Header-actions">
+        <div class="uk-width-1-1 Header-actions-search">
+          <SearchBar fill />
+        </div>
+        <!-- Show This On Both Tabs -->
+        <Button height="40px" outline icon="sortup" fill>Sort By</Button>
+        <div style="margin-left: 5px;" />
+        <!-- Show This On User Tab -->
+        <Button height="40px" outline icon="filter" fill>Filter</Button>
+        <div style="margin-left: 5px;" />
+        <!-- Show this On Admin Tab -->
+        <Button height="40px" primary fill>Delete</Button>
+      </div>
+    </div>
+    <div class="uk-width-2-3 Header-tabs">
+      <TabMenu type="default" tabs={['Submissions', 'Settings']} />
     </div>
   </div>
 </div>
@@ -28,11 +48,14 @@
     .Header-content {
       box-sizing: border-box;
       width: 98%;
-      padding: 60px 30px 5px 30px;
+      padding: 19px 30px 5px 30px;
 
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
+    }
+    .Header-tabs {
+      margin-left: 30px;
     }
     .Header-titles {
       width: 100%;
