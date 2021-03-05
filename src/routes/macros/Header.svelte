@@ -17,7 +17,7 @@
         </p>
       </div>
 
-      <div class="Header-actions">
+      <div class="Header-actions uk-flex">
         <div class="uk-width-1-1 Header-actions-search">
           <SearchBar fill />
         </div>
