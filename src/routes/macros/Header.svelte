@@ -23,7 +23,9 @@
         </div>
         <Button height="40px" outline icon="sortup" fill>Sort By</Button>
         <div style="margin-left: 4px;" />
-        <Button height="40px" primary fill>New Macro</Button>
+        <a style="text-decoration: none" href="/macros/new"
+          ><Button height="40px" primary fill>New Macro</Button></a
+        >
       </div>
     </div>
   </div>

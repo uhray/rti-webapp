@@ -57,7 +57,6 @@
   export let label = undefined;
 </script>
 
-<!-- HTML -->
 <section class="RichText">
   {#if label}
     <label>{label}</label>
