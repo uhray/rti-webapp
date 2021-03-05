@@ -7,7 +7,6 @@
   export let userTable = false;
 </script>
 
-<!-- HTML -->
 <section class="Table">
   {#if userTable}
     <div class="Table-outer">
@@ -20,7 +19,13 @@
           <thead>
             <tr class="Table-headerRow">
               {#each data.headers as header}
-                <th scope="col" class="Table-headerRow-headerCell">
+                <th
+                  scope="col"
+                  class={header.header == 'fullName' ||
+                  header.header == 'macroTitle'
+                    ? 'uk-width-1-2 Table-headerRow-headerCell'
+                    : 'uk-width-1-6 Table-headerRow-headerCell'}
+                >
                   {#if header.header == 'view' || header.header == 'actions' || header.header == 'user-actions' || header.header == 'sub-actions'}
                     {''}
                   {:else}{header.text}{/if}
@@ -32,7 +37,12 @@
             {#each data.data as item}
               <tr class="Table-row">
                 {#each data.headers as header}
-                  <td>
+                  <td
+                    class={header.header == 'fullName' ||
+                    header.header == 'macroTitle'
+                      ? 'uk-width-1-2'
+                      : 'uk-width-1-6'}
+                  >
                     {#if header.header == 'status'}
                       {#if item.status == 'pending'}
                         <Label type="warning" text="Pending" />
@@ -161,6 +171,5 @@
   {/if}
 </section>
 
-<!-- ==== -->
 <style src="./Table.scss">
 </style>
