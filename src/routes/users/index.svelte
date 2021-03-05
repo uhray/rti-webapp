@@ -14,10 +14,10 @@
 </div> -->
 <section class="ManagePage">
   <!-- Show This if Users Tab Is Active -->
-  <Table height={60} data={usersTable} userTable />
+  <Table height={60} data={usersTable} expand />
   <br />
   <!-- Show This if Admins Tab Is Active -->
-  <Table height={25} data={adminsTable} userTable />
+  <Table height={25} data={adminsTable} expand />
 </section>
 
 <style lang="scss">

@@ -4,11 +4,11 @@
   import Icon from '../icon/Icon.svelte';
   export let data = undefined;
   export let height = undefined;
-  export let userTable = false;
+  export let expand = false;
 </script>
 
 <section class="Table">
-  {#if userTable}
+  {#if expand}
     <div class="Table-outer">
       <div class="Table-inner" style={`height: ${height}vh`}>
         <table

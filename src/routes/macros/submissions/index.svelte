@@ -6,7 +6,7 @@
 
 <Header />
 <section class="MacroSubmissionsPage">
-  <Table userTable height={75} {data} />
+  <Table expand height={75} {data} />
 </section>
 
 <style lang="scss">
