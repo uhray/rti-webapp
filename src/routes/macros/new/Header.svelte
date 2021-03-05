@@ -1,4 +1,5 @@
 <script>
+  import NavLabel from '../../../components/navlabel/NavLabel.svelte';
 </script>
 
 <svelte:head>
@@ -7,6 +8,7 @@
 
 <div class="Header">
   <div class="Header-container">
+    <NavLabel page="DRIVER MACROS" subpage="NEW MACRO" />
     <div class="Header-content">
       <div class="Header-titles">
         <h2 class="Header-title">New Macro</h2>
@@ -26,7 +28,7 @@
     .Header-content {
       box-sizing: border-box;
       width: 98%;
-      padding: 95px 30px 5px 30px;
+      padding: 60px 30px 5px 30px;
 
       display: flex;
       flex-flow: row nowrap;

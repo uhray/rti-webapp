@@ -69,25 +69,24 @@
       <br />
     {/if}
     <button
-      class="uk-button-small uk-flex uk-button-default DropDown-button"
+      class="uk-button-small uk-flex uk-button-default DropDown-button logo"
       type="button"
     >
-      <span class="DropDown-text">
-        <Icon type="rocket" />
-      </span>
-      <span class="DropDown-chevIcon">
-        <!-- This should be in its own box -->
+      <div class="DropDown-text forlogo">
+        <Icon type="vehicle" />
+      </div>
+      <div class="DropDown-chevIcon forlogo">
         <Icon type="caretdown" color="#15224b" />
-      </span>
+      </div>
     </button>
-    <div class="uk-width-small" uk-dropdown="mode: click">
+    <div class="DropDown-logoDrop" uk-dropdown="mode: click">
       <div class="uk-child-width-1-1" uk-grid>
         <div>
           <ul class="uk-nav uk-dropdown-nav">
             {#if choices.length > 0}
               {#each choices as choice}
-                <li class="uk-flex DropDown-listItem">
-                  <Icon type="rocket" />
+                <li class="uk-flex DropDown-listItem forlogo">
+                  <a><Icon type={choice} /></a>
                 </li>
               {/each}
             {/if}

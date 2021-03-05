@@ -1,4 +1,5 @@
 <script>
+  import NavLabel from '../../../components/navlabel/NavLabel.svelte';
 </script>
 
 <svelte:head>
@@ -7,9 +8,7 @@
 
 <div class="Header">
   <div class="Header-container">
-    <p class="Header-navHead">
-      USER MANAGEMENT / <span class="Header-navHead-name">JOHN SMITHY</span>
-    </p>
+    <NavLabel page="USER MANAGEMENT" subpage="JOHN SMITH" />
     <div class="Header-content">
       <div class="Header-titles">
         <h2 class="Header-title">John Smithy</h2>
@@ -25,18 +24,6 @@
       height: 175px;
       width: 100%;
       background: #f8f9fc;
-    }
-    .Header-navHead {
-      font-family: Poppins;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 13px;
-      line-height: 13px;
-      text-transform: uppercase;
-      color: #15224b;
-      padding: 25px 0px 0px 30px;
-    }
-    .Header-navHead-name {
     }
     .Header-content {
       box-sizing: border-box;

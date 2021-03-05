@@ -17,7 +17,7 @@
       type="logo"
       label="Icon"
       text="Text"
-      choices={['choice', 'anotherchoice']}
+      choices={['vehicle', 'archive', 'trailer']}
     />
   </div>
   <br />
