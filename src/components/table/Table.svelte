@@ -26,7 +26,7 @@
                     ? 'uk-width-1-2 Table-headerRow-headerCell'
                     : 'uk-width-1-6 Table-headerRow-headerCell'}
                 >
-                  {#if header.header == 'view' || header.header == 'actions' || header.header == 'user-actions' || header.header == 'sub-actions'}
+                  {#if header.header == 'view' || header.header == 'timeoff-view' || header.header == 'actions' || header.header == 'user-actions' || header.header == 'sub-actions'}
                     {''}
                   {:else}{header.text}{/if}
                 </th>
@@ -69,6 +69,10 @@
                       <div class="alignRight">
                         <a href="">View</a>
                       </div>
+                    {:else if header.header == 'timeoff-view'}
+                      <div class="alignRight">
+                        <a href="#TimeOff-modal" uk-toggle>View</a>
+                      </div>
                     {:else if header.header == 'actions'}
                       <div class="Table-row-actions alignRight">
                         <Icon type="delete" hover />
@@ -85,7 +89,7 @@
                       </div>
                     {:else if header.header == 'sub-actions'}
                       <div class="Table-row-actions alignRight">
-                        <Icon type="edit" hover />
+                        <Icon type="message-outline" hover />
                         <div style="margin-left: 8px;" />
                         <Icon type="delete" hover />
                         <div style="margin-left: 8px;" />
