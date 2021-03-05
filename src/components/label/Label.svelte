@@ -2,38 +2,63 @@
   import Icon from '../icon/Icon.svelte';
   export let type = undefined;
   export let text = undefined;
+  export let size = 'default';
 </script>
 
 <!-- HTML -->
 <section class="Label">
   <!-- Labels Regular -->
   {#if type === 'active'}
-    <div class="Label-divs Label-active">
+    <div
+      class={size === 'small'
+        ? 'Label-divs Label-active Label-small'
+        : 'Label-divs Label-active'}
+    >
       <p class="Label-regText">{text}</p>
     </div>
   {/if}
   {#if type === 'success'}
-    <div class="Label-divs Label-success">
+    <div
+      class={size === 'small'
+        ? 'Label-divs Label-success Label-small'
+        : 'Label-divs Label-success'}
+    >
       <p class="Label-regText">{text}</p>
     </div>
   {/if}
   {#if type === 'disabled'}
-    <div class="Label-divs Label-disabled">
+    <div
+      class={size === 'small'
+        ? 'Label-divs Label-disabled Label-small'
+        : 'Label-divs Label-disabled'}
+    >
       <p class="Label-blackText">{text}</p>
     </div>
   {/if}
   {#if type === 'warning'}
-    <div class="Label-divs Label-warning">
+    <div
+      class={size === 'small'
+        ? 'Label-divs Label-warning Label-small'
+        : 'Label-divs Label-warning'}
+    >
       <p class="Label-regText">{text}</p>
     </div>
   {/if}
   {#if type === 'danger'}
-    <div class="Label-divs Label-danger">
+    <div
+      class={size === 'small'
+        ? 'Label-divs Label-danger Label-small'
+        : 'Label-divs Label-danger'}
+    >
       <p class="Label-regText">{text}</p>
     </div>
   {/if}
   {#if type === 'default'}
-    <div class="Label-divs Label-default">
+    <div
+      class={size === 'small'
+        ? 'Label-divs Label-default Label-small'
+        : 'Label-divs Label-default'}
+    >
       <p class="Label-regText">{text}</p>
     </div>
   {/if}
