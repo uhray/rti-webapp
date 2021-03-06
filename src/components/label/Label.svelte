@@ -77,6 +77,12 @@
       <Icon type="rocket" />
     </div>
   {/if}
+  {#if type === 'email-label'}
+    <div class="Label-divsIcons Label-disabled">
+      <p class="Label-emailText">{text}</p>
+      <Icon type="close" />
+    </div>
+  {/if}
 </section>
 
 <!-- ==== -->

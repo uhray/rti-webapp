@@ -10,6 +10,7 @@
   export let label = undefined;
   export let placeholder = undefined;
   export let onInput = undefined;
+  export let value = '';
 
   let isFocused = false;
   const onFocus = () => {
@@ -30,6 +31,7 @@
     <input
       class="uk-input"
       type="text"
+      {value}
       {placeholder}
       {invalid}
       {isFocused}

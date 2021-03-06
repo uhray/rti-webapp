@@ -21,10 +21,12 @@
         <div class="uk-width-1-1 Header-actions-search">
           <SearchBar fill />
         </div>
+        <!-- These two buttons are for the submissions page only -->
         <Button height="40px" outline icon="filter" fill>Filter</Button>
         <div style="margin-left: 5px;" />
         <Button height="40px" outline icon="sortup" fill>Sort By</Button>
         <div style="margin-left: 5px;" />
+        <!-- This is for the settings page only -->
         <Button height="40px" primary fill>Delete</Button>
       </div>
     </div>
