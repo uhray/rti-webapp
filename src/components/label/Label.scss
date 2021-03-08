@@ -36,6 +36,16 @@
     margin-top: auto !important;
     margin-bottom: auto !important;
   }
+  .Label-statusText {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.03em;
+    color: #15224b;
+    margin: auto 5px;
+  }
   .Label-blueText {
     font-family: Poppins;
     font-style: normal;
@@ -90,5 +100,8 @@
   }
   .Label-default {
     background: #4973f1;
+  }
+  .Label-status {
+    margin: 5px;
   }
 }

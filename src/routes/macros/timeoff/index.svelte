@@ -19,11 +19,6 @@
   <Table expand height={75} {data} />
 </section>
 <section class="MacroSettingsPage">
-  <!-- TODO: -> Add Sections Section of Time Off -->
-  <!-- ** This will be basically an exact copy of the new macro page -->
-  <!--    It will just come preloaded with data -->
-  <!--    For static, going to create the section and get some of the new components needed for it made -->
-  <!--    There will be some reusing from the new macro page -->
   <h3>Macro Information</h3>
   <div class="uk-flex">
     <Input label="Title" value="Time Off" placeholder="Enter Macro Title" />
@@ -34,7 +29,7 @@
       choices={['vehicle', 'archive', 'trailer']}
     />
   </div>
-  <br />
+  <div class="MacroSettingsPage-interCard" />
   <RichText label="Helper Note (Optional)" />
 
   <h3>Macro Configurations</h3>
@@ -59,7 +54,7 @@
         </div>
       </div>
     </Card>
-    <br />
+    <div class="MacroSettingsPage-interCard" />
     <Card type="input-card">
       <div class="uk-flex uk-width-1-1">
         <div class="uk-width-2-3 input-space">
@@ -84,7 +79,7 @@
       <a class="MacroSettingsPage-linkText">Add New</a>
     </div>
   </Card>
-  <br />
+  <div class="MacroSettingsPage-interCard" />
   <Card type="card-gray-bg">
     <h6 class="MacroSettingsPage-cardTitle">Recipient</h6>
     <Card type="input-card">
@@ -108,7 +103,7 @@
       </div>
     </Card>
   </Card>
-  <br />
+  <div class="MacroSettingsPage-interCard" />
   <Card type="card-gray-bg">
     <h6 class="MacroSettingsPage-cardTitle">Add Statuses</h6>
     <Card type="input-card">
@@ -116,15 +111,40 @@
         <p class="MacroSettingsPage-toggleText">
           Status<span> (Off/On)</span>
         </p>
-        <Icon type="toggle-disabled" />
+        <Icon type="toggle-active" />
       </div>
       <p class="MacroSettingsPage-toggleP">
         Switch the toggle on if you’d like to assign personal statuses to the
         macro submissions.
       </p>
     </Card>
+    <div class="MacroSettingsPage-interCard" />
+    <Card type="input-card">
+      <div class="uk-flex">
+        <Label type="status-label" statusColor="#ffba5e" text="Pending" />
+        <Label type="status-label" statusColor="#5dca91" text="Approved" />
+      </div>
+      <p class="MacroSettingsPage-toggleText">Status Name</p>
+      <div class="uk-width-2-3 input-space">
+        <Input placeholder="Add Status" fill />
+      </div>
+      <div class="Settings-buttons">
+        <Button secondary icon="add" iconColor="#ffffff">Add Status</Button>
+      </div>
+    </Card>
+    <div class="MacroSettingsPage-interCard" />
+    <Card type="input-card"
+      ><p class="MacroSettingsPage-toggleText">Default Status</p>
+      <div class="uk-width-2-3 input-space">
+        <Input
+          placeholder="Select the default status for submissions"
+          fill
+          icon="caretdown"
+        />
+      </div>
+    </Card>
   </Card>
-  <br />
+  <div class="MacroSettingsPage-interCard" />
 
   <div>
     <Button primary>Save Changes</Button>
@@ -150,6 +170,9 @@
       text-transform: uppercase;
       color: #15224b;
     }
+    .MacroSettingsPage-interCard {
+      margin: 9px 0px;
+    }
     .MacroSettingsPage-deleteIcon {
       margin: auto 4px auto auto;
     }
@@ -171,7 +194,7 @@
       font-size: 12px;
       line-height: 14px;
       color: #15224b;
-      margin: auto 4px auto 4px;
+      margin: 5px 4px 5px 4px;
     }
     .MacroSettingsPage-toggleP {
       font-family: Poppins;
@@ -186,10 +209,13 @@
       margin: 10px 4px 0px 4px;
     }
     .MacroSettingsPage-emailLabel {
-      margin: 2px 4px 2px 4px;
+      margin: 4px 4px 6px 4px;
     }
     .input-space {
       margin: 2px 0px auto 3px;
+    }
+    .Settings-buttons {
+      margin: 2px 2px 2px 4px;
     }
   }
 </style>

@@ -1,8 +1,10 @@
 <script>
+  import { colors } from '../../theme/variables';
   import Icon from '../icon/Icon.svelte';
   export let type = undefined;
   export let text = undefined;
   export let size = 'default';
+  export let statusColor = 'blue';
 </script>
 
 <!-- HTML -->
@@ -80,6 +82,14 @@
   {#if type === 'email-label'}
     <div class="Label-divsIcons Label-disabled">
       <p class="Label-emailText">{text}</p>
+      <Icon type="close" />
+    </div>
+  {/if}
+  <!-- Status Labels with Colored Dots and Close Icon (see settings portion of /macros/timeoff) -->
+  {#if type === 'status-label'}
+    <div class="Label-divsIcons Label-disabled Label-small Label-status">
+      <Icon type="indicator" color={statusColor} />
+      <p class="Label-statusText">{text}</p>
       <Icon type="close" />
     </div>
   {/if}
