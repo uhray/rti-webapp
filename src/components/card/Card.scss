@@ -53,4 +53,16 @@
       padding: 10px 5px !important;
     }
   }
+  .Card-defaultOrders {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px !important;
+    background: #ffffff;
+    border-radius: 8px;
+    .Card-body {
+      padding: 10px 0px !important;
+    }
+  }
 }

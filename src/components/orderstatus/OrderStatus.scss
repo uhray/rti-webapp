@@ -37,5 +37,55 @@
     font-size: 14px;
     line-height: 16px;
     color: #15224b;
+    margin: 3px 0px;
+    &.grayed {
+      color: #a6adc4;
+    }
+  }
+  .OrderStatus-file {
+    margin: 0px 3px;
+  }
+  //   Styles for the status minicard
+  .OrderStatus-statusCard {
+    width: 100%;
+    min-height: 100px;
+    margin: 0px;
+    padding: 10px 0px;
+    &.active {
+      background: #f6f7fb;
+    }
+  }
+  .OrderStatus-locationIcon {
+    margin: 0px 3px;
+  }
+  .OrderStatus-indicatorIcon {
+    margin: 0px 9px;
+  }
+  .OrderStatus-cardHeader {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #15224b;
+    margin: 3px 0px;
+  }
+  .OrderStatus-cardText {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    color: #595f76;
+    margin: 3px 0px;
+  }
+  .OrderStatus-chevron {
+    margin: 3px 3px 3px auto;
   }
 }

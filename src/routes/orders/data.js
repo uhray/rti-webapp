@@ -34,21 +34,27 @@ export const data = {
       },
       statusDetails: {
         dispatchedFrom: {
+          name: 'Walmart',
           location: 'Seattle, WA 02476',
           day: 'Today',
           time: '8:25 AM',
+          status: 'dispatched',
         },
         stopPoints: [
           {
+            name: 'Walmarts Friend',
             location: 'Seattle, WA 02475',
             day: 'Today',
             time: '3:45 PM',
+            status: 'complete',
           },
         ],
         destination: {
+          name: 'Target',
           location: 'Seattle, WA 01652',
           day: 'June 25th',
           time: '9:45 AM',
+          status: 'in progress',
         },
         timeline: {
           trailerNum: '01234',
