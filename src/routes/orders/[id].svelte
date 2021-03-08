@@ -13,6 +13,7 @@
 <script>
   import OrderHeader from './OrderHeader.svelte';
   import TripDetails from '../../components/tripdetails/TripDetails.svelte';
+  import OrderStatus from '../../components/orderstatus/OrderStatus.svelte';
   import Table from '../../components/table/Table.svelte';
   export let order;
 
@@ -30,12 +31,6 @@
   console.log(order.documents);
 </script>
 
-<style lang="scss">
-  .Order {
-    padding: 2em;
-  }
-</style>
-
 <svelte:head>
   <title>Order #{order.id}</title>
 </svelte:head>
@@ -50,4 +45,14 @@
 
     <Table {headers} data={order.documents} height={30} />
   {/if}
+
+  <div style="margin-top: 18px;" />
+
+  <OrderStatus orderStatusData={order.statusDetails} />
 </div>
+
+<style lang="scss">
+  .Order {
+    padding: 2em;
+  }
+</style>

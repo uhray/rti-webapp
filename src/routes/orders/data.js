@@ -32,6 +32,36 @@ export const data = {
           },
         ],
       },
+      statusDetails: {
+        dispatchedFrom: {
+          location: 'Seattle, WA 02476',
+          day: 'Today',
+          time: '8:25 AM',
+        },
+        stopPoints: [
+          {
+            location: 'Seattle, WA 02475',
+            day: 'Today',
+            time: '3:45 PM',
+          },
+        ],
+        destination: {
+          location: 'Seattle, WA 01652',
+          day: 'June 25th',
+          time: '9:45 AM',
+        },
+        timeline: {
+          trailerNum: '01234',
+          event: 'Final Drop Loaded Trailer',
+          apptTime: 'Jan 25, 2021  • 9:45 AM',
+          arrivalTime: 'Jan 25, 2021  • 9:45 AM',
+          uploadedDocs: 'POD-01.pdf',
+          deliveryNotes:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus tristique commodo eget semper id. Ultrices nunc posuere pellentesque ut etiam egestas sapien elit sed. Pellentesque ornare donec urna, integer. Facilisi ut pulvinar elit, tempus, aliquam tincidunt velit nunc.',
+        },
+        customerInfo: {},
+        refNumbers: {},
+      },
     },
     {
       id: '0102032',
