@@ -1,6 +1,17 @@
 .DropDown {
   .DropDown-chevIcon {
     margin-left: 15px;
+    &.forlogo {
+      margin-left: 0px;
+      width: 40px;
+      height: 40px;
+      background: #f6f7fb;
+      border: 0.5px solid #15224b;
+      border-left: none;
+      box-sizing: border-box;
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+    }
   }
   .DropDown-button {
     border-radius: 5px !important;
@@ -12,6 +23,10 @@
     padding-bottom: 5px;
     padding-left: 8px;
     padding-right: 8px;
+    &.logo {
+      padding: 0px;
+      margin-left: 0px !important;
+    }
   }
   .DropDown-container {
     border-radius: 8px;
@@ -19,6 +34,10 @@
   .DropDown-listItem {
     margin-top: 9px;
     margin-bottom: 9px;
+    &.forlogo {
+      margin: auto !important;
+      text-align: center;
+    }
   }
   .DropDown-header {
     display: flex;
@@ -44,6 +63,14 @@
     font-weight: 500;
     font-size: 14px;
     color: #73767f;
+    &.forlogo {
+      width: 40px;
+      height: 40px;
+      border: 0.5px solid #15224b;
+      box-sizing: border-box;
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+    }
   }
   .DropDown-choice {
     font-family: Poppins;
@@ -56,5 +83,9 @@
   }
   .DropDown-spacing {
     margin-left: auto;
+  }
+  .DropDown-logoDrop {
+    width: 25px;
+    border-radius: 5px;
   }
 }

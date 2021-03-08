@@ -42,7 +42,8 @@
           isActive={segment == item.link ? true : false}
           {isOpen}
           icon={item.icon}
-          amount={item.amount}>
+          amount={item.amount}
+        >
           <span>{item.text}</span>
         </NavItem>
       </a>

@@ -30,11 +30,16 @@
   }
   .Card-grayBg {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    padding: 15px;
+    padding: 15px 5px !important;
     background: #f6f7fb;
     border-radius: 4px;
+    .Card-body {
+      padding: 10px 5px !important;
+      width: 99%;
+    }
   }
   .Card-default {
     display: flex;
@@ -44,5 +49,8 @@
     padding: 0px;
     background: #ffffff;
     border-radius: 8px;
+    .Card-body {
+      padding: 10px 5px !important;
+    }
   }
 }
