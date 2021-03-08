@@ -43,8 +43,8 @@
 
             <!-- ARRAY OF MIDDLE STOPS -->
             <div class="uk-flex OrderStatus-statusCard">
-              <div class="OrderStatus-indicatorIcon">
-                <Icon type="indicator" color="gray" />
+              <div class="OrderStatus-locationIcon">
+                <Icon type="indicator-outline" color="gray" />
               </div>
               <div>
                 <h4 class="OrderStatus-cardHeader">
@@ -72,7 +72,7 @@
                 : 'uk-flex OrderStatus-statusCard'}
             >
               <div class="OrderStatus-locationIcon">
-                <Icon type="location-end" color="black" />
+                <Icon type="location-end-filled" color="black" />
               </div>
               <div>
                 <h4 class="OrderStatus-cardHeader">
