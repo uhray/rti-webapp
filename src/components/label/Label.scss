@@ -25,6 +25,27 @@
     margin-top: auto !important;
     margin-bottom: auto !important;
   }
+  .Label-emailText {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.03em;
+    color: #15224b;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+  .Label-statusText {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.03em;
+    color: #15224b;
+    margin: auto 5px;
+  }
   .Label-blueText {
     font-family: Poppins;
     font-style: normal;
@@ -47,6 +68,10 @@
     align-items: center;
     padding: 5.5px 8px;
     border-radius: 4px;
+  }
+  .Label-small {
+    min-height: 10px !important;
+    height: 15px !important;
   }
   .Label-divsIcons {
     min-height: 25px;
@@ -75,5 +100,8 @@
   }
   .Label-default {
     background: #4973f1;
+  }
+  .Label-status {
+    margin: 5px;
   }
 }

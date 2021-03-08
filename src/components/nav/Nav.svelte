@@ -24,12 +24,7 @@
   }
 </script>
 
-<style src="./Nav.scss">
-
-</style>
-
 <nav class={isOpen ? 'Nav' : 'Nav-closed'}>
-
   <div class="collapse" on:click={menuToggle}>
     <NavItem {isOpen} icon={isOpen ? 'arrow-left' : 'arrow-right'}>
       <span>Collapse</span>
@@ -47,7 +42,8 @@
           isActive={segment == item.link ? true : false}
           {isOpen}
           icon={item.icon}
-          amount={item.amount}>
+          amount={item.amount}
+        >
           <span>{item.text}</span>
         </NavItem>
       </a>
@@ -65,3 +61,6 @@
     </div>
   </div>
 </nav>
+
+<style src="./Nav.scss">
+</style>

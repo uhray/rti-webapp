@@ -1,16 +1,12 @@
 <script>
   export let type = undefined;
   export let tabs = undefined;
+  export let nospace = false;
 </script>
 
-<style src="./TabMenu.scss">
-
-</style>
-
-<!-- HTML -->
 <section class="TabMenu">
   {#if type === 'default'}
-    <ul uk-tab>
+    <ul class={nospace ? 'TabMenu-noSpace' : ''} uk-tab>
       {#each tabs as tab}
         <li>
           <a class="TabMenu-linkText">{tab}</a>
@@ -20,4 +16,5 @@
   {/if}
 </section>
 
-<!-- ==== -->
+<style src="./TabMenu.scss">
+</style>

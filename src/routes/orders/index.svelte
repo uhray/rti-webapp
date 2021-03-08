@@ -7,12 +7,6 @@
   import Header from './Header.svelte';
 </script>
 
-<style lang="scss">
-  .Orders {
-    padding: 2em;
-  }
-</style>
-
 <svelte:head>
   <title>Orders</title>
 </svelte:head>
@@ -22,3 +16,9 @@
 <div class="Orders">
   <Table {headers} {data} height={75} />
 </div>
+
+<style lang="scss">
+  .Orders {
+    padding: 2em;
+  }
+</style>

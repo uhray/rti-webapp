@@ -9,12 +9,9 @@
   export let outline = undefined;
   export let large = undefined;
   export let icon = undefined;
+  export let iconColor = undefined;
   export let height = undefined;
 </script>
-
-<style src="./Button.scss">
-
-</style>
 
 <!-- HTML -->
 <button
@@ -26,11 +23,15 @@
   {success}
   {disabled}
   {outline}
-  {large}>
+  {large}
+>
   <slot />
   {#if icon}
-    <Icon type={icon} />
+    <Icon type={icon} color={iconColor} />
   {/if}
 </button>
 
 <!-- ==== -->
+
+<style src="./Button.scss">
+</style>

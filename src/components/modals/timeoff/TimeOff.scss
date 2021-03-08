@@ -1,0 +1,32 @@
+.TimeOff-header {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  color: #15224b;
+}
+.TimeOff-modalBody {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.TimeOff-status {
+  margin: 3px 3px;
+  height: 10px;
+}
+.TimeOff-bottomGroup {
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  margin: auto 4px;
+  padding: auto 4px;
+}
+.TimeOff-buttons {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+}
