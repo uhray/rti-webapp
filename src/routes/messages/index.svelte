@@ -1,7 +1,11 @@
 <script>
+  import { contacts } from './data.js';
   import Header from './Header.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
   import MessagesHeader from '../../components/messagesheader/MessagesHeader.svelte';
+  import ContactList from '../../components/contactlist/ContactList.svelte';
+
+  console.log(contacts);
 </script>
 
 <style lang="scss">
@@ -12,16 +16,21 @@
     display: flex;
     flex-flow: row nowrap;
 
-    .Messages-Nav {
+    .Messages-nav {
       width: 250px;
       border: 1px solid rgba(166, 173, 196, 0.5);
       border-left: 0;
       border-bottom: 0;
 
-      .Messages-Nav-Search {
+      .Messages-nav-search {
         box-sizing: border-box;
         height: 60px;
         border-bottom: 1px solid rgba(166, 173, 196, 0.5);
+        padding: 10px;
+      }
+
+      .Messages-nav-contacts {
+        box-sizing: border-box;
         padding: 10px;
       }
     }
@@ -47,9 +56,12 @@
 <Header />
 
 <div class="Messages">
-  <div class="Messages-Nav">
-    <div class="Messages-Nav-Search">
+  <div class="Messages-nav">
+    <div class="Messages-nav-search">
       <SearchBar alternate />
+    </div>
+    <div class="Messages-nav-contacts">
+      <ContactList {contacts} />
     </div>
   </div>
   <div class="Messages-main">
