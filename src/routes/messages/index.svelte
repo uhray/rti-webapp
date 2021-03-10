@@ -30,6 +30,7 @@
       border-top: 1px solid rgba(166, 173, 196, 0.5);
 
       .Messages-main-header {
+        display: flex;
         box-sizing: border-box;
         height: 60px;
         border-bottom: 1px solid rgba(166, 173, 196, 0.5);
@@ -48,7 +49,7 @@
 <div class="Messages">
   <div class="Messages-Nav">
     <div class="Messages-Nav-Search">
-      <SearchBar />
+      <SearchBar alternate />
     </div>
   </div>
   <div class="Messages-main">

@@ -1,23 +1,31 @@
+@import '../../theme/variables.scss';
+
 .SearchBar {
   .SearchBar-formContainer {
     width: 100%;
-    // margin: 10px auto;
 
     &[fill='true'] {
       width: 100%;
     }
   }
 
-  .SearchBar-defaultSearch {
+  .SearchBar-default {
     border: 0.5px solid #15224b;
     box-sizing: border-box;
     border-radius: 4px;
     width: 100%;
   }
+
+  .SearchBar-alternate {
+    border: 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    width: 100%;
+    background-color: $color--tablegray;
+  }
 }
 
 ::-webkit-input-placeholder {
-  font-family: Poppins;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -25,7 +33,6 @@
   color: #595f76;
 }
 ::-moz-placeholder {
-  font-family: Poppins;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -33,7 +40,6 @@
   color: #595f76;
 }
 :-ms-input-placeholder {
-  font-family: Poppins;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -41,7 +47,6 @@
   color: #595f76;
 }
 :-moz-placeholder {
-  font-family: Poppins;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;

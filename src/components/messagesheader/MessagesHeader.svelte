@@ -1,5 +1,5 @@
 <script>
-  import Label from '../../components/Label/label.svelte';
+  import Label from '../../components/label/Label.svelte';
   import { colors } from '../../theme/variables';
   export let name = undefined;
   export let vehicle = undefined;
@@ -10,9 +10,11 @@
 
 </style>
 
-<!-- <Label type="dis-icon-blue" text="disabled" /> -->
 <div class="Header">
+
+  <!-- #TODO: needs to become profile picture -->
   <div class="Header-photo">RE</div>
+
   <div class="Header-content">
     <div class="Header-content-details">
       <span class="Header-content-name">{name}</span>

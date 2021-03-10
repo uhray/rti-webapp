@@ -1,5 +1,6 @@
 <script>
   export let fill = undefined;
+  export let alternate = false;
 </script>
 
 <style src="./SearchBar.scss">
@@ -11,9 +12,9 @@
   <form class="uk-search uk-search-default SearchBar-formContainer" {fill}>
     <span uk-search-icon />
     <input
-      class="uk-search-input SearchBar-defaultSearch"
+      class={`uk-search-input ${alternate ? 'SearchBar-alternate' : 'SearchBar-default'}`}
       type="search"
-      placeholder="Search..." />
+      placeholder="Fleet Search..." />
   </form>
 </section>
 
