@@ -13,6 +13,7 @@
 <style lang="scss">
   .ManagePage {
     padding: 2em;
+
     .delete-section {
       margin: 0px 15px 5px 0px;
       padding: 5px;
@@ -35,7 +36,6 @@
 <svelte:head>
   <title>Users</title>
 </svelte:head>
-<h1>Users Management</h1>
 <!-- html -->
 <Header />
 <!-- Show This Link Tag Only If Users/Admins are Selected -->
