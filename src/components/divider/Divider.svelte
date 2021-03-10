@@ -1,14 +1,14 @@
 <script>
-  export let type = undefined;
+  export let secondary = undefined;
 </script>
+
+<style src="./Divider.scss">
+
+</style>
 
 <!-- HTML -->
 <section class="Divider">
-  {#if type === 'default'}
-    <div class="Divider-default" />
-  {/if}
+  <div class="Divider-default" {secondary} />
 </section>
 
 <!-- ==== -->
-<style src="./Divider.scss">
-</style>

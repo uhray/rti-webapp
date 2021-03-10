@@ -37,7 +37,16 @@
     .Table-row-orderDate {
       font-size: 12px;
     }
-
+    .Table-row-filename {
+      display: flex;
+      flex-flow: row nowrap;
+      // justify-content: flex-end;
+      align-items: center;
+      :first-child {
+        margin-right: 5px;
+        padding-bottom: 3px;
+      }
+    }
     .Table-row-actions {
       display: flex;
       flex-flow: row nowrap;
@@ -54,12 +63,13 @@
 // Set height of Table-inner to enable scrolling
 .uk-table-scrollable {
   display: flex;
+  position: relative;
   flex-flow: column;
   height: 100%;
   width: 100%;
 
   thead {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     display: block;
     padding-right: 15px;
 
@@ -71,6 +81,8 @@
   }
 
   tbody {
+    position: relative;
+    top: 0;
     flex: 1 1 auto;
     display: block;
     overflow-x: hidden;

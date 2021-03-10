@@ -1,7 +1,13 @@
+@import '../../theme/variables.scss';
+
 .Divider {
   .Divider-default {
     height: 0.5px;
-    border: 1px solid rgba(166, 173, 196, 0.5);
+    border-bottom: 1px solid rgba(166, 173, 196, 0.5);
     box-sizing: border-box;
+
+    &[secondary='true'] {
+      border-bottom: 1px solid $color--darkblue;
+    }
   }
 }

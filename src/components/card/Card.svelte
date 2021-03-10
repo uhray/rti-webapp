@@ -29,6 +29,13 @@
   {/if}
   {#if type === 'input-card'}
     <div class="uk-card Card-default uk-width-1-1">
+      <div class="uk-card-body uk-padding-remove Card-body">
+        <slot />
+      </div>
+    </div>
+  {/if}
+  {#if type === 'input-card-orders'}
+    <div class="uk-card Card-defaultOrders uk-width-1-1">
       <div class="uk-card-body Card-body">
         <slot />
       </div>
