@@ -28,7 +28,7 @@
     {#if iconLeft}
       <Icon type={iconLeft} color={iconColor} />
     {/if}
-    <span class="Label-blackText">{text}</span>
+    <span>{text}</span>
     {#if iconRight}
       <Icon type={iconRight} color={iconColor} />
     {/if}
