@@ -19,10 +19,13 @@
   ];
 
   function menuToggle() {
-    console.log('TOGGLE MENU');
     isOpen = !isOpen;
   }
 </script>
+
+<style src="./Nav.scss">
+
+</style>
 
 <nav class={isOpen ? 'Nav' : 'Nav-closed'}>
   <div class="collapse" on:click={menuToggle}>
@@ -42,8 +45,7 @@
           isActive={segment == item.link ? true : false}
           {isOpen}
           icon={item.icon}
-          amount={item.amount}
-        >
+          amount={item.amount}>
           <span>{item.text}</span>
         </NavItem>
       </a>
@@ -61,6 +63,3 @@
     </div>
   </div>
 </nav>
-
-<style src="./Nav.scss">
-</style>

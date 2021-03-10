@@ -25,11 +25,13 @@
     { header: 'view', text: 'View' },
     { header: 'actions', text: 'Actions' },
   ];
-
-  console.log(headers);
-
-  console.log(order.documents);
 </script>
+
+<style lang="scss">
+  .Order {
+    padding: 2em;
+  }
+</style>
 
 <svelte:head>
   <title>Order #{order.id}</title>
@@ -50,9 +52,3 @@
 
   <OrderStatus orderStatusData={order.statusDetails} />
 </div>
-
-<style lang="scss">
-  .Order {
-    padding: 2em;
-  }
-</style>
