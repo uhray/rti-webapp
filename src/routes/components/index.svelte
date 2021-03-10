@@ -43,6 +43,34 @@
 <div class="Components">
   <h1>Components Page</h1>
 
+  <h2>Labels</h2>
+  <Label status="active" text="Active" />
+  <br />
+  <Label status="success" text="Success" />
+  <br />
+  <Label status="disabled" text="Disabled" />
+  <br />
+  <Label status="warning" text="Warning" />
+  <br />
+  <Label status="danger" text="Danger" />
+  <br />
+  <Label status="default" text="Default" />
+  <br />
+  <Label status="disabled" text="disabled" iconLeft="rocket" />
+  <br />
+  <Label status="dis-icon-default" text="disabled" />
+
+  <br />
+  <Label
+    status="disabled"
+    text="All Messages"
+    iconLeft="message"
+    iconColor="#243E93" />
+
+  <Label status="disabled" text="Macros" iconLeft="macro-outline" />
+  <Label status="disabled" text="Orders" iconLeft="orders-outline" />
+  <Label status="disabled" iconLeft="overflow" />
+
   <h2>Table</h2>
 
   <!------------------ VERTICAL SCROLLING ---------------------------
@@ -122,23 +150,6 @@ defaults to [height: 100%] with no scrolling if no height value
   <TabMenu
     type="default"
     tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']} />
-
-  <h2>Labels</h2>
-  <Label type="active" text="active" />
-  <br />
-  <Label type="success" text="success" />
-  <br />
-  <Label type="disabled" text="disabled" />
-  <br />
-  <Label type="warning" text="warning" />
-  <br />
-  <Label type="danger" text="danger" />
-  <br />
-  <Label type="default" text="default" />
-  <br />
-  <Label type="dis-icon-blue" text="disabled" />
-  <br />
-  <Label type="dis-icon-default" text="disabled" />
 
   <h2>Error Messages</h2>
   <Error type="email-validation-error" />

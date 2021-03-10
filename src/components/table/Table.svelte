@@ -39,21 +39,21 @@
                     class={header.header == 'fullName' || header.header == 'macroTitle' ? 'uk-width-1-2' : 'uk-width-1-6'}>
                     {#if header.header == 'status'}
                       {#if item.status == 'pending'}
-                        <Label type="warning" text="Pending" />
+                        <Label status="warning" text="Pending" />
                       {:else if item.status == 'completed'}
-                        <Label type="success" text="Completed" />
+                        <Label status="success" text="Completed" />
                       {:else if item.status == 'declined'}
-                        <Label type="danger" text="Declined" />
+                        <Label status="danger" text="Declined" />
                       {:else if item.status == 'dispatched'}
-                        <Label type="default" text="Dispatched" />
+                        <Label status="default" text="Dispatched" />
                       {:else if item.status == 'in progress'}
-                        <Label type="active" text="In Progress" />
+                        <Label status="active" text="In Progress" />
                       {:else if item.status == 'active'}
-                        <Label type="default" text="Active" />
+                        <Label status="default" text="Active" />
                       {:else if item.status == 'inactive'}
-                        <Label type="disabled" text="Inactive" />
+                        <Label status="disabled" text="Inactive" />
                       {:else if item.status == 'approved'}
-                        <Label type="success" text="Approved" />
+                        <Label status="success" text="Approved" />
                       {/if}
                     {:else if header.header == 'order'}
                       <span class="Table-row-orderNumber">{item.order}</span>
@@ -121,15 +121,15 @@
                   <td>
                     {#if header.header == 'status'}
                       {#if item.status == 'pending'}
-                        <Label type="warning" text="Pending" />
+                        <Label status="warning" text="Pending" />
                       {:else if item.status == 'completed'}
-                        <Label type="success" text="Completed" />
+                        <Label status="success" text="Completed" />
                       {:else if item.status == 'declined'}
-                        <Label type="danger" text="Declined" />
+                        <Label status="danger" text="Declined" />
                       {:else if item.status == 'dispatched'}
-                        <Label type="default" text="Dispatched" />
+                        <Label status="default" text="Dispatched" />
                       {:else if item.status == 'in progress'}
-                        <Label type="active" text="In Progress" />
+                        <Label status="active" text="In Progress" />
                       {/if}
                     {:else if header.header == 'order'}
                       <span class="Table-row-orderNumber">{item.id}</span>

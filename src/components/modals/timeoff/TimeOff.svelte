@@ -5,6 +5,10 @@
   import Button from '../../button/Button.svelte';
 </script>
 
+<style src="./TimeOff.scss">
+
+</style>
+
 <section class="TimeOff">
   <div id="TimeOff-modal" uk-modal>
     <div class="TimeOff-modalBody uk-modal-dialog uk-modal-body">
@@ -19,13 +23,13 @@
       <label>Select Status</label>
       <div class="uk-flex">
         <div class="TimeOff-status">
-          <Label size="small" type="warning" text="Pending" />
+          <Label status="warning" text="Pending" />
         </div>
         <div class="TimeOff-status">
-          <Label size="small" type="success" text="Approved" />
+          <Label status="success" text="Approved" />
         </div>
         <div class="TimeOff-status">
-          <Label size="small" type="danger" text="Declined" />
+          <Label status="danger" text="Declined" />
         </div>
       </div>
       <br />
@@ -41,5 +45,3 @@
     </div>
   </div>
 </section>
-
-<style src="./TimeOff.scss"></style>

@@ -9,7 +9,7 @@ button[secondary='true'] {
 }
 
 button[warning='true'] {
-  background-color: $color--warning;
+  background-color: $color--danger;
 }
 
 button[success='true'] {
@@ -63,8 +63,8 @@ button {
     }
     &[warning='true'] {
       background-color: transparent !important;
-      color: $color--warning;
-      border: 1px solid $color--warning;
+      color: $color--danger;
+      border: 1px solid $color--danger;
     }
     &[success='true'] {
       background-color: transparent !important;

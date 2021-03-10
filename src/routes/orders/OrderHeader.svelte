@@ -74,15 +74,15 @@
       <div class="Header-titles">
         <h2 class="Header-title">Order #{order.id}</h2>
         {#if order.status == 'pending'}
-          <Label type="warning" text="Pending" />
+          <Label status="warning" text="Pending" />
         {:else if order.status == 'completed'}
-          <Label type="success" text="Completed" />
+          <Label status="success" text="Completed" />
         {:else if order.status == 'declined'}
-          <Label type="danger" text="Declined" />
+          <Label status="danger" text="Declined" />
         {:else if order.status == 'dispatched'}
-          <Label type="default" text="Dispatched" />
+          <Label status="default" text="Dispatched" />
         {:else if order.status == 'in progress'}
-          <Label type="active" text="In Progress" />
+          <Label status="active" text="In Progress" />
         {/if}
 
       </div>
