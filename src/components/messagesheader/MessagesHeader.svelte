@@ -1,5 +1,6 @@
 <script>
   import Label from '../../components/Label/label.svelte';
+  import { colors } from '../../theme/variables';
   export let name = undefined;
   export let vehicle = undefined;
   export let tag = undefined;
@@ -19,16 +20,32 @@
     </div>
     <div class="Header-content-actions">
       <div>
-        <Label type="dis-icon-blue" text="disabled" />
+        <Label
+          status="disabled"
+          text="All Messages"
+          iconLeft="message"
+          iconColor="#243E93"
+          backgroundColor={colors.tablegray} />
       </div>
       <div>
-        <Label type="dis-icon-blue" text="disabled" />
+        <Label
+          status="disabled"
+          text="Macros"
+          iconLeft="macro-outline"
+          backgroundColor={colors.tablegray} />
       </div>
       <div>
-        <Label type="dis-icon-blue" text="disabled" />
+        <Label
+          status="disabled"
+          text="Orders"
+          iconLeft="orders-outline"
+          backgroundColor={colors.tablegray} />
       </div>
       <div>
-        <Label type="dis-icon-blue" text="disabled" />
+        <Label
+          status="disabled"
+          iconLeft="overflow"
+          backgroundColor={colors.tablegray} />
       </div>
     </div>
   </div>

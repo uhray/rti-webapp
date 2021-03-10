@@ -15,7 +15,7 @@
 
     height: 40px;
     width: 40px;
-    border-radius: 100%;
+    // border-radius: 50%;
     background-color: $color--darkblue;
     color: #fff;
   }
@@ -33,13 +33,13 @@
 
       .Header-content-name {
         font-weight: 500;
-        font-size: 14px;
+        font-size: 16px;
         color: $color--darkblue;
       }
       .Header-content-vehicle {
         font-style: normal;
         font-weight: normal;
-        font-size: 12px;
+        font-size: 14px;
         color: $color--darkgray;
       }
     }

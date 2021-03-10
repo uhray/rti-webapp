@@ -8,6 +8,7 @@
   export let iconColor = undefined;
   export let fontWeight = 600;
   export let statusColor = undefined;
+  export let backgroundColor = undefined;
 </script>
 
 <style src="./Label.scss">
@@ -20,7 +21,8 @@
   <div
     class="uk-flex Label-container"
     {status}
-    style={`--custom-font-weight: ${fontWeight};`}>
+    {backgroundColor}
+    style={`--custom-font-weight: ${fontWeight}; --custom-background-color: ${backgroundColor}`}>
 
     {#if statusColor}
       <div class="statusColor" {statusColor} />
