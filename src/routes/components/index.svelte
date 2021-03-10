@@ -15,7 +15,7 @@
   import ToolTip from '../../components/tooltip/ToolTip.svelte';
   import RichText from '../../components/richtext/RichText.svelte';
   import Card from '../../components/card/Card.svelte';
-  import { tableData, tableDataSmall } from '../../data/fakeTableData';
+  import { headers, tableData, tableDataSmall } from '../../data/fakeTableData';
 
   let error = false;
   let errorMessage = 'test';
@@ -29,6 +29,12 @@
 
   // custom header to inject html
 </script>
+
+<style lang="scss">
+  .Components {
+    padding: 2em;
+  }
+</style>
 
 <svelte:head>
   <title>Components</title>
@@ -66,8 +72,7 @@ defaults to [height: 100%] with no scrolling if no height value
     error="APOCALYPTIC ERROR TIME"
     invalid
     label="Test"
-    icon="rocket"
-  />
+    icon="rocket" />
   <Input placeholder="Test 2" invalid label="No Error Message Test" />
   <div style={'display: flex; flex-flow:row nowrap'}>
     <Input label="Test 3" invalid={error} error={errorMessage} icon="upload" />
@@ -86,42 +91,37 @@ defaults to [height: 100%] with no scrolling if no height value
     type="default"
     text="Drop Down"
     choiceHeader="Choice Header"
-    choices={['Choice One', 'Choice Two']}
-  />
+    choices={['Choice One', 'Choice Two']} />
 
   <h2>Cards</h2>
   <Card
     type="card-gray-border"
     header="Lorem"
     content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo
-  praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
-  laborum iusto qui, incidunt nam repudiandae expedita architecto vel
-  recusandae!"
-  />
+    praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
+    laborum iusto qui, incidunt nam repudiandae expedita architecto vel
+    recusandae!" />
   <br />
   <Card
     type="card-gray-bg"
     header="Lorem"
     content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo
-  praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
-  laborum iusto qui, incidunt nam repudiandae expedita architecto vel
-  recusandae!"
-  />
+    praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
+    laborum iusto qui, incidunt nam repudiandae expedita architecto vel
+    recusandae!" />
   <br />
   <Card
     type="card-default"
     header="Lorem"
     content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quo
-  praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
-  laborum iusto qui, incidunt nam repudiandae expedita architecto vel
-  recusandae!"
-  />
+    praesentium, voluptatibus ipsa sit eos dolorem iure veritatis deleniti vero
+    laborum iusto qui, incidunt nam repudiandae expedita architecto vel
+    recusandae!" />
 
   <h2>Tab Menu</h2>
   <TabMenu
     type="default"
-    tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']}
-  />
+    tabs={['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']} />
 
   <h2>Labels</h2>
   <Label type="active" text="active" />
@@ -145,8 +145,7 @@ defaults to [height: 100%] with no scrolling if no height value
   <Error type="password-validation-error" />
   <Error
     type="default-error"
-    text="This error takes a text prop, and can say anything"
-  />
+    text="This error takes a text prop, and can say anything" />
 
   <h2>Radios</h2>
   <Radios options={['A', 'B', 'C']} />
@@ -447,8 +446,3 @@ defaults to [height: 100%] with no scrolling if no height value
 </div>
 
 <!-- ===================================================== -->
-<style lang="scss">
-  .Components {
-    padding: 2em;
-  }
-</style>

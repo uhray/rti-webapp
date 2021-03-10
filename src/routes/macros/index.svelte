@@ -2,8 +2,14 @@
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
-  import { data } from './data';
+  import { headers, data } from './data';
 </script>
+
+<style>
+  .MacroPage {
+    padding: 2em;
+  }
+</style>
 
 <svelte:head>
   <title>Macros</title>
@@ -14,11 +20,5 @@
   <div class="uk-width-1-3">
     <TabMenu type="default" nospace tabs={['Active', 'Inactive']} />
   </div>
-  <Table {data} height={71} expand />
+  <Table {headers} {data} height={71} />
 </section>
-
-<style>
-  .MacroPage {
-    padding: 2em;
-  }
-</style>

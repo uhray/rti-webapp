@@ -1,16 +1,8 @@
 export const tableDataSmall = {
-  headers: [
-    { header: 'order', text: 'Order' },
-    { header: 'status', text: 'Status' },
-    { header: 'vehicle', text: 'Vehicle' },
-    { header: 'startPoint', text: 'Start Point' },
-    { header: 'endPoint', text: 'End Point' },
-    { header: 'view', text: 'View' },
-    { header: 'actions', text: 'Actions' },
-  ],
+  type: 'orders',
   data: [
     {
-      order: '0102031',
+      id: '0102031',
       orderDate: 'Jan 23, 2020',
       status: 'pending',
       vehicle: '1XY001',
@@ -20,19 +12,21 @@ export const tableDataSmall = {
   ],
 };
 
+export const headers = [
+  { header: 'order', text: 'Order' },
+  { header: 'status', text: 'Status' },
+  { header: 'vehicle', text: 'Vehicle' },
+  { header: 'startPoint', text: 'Start Point' },
+  { header: 'endPoint', text: 'End Point' },
+  { header: 'view', text: 'View' },
+  { header: 'actions', text: 'Actions' },
+];
+
 export const tableData = {
-  headers: [
-    { header: 'order', text: 'Order' },
-    { header: 'status', text: 'Status' },
-    { header: 'vehicle', text: 'Vehicle' },
-    { header: 'startPoint', text: 'Start Point' },
-    { header: 'endPoint', text: 'End Point' },
-    { header: 'view', text: 'View' },
-    { header: 'actions', text: 'Actions' },
-  ],
+  type: 'orders',
   data: [
     {
-      order: '0102031',
+      id: '0102031',
       orderDate: 'Jan 23, 2020',
       status: 'pending',
       vehicle: '1XY001',
@@ -40,7 +34,7 @@ export const tableData = {
       endPoint: 'Seattle, WA 01652',
     },
     {
-      order: '0102032',
+      id: '0102032',
       orderDate: 'Jan 24, 2020',
       status: 'completed',
       vehicle: '1XY123',
@@ -48,7 +42,7 @@ export const tableData = {
       endPoint: 'Atlanta, GA 01652',
     },
     {
-      order: '0102032',
+      id: '0102032',
       orderDate: 'Jan 24, 2020',
       status: 'declined',
       vehicle: '1XY123',
@@ -56,7 +50,7 @@ export const tableData = {
       endPoint: 'Atlanta, GA 01652',
     },
     {
-      order: '0102032',
+      id: '0102032',
       orderDate: 'Jan 24, 2020',
       status: 'dispatched',
       vehicle: '1XY123',
@@ -64,7 +58,7 @@ export const tableData = {
       endPoint: 'Atlanta, GA 01652',
     },
     {
-      order: '0102032',
+      id: '0102032',
       orderDate: 'Jan 24, 2020',
       status: 'in progress',
       vehicle: '1XY123',
@@ -72,7 +66,7 @@ export const tableData = {
       endPoint: 'Atlanta, GA 01652',
     },
     {
-      order: '0102032',
+      id: '0102032',
       orderDate: 'Jan 24, 2020',
       status: 'in progress',
       vehicle: '1XY123',
@@ -80,7 +74,7 @@ export const tableData = {
       endPoint: 'Atlanta, GA 01652',
     },
     {
-      order: '0102032',
+      id: '0102032',
       orderDate: 'Jan 24, 2020',
       status: 'in progress',
       vehicle: '1XY123',
@@ -88,7 +82,7 @@ export const tableData = {
       endPoint: 'Atlanta, GA 01652',
     },
     {
-      order: '0102032',
+      id: '0102032',
       orderDate: 'Jan 24, 2020',
       status: 'in progress',
       vehicle: '1XY123',
@@ -96,7 +90,7 @@ export const tableData = {
       endPoint: 'Atlanta, GA 01652',
     },
     {
-      order: '0102032',
+      id: '0102032',
       orderDate: 'Jan 24, 2020',
       status: 'in progress',
       vehicle: '1XY123',
@@ -105,16 +99,15 @@ export const tableData = {
     },
   ],
 };
-
+export const usersHeaders = [
+  { header: 'fullName', text: 'FULL NAME' },
+  { header: 'userId', text: 'USER ID' },
+  { header: 'driverMngr', text: 'DRIVER MANAGER' },
+  { header: 'vehicle', text: 'VEHICLE' },
+  { header: 'status', text: 'STATUS' },
+  { header: 'user-actions', text: 'Actions' },
+];
 export const usersTable = {
-  headers: [
-    { header: 'fullName', text: 'FULL NAME' },
-    { header: 'userId', text: 'USER ID' },
-    { header: 'driverMngr', text: 'DRIVER MANAGER' },
-    { header: 'vehicle', text: 'VEHICLE' },
-    { header: 'status', text: 'STATUS' },
-    { header: 'user-actions', text: 'Actions' },
-  ],
   data: [
     {
       fullName: 'Jeff Yankovich',
@@ -272,14 +265,13 @@ export const usersTable = {
     },
   ],
 };
-
+export const adminsHeaders = [
+  { header: 'fullName', text: 'FULL NAME' },
+  { header: 'email', text: 'EMAIL' },
+  { header: 'lastLogin', text: 'LAST LOGIN DATE' },
+  { header: 'actions', text: 'Actions' },
+];
 export const adminsTable = {
-  headers: [
-    { header: 'fullName', text: 'FULL NAME' },
-    { header: 'email', text: 'EMAIL' },
-    { header: 'lastLogin', text: 'LAST LOGIN DATE' },
-    { header: 'actions', text: 'Actions' },
-  ],
   data: [
     {
       fullName: 'Terry Mantle',

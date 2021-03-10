@@ -1,12 +1,13 @@
+export const headers = [
+  { header: 'fullName', text: 'USER NAME' },
+  { header: 'dateReceived', text: 'DATE RECEIVED' },
+  { header: 'status', text: 'STATUS' },
+  { header: 'driverMgr', text: 'DRIVER MANANGER' },
+  { header: 'timeoff-view', text: 'View' },
+  { header: 'sub-actions', text: 'Actions' },
+];
+
 export const data = {
-  headers: [
-    { header: 'fullName', text: 'USER NAME' },
-    { header: 'dateReceived', text: 'DATE RECEIVED' },
-    { header: 'status', text: 'STATUS' },
-    { header: 'driverMgr', text: 'DRIVER MANANGER' },
-    { header: 'timeoff-view', text: 'View' },
-    { header: 'sub-actions', text: 'Actions' },
-  ],
   data: [
     {
       fullName: 'Bubba Gump',

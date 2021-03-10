@@ -1,11 +1,12 @@
+export const headers = [
+  { header: 'macroTitle', text: 'MACRO TITLE' },
+  { header: 'lastUpdated', text: 'LAST UPDATED' },
+  { header: 'dateCreated', text: 'DATE CREATED' },
+  { header: 'view', text: 'View' },
+  { header: 'actions', text: 'Actions' },
+];
+
 export const data = {
-  headers: [
-    { header: 'macroTitle', text: 'MACRO TITLE' },
-    { header: 'lastUpdated', text: 'LAST UPDATED' },
-    { header: 'dateCreated', text: 'DATE CREATED' },
-    { header: 'view', text: 'View' },
-    { header: 'actions', text: 'Actions' },
-  ],
   data: [
     {
       macroTitle: 'Time Off',
