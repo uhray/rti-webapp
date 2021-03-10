@@ -9,14 +9,18 @@
   export let inProgress = true;
 </script>
 
+<style src="./OrderStatus.scss">
+
+</style>
+
 <section class="OrderStatus">
   <Card type="card-gray-bg">
     <h6 class="OrderStatus-headerText">Order Status</h6>
 
     <div class="uk-flex">
       <div class="uk-width-1-4">
-        <Card type="input-card-orders"
-          ><div class="OrderStatus-cardSection">
+        <Card type="input-card-orders">
+          <div class="OrderStatus-cardSection">
             <!-- FOR THE ORIGIN -->
             <div class="uk-flex OrderStatus-statusCard">
               <div class="OrderStatus-locationIcon">
@@ -30,10 +34,8 @@
                   {`${orderStatusData.dispatchedFrom.location} • ${orderStatusData.dispatchedFrom.day}, ${orderStatusData.dispatchedFrom.time}`}
                 </p>
                 <Label
-                  type="disabled"
-                  size="small"
-                  text={orderStatusData.dispatchedFrom.status}
-                />
+                  status="disabled"
+                  text={orderStatusData.dispatchedFrom.status} />
               </div>
               <div class="OrderStatus-chevron">
                 <Icon type="chev-right" color="black" />
@@ -54,10 +56,8 @@
                   {`${orderStatusData.stopPoints[0].location} • ${orderStatusData.stopPoints[0].day}, ${orderStatusData.stopPoints[0].time}`}
                 </p>
                 <Label
-                  type="disabled"
-                  size="small"
-                  text={orderStatusData.stopPoints[0].status}
-                />
+                  status="disabled"
+                  text={orderStatusData.stopPoints[0].status} />
               </div>
               <div class="OrderStatus-chevron">
                 <Icon type="chev-right" color="black" />
@@ -67,10 +67,7 @@
             <br />
             <!-- FOR THE DESTINATION -->
             <div
-              class={inProgress
-                ? 'uk-flex OrderStatus-statusCard active'
-                : 'uk-flex OrderStatus-statusCard'}
-            >
+              class={inProgress ? 'uk-flex OrderStatus-statusCard active' : 'uk-flex OrderStatus-statusCard'}>
               <div class="OrderStatus-locationIcon">
                 <Icon type="location-end-filled" color="black" />
               </div>
@@ -82,10 +79,8 @@
                   {`${orderStatusData.destination.location} • ${orderStatusData.destination.day}, ${orderStatusData.destination.time}`}
                 </p>
                 <Label
-                  type="default"
-                  size="small"
-                  text={orderStatusData.destination.status}
-                />
+                  status="default"
+                  text={orderStatusData.destination.status} />
               </div>
               <div class="OrderStatus-chevron">
                 <Icon type="chev-right" color="black" />
@@ -96,13 +91,12 @@
       </div>
       <div style="margin-left: 4px;" />
       <div class="uk-width-3-4">
-        <Card type="input-card"
-          ><div class="OrderStatus-cardSection">
+        <Card type="input-card">
+          <div class="OrderStatus-cardSection">
             <!-- TODO: Gray out inactive tabs -->
             <TabMenu
               type="default"
-              tabs={['TIMELINE', 'CUSTOMER INFO', 'REFERENCE NUMBERS']}
-            />
+              tabs={['TIMELINE', 'CUSTOMER INFO', 'REFERENCE NUMBERS']} />
             <div class="OrderStatus-timelineSection">
               <div class="uk-flex">
                 <div class="uk-width-1-2">
@@ -161,11 +155,9 @@
                 </p>
               </div>
             </div>
-          </div></Card
-        >
+          </div>
+        </Card>
       </div>
     </div>
   </Card>
 </section>
-
-<style src="./OrderStatus.scss"></style>

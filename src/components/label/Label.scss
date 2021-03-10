@@ -1,66 +1,8 @@
+@import '../../theme/variables.scss';
+
 .Label {
-  // Label Text Styles
-  .Label-regText {
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 13px;
-    letter-spacing: 0.03em;
-    text-transform: capitalize;
-    text-align: center;
-    color: #ffffff;
-    margin-top: auto !important;
-    margin-bottom: auto !important;
-  }
-  .Label-blackText {
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 13px;
-    letter-spacing: 0.03em;
-    text-transform: capitalize;
-    color: #15224b;
-    margin-top: auto !important;
-    margin-bottom: auto !important;
-  }
-  .Label-emailText {
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 13px;
-    letter-spacing: 0.03em;
-    color: #15224b;
-    margin-top: auto !important;
-    margin-bottom: auto !important;
-  }
-  .Label-statusText {
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 13px;
-    letter-spacing: 0.03em;
-    color: #15224b;
-    margin: auto 5px;
-  }
-  .Label-blueText {
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 13px;
-    letter-spacing: 0.03em;
-    text-transform: capitalize;
-    color: #243e93;
-    margin-top: auto !important;
-    margin-bottom: auto !important;
-  }
-  // Label Div/Background Styles
-  .Label-divs {
-    min-height: 25px;
+  .Label-container {
+    height: 24px !important;
     width: fit-content;
     display: flex;
     flex-direction: row;
@@ -68,40 +10,56 @@
     align-items: center;
     padding: 5.5px 8px;
     border-radius: 4px;
-  }
-  .Label-small {
-    min-height: 10px !important;
-    height: 15px !important;
-  }
-  .Label-divsIcons {
-    min-height: 25px;
-    width: fit-content;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 5.5px 8px;
-    border-radius: 4px;
-  }
-  .Label-active {
-    background: #243e93;
-  }
-  .Label-success {
-    background: #5dca91;
-  }
-  .Label-disabled {
-    background: rgba(36, 62, 147, 0.05);
-  }
-  .Label-warning {
-    background: #ffba5e;
-  }
-  .Label-danger {
-    background: #e86172;
-  }
-  .Label-default {
-    background: #4973f1;
-  }
-  .Label-status {
-    margin: 5px;
+    font-size: 14px;
+    font-weight: var(--custom-font-weight);
+
+    color: #fff;
+
+    &[status='active'] {
+      background-color: $color--primary;
+    }
+    &[status='success'] {
+      background-color: $color--success;
+    }
+    &[status='warning'] {
+      background-color: $color--warning;
+    }
+    &[status='danger'] {
+      background-color: $color--danger;
+    }
+    &[status='disabled'] {
+      background-color: $color--disabled;
+      color: $color--darkblue;
+    }
+    &[status='default'] {
+      background-color: $color--default;
+    }
+
+    .statusColor {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-right: 5px;
+
+      &[statusColor='active'] {
+        background-color: $color--primary;
+      }
+      &[statusColor='success'] {
+        background-color: $color--success;
+      }
+      &[statusColor='warning'] {
+        background-color: $color--warning;
+      }
+      &[statusColor='danger'] {
+        background-color: $color--danger;
+      }
+      &[statusColor='disabled'] {
+        background-color: $color--disabled;
+        color: $color--darkblue;
+      }
+      &[statusColor='default'] {
+        background-color: $color--default;
+      }
+    }
   }
 }

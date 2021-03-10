@@ -150,10 +150,20 @@
     <Card type="input-card">
       <div class="uk-flex">
         <div class="MacroSettingsPage-emailLabel">
-          <Label type="email-label" text="email@email.com" />
+          <Label
+            status="disabled"
+            text="email@email.com"
+            iconRight="close"
+            iconColor="#15224b"
+            fontWeight="400" />
         </div>
         <div class="MacroSettingsPage-emailLabel">
-          <Label type="email-label" text="email@email.com" />
+          <Label
+            status="disabled"
+            text="email@email.com"
+            iconRight="close"
+            iconColor="#15224b"
+            fontWeight="400" />
         </div>
       </div>
 
@@ -186,8 +196,18 @@
     <div class="MacroSettingsPage-interCard" />
     <Card type="input-card">
       <div class="uk-flex">
-        <Label type="status-label" statusColor="#ffba5e" text="Pending" />
-        <Label type="status-label" statusColor="#5dca91" text="Approved" />
+        <Label
+          status="disabled"
+          iconRight="close"
+          iconColor="#15224b"
+          statusColor="warning"
+          text="Pending" />
+        <Label
+          status="disabled"
+          iconRight="close"
+          iconColor="#15224b"
+          statusColor="success"
+          text="Approved" />
       </div>
       <p class="MacroSettingsPage-toggleText">Status Name</p>
       <div class="uk-width-2-3 input-space">
