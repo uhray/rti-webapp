@@ -4,7 +4,8 @@
   position: sticky;
   top: 0;
   z-index: 999;
-  width: 256px;
+  min-width: 250px;
+  width: 250px;
   height: 100vh;
   background: $color--nav;
   // transition: width 0.5s;

@@ -2,26 +2,76 @@
 
 .ContactList {
   .ContactList-group {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    // border: 1px solid red;
+    .ContactList-group-header {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
 
-    .ContactList-group-icon {
-      width: 24px;
-      height: 24px;
-      padding-bottom: 3px;
+      .ContactList-group-icon {
+        width: 24px;
+        height: 24px;
+        padding-bottom: 3px;
 
-      &:hover {
-        cursor: pointer;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .ContactList-group-text {
+        font-weight: 500;
+        font-size: 14px;
+      }
+      .ContactList-group-icon {
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
+  }
 
-    .ContactList-group-text {
-      // border: 1px solid pink;
-      font-weight: 500;
-      font-size: 14px;
+  .ContactList-subgroup {
+    margin-bottom: 30px;
+
+    .ContactList-subgroup-container {
+      padding-left: 24px;
+
+      .ContactList-subgroup-text {
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .ContactList-contact {
+        display: flex;
+        align-items: center;
+        height: 34px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .ContactList-contact-picture {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+          min-width: 24px;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background-color: $color--primary;
+          margin-right: 8px;
+        }
+
+        .ContactList-contact-name {
+          font-size: 14px;
+          font-weight: 400;
+          color: $color--darkgray;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
     }
   }
 }

@@ -1,0 +1,66 @@
+@import '../../theme/variables.scss';
+
+.Header {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+
+  .Header-photo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 40px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: $color--darkblue;
+    color: #fff;
+  }
+
+  .Header-content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-left: 12px;
+
+    .Header-content-details {
+      display: flex;
+      flex-flow: column;
+
+      .Header-content-name {
+        font-weight: 500;
+        font-size: 16px;
+        color: $color--darkblue;
+      }
+      .Header-content-vehicle {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        color: $color--darkgray;
+      }
+    }
+
+    .Header-content-actions {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end;
+      align-items: center;
+
+      div {
+        margin-left: 10px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
