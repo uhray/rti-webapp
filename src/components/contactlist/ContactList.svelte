@@ -1,6 +1,6 @@
 <script>
   export let contacts = undefined;
-  export let getMessages;
+  export let getContact;
   import Icon from '../icon/Icon.svelte';
   import { colors } from '../../theme/variables.js';
   import _ from 'lodash';
@@ -25,7 +25,18 @@
 
 </style>
 
-<div class="ContactList">
+<div class="ContactList ">
+  <a rel="prefetch" href="messages">
+    <div class="ContactList-allMessages">
+      <div class="uk-flex uk-flex-middle">
+        <div class="ContactList-allMessages-icon">
+          <Icon type="indicator" color={colors.darkblue} />
+        </div>
+        <div class="ContactList-allMessages-text">All Messages</div>
+      </div>
+    </div>
+  </a>
+
   {#each contacts as group}
     <div class="ContactList-group">
       <div class="ContactList-group-header">
@@ -48,12 +59,14 @@
             <div class="ContactList-subgroup-container">
               <span class="ContactList-subgroup-text">{subgroup.name}</span>
               {#each subgroup.contacts as contact}
-                <div
-                  class="ContactList-contact"
-                  on:click={getMessages(contact.id, contact.name, contact.picture)}>
-                  <div class="ContactList-contact-picture">A</div>
-                  <div class="ContactList-contact-name">{contact.name}</div>
-                </div>
+                <a rel="prefetch" href={`messages/${contact.id}`}>
+                  <div class="ContactList-contact">
+                    <div class="ContactList-contact-picture">
+                      <img src={contact.picture} alt={contact.name} />
+                    </div>
+                    <div class="ContactList-contact-name">{contact.name}</div>
+                  </div>
+                </a>
               {/each}
             </div>
           {/each}

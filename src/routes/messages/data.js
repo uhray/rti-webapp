@@ -13,6 +13,18 @@ export const contacts = [
             picture:
               'https://cdnb.artstation.com/p/assets/images/images/028/800/351/large/wyatt-belgard-cthulhuavatar-nobackground.jpg?1595539181',
           },
+          {
+            name: 'Mattimus Prime',
+            id: '6011a9cd2e0b8646085654e5',
+            picture:
+              'https://reflector.tfw2005.com/wp-content/uploads/sites/14/2011/05/head-closeup-jpg.jpg',
+          },
+          {
+            name: 'Swamp Brett',
+            id: '604be0231aec19a4c1d8becf',
+            picture:
+              'https://pm1.narvii.com/7603/7a2ea6024d14bd7ceea75da6b906076e2fb7841dr1-828-481v2_128.jpg',
+          },
         ],
       },
     ],

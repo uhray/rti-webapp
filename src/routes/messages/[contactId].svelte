@@ -1,10 +1,15 @@
 <script context="module">
+  import _ from 'lodash';
   import { contacts } from './data.js';
   import tools from '../../tools/crudApi.ts';
-  export async function preload({ params }) {
+  export async function preload(page, session) {
+    const { contactId } = page.params;
+
+    console.log('contactId: ', contactId);
+
     const id = '602bfa394a8a148e8a348f14';
     const res = await tools.fetch(
-      `http://localhost:5000/api/v1/posts/manager`,
+      `http://localhost:5000/api/v1/posts/manager/${contactId}`,
       {},
       { fetch: this.fetch }
     );
@@ -27,7 +32,9 @@
       });
     });
 
-    return { posts, replies, contacts, contactsList };
+    let contact = _.find(contactsList, { id: contactId });
+
+    return { posts, replies, contact, contacts, contactsList };
   }
 </script>
 
@@ -40,6 +47,7 @@
 
   export let posts;
   export let replies;
+  export let contact;
   export let contacts;
   export let contactsList;
 
@@ -137,7 +145,7 @@
   </div>
   <div class="Messages-main">
     <div class="Messages-main-header">
-      <MessagesHeader name={'All Messages'} tag={'RALED'} vehicle={'1XY001'} />
+      <MessagesHeader {contact} tag={'RALED'} vehicle={'1XY001'} />
     </div>
     <div class="Messages-main-posts">
       <MessagesDisplay {posts} {replies} {me} contacts={contactsList} />

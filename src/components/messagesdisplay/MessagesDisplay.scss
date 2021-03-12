@@ -4,13 +4,13 @@
   display: flex;
   flex-flow: column;
   padding: 0px 30px 0px 30px;
-  margin: 10px 0 10px 0;
+  margin: 25px 0 10px 0;
   box-sizing: border-box;
 
   height: 100%;
   width: 100%;
   max-width: calc(100vw - 500px);
-  max-height: calc(100vh - 138px);
+  max-height: calc(100vh - 153px);
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -80,11 +80,11 @@
       margin-top: 10px;
 
       .Post-replies-show {
+        width: fit-content;
         display: flex;
         flex-flow: row nowrap;
         justify-content: flex-start;
         align-items: center;
-
         font-weight: normal;
         font-size: 14px;
         color: $color--primary;

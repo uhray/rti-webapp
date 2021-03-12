@@ -1,6 +1,37 @@
 @import '../../theme/variables.scss';
 
 .ContactList {
+  a {
+    text-decoration: none;
+  }
+
+  .ContactList-allMessages {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .ContactList-allMessages-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+      padding-bottom: 1px;
+    }
+
+    .ContactList-allMessages-text {
+      font-weight: 500;
+      font-size: 14px;
+      color: $color--darkblue;
+    }
+  }
+
   .ContactList-group {
     .ContactList-group-header {
       display: flex;
@@ -61,6 +92,13 @@
           border-radius: 50%;
           background-color: $color--primary;
           margin-right: 8px;
+
+          img {
+            min-width: 24px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+          }
         }
 
         .ContactList-contact-name {
