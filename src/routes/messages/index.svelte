@@ -13,8 +13,6 @@
 </script>
 
 <script>
-  export let allPosts;
-  export let posts;
   import { contacts } from './data.js';
   import Header from './Header.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
@@ -22,17 +20,26 @@
   import ContactList from '../../components/contactlist/ContactList.svelte';
   import MessagesDisplay from '../../components/messagesdisplay/MessagesDisplay.svelte';
 
-  const getMessages = async id => {
-    console.log(id);
+  let allPosts;
+  let posts;
+  let me = {
+    id: '602bfa394a8a148e8a348f14',
+    name: 'Hugo Oliveira',
+    pic: 'https://via.placeholder.com/150/FF0000/FFFFFF',
+  };
+  let contactsList;
+
+  const getMessages = async (id, name, pic) => {
     const res = await tools.fetch(
       `http://localhost:5000/api/v1/posts/manager/${id}`
     );
-    console.log(res);
-    const data = res;
-    console.log(data);
-    posts = data;
+    posts = res;
 
-    logPosts();
+    contactsList = [{ id: id, name: name, pic: pic }];
+
+    console.log('contacts: ', contactsList);
+
+    // logPosts();
   };
 
   const logPosts = () => {
@@ -41,8 +48,6 @@
     console.log('\n##### POSTS #####');
     console.table(posts);
   };
-
-  logPosts();
 </script>
 
 <style lang="scss">
@@ -130,7 +135,7 @@
   <div class="Messages-main">
     <div class="Messages-main-header">
       <MessagesHeader name={'Ralph Edwards'} tag={'RALED'} vehicle={'1XY001'} />
-      <MessagesDisplay />
     </div>
+    <MessagesDisplay {posts} {me} contacts={contactsList} />
   </div>
 </div>

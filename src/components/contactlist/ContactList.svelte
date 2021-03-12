@@ -50,7 +50,7 @@
               {#each subgroup.contacts as contact}
                 <div
                   class="ContactList-contact"
-                  on:click={getMessages(contact.id)}>
+                  on:click={getMessages(contact.id, contact.name, contact.picture)}>
                   <div class="ContactList-contact-picture">A</div>
                   <div class="ContactList-contact-name">{contact.name}</div>
                 </div>

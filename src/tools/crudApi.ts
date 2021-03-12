@@ -17,9 +17,7 @@ export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
 
   // query params
   const qs = fetchOpts.qs || {};
-  console.log(qs);
   src += '?' + serialize(qs);
-  console.log(src);
   delete fetchOpts.qs;
 
   // raw data
