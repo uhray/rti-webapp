@@ -16,15 +16,13 @@
 <div class="Header">
 
   {#if contact}
-    <!-- #TODO: needs to become profile picture -->
     <div class="Header-photo">
       <img src={contact.pic || ''} alt={contact.name || ''} />
     </div>
 
     <div class="Header-content">
       <div class="Header-content-details">
-        <!-- #TODO: remove id -->
-        <span class="Header-content-name">{contact.name} • {contact.id}</span>
+        <span class="Header-content-name">{contact.name}</span>
         <span class="Header-content-vehicle">{tag} • {vehicle}</span>
       </div>
       <div class="Header-content-actions">
@@ -59,8 +57,6 @@
       </div>
     </div>
   {:else}
-    <!-- #TODO: needs to become profile picture -->
-
     <div class="Header-content-all">
       <div class="Header-content-title">
         <span>All Messages</span>

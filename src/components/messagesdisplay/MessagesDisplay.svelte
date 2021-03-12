@@ -8,8 +8,6 @@
   export let replies;
 
   const findContact = id => {
-    console.log('\n\n contacts: ', contacts);
-    console.log('\n\n contact found: ', _.find(contacts, { id: id }));
     return _.find(contacts, { id: id });
   };
 

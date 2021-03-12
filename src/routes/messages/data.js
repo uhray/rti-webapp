@@ -25,6 +25,12 @@ export const contacts = [
             picture:
               'https://pm1.narvii.com/7603/7a2ea6024d14bd7ceea75da6b906076e2fb7841dr1-828-481v2_128.jpg',
           },
+          {
+            name: "Tyler 'Darren Sharper' Pudenz",
+            id: '604beadc1aec19a4c1d8bed1',
+            picture:
+              'https://bloximages.chicago2.vip.townnews.com/madison.com/content/tncms/assets/v3/editorial/f/de/fde99ff3-3250-5179-a96d-da56445fb81b/5521153adb78f.preview-300.jpg?crop=300%2C225%2C0%2C79&resize=1200%2C900&order=crop%2Cresize',
+          },
         ],
       },
     ],

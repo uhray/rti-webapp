@@ -1,11 +1,13 @@
 <script>
+  export let slug;
   export let contacts = undefined;
-  export let getContact;
   import Icon from '../icon/Icon.svelte';
   import { colors } from '../../theme/variables.js';
   import _ from 'lodash';
 
   export let collapsed = [];
+
+  console.log('slug: ', slug);
 
   const collapse = id => {
     // console.log('collapsing/expanding: ', id);
@@ -27,7 +29,7 @@
 
 <div class="ContactList ">
   <a rel="prefetch" href="messages">
-    <div class="ContactList-allMessages">
+    <div class={`ContactList-allMessages ${slug === 'all' && 'active'}`}>
       <div class="uk-flex uk-flex-middle">
         <div class="ContactList-allMessages-icon">
           <Icon type="indicator" color={colors.darkblue} />
@@ -58,9 +60,11 @@
           {#each group.subgroups as subgroup}
             <div class="ContactList-subgroup-container">
               <span class="ContactList-subgroup-text">{subgroup.name}</span>
+
               {#each subgroup.contacts as contact}
                 <a rel="prefetch" href={`messages/${contact.id}`}>
-                  <div class="ContactList-contact">
+                  <div
+                    class={`ContactList-contact ${slug === contact.id && 'active'}`}>
                     <div class="ContactList-contact-picture">
                       <img src={contact.picture} alt={contact.name} />
                     </div>

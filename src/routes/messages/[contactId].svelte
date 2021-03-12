@@ -5,8 +5,6 @@
   export async function preload(page, session) {
     const { contactId } = page.params;
 
-    console.log('contactId: ', contactId);
-
     const id = '602bfa394a8a148e8a348f14';
     const res = await tools.fetch(
       `http://localhost:5000/api/v1/posts/manager/${contactId}`,
@@ -14,7 +12,7 @@
       { fetch: this.fetch }
     );
 
-    // #TODO: fetch to get user's contacts info
+    // #TODO: fetch to get user's contacts info instead of from ./data.js
 
     const posts = res;
 
@@ -34,7 +32,7 @@
 
     let contact = _.find(contactsList, { id: contactId });
 
-    return { posts, replies, contact, contacts, contactsList };
+    return { posts, replies, contact, contacts, contactsList, slug: contactId };
   }
 </script>
 
@@ -45,12 +43,14 @@
   import ContactList from '../../components/contactlist/ContactList.svelte';
   import MessagesDisplay from '../../components/messagesdisplay/MessagesDisplay.svelte';
 
+  export let slug;
   export let posts;
   export let replies;
   export let contact;
   export let contacts;
   export let contactsList;
 
+  // #TODO: remove hardcoded me, get user data
   let me = {
     id: '602bfa394a8a148e8a348f14',
     name: 'Hugo Oliveira',
@@ -84,7 +84,7 @@
 
       .Messages-nav-contacts {
         box-sizing: border-box;
-        padding: 10px;
+        padding: 10px 0;
         max-height: calc(100vh - 118px);
         overflow-y: auto;
 
@@ -140,7 +140,7 @@
       <SearchBar alternate />
     </div>
     <div class="Messages-nav-contacts">
-      <ContactList {contacts} />
+      <ContactList {slug} {contacts} />
     </div>
   </div>
   <div class="Messages-main">

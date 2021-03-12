@@ -9,7 +9,7 @@
       { fetch: this.fetch }
     );
 
-    // #TODO: fetch to get user's contacts info
+    // #TODO: fetch to get user's contacts info instead of from ./data.js
 
     const posts = res;
 
@@ -43,6 +43,7 @@
   export let contacts;
   export let contactsList;
 
+  // #TODO: remove hardcoded me, get user data
   let me = {
     id: '602bfa394a8a148e8a348f14',
     name: 'Hugo Oliveira',
@@ -76,7 +77,7 @@
 
       .Messages-nav-contacts {
         box-sizing: border-box;
-        padding: 10px;
+        padding: 10px 0;
         max-height: calc(100vh - 118px);
         overflow-y: auto;
 
@@ -132,7 +133,7 @@
       <SearchBar alternate />
     </div>
     <div class="Messages-nav-contacts">
-      <ContactList {contacts} />
+      <ContactList slug="all" {contacts} />
     </div>
   </div>
   <div class="Messages-main">
