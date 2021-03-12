@@ -29,6 +29,7 @@
     pic: 'https://i.kym-cdn.com/photos/images/original/001/475/112/f36.jpg',
   };
   let contactsList;
+  let contact;
 
   const getMessages = async (id, name, pic) => {
     const res = await tools.fetch(
@@ -40,6 +41,7 @@
       return { id: post._id, display: false };
     });
 
+    contact = { id: id, name: name, pic: pic };
     contactsList = [{ id: id, name: name, pic: pic }];
 
     console.log('contacts: ', contactsList);
@@ -142,7 +144,7 @@
   </div>
   <div class="Messages-main">
     <div class="Messages-main-header">
-      <MessagesHeader name={'Ralph Edwards'} tag={'RALED'} vehicle={'1XY001'} />
+      <MessagesHeader {contact} tag={'RALED'} vehicle={'1XY001'} />
     </div>
     <div class="Messages-main-posts">
       <MessagesDisplay {posts} {replies} {me} contacts={contactsList} />
