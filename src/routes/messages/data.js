@@ -8,9 +8,10 @@ export const contacts = [
         id: id(),
         contacts: [
           {
-            name: 'Tyler Boyd',
+            name: 'Papa Giorgio',
             id: '6047e683a83b208690f6c607',
-            picture: 'https://via.placeholder.com/150/0000FF/808080',
+            picture:
+              'https://cdnb.artstation.com/p/assets/images/images/028/800/351/large/wyatt-belgard-cthulhuavatar-nobackground.jpg?1595539181',
           },
         ],
       },

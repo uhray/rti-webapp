@@ -22,10 +22,11 @@
 
   let allPosts;
   let posts;
+  let replies;
   let me = {
     id: '602bfa394a8a148e8a348f14',
     name: 'Hugo Oliveira',
-    pic: 'https://via.placeholder.com/150/FF0000/FFFFFF',
+    pic: 'https://i.kym-cdn.com/photos/images/original/001/475/112/f36.jpg',
   };
   let contactsList;
 
@@ -34,6 +35,10 @@
       `http://localhost:5000/api/v1/posts/manager/${id}`
     );
     posts = res;
+
+    replies = posts.map(post => {
+      return { id: post._id, display: false };
+    });
 
     contactsList = [{ id: id, name: name, pic: pic }];
 
@@ -113,6 +118,9 @@
         border-bottom: 1px solid rgba(166, 173, 196, 0.5);
         padding: 10px 30px 10px 30px;
       }
+
+      .Messages-main-posts {
+      }
     }
   }
 </style>
@@ -136,6 +144,8 @@
     <div class="Messages-main-header">
       <MessagesHeader name={'Ralph Edwards'} tag={'RALED'} vehicle={'1XY001'} />
     </div>
-    <MessagesDisplay {posts} {me} contacts={contactsList} />
+    <div class="Messages-main-posts">
+      <MessagesDisplay {posts} {replies} {me} contacts={contactsList} />
+    </div>
   </div>
 </div>

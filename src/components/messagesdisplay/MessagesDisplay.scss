@@ -73,7 +73,47 @@
       font-weight: normal;
       font-size: 15px;
       color: $color--darkblue;
-      margin-bottom: 10px;
+    }
+
+    .Post-replies {
+      width: 100%;
+      margin-top: 10px;
+
+      .Post-replies-show {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        font-weight: normal;
+        font-size: 14px;
+        color: $color--primary;
+
+        margin-bottom: 10px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .Post-replies-icon {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .Post-replies-content {
+        margin-left: 30px;
+        margin-bottom: 5px;
+
+        padding: 22px 15px 15px 15px;
+        background: $color--tablegray;
+        border-radius: 4px;
+
+        .Post-replies-content-message {
+          font-weight: normal;
+          font-size: 15px;
+          color: $color--darkblue;
+        }
+      }
     }
 
     .Post-reply {
@@ -83,6 +123,7 @@
       color: $color--primary;
       font-weight: normal;
       font-size: 14px;
+      margin-top: 10px;
 
       .Post-reply-action {
         display: flex;
