@@ -51,12 +51,25 @@
     min-height: 100px;
     margin: 0px;
     padding: 10px 0px;
+    position: relative;
     &.active {
       background: #f6f7fb;
     }
+    .OrderStatus-cardLine {
+      position: absolute;
+      left: 1.7em;
+      top: 1.5em;
+      height: 90%;
+      overflow: hidden;
+      div {
+        font-size: 1.1em;
+        height: 3px;
+        margin: 2px 0;
+      }
+    }
   }
   .OrderStatus-locationIcon {
-    margin: 0px 3px;
+    margin: 0px 8px 0px 1em;
   }
   .OrderStatus-cardHeader {
     font-family: Poppins;
@@ -64,12 +77,14 @@
     font-weight: 600;
     font-size: 13px;
     line-height: 20px;
-    display: flex;
     align-items: center;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: #15224b;
     margin: 3px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
   }
   .OrderStatus-cardText {
     font-family: Poppins;

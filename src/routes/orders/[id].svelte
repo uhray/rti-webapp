@@ -27,12 +27,6 @@
   ];
 </script>
 
-<style lang="scss">
-  .Order {
-    padding: 2em;
-  }
-</style>
-
 <svelte:head>
   <title>Order #{order.id}</title>
 </svelte:head>
@@ -52,3 +46,13 @@
 
   <OrderStatus orderStatusData={order.statusDetails} />
 </div>
+
+<style lang="scss">
+  .Order {
+    padding: 2em;
+    h3 {
+      line-height: 1.25;
+      margin-bottom: 0.5em;
+    }
+  }
+</style>

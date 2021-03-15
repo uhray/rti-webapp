@@ -10,10 +10,6 @@
   };
 </script>
 
-<style src="./TripDetails.scss">
-
-</style>
-
 <!-- HTML -->
 <div class="TripDetails">
   <div class="TripDetails-header">
@@ -26,7 +22,6 @@
 
   {#if isOpen}
     <div class="TripDetails-content">
-      <br />
       <Divider secondary />
       <br />
 
@@ -57,3 +52,6 @@
 </div>
 
 <!-- ==== -->
+
+<style src="./TripDetails.scss">
+</style>

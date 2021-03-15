@@ -1,4 +1,7 @@
 .TabMenu {
+  ul::before {
+    border-bottom: none !important;
+  }
   .uk-tab {
     .uk-active {
       a {

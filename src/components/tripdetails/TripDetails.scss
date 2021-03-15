@@ -5,16 +5,17 @@
   border-radius: 4px;
   padding: 22px 20px;
 
+  h3 {
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: 0;
+  }
+
   .TripDetails-header {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    align-items: flex-start;
-    height: 20px;
-
-    h3 {
-      font-weight: 500;
-    }
+    align-items: center;
 
     .TripDetails-header-toggle {
       display: flex;
