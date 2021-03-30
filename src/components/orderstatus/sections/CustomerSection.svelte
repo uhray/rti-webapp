@@ -9,18 +9,18 @@
   <div class="OrderStatus-timelineSection">
     <div class="uk-flex">
       <div class="uk-width-1-2">
-        <h4 class="OrderStatus-timelineHeader">Trailer #</h4>
+        <h4 class="OrderStatus-timelineHeader">Customer</h4>
         <div class="OrderStatus-timelineContent">
           <p class="OrderStatus-timelineContentText">
-            {orderStatusData.timeline.trailerNum}
+            {orderStatusData.customerInfo.customerName}
           </p>
         </div>
       </div>
       <div class="uk-width-1-2">
-        <h4 class="OrderStatus-timelineHeader">Event</h4>
+        <h4 class="OrderStatus-timelineHeader">Customer ID</h4>
         <div class="OrderStatus-timelineContent">
           <p class="OrderStatus-timelineContentText">
-            {orderStatusData.timeline.event}
+            {orderStatusData.customerInfo.customerID}
           </p>
         </div>
       </div>
@@ -28,38 +28,24 @@
     <Divider />
     <div class="uk-flex">
       <div class="uk-width-1-2">
-        <h4 class="OrderStatus-timelineHeader">Appointment Time</h4>
+        <h4 class="OrderStatus-timelineHeader">Address</h4>
         <div class="OrderStatus-timelineContent">
           <p class="OrderStatus-timelineContentText">
-            {orderStatusData.timeline.apptTime}
+            {orderStatusData.customerInfo.address}
           </p>
         </div>
       </div>
+    </div>
+    <Divider />
+    <div class="uk-flex">
       <div class="uk-width-1-2">
-        <h4 class="OrderStatus-timelineHeader">Arrival Time</h4>
+        <h4 class="OrderStatus-timelineHeader">Phone Number</h4>
         <div class="OrderStatus-timelineContent">
           <p class="OrderStatus-timelineContentText">
-            {orderStatusData.timeline.arrivalTime}
+            {orderStatusData.customerInfo.phoneNumber}
           </p>
         </div>
       </div>
-    </div>
-    <Divider />
-    <h4 class="OrderStatus-timelineHeader">Uploaded Documents</h4>
-    <div class="OrderStatus-timelineContent uk-flex">
-      <div class="OrderStatus-file">
-        <Icon type="file" color="#a6adc4" />
-      </div>
-      <p class="OrderStatus-timelineContentText grayed">
-        {orderStatusData.timeline.uploadedDocs}
-      </p>
-    </div>
-    <Divider />
-    <h4 class="OrderStatus-timelineHeader">Driver / Delivery Notes</h4>
-    <div class="OrderStatus-timelineContent">
-      <p class="OrderStatus-timelineContentText">
-        {orderStatusData.timeline.deliveryNotes}
-      </p>
     </div>
   </div>
 </section>

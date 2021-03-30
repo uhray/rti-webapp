@@ -147,6 +147,7 @@
               tabs={['TIMELINE', 'CUSTOMER INFO', 'REFERENCE NUMBERS']}
             />
             <!-- TIMELINE SECTION -->
+            <!-- TODO: based on tab selected, show either the timeline, customer info, or reference section -->
             <TimelineSection {orderStatusData} />
             <!-- CUSTOMER INFO SECTION -->
             <!-- <CustomerSection {orderStatusData} /> -->
