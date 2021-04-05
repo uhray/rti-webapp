@@ -7,31 +7,6 @@
   import Header from './Header.svelte';
 </script>
 
-<style lang="scss">
-  .Account {
-    display: flex;
-    flex-flow: column;
-    padding: 2em;
-
-    .Account-photo {
-      width: 80px;
-      height: 80px;
-      border-radius: 100%;
-    }
-  }
-  .row {
-    display: inline-flex;
-    flex-flow: row nowrap;
-    width: 100%;
-    max-width: 1000px;
-    margin-bottom: 10px;
-  }
-  .half {
-    width: 50%;
-    max-width: 500px;
-  }
-</style>
-
 <svelte:head>
   <title>Account/User Profile</title>
 </svelte:head>
@@ -61,13 +36,21 @@
 
   <form class="uk-form-stacked">
     <div class="row">
-      <Input label="First Name" />
-      <Input label="Last Name" />
+      <div class="uk-width-1-3 uk-margin-small-right">
+        <Input label="First Name" fill />
+      </div>
+      <div class="uk-width-1-3 uk-margin-small-right">
+        <Input label="Last Name" fill />
+      </div>
     </div>
     <br />
     <div class="row">
-      <Input label="Email" />
-      <Input label="Driver Manager" />
+      <div class="uk-width-1-3 uk-margin-small-right">
+        <Input label="Email" fill />
+      </div>
+      <div class="uk-width-1-3 uk-margin-small-right">
+        <Input label="Driver Manager" fill />
+      </div>
     </div>
   </form>
 
@@ -77,19 +60,49 @@
   <h3>Password</h3>
 
   <form class="uk-form-stacked">
-
     <div class="half">
       <div class="row">
-        <Input label="Current Password" />
+        <div class="uk-width-2-3">
+          <Input label="Current Password" fill />
+        </div>
       </div>
       <div class="row">
-        <Input label="New Password" />
+        <div class="uk-width-2-3">
+          <Input label="New Password" fill />
+        </div>
       </div>
       <div class="row">
-        <Input label="Confirm Password" />
+        <div class="uk-width-2-3">
+          <Input label="Confirm Password" fill />
+        </div>
       </div>
       <br />
       <Button primary>Save Password</Button>
     </div>
   </form>
 </div>
+
+<style lang="scss">
+  .Account {
+    display: flex;
+    flex-flow: column;
+    padding: 2em;
+
+    .Account-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 100%;
+    }
+  }
+  .row {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 10px;
+  }
+  .half {
+    width: 50%;
+    max-width: 500px;
+  }
+</style>

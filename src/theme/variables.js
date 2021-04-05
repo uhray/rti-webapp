@@ -1,7 +1,7 @@
 export const colors = {
   primary: '#243e93',
   secondary: '#2b8af7',
-  disabled: 'rgba(36, 62, 147, 0.15)',
+  disabled: 'rgba(36, 62, 147, 0.05)',
   warning: '#ea4335',
   success: '#3dbc6f',
   nav: '#161d35',

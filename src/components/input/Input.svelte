@@ -22,12 +22,17 @@
 </script>
 
 <!-- HTML -->
-<div>
+<div class="Input-wrapper">
   {#if label}
     <label>{label}</label>
     <br />
   {/if}
-  <div class={`Input uk-inline ${fill && 'uk-width-1-1'}`} {invalid}>
+  <div
+    class={`Input uk-inline ${
+      fill ? 'uk-width-1-1 uk-margin-small-right' : ''
+    }`}
+    {invalid}
+  >
     <input
       class="uk-input"
       type="text"

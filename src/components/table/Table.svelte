@@ -8,22 +8,25 @@
   export let expand = false;
 </script>
 
-<style src="./Table.scss">
-
-</style>
-
 <section class="Table">
   {#if expand}
     <div class="Table-outer">
       <div class="Table-inner" style={`height: ${height}vh`}>
         <table
-          class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
+          class={`uk-table uk-table-middle Table-container ${
+            height ? 'uk-table-scrollable' : ''
+          }`}
+        >
           <thead>
             <tr class="Table-headerRow">
               {#each headers as header}
                 <th
                   scope="col"
-                  class={header.header == 'fullName' || header.header == 'macroTitle' ? 'uk-width-1-2 Table-headerRow-headerCell' : 'uk-width-1-6 Table-headerRow-headerCell'}>
+                  class={header.header == 'fullName' ||
+                  header.header == 'macroTitle'
+                    ? 'uk-width-1-2 Table-headerRow-headerCell'
+                    : 'uk-width-1-6 Table-headerRow-headerCell'}
+                >
                   {#if header.header == 'view' || header.header == 'timeoff-view' || header.header == 'actions' || header.header == 'user-actions' || header.header == 'sub-actions'}
                     {''}
                   {:else}{header.text}{/if}
@@ -36,7 +39,11 @@
               <tr class="Table-row">
                 {#each headers as header}
                   <td
-                    class={header.header == 'fullName' || header.header == 'macroTitle' ? 'uk-width-1-2' : 'uk-width-1-6'}>
+                    class={header.header == 'fullName' ||
+                    header.header == 'macroTitle'
+                      ? 'uk-width-1-2'
+                      : 'uk-width-1-6'}
+                  >
                     {#if header.header == 'status'}
                       {#if item.status == 'pending'}
                         <Label status="warning" text="Pending" />
@@ -70,23 +77,23 @@
                     {:else if header.header == 'actions'}
                       <div class="Table-row-actions alignRight">
                         <Icon type="delete" hover />
-                        <div style="margin-left: 8px;" />
+                        <div style="margin-left: 15px;" />
                         <Checkbox secondary />
                       </div>
                     {:else if header.header == 'user-actions'}
                       <div class="Table-row-actions alignRight">
                         <Icon type="edit" hover />
-                        <div style="margin-left: 8px;" />
+                        <div style="margin-left: 10px;" />
                         <Icon type="delete" hover />
-                        <div style="margin-left: 8px;" />
+                        <div style="margin-left: 15px;" />
                         <Checkbox secondary />
                       </div>
                     {:else if header.header == 'sub-actions'}
                       <div class="Table-row-actions alignRight">
                         <Icon type="message-outline" hover />
-                        <div style="margin-left: 8px;" />
+                        <div style="margin-left: 10px;" />
                         <Icon type="delete" hover />
-                        <div style="margin-left: 8px;" />
+                        <div style="margin-left: 15px;" />
                         <Checkbox secondary />
                       </div>
                     {:else}{item[header.header]}{/if}
@@ -102,7 +109,10 @@
     <div class="Table-outer">
       <div class="Table-inner" style={`height: ${height}vh`}>
         <table
-          class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
+          class={`uk-table uk-table-middle Table-container ${
+            height ? 'uk-table-scrollable' : ''
+          }`}
+        >
           <thead>
             <tr class="Table-headerRow">
               {#each headers as header}
@@ -142,6 +152,7 @@
                     {:else if header.header == 'actions'}
                       <div class="Table-row-actions alignRight">
                         <Icon type="delete" hover />
+                        <div style="margin-left: 15px;" />
                         <Checkbox secondary />
                       </div>
                     {:else if header.header == 'filename'}
@@ -163,3 +174,6 @@
     </div>
   {/if}
 </section>
+
+<style src="./Table.scss">
+</style>
