@@ -1,16 +1,6 @@
 @import '../../theme/variables.scss';
 
-.Display {
-  display: flex;
-  flex-flow: column;
-  padding: 0px 30px 0px 30px;
-  margin: 25px 0 10px 0;
-  box-sizing: border-box;
-
-  height: 100%;
-  width: 100%;
-  max-width: calc(100vw - 500px);
-  max-height: calc(100vh - 153px);
+#Messages {
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -32,6 +22,29 @@
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
     background: #595f76;
+  }
+}
+
+.Display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-flow: column;
+  padding: 15px 30px 0px 30px;
+  margin: 0px 0 10px 0;
+  box-sizing: border-box;
+
+  width: 100%;
+  max-width: calc(100vw - 500px);
+  max-height: calc(100vh - 119px);
+
+  .Display-dateLabel {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
   }
 
   .Post {
@@ -100,8 +113,10 @@
           cursor: pointer;
         }
       }
-      .Post-replies-content {
+      .Post-replies-wrapper {
         margin-left: 30px;
+      }
+      .Post-replies-content {
         margin-bottom: 5px;
 
         padding: 22px 15px 15px 15px;
@@ -140,5 +155,27 @@
         }
       }
     }
+  }
+}
+
+#Input {
+  position: absolute;
+  left: 0;
+  right: 2px;
+  bottom: 0;
+
+  .Input-fade {
+    height: 60px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .Input-input {
+    background-color: #fff;
+    padding: 0 30px 30px 30px;
   }
 }

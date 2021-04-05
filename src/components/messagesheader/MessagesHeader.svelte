@@ -5,8 +5,6 @@
   export let name = undefined;
   export let vehicle = undefined;
   export let tag = undefined;
-
-  console.log(contact);
 </script>
 
 <style src="./MessagesHeader.scss">

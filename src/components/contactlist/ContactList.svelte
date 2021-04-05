@@ -7,19 +7,13 @@
 
   export let collapsed = [];
 
-  console.log('slug: ', slug);
-
   const collapse = id => {
-    // console.log('collapsing/expanding: ', id);
     if (_.includes(collapsed, id)) {
-      // console.log('found it');
       _.pull(collapsed, id);
     } else {
-      // console.log('not found');
       collapsed.push(id);
     }
     collapsed = collapsed;
-    console.log('collapsed = ', collapsed);
   };
 </script>
 

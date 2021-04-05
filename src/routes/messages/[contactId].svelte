@@ -1,5 +1,6 @@
 <script context="module">
   import _ from 'lodash';
+  import moment from 'moment';
   import { contacts } from './data.js';
   import tools from '../../tools/crudApi.ts';
   export async function preload(page, session) {
@@ -32,11 +33,19 @@
 
     let contact = _.find(contactsList, { id: contactId });
 
-    return { posts, replies, contact, contacts, contactsList, slug: contactId };
+    return {
+      posts,
+      replies,
+      contact,
+      contacts,
+      contactsList,
+      slug: contactId,
+    };
   }
 </script>
 
 <script>
+  import { beforeUpdate, afterUpdate } from 'svelte';
   import Header from './Header.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
   import MessagesHeader from '../../components/messagesheader/MessagesHeader.svelte';
@@ -49,6 +58,7 @@
   export let contact;
   export let contacts;
   export let contactsList;
+  let sortedPosts = {};
 
   // #TODO: remove hardcoded me, get user data
   let me = {
@@ -56,6 +66,19 @@
     name: 'Hugo Oliveira',
     pic: 'https://i.kym-cdn.com/photos/images/original/001/475/112/f36.jpg',
   };
+
+  beforeUpdate(() => {
+    sortedPosts = _.chain(posts)
+      .map(p => {
+        let newP = p;
+        newP.date = moment(new Date(p.createdAt).toISOString()).format(
+          'MMM D, YYYY'
+        );
+        return newP;
+      })
+      .groupBy('date')
+      .value();
+  });
 </script>
 
 <style lang="scss">
@@ -123,6 +146,10 @@
       }
 
       .Messages-main-posts {
+        position: relative;
+        height: calc(100vh - 119px);
+        max-width: 1200px;
+        max-height: calc(100vh - 119px);
       }
     }
   }
@@ -148,7 +175,13 @@
       <MessagesHeader {contact} tag={'RALED'} vehicle={'1XY001'} />
     </div>
     <div class="Messages-main-posts">
-      <MessagesDisplay {posts} {replies} {me} contacts={contactsList} />
+      <MessagesDisplay
+        {posts}
+        {sortedPosts}
+        {replies}
+        {me}
+        contacts={contactsList} />
+
     </div>
   </div>
 </div>
