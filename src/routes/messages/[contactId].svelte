@@ -148,7 +148,7 @@
       .Messages-main-posts {
         position: relative;
         height: calc(100vh - 119px);
-        max-width: 1200px;
+        // max-width: 1200px;
         max-height: calc(100vh - 119px);
       }
     }
