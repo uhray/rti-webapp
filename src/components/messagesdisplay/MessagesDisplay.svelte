@@ -17,6 +17,7 @@
   let input;
   let autoscroll;
   let maxHeight;
+  let replyPost = null;
 
   onMount(() => {
     if (messages && input) {
@@ -25,7 +26,9 @@
       messages.scrollTo(0, messages.scrollHeight);
 
       onElementHeightChange(input, function(h) {
-        messages.style.paddingBottom = `${h - 60}px`;
+        if (messages) {
+          messages.style.paddingBottom = `${h - 60}px`;
+        }
       });
     }
   });
@@ -71,6 +74,84 @@
 
       elm.onElementHeightChangeTimer = setTimeout(run, 200);
     })();
+  }
+
+  async function send(message) {
+    const id = '602bfa394a8a148e8a348f14';
+
+    if (replyPost) {
+      replyPost.subthread.push({ from: id, message: message });
+
+      let payload = replyPost;
+
+      putData(`http://localhost:5000/api/v1/posts/${replyPost._id}`, payload)
+        .then(json => {
+          console.log(json); // Handle success
+        })
+        .catch(err => {
+          console.log(err); // Handle errors
+        });
+
+      replyPost = null;
+    } else {
+      console.log('sending: ', message);
+
+      let payload = {
+        from: id,
+        message: message,
+        to: ['6047e683a83b208690f6c607'],
+      };
+
+      postData('http://localhost:5000/api/v1/posts', payload)
+        .then(json => {
+          console.log(json); // Handle success
+        })
+        .catch(err => {
+          console.log(err); // Handle errors
+        });
+    }
+  }
+
+  async function postData(url = '', data = {}) {
+    const response = await fetch(url, {
+      method: 'POST',
+      // mode: 'no-cors',
+      // cache: 'no-cache',
+      // credentials: 'same-origin',
+      // redirect: 'follow',
+      // referrerPolicy: 'no-referrer',
+
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(response);
+    return response;
+  }
+
+  async function putData(url = '', data = {}) {
+    const response = await fetch(url, {
+      method: 'PUT',
+      // mode: 'no-cors',
+      // cache: 'no-cache',
+      // credentials: 'same-origin',
+      // redirect: 'follow',
+      // referrerPolicy: 'no-referrer',
+
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(response);
+    return response;
+  }
+
+  function removeTags(str) {
+    if (str === null || str === '') return false;
+    else str = str.toString();
+    return str.replace(/(<([^>]+)>)/gi, '');
   }
 </script>
 
@@ -119,7 +200,7 @@
             <Post message={post.message} />
           </div>
 
-          {#if post.subthread}
+          {#if post.subthread && post.subthread.length > 0}
             <div class="Post-replies">
 
               {#if _.find(replies, { id: post._id }).display}
@@ -162,11 +243,17 @@
                           </div>
                         </div>
                       {/if}
-                      <div class="Post-message">{reply.message}</div>
+                      <div class="Post-message">
+                        <Post message={reply.message} />
+                      </div>
                     </div>
                   {/each}
                   <div class="Post-reply">
-                    <div class="Post-reply-action">
+                    <div
+                      class="Post-reply-action"
+                      on:click={() => {
+                        replyPost = post;
+                      }}>
                       <Icon type="reply" color="#243E93" />
                       <span>Reply in the thread</span>
                     </div>
@@ -188,7 +275,11 @@
             </div>
           {:else}
             <div class="Post-reply">
-              <div class="Post-reply-action">
+              <div
+                class="Post-reply-action"
+                on:click={() => {
+                  replyPost = post;
+                }}>
                 <Icon type="reply" color="#243E93" />
                 <span>Reply in the thread</span>
               </div>
@@ -204,6 +295,21 @@
 <div id="Input" bind:this={input}>
   <div class="Input-fade" />
   <div class="Input-input">
-    <RichText />
+    {#if replyPost}
+      <div class="Input-input-replying">
+        <div class="uk-flex uk-flex-middle">
+          <span>Replying to: {removeTags(replyPost.message)}</span>
+        </div>
+        <div
+          class="clickable"
+          on:click={() => {
+            console.log('closing');
+            replyPost = null;
+          }}>
+          <Icon type="close" />
+        </div>
+      </div>
+    {/if}
+    <RichText {send} />
   </div>
 </div>

@@ -177,5 +177,13 @@
   .Input-input {
     background-color: #fff;
     padding: 0 30px 30px 30px;
+
+    .Input-input-replying {
+      padding: 10px 0;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 }

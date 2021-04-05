@@ -40,7 +40,6 @@
   const updateContent = () => {
     content = quill.getText();
     htmlContent = quill.root.innerHTML;
-    console.log(htmlContent);
   };
   const doSomething = () => {
     console.log('send button clicked');
@@ -56,6 +55,7 @@
   };
 
   export let label = undefined;
+  export let send = undefined;
 </script>
 
 <style src="./RichText.scss">
@@ -81,7 +81,13 @@
       <button class="ql-list" />
       <div class="aligned-right">
         <button class="ql-attach" />
-        <button class="send-msg" on:click={doSomething}>
+        <button
+          class="send-msg"
+          on:click={() => {
+            const message = htmlContent;
+            quill.deleteText(0, quill.getLength());
+            send(message);
+          }}>
           <svg
             width="24"
             height="25"
