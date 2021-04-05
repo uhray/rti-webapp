@@ -1,5 +1,6 @@
 <script>
   import _ from 'lodash';
+  import { me as meData } from '../../routes/messages/data.js'; // #TODO: remove hardcoded me, get user data
   import { beforeUpdate, afterUpdate } from 'svelte';
   import { onMount } from 'svelte';
   import Label from '../label/Label.svelte';
@@ -12,6 +13,7 @@
   export let me;
   export let contacts = [];
   export let replies;
+  export let slug = undefined;
 
   let messages;
   let input;
@@ -77,7 +79,7 @@
   }
 
   async function send(message) {
-    const id = '602bfa394a8a148e8a348f14';
+    const id = meData.id;
 
     if (replyPost) {
       replyPost.subthread.push({ from: id, message: message });
@@ -86,28 +88,26 @@
 
       putData(`http://localhost:5000/api/v1/posts/${replyPost._id}`, payload)
         .then(json => {
-          console.log(json); // Handle success
+          console.log(json);
         })
         .catch(err => {
-          console.log(err); // Handle errors
+          console.log(err);
         });
 
       replyPost = null;
     } else {
-      console.log('sending: ', message);
-
       let payload = {
         from: id,
         message: message,
-        to: ['6047e683a83b208690f6c607'],
+        to: [slug],
       };
 
       postData('http://localhost:5000/api/v1/posts', payload)
         .then(json => {
-          console.log(json); // Handle success
+          console.log(json);
         })
         .catch(err => {
-          console.log(err); // Handle errors
+          console.log(err);
         });
     }
   }
@@ -115,36 +115,22 @@
   async function postData(url = '', data = {}) {
     const response = await fetch(url, {
       method: 'POST',
-      // mode: 'no-cors',
-      // cache: 'no-cache',
-      // credentials: 'same-origin',
-      // redirect: 'follow',
-      // referrerPolicy: 'no-referrer',
-
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
       body: JSON.stringify(data),
     });
-    console.log(response);
     return response;
   }
 
   async function putData(url = '', data = {}) {
     const response = await fetch(url, {
       method: 'PUT',
-      // mode: 'no-cors',
-      // cache: 'no-cache',
-      // credentials: 'same-origin',
-      // redirect: 'follow',
-      // referrerPolicy: 'no-referrer',
-
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
       body: JSON.stringify(data),
     });
-    console.log(response);
     return response;
   }
 
@@ -303,7 +289,6 @@
         <div
           class="clickable"
           on:click={() => {
-            console.log('closing');
             replyPost = null;
           }}>
           <Icon type="close" />

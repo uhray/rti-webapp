@@ -1,3 +1,9 @@
+export const me = {
+  id: '602bfa394a8a148e8a348f14',
+  name: 'Hugo Oliveira',
+  pic: 'https://i.kym-cdn.com/photos/images/original/001/475/112/f36.jpg',
+};
+
 export const contacts = [
   {
     name: 'DM 98',

@@ -1,10 +1,10 @@
 <script context="module">
   import _ from 'lodash';
   import moment from 'moment';
-  import { contacts } from './data.js';
+  import { contacts, me } from './data.js'; // #TODO: remove hardcoded me, get user data
   import tools from '../../tools/crudApi.ts';
   export async function preload({ params }) {
-    const id = '602bfa394a8a148e8a348f14';
+    const id = me.id;
     const res = await tools.fetch(
       `http://localhost:5000/api/v1/posts/manager`,
       {},
@@ -47,13 +47,6 @@
   export let contacts;
   export let contactsList;
   let sortedPosts = {};
-
-  // #TODO: remove hardcoded me, get user data
-  let me = {
-    id: '602bfa394a8a148e8a348f14',
-    name: 'Hugo Oliveira',
-    pic: 'https://i.kym-cdn.com/photos/images/original/001/475/112/f36.jpg',
-  };
 
   beforeUpdate(() => {
     sortedPosts = _.chain(posts)
