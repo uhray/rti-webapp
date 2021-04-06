@@ -161,9 +161,7 @@
       datetime = moment(d).format('dddd h:mm A');
     } else if (
       moment(new Date(d).toISOString()).isSameOrAfter(
-        moment()
-          .subtract(365, 'days')
-          .startOf('Y'),
+        moment().subtract(11, 'months'),
         'day'
       )
     ) {
@@ -245,7 +243,6 @@
                           <div class="Post-header-details">
                             <div class="Post-header-name">{me.name}</div>
                             <div class="Post-header-timestamp">
-                              <!-- {moment(reply.createdAt).format('MMM D h:mm A')} -->
                               {formatDate(reply.createdAt)}
                             </div>
                           </div>
@@ -260,7 +257,6 @@
                               {findContact(reply.from).name || ''}
                             </div>
                             <div class="Post-header-timestamp">
-                              <!-- {moment(reply.createdAt).format('MMM D h:mm A')} -->
                               {formatDate(reply.createdAt)}
                             </div>
                           </div>
