@@ -15,7 +15,7 @@
   }
 
   input[invalid='true'] {
-    border: 1px solid $color--warning;
+    border: 1px solid $color--danger;
   }
 
   input[isFocused='true'][invalid='false'] {
