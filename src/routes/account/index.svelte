@@ -7,6 +7,31 @@
   import Header from './Header.svelte';
 </script>
 
+<style lang="scss">
+  .Account {
+    display: flex;
+    flex-flow: column;
+    padding: 2em;
+
+    .Account-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 100%;
+    }
+  }
+  .row {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 10px;
+  }
+  .half {
+    width: 50%;
+    max-width: 500px;
+  }
+</style>
+
 <svelte:head>
   <title>Account/User Profile</title>
 </svelte:head>
@@ -30,7 +55,7 @@
 
   <br />
 
-  <Divider type="default" />
+  <Divider />
 
   <h3>Basic Information</h3>
 
@@ -55,7 +80,7 @@
   </form>
 
   <br />
-  <Divider type="default" />
+  <Divider />
 
   <h3>Password</h3>
 
@@ -81,28 +106,3 @@
     </div>
   </form>
 </div>
-
-<style lang="scss">
-  .Account {
-    display: flex;
-    flex-flow: column;
-    padding: 2em;
-
-    .Account-photo {
-      width: 80px;
-      height: 80px;
-      border-radius: 100%;
-    }
-  }
-  .row {
-    display: inline-flex;
-    flex-flow: row nowrap;
-    width: 100%;
-    max-width: 1000px;
-    margin-bottom: 10px;
-  }
-  .half {
-    width: 50%;
-    max-width: 500px;
-  }
-</style>

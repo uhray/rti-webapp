@@ -13,7 +13,7 @@
   <div id="TimeOff-modal" uk-modal>
     <div class="TimeOff-modalBody uk-modal-dialog uk-modal-body">
       <h2 class="TimeOff-header">Time Off</h2>
-      <Divider type="default" />
+      <Divider />
       <br />
       <Input label="First Name" placeholder="First Name" fill />
       <Input label="Last Name" placeholder="Last Name" fill />
@@ -34,7 +34,7 @@
       </div>
       <br />
       <div class="TimeOff-bottomGroup">
-        <Divider type="default" />
+        <Divider />
         <div style="margin-top: 9px;" />
         <div class="uk-flex uk-align-right TimeOff-buttons">
           <Button outline fill>Message</Button>

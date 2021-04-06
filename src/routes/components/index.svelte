@@ -82,7 +82,7 @@ defaults to [height: 100%] with no scrolling if no height value
   <Table {headers} data={tableData} height={50} />
 
   <h2>Divider</h2>
-  <Divider type="default" />
+  <Divider />
 
   <h2>Progress Bar</h2>
   <ProgressBar progress="35" />
