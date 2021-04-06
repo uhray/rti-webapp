@@ -11,6 +11,7 @@
   export let posts;
   export let sortedPosts;
   export let me;
+  export let refetch;
   export let contacts = [];
   export let replies;
   export let slug = undefined;
@@ -45,6 +46,13 @@
   afterUpdate(() => {
     // messages.scrollTo(0, messages.scrollHeight);
   });
+
+  const scrollToBottom = (div = undefined) => {
+    if (div) {
+    } else {
+      messages.scrollTo(0, messages.scrollHeight);
+    }
+  };
 
   const findContact = id => {
     return _.find(contacts, { id: id });
@@ -88,7 +96,8 @@
 
       putData(`http://localhost:5000/api/v1/posts/${replyPost._id}`, payload)
         .then(json => {
-          console.log(json);
+          console.log(json.data);
+          refetch(payload._id);
         })
         .catch(err => {
           console.log(err);
@@ -103,8 +112,10 @@
       };
 
       postData('http://localhost:5000/api/v1/posts', payload)
-        .then(json => {
-          console.log(json);
+        .then(async json => {
+          console.log(json.data);
+          await refetch(json.data._id);
+          scrollToBottom();
         })
         .catch(err => {
           console.log(err);
@@ -120,7 +131,7 @@
       },
       body: JSON.stringify(data),
     });
-    return response;
+    return response.json();
   }
 
   async function putData(url = '', data = {}) {
@@ -131,7 +142,7 @@
       },
       body: JSON.stringify(data),
     });
-    return response;
+    return response.json();
   }
 
   function removeTags(str) {
@@ -141,7 +152,7 @@
   }
 
   function formatDate(d) {
-    let datetime = 'Apr 32 2:00 pm';
+    let datetime = '';
 
     if (moment(new Date(d).toISOString()).isSame(moment(), 'day')) {
       datetime = moment(d).format('h:mm A');
@@ -243,7 +254,7 @@
                           <div class="Post-header-details">
                             <div class="Post-header-name">{me.name}</div>
                             <div class="Post-header-timestamp">
-                              {formatDate(reply.createdAt)}
+                              {reply.createdAt ? formatDate(reply.createdAt) : ''}
                             </div>
                           </div>
                         </div>
@@ -257,7 +268,7 @@
                               {findContact(reply.from).name || ''}
                             </div>
                             <div class="Post-header-timestamp">
-                              {formatDate(reply.createdAt)}
+                              {reply.createdAt ? formatDate(reply.createdAt) : ''}
                             </div>
                           </div>
                         </div>

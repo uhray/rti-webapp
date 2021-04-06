@@ -72,6 +72,27 @@
       .groupBy('date')
       .value();
   });
+
+  async function refetch(postId = undefined) {
+    const id = me.id;
+    const res = await tools.fetch(
+      `http://localhost:5000/api/v1/posts/manager/${slug}`,
+      {},
+      { fetch: fetch }
+    );
+
+    // #TODO: fetch to get user's contacts info instead of from ./data.js
+
+    posts = res;
+
+    replies = await posts.map(post => {
+      if (post._id === postId) {
+        return { id: post._id, display: true };
+      } else {
+        return _.find(replies, { id: post._id });
+      }
+    });
+  }
 </script>
 
 <style lang="scss">
@@ -174,6 +195,7 @@
         {replies}
         {me}
         {slug}
+        {refetch}
         contacts={contactsList} />
 
     </div>

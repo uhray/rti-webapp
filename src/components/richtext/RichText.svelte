@@ -2,6 +2,9 @@
   import { onMount } from 'svelte';
 
   // ========================= Quill.js Config ================== //
+
+  export let label = undefined;
+  export let send = undefined;
   let quill;
   let htmlContent = 'type above';
   let content = undefined;
@@ -29,21 +32,39 @@
       icons[key] = value;
     }
 
+    let bindings = {
+      enter: {
+        key: 13,
+        shortKey: true,
+        handler: function() {
+          sendMessage();
+        },
+      },
+    };
+
     quill = new Quill('#editor', {
       theme: 'snow',
       placeholder: 'Type something...',
       modules: {
         toolbar: '#toolbar',
+        keyboard: {
+          bindings: bindings,
+        },
       },
     });
   });
+
   const updateContent = () => {
     content = quill.getText();
     htmlContent = quill.root.innerHTML;
   };
-  const doSomething = () => {
-    console.log('send button clicked');
+
+  const sendMessage = () => {
+    const message = htmlContent;
+    quill.deleteText(0, quill.getLength());
+    send(message);
   };
+
   // =========================================================== //
 
   let isFocused = false;
@@ -53,9 +74,6 @@
   const onBlur = () => {
     isFocused = false;
   };
-
-  export let label = undefined;
-  export let send = undefined;
 </script>
 
 <style src="./RichText.scss">
@@ -84,9 +102,7 @@
         <button
           class="send-msg"
           on:click={() => {
-            const message = htmlContent;
-            quill.deleteText(0, quill.getLength());
-            send(message);
+            sendMessage();
           }}>
           <svg
             width="24"

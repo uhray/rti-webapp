@@ -60,6 +60,19 @@
       .groupBy('date')
       .value();
   });
+
+  async function refetch() {
+    const id = me.id;
+    const res = await tools.fetch(
+      `http://localhost:5000/api/v1/posts/manager`,
+      {},
+      { fetch: fetch }
+    );
+
+    // #TODO: fetch to get user's contacts info instead of from ./data.js
+
+    posts = res;
+  }
 </script>
 
 <style lang="scss">
@@ -164,6 +177,7 @@
         {sortedPosts}
         {replies}
         {me}
+        {refetch}
         contacts={contactsList} />
     </div>
   </div>
