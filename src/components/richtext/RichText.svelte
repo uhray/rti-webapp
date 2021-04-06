@@ -62,7 +62,7 @@
   const sendMessage = () => {
     const message = htmlContent;
     quill.deleteText(0, quill.getLength());
-    send(message);
+    send && send(message);
   };
 
   // =========================================================== //
