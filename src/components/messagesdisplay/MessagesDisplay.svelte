@@ -139,6 +139,41 @@
     else str = str.toString();
     return str.replace(/(<([^>]+)>)/gi, '');
   }
+
+  function formatDate(d) {
+    let datetime = 'Apr 32 2:00 pm';
+
+    if (moment(new Date(d).toISOString()).isSame(moment(), 'day')) {
+      datetime = moment(d).format('h:mm A');
+    } else if (
+      moment(new Date(d).toISOString()).isSame(
+        moment().subtract(1, 'days'),
+        'day'
+      )
+    ) {
+      datetime = 'Yesterday ' + moment(d).format('h:mm A');
+    } else if (
+      moment(new Date(d).toISOString()).isSameOrAfter(
+        moment().subtract(7, 'days'),
+        'day'
+      )
+    ) {
+      datetime = moment(d).format('dddd h:mm A');
+    } else if (
+      moment(new Date(d).toISOString()).isSameOrAfter(
+        moment()
+          .subtract(365, 'days')
+          .startOf('Y'),
+        'day'
+      )
+    ) {
+      datetime = moment(d).format('MMM D h:mm A');
+    } else {
+      datetime = moment(d).format('MMM D YYYY h:mm A');
+    }
+
+    return datetime;
+  }
 </script>
 
 <style src="./MessagesDisplay.scss">
@@ -210,7 +245,8 @@
                           <div class="Post-header-details">
                             <div class="Post-header-name">{me.name}</div>
                             <div class="Post-header-timestamp">
-                              {moment(reply.createdAt).format('h:mm A')}
+                              <!-- {moment(reply.createdAt).format('MMM D h:mm A')} -->
+                              {formatDate(reply.createdAt)}
                             </div>
                           </div>
                         </div>
@@ -224,7 +260,8 @@
                               {findContact(reply.from).name || ''}
                             </div>
                             <div class="Post-header-timestamp">
-                              {moment(reply.createdAt).format('h:mm A')}
+                              <!-- {moment(reply.createdAt).format('MMM D h:mm A')} -->
+                              {formatDate(reply.createdAt)}
                             </div>
                           </div>
                         </div>
