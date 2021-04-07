@@ -14,6 +14,7 @@
   export let refetch;
   export let contacts = [];
   export let replies;
+  export let toggleReplies;
   export let slug = undefined;
 
   let messages;
@@ -56,18 +57,6 @@
 
   const findContact = id => {
     return _.find(contacts, { id: id });
-  };
-
-  const toggleReplies = id => {
-    replies = replies.map(r => {
-      if (r.id == id) {
-        return { id: r.id, display: !r.display };
-      } else {
-        return r;
-      }
-    });
-
-    replies = replies;
   };
 
   function onElementHeightChange(elm, callback) {
@@ -193,10 +182,12 @@
   {#if sortedPosts}
     {#each Object.keys(sortedPosts) as date}
       <div class="Display-dateLabel">
-        <Label
-          text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
-          status="disabled"
-          backgroundColor="rgba(166, 173, 196, 0.3);" />
+        {#if date}
+          <Label
+            text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
+            status="disabled"
+            backgroundColor="rgba(166, 173, 196, 0.3);" />
+        {/if}
       </div>
       {#each Object.values(sortedPosts[date]) as post}
         <div class="Post">

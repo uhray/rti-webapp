@@ -1,7 +1,7 @@
 <script context="module">
   import _ from 'lodash';
   import moment from 'moment';
-  import { contacts, me } from './data.js'; // #TODO: remove hardcoded me, get user data
+  import { contacts, me, interval } from './data.js'; // #TODO: remove hardcoded me, get user data
   import tools from '../../tools/crudApi.ts';
   export async function preload({ params }) {
     const id = me.id;
@@ -52,27 +52,56 @@
     sortedPosts = _.chain(posts)
       .map(p => {
         let newP = p;
-        newP.date = moment(new Date(p.createdAt).toISOString()).format(
-          'MMM D, YYYY'
-        );
+
+        if (p.createdAt) {
+          newP.date = moment(new Date(p.createdAt).toISOString()).format(
+            'MMM D, YYYY'
+          );
+        }
         return newP;
       })
       .groupBy('date')
       .value();
   });
 
+  const toggleReplies = id => {
+    replies = replies.map(r => {
+      if (r.id == id) {
+        return { id: r.id, display: !r.display };
+      } else {
+        return r;
+      }
+    });
+
+    replies = replies;
+  };
+
+  async function getData(url = '', data = {}) {
+    const response = await fetch(url, {});
+    return response.json();
+  }
+
   async function refetch() {
     const id = me.id;
-    const res = await tools.fetch(
-      `http://localhost:5000/api/v1/posts/manager`,
-      {},
-      { fetch: fetch }
-    );
+
+    getData('http://localhost:5000/api/v1/posts', {})
+      .then(async json => {
+        posts = json.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
     // #TODO: fetch to get user's contacts info instead of from ./data.js
 
-    posts = res;
+    replies = await posts.map(post => {
+      return _.find(replies, { id: post._id });
+    });
   }
+
+  setInterval(async () => {
+    await refetch();
+  }, interval || 1000);
 </script>
 
 <style lang="scss">
@@ -177,6 +206,7 @@
         {sortedPosts}
         {replies}
         {me}
+        {toggleReplies}
         {refetch}
         contacts={contactsList} />
     </div>
