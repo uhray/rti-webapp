@@ -42,6 +42,21 @@ export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
     });
 });
 
+export const userLogin = async (path, data) => {
+  const res = await tools.fetch(path, {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+  console.log('crud', res);
+  return res;
+}
+
+export const auth = async() => {
+  const res = await tools.fetch('http://localhost:5000/api/v1/users/me',
+  { headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' } });
+  return res;
+}
+
 export function serialize(obj, prefix?) {
   var str = [],
     p,

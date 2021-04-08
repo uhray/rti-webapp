@@ -2,7 +2,7 @@
   import Input from '../../input/Input.svelte';
   import Checkbox from '../../checkbox/Checkbox.svelte';
   import Button from '../../button/Button.svelte';
-  import tools from '../../../tools/crudApi';
+  import tools, { userLogin, auth } from '../../../tools/crudApi';
   import {
     isEmpty,
     validEmail,
@@ -21,20 +21,14 @@
 
   const handleLogin = async data => {
     if (!isDisabled) {
-      const response = await tools.fetch(
+      const response = await userLogin(
         'http://localhost:5000/turnkey/login',
-        {
-          method: 'POST',
-          body: JSON.stringify(data),
-        }
+        data
       );
       if (!response.error) {
         await localStorage.setItem('turnkey', response);
         console.log(localStorage.getItem('turnkey'));
-        const user = await tools.fetch(
-          'http://localhost:5000/api/v1/users/me',
-          { headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' } }
-        );
+        const user = await auth();
         console.log(user);
       }
     }
