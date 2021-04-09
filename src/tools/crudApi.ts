@@ -1,6 +1,7 @@
 import set from 'lodash/set';
 import merge from 'lodash/merge';
 import { goto } from '@sapper/app';
+import {userStore} from '../store';
 
 const tools: any = {};
 
@@ -54,7 +55,13 @@ export const userLogin = async (path, data) => {
 export const auth = async() => {
   const res = await tools.fetch('http://localhost:5000/api/v1/users/me',
   { headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' } });
+  console.log(res);
   return res;
+}
+
+export const userLogout = () => {
+  localStorage.clear();
+  userStore.userLogout();
 }
 
 export function serialize(obj, prefix?) {

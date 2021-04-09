@@ -1,8 +1,21 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import Nav from '../components/nav/Nav.svelte';
   import TopNav from '../components/topnav/TopNav.svelte';
+  import { userStore } from '../store';
+  import { auth } from '../tools/crudApi';
 
   export let segment: string;
+
+  onMount(async () => {
+    const user = await auth();
+    if(user){
+      userStore.setCurrent(user);
+    }else{
+      segment = 'signin';
+    }
+  });
+
 </script>
 
 {#if segment === 'signin' || segment === 'signup'}
@@ -15,7 +28,7 @@
   <div class="wrapper">
     <Nav {segment} />
     <main>
-      <TopNav />
+      <TopNav user={$userStore} />
       <div class="main-content">
         <slot />
       </div>

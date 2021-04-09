@@ -1,8 +1,10 @@
 <script>
+  import { goto } from '@sapper/app';
   import Input from '../../input/Input.svelte';
   import Checkbox from '../../checkbox/Checkbox.svelte';
   import Button from '../../button/Button.svelte';
-  import tools, { userLogin, auth } from '../../../tools/crudApi';
+  import { userLogin, auth } from '../../../tools/crudApi';
+  import { userStore } from '../../../store';
   import {
     isEmpty,
     validEmail,
@@ -27,9 +29,12 @@
       );
       if (!response.error) {
         await localStorage.setItem('turnkey', response);
-        console.log(localStorage.getItem('turnkey'));
         const user = await auth();
-        console.log(user);
+        if (user) {
+          userStore.setCurrent(user);
+          console.log('store', $userStore);
+          goto('/');
+        }
       }
     }
   };
