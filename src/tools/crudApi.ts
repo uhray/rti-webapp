@@ -32,12 +32,9 @@ export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
   if (fetchOpts.body && typeof fetchOpts.body === 'object') {
     fetchOpts.body = JSON.stringify(fetchOpts.body);
   }
-  console.log('curious', window['fetch'])
+  
   return ((opts && opts.fetch) || window['fetch'])(src, fetchOpts || {})
-    .then(res => { 
-      const myRes = res.json()
-      console.log(myRes)
-      return myRes})
+    .then(res => res.json())
     .then(res => {
       if (res && res.error) return Promise.reject(res.error);
       else {
@@ -63,9 +60,10 @@ export const auth = async() => {
 }
 
 export const userSignup = async (data) => {
-  const opts = {method: 'POST',body: JSON.stringify(data)}
-  console.log('fetch options', opts, options().baseUrl + '/users');
-  const res = await tools.fetch(options().baseUrl + '/users', opts);
+  const res = await tools.fetch(options().baseUrl + '/users', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
   console.log('signup res', res);
   return res;
 }

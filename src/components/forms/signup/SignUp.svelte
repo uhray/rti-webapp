@@ -1,4 +1,5 @@
 <script>
+  import { goto } from '@sapper/app';
   import Input from '../../input/Input.svelte';
   import Button from '../../button/Button.svelte';
   import {
@@ -33,7 +34,9 @@
   const handleSignup = async data => {
     try {
       const response = await userSignup(data);
-      console.log(response);
+      if (!response.error) {
+        goto('/signin');
+      }
     } catch (err) {
       console.log('my error', err);
     }
@@ -77,7 +80,7 @@
       <br />
       <div
         class="SignUpForm-button"
-        on:click={() =>
+        on:click|preventDefault={() =>
           handleSignup({
             email,
             password,
