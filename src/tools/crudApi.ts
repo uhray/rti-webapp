@@ -68,9 +68,9 @@ export const userSignup = async (data) => {
   return res;
 }
 
-export const userLogout = () => {
-  localStorage.clear();
-  userStore.userLogout();
+export const userLogout = async () => {
+  localStorage.removeItem('turnkey');
+  window.location.pathname = '/signin'
 }
 
 export function serialize(obj, prefix?) {

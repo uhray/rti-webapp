@@ -84,7 +84,7 @@
         on:blur={onBlur}
       />
 
-      <span class="uk-form-icon uk-form-icon-flip icon" on:click={togglePass}>
+      <span class="uk-form-icon uk-form-icon-flip" on:click={togglePass}>
         <Icon
           type={showPassword ? 'show' : 'hide'}
           color={invalid
