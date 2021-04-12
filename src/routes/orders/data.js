@@ -65,8 +65,19 @@ export const data = {
           deliveryNotes:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus tristique commodo eget semper id. Ultrices nunc posuere pellentesque ut etiam egestas sapien elit sed. Pellentesque ornare donec urna, integer. Facilisi ut pulvinar elit, tempus, aliquam tincidunt velit nunc.',
         },
-        customerInfo: {},
-        refNumbers: {},
+        customerInfo: {
+          customerName: 'Shipping Compony',
+          customerID: '1756273',
+          address: '1253 Shipping St, Kansas City, KS 66414',
+          phoneNumber: '913-333-4444',
+        },
+        refNumbers: {
+          customerOrderId: '0102031',
+          stopRef: '2375923752:2835235',
+          dictNum: '0000000000000',
+          orderMarks:
+            '*** EXPEDITED FREIGHT ***DO NOT BOBTAIL TO SHIPPER, MUST ARRIVE 1HR EARLY -- HOT FREIGHT MUST PICK UP AND DELIVER ON TIME! issues with this load contact expeditedcsr@rti1.com or call 913‑233‑5514',
+        },
       },
     },
     {
