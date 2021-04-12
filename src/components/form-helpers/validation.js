@@ -1,5 +1,4 @@
 export const isEmpty = (val) => {
-    console.log(val)
     return val.trim().length === 0;
 }
 
@@ -20,7 +19,6 @@ export const validSelect = (val, val2) => {
 }
 
 export const formValid = (...args) => {
-    console.log(args)
     for(const arg of args){
         if(!arg){
             return true

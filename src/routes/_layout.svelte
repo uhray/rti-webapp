@@ -8,14 +8,14 @@
   export let segment: string;
 
   onMount(async () => {
+    console.log('setting user');
     const user = await auth();
-    if(user){
+    if (user) {
       userStore.setCurrent(user);
-    }else{
+    } else {
       segment = 'signin';
     }
   });
-
 </script>
 
 {#if segment === 'signin' || segment === 'signup'}

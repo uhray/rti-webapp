@@ -23,10 +23,7 @@
 
   const handleLogin = async data => {
     if (!isDisabled) {
-      const response = await userLogin(
-        'http://localhost:5000/turnkey/login',
-        data
-      );
+      const response = await userLogin(data);
       if (!response.error) {
         await localStorage.setItem('turnkey', response);
         const user = await auth();

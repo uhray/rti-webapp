@@ -32,9 +32,12 @@ export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
   if (fetchOpts.body && typeof fetchOpts.body === 'object') {
     fetchOpts.body = JSON.stringify(fetchOpts.body);
   }
-
+  console.log('curious', window['fetch'])
   return ((opts && opts.fetch) || window['fetch'])(src, fetchOpts || {})
-    .then(res => res.json())
+    .then(res => { 
+      const myRes = res.json()
+      console.log(myRes)
+      return myRes})
     .then(res => {
       if (res && res.error) return Promise.reject(res.error);
       else {
@@ -43,8 +46,8 @@ export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
     });
 });
 
-export const userLogin = async (path, data) => {
-  const res = await tools.fetch(path, {
+export const userLogin = async (data) => {
+  const res = await tools.fetch(options().turnkeyUrl + '/login', {
         method: 'POST',
         body: JSON.stringify(data),
       });
@@ -53,9 +56,17 @@ export const userLogin = async (path, data) => {
 }
 
 export const auth = async() => {
-  const res = await tools.fetch('http://localhost:5000/api/v1/users/me',
+  const res = await tools.fetch( options().baseUrl + '/users/me',
   { headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' } });
   console.log(res);
+  return res;
+}
+
+export const userSignup = async (data) => {
+  const opts = {method: 'POST',body: JSON.stringify(data)}
+  console.log('fetch options', opts, options().baseUrl + '/users');
+  const res = await tools.fetch(options().baseUrl + '/users', opts);
+  console.log('signup res', res);
   return res;
 }
 
@@ -137,3 +148,14 @@ export function changePageIfDifferent(url, page) {
     goto(url);
   }
 }
+
+const options = () => {
+  return {baseUrl:'http://localhost:5000/api/v1',
+turnkeyUrl:'http://localhost:5000/turnkey',
+baseOptions: {
+  headers: {
+    'Content-Type': 'application/json',
+    'Turnkey-Auth': localStorage.getItem('turnkey') || '',
+  }
+}
+}}

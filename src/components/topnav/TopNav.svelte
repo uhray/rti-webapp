@@ -12,7 +12,7 @@
       <Icon type="account" />
       <span class="TopNav-navName">
         {#if user.isLoggedIn}
-        {user.user.email}
+          {user.user.email}
         {/if}
       </span>
       <Icon type="caretdown" />
