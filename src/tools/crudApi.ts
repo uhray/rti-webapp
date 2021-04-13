@@ -44,6 +44,7 @@ export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
 });
 
 export const userLogin = async (data) => {
+  console.log(data);
   const res = await tools.fetch(options().turnkeyUrl + '/login', {
         method: 'POST',
         body: JSON.stringify(data),
