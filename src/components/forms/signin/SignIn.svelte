@@ -13,13 +13,13 @@
   } from '../../form-helpers/validation';
   import Card from '../../card/Card.svelte';
 
-  let email = '';
+  let username = '';
   let password = '';
   let isDisabled = true;
 
-  $: emailValid = validEmail(email);
+  $: usernameValid = !isEmpty(username);
   $: passValid = validPass(password);
-  $: isDisabled = formValid(emailValid, passValid);
+  $: isDisabled = formValid(usernameValid, passValid);
 
   const handleLogin = async data => {
     if (!isDisabled) {
@@ -51,9 +51,9 @@
       <Input
         fill
         placeholder=""
-        value={email}
+        value={username}
         icon="user"
-        on:input={e => (email = e.target.value)}
+        on:input={e => (username = e.target.value.toLowerCase())}
       />
       <br />
       <span class="SignInForm-inputLabel">Password</span>
@@ -73,7 +73,7 @@
       </div>
       <div
         class="SignInForm-button"
-        on:click|preventDefault={() => handleLogin({ email, password })}
+        on:click|preventDefault={() => handleLogin({ username, password })}
       >
         <Button primary fill large disabled={isDisabled}>Sign In</Button>
       </div>

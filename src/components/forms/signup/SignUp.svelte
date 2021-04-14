@@ -15,18 +15,21 @@
   let firstName = '';
   let lastName = '';
   let email = '';
+  let username = '';
   let password = '';
   let confirmPass = '';
 
   $: firstNameValid = !isEmpty(firstName);
   $: lastNameValid = !isEmpty(lastName);
   $: emailValid = validEmail(email);
+  $: usernameValid = !isEmpty(username);
   $: passValid = validPass(password);
   $: confirmPassword = passMatch(password, confirmPass);
   $: isDisabled = formValid(
     firstNameValid,
     lastNameValid,
     emailValid,
+    usernameValid,
     passValid,
     confirmPassword
   );
@@ -59,8 +62,11 @@
       <span class="SignUpForm-inputLabel">Last Name</span>
       <Input fill placeholder="" on:input={e => (lastName = e.target.value)} />
       <br />
-      <span class="SignUpForm-inputLabel">User ID</span>
+      <span class="SignUpForm-inputLabel">Email</span>
       <Input fill placeholder="" on:input={e => (email = e.target.value)} />
+      <br />
+      <span class="SignUpForm-inputLabel">User ID</span>
+      <Input fill placeholder="" on:input={e => (username = e.target.value)} />
       <br />
       <span class="SignUpForm-inputLabel">Password</span>
       <Input
@@ -83,6 +89,7 @@
         on:click|preventDefault={() =>
           handleSignup({
             email,
+            username,
             password,
             contactInfo: { firstName, lastName },
           })}
