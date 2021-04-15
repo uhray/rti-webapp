@@ -1,37 +1,20 @@
 <script>
+  import { onMount, afterUpdate } from 'svelte';
   import Logo from '../../../static/images/rti.png';
   import Button from '../../components/button/Button.svelte';
   import Icon from '../../components/icon/Icon.svelte';
   import Divider from '../../components/divider/Divider.svelte';
   import Input from '../../components/input/Input.svelte';
   import Header from './Header.svelte';
-  import {userStore} from '../../store';
+  import { userStore } from '../../store';
+  import Card from '../../components/card/Card.svelte';
+  let currentUser = {};
+
+  afterUpdate(() => {
+    console.log($userStore);
+    currentUser = $userStore.user;
+  });
 </script>
-
-<style lang="scss">
-  .Account {
-    display: flex;
-    flex-flow: column;
-    padding: 2em;
-
-    .Account-photo {
-      width: 80px;
-      height: 80px;
-      border-radius: 100%;
-    }
-  }
-  .row {
-    display: inline-flex;
-    flex-flow: row nowrap;
-    width: 100%;
-    max-width: 1000px;
-    margin-bottom: 10px;
-  }
-  .half {
-    width: 50%;
-    max-width: 500px;
-  }
-</style>
 
 <svelte:head>
   <title>Account/User Profile</title>
@@ -63,16 +46,32 @@
   <form class="uk-form-stacked">
     <div class="row">
       <div class="uk-width-1-3 uk-margin-small-right">
-        <Input label="First Name" fill />
+        <Input
+          label="First Name"
+          placeholder={$userStore.user
+            ? $userStore.user.contactInfo.firstName
+            : ' '}
+          fill
+        />
       </div>
       <div class="uk-width-1-3 uk-margin-small-right">
-        <Input label="Last Name" fill />
+        <Input
+          label="Last Name"
+          placeholder={$userStore.user
+            ? $userStore.user.contactInfo.lastName
+            : ''}
+          fill
+        />
       </div>
     </div>
     <br />
     <div class="row">
       <div class="uk-width-1-3 uk-margin-small-right">
-        <Input label="Email" fill />
+        <Input
+          label="Email"
+          placeholder={$userStore.user ? $userStore.user.email : ''}
+          fill
+        />
       </div>
       <div class="uk-width-1-3 uk-margin-small-right">
         <Input label="Driver Manager" fill />
@@ -107,3 +106,28 @@
     </div>
   </form>
 </div>
+
+<style lang="scss">
+  .Account {
+    display: flex;
+    flex-flow: column;
+    padding: 2em;
+
+    .Account-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 100%;
+    }
+  }
+  .row {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 10px;
+  }
+  .half {
+    width: 50%;
+    max-width: 500px;
+  }
+</style>

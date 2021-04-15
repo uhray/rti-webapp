@@ -74,6 +74,22 @@ export const userLogout = async () => {
   window.location.pathname = '/signin'
 }
 
+export const userUpdate = async (id, data) => {
+  const res = await tools.fetch(`${options().baseUrl}/users/${id}`, { method:'PUT', body: JSON.stringify(data) })
+  return res;
+}
+
+export const getAllUsers = async () => {
+  const res = await tools.fetch(options().baseUrl + '/users');
+  return res
+}
+
+export const deleteUser = async (id) => {
+  console.log('deleting user', id)
+  const res = await tools.fetch(`${options().baseUrl}/users/${id}`, {method:'DELETE'});
+  return res
+}
+
 export function serialize(obj, prefix?) {
   var str = [],
     p,

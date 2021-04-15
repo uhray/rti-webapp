@@ -35,7 +35,7 @@
             </tr>
           </thead>
           <tbody class="Table-body">
-            {#each data.data as item}
+            {#each data as item}
               <tr class="Table-row">
                 {#each headers as header}
                   <td

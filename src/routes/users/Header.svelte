@@ -2,6 +2,7 @@
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
+  export let currentTab;
 </script>
 
 <svelte:head>
@@ -27,11 +28,13 @@
         <Button height="40px" outline icon="filter" fill>Filter</Button>
         <div style="margin-left: 5px;" />
         <!-- Show this On Admin Tab -->
-        <Button height="40px" primary fill>Add Admin</Button>
+        {#if currentTab === 'Admins'}
+          <Button height="40px" primary fill>Add Admin</Button>
+        {/if}
       </div>
     </div>
     <div class="uk-width-2-3 Header-tabs">
-      <TabMenu type="default" tabs={['Users', 'Admins']} />
+      <TabMenu on:toggle type="default" tabs={['Users', 'Admins']} />
     </div>
   </div>
 </div>
@@ -92,6 +95,15 @@
 
       .Header-actions-search {
         margin-right: 5px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    .Header {
+      .Header-content {
+        flex-flow: wrap;
+        justify-content: flex-start;
       }
     }
   }

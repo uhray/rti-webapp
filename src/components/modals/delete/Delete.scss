@@ -1,0 +1,37 @@
+.DeleteModal {
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  .DeleteModal-inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    .DeleteModal-content {
+      position: absolute;
+      min-width: 500px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 25px;
+      .DeleteModal-closeIcon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      .DeleteModal-title {
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin-top: 0;
+      }
+      .DeleteModal-buttonContainer {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+}

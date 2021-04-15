@@ -1,8 +1,11 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   export let type = undefined;
   export let hover = undefined;
   export let color = '#a6adc4';
   export let slotend = undefined;
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <!-- HTML -->
@@ -416,6 +419,7 @@
       height="32"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
+      on:click={() => dispatch('edit')}
     >
       <path
         d="M16.0312 13.875C16 13.9062 16 13.9688 16 14V18.5C16 18.7812 15.75 19
@@ -440,6 +444,7 @@
       height="32"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
+      on:click={() => dispatch('delete')}
     >
       <path
         d="M14.25 17.5H14.75C14.875 17.5 15 17.4062 15 17.25V8.75C15 8.625
@@ -1206,6 +1211,7 @@
       viewBox="0 0 24 24"
       fill={color}
       xmlns="http://www.w3.org/2000/svg"
+      on:click={() => dispatch('close')}
     >
       <path
         d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812 7.71875 19.75
