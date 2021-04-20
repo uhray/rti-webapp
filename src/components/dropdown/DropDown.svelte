@@ -5,6 +5,7 @@
   export let choiceHeader = undefined;
   export let choices = undefined;
   export let label = undefined;
+  import { userLogout } from '../../tools/crudApi';
 </script>
 
 <!-- HTML -->
@@ -54,7 +55,7 @@
               <Icon type="user" />
               <a class="DropDown-choice" href="account">View Profile</a>
             </li>
-            <li class="uk-flex DropDown-listItem">
+            <li class="uk-flex DropDown-listItem" on:click|preventDefault={userLogout}>
               <Icon type="logout" />
               <a class="DropDown-choice">Log Out</a>
             </li>
