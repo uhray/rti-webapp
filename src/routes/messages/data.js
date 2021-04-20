@@ -39,6 +39,12 @@ export const contacts = [
             picture:
               'https://bloximages.chicago2.vip.townnews.com/madison.com/content/tncms/assets/v3/editorial/f/de/fde99ff3-3250-5179-a96d-da56445fb81b/5521153adb78f.preview-300.jpg?crop=300%2C225%2C0%2C79&resize=1200%2C900&order=crop%2Cresize',
           },
+          {
+            id: '60759c12249ff0e0cafe67bb',
+            name: 'BRETT P',
+            picture:
+              'https://onmilwaukee.com/images/articles/pa/packers-brett-favre-aging-morphing-gif/packers-brett-favre-aging-morphing-gif_fullsize_story1.jpg',
+          },
         ],
       },
     ],

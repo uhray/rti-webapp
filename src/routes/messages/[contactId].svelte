@@ -8,7 +8,7 @@
 
     const id = me.id;
     const res = await tools.fetch(
-      `http://localhost:5000/api/v1/posts/manager/${contactId}`,
+      `http://localhost:5000/api/v1/posts/`,
       {},
       { fetch: this.fetch }
     );
@@ -93,7 +93,7 @@
   async function refetch(postId = undefined) {
     const id = me.id;
 
-    getData(`http://localhost:5000/api/v1/posts/manager/${slug}`, {})
+    getData(`http://localhost:5000/api/v1/posts/`, {})
       .then(async json => {
         posts = json.data;
       })
@@ -112,9 +112,9 @@
     });
   }
 
-  setInterval(async () => {
-    await refetch();
-  }, interval || 1000);
+  // setInterval(async () => {
+  //   await refetch();
+  // }, interval || 1000);
 </script>
 
 <style lang="scss">
@@ -211,7 +211,7 @@
       <MessagesHeader {contact} tag={'RALED'} vehicle={'1XY001'} />
     </div>
     <div class="Messages-main-posts">
-      <MessagesDisplay
+      <!-- <MessagesDisplay
         {posts}
         {sortedPosts}
         {replies}
@@ -219,7 +219,7 @@
         {slug}
         {toggleReplies}
         {refetch}
-        contacts={contactsList} />
+        contacts={contactsList} /> -->
 
     </div>
   </div>

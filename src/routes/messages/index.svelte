@@ -5,15 +5,23 @@
   import tools from '../../tools/crudApi.ts';
   export async function preload({ params }) {
     const id = me.id;
-    const res = await tools.fetch(
-      `http://localhost:5000/api/v1/posts/manager`,
+    const posts = await tools.fetch(
+      `http://localhost:5000/api/v1/posts/`,
       {},
       { fetch: this.fetch }
     );
 
+    const contacts2 = await tools.fetch(
+      `http://localhost:5000/api/v1/users/contacts`,
+      {},
+      { fetch: this.fetch }
+    );
+
+    console.log(contacts2);
+
     // #TODO: fetch to get user's contacts info instead of from ./data.js
 
-    const posts = res;
+    console.log('### POSTS ###', posts);
 
     const replies = posts.map(post => {
       return { id: post._id, display: false };
@@ -99,9 +107,9 @@
     });
   }
 
-  setInterval(async () => {
-    await refetch();
-  }, interval || 1000);
+  // setInterval(async () => {
+  //   await refetch();
+  // }, interval || 1000);
 </script>
 
 <style lang="scss">
@@ -201,14 +209,14 @@
         vehicle={'1XY001'} />
     </div>
     <div class="Messages-main-posts">
-      <MessagesDisplay
+      <!-- <MessagesDisplay
         {posts}
         {sortedPosts}
         {replies}
         {me}
         {toggleReplies}
         {refetch}
-        contacts={contactsList} />
+        contacts={contactsList} /> -->
     </div>
   </div>
 </div>

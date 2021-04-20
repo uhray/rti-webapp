@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import _ from 'lodash';
   import { me as meData } from '../../routes/messages/data.js'; // #TODO: remove hardcoded me, get user data
   import { beforeUpdate, afterUpdate } from 'svelte';
@@ -172,13 +172,9 @@
 
     return datetime;
   }
-</script>
+</script><style src="./MessagesDisplay.scss">
 
-<style src="./MessagesDisplay.scss">
-
-</style>
-
-<div class="Display" id="Messages" bind:this={messages}>
+</style><div class="Display" id="Messages" bind:this={messages}>
   {#if sortedPosts}
     {#each Object.keys(sortedPosts) as date}
       <div class="Display-dateLabel">
@@ -193,9 +189,9 @@
         <div class="Post">
           {#if post.from === me.id}
             <div class="Post-header">
-              <img src={me.pic} alt={me.name} />
+              <img src={me.pic} alt={me?.name} />
               <div class="Post-header-details">
-                <div class="Post-header-name">{me.name}</div>
+                <div class="Post-header-name">{me?.name}</div>
                 <div class="Post-header-timestamp">
                   {moment(post.createdAt).format('h:mm A')}
                 </div>
@@ -205,10 +201,10 @@
             <div class="Post-header">
               <img
                 src={findContact(post.from).pic || ''}
-                alt={findContact(post.from).name || ''} />
+                alt={findContact(post.from)?.name || ''} />
               <div class="Post-header-details">
                 <div class="Post-header-name">
-                  {findContact(post.from).name || ''}
+                  {findContact(post.from)?.name || ''}
                 </div>
                 <div class="Post-header-timestamp">
                   {moment(post.createdAt).format('h:mm A')}
@@ -241,9 +237,9 @@
                     <div class="Post-replies-content">
                       {#if reply.from === me.id}
                         <div class="Post-header">
-                          <img src={me.pic} alt={me.name} />
+                          <img src={me.pic} alt={me?.name} />
                           <div class="Post-header-details">
-                            <div class="Post-header-name">{me.name}</div>
+                            <div class="Post-header-name">{me?.name}</div>
                             <div class="Post-header-timestamp">
                               {reply.createdAt ? formatDate(reply.createdAt) : ''}
                             </div>
@@ -253,10 +249,10 @@
                         <div class="Post-header">
                           <img
                             src={findContact(reply.from).pic || ''}
-                            alt={findContact(reply.from).name || ''} />
+                            alt={findContact(reply.from)?.name || ''} />
                           <div class="Post-header-details">
                             <div class="Post-header-name">
-                              {findContact(reply.from).name || ''}
+                              {findContact(reply.from)?.name || ''}
                             </div>
                             <div class="Post-header-timestamp">
                               {reply.createdAt ? formatDate(reply.createdAt) : ''}
@@ -332,4 +328,4 @@
     {/if}
     <RichText {send} />
   </div>
-</div>
+</div> -->
