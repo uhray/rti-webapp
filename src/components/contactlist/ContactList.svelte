@@ -1,6 +1,6 @@
 <script>
   export let slug;
-  export let contacts = undefined;
+  export let driversList = [];
   import Icon from '../icon/Icon.svelte';
   import { colors } from '../../theme/variables.js';
   import _ from 'lodash';
@@ -33,7 +33,7 @@
     </div>
   </a>
 
-  {#each contacts as group}
+  {#each driversList as group}
     <div class="ContactList-group">
       <div class="ContactList-group-header">
         <div class="uk-flex uk-flex-middle">

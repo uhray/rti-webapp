@@ -1,11 +1,12 @@
 <script context="module">
   import _ from 'lodash';
   import moment from 'moment';
-  import { contacts, me, interval } from './data.js'; // #TODO: remove hardcoded me, get user data
-  import tools from '../../tools/crudApi.ts';
+  import { me, interval } from './data.js'; // #TODO: remove hardcoded me, get user data
+  import tools, { getContacts } from '../../tools/crudApi.ts';
+  import { userStore } from '../../store';
+
   export async function preload(page, session) {
     const { contactId } = page.params;
-
     const id = me.id;
     const res = await tools.fetch(
       `http://localhost:5000/api/v1/posts/`,
@@ -13,39 +14,24 @@
       { fetch: this.fetch }
     );
 
-    // #TODO: fetch to get user's contacts info instead of from ./data.js
-
     const posts = res;
 
     const replies = posts.map(post => {
       return { id: post._id, display: false };
     });
 
-    let contactsList = [];
-
-    contacts.map(group => {
-      group.subgroups.map(s => {
-        s.contacts.map(c => {
-          contactsList.push({ name: c.name, id: c.id, pic: c.picture });
-        });
-      });
-    });
-
-    let contact = _.find(contactsList, { id: contactId });
+    console.log('### SLUG', contactId);
 
     return {
       posts,
       replies,
-      contact,
-      contacts,
-      contactsList,
       slug: contactId,
     };
   }
 </script>
 
 <script>
-  import { beforeUpdate, afterUpdate } from 'svelte';
+  import { beforeUpdate, afterUpdate, onMount } from 'svelte';
   import Header from './Header.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
   import MessagesHeader from '../../components/messagesheader/MessagesHeader.svelte';
@@ -55,10 +41,18 @@
   export let slug;
   export let posts;
   export let replies;
-  export let contact;
-  export let contacts;
-  export let contactsList;
+  let contactsList;
+  let driversList;
+  let contact;
   let sortedPosts = {};
+
+  onMount(async () => {
+    const contacts = await getContacts(
+      `http://localhost:5000/api/v1/users/contacts`
+    );
+    contactsList = contacts.contacts;
+    driversList = contacts.drivers;
+  });
 
   beforeUpdate(() => {
     sortedPosts = _.chain(posts)
@@ -71,6 +65,8 @@
       })
       .groupBy('date')
       .value();
+
+    contact = _.find(contactsList, { id: slug });
   });
 
   const toggleReplies = id => {
@@ -203,12 +199,12 @@
       <SearchBar alternate />
     </div>
     <div class="Messages-nav-contacts">
-      <ContactList {slug} {contacts} />
+      <ContactList {slug} {driversList} />
     </div>
   </div>
   <div class="Messages-main">
     <div class="Messages-main-header">
-      <MessagesHeader {contact} tag={'RALED'} vehicle={'1XY001'} />
+      <MessagesHeader {contact} />
     </div>
     <div class="Messages-main-posts">
       <!-- <MessagesDisplay

@@ -1,10 +1,7 @@
 <script>
   import Label from '../../components/label/Label.svelte';
   import { colors } from '../../theme/variables';
-  export let contact;
-  export let name = undefined;
-  export let vehicle = undefined;
-  export let tag = undefined;
+  export let contact = undefined;
 </script>
 
 <style src="./MessagesHeader.scss">
@@ -15,13 +12,17 @@
 
   {#if contact}
     <div class="Header-photo">
-      <img src={contact.pic || ''} alt={contact.name || ''} />
+      <img src={contact.avatarUrl || ''} alt={contact.name || ''} />
     </div>
 
     <div class="Header-content">
       <div class="Header-content-details">
-        <span class="Header-content-name">{contact.name}</span>
-        <span class="Header-content-vehicle">{tag} • {vehicle}</span>
+        <span class="Header-content-name">
+          {contact ? contact.name : 'All Messages'}
+        </span>
+        <span class="Header-content-vehicle">
+          {contact.username.toUpperCase()} • {contact.truckId}
+        </span>
       </div>
       <div class="Header-content-actions">
         <div>
