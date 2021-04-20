@@ -83,6 +83,14 @@ export const getContacts = async () => {
   return res;
 };
 
+export const getPosts = async () => {
+  const res = await tools.fetch(options().baseUrl + '/posts', {
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  // console.log(res);
+  return res;
+};
+
 export function serialize(obj, prefix?) {
   var str = [],
     p,

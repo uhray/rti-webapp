@@ -5,20 +5,7 @@
   import tools, { getContacts } from '../../tools/crudApi.ts';
   import { userStore } from '../../store';
 
-  export async function preload({ params }) {
-    const id = me.id;
-    const posts = await tools.fetch(
-      `http://localhost:5000/api/v1/posts/`,
-      {},
-      { fetch: this.fetch }
-    );
-
-    const replies = posts.map(post => {
-      return { id: post._id, display: false };
-    });
-
-    return { posts, replies };
-  }
+  export async function preload({ params }) {}
 </script>
 
 <script>
@@ -30,10 +17,11 @@
   import MessagesDisplay from '../../components/messagesdisplay/MessagesDisplay.svelte';
   import RichText from '../../components/richtext/RichText.svelte';
 
-  export let posts;
-  export let replies;
+  let posts;
+  let replies;
   let contactsList;
   let driversList;
+
   let sortedPosts = {};
 
   beforeUpdate(async () => {
@@ -53,11 +41,17 @@
   });
 
   onMount(async () => {
+    posts = await tools.fetch(`http://localhost:5000/api/v1/posts/`, {});
     const contacts = await getContacts(
       `http://localhost:5000/api/v1/users/contacts`
     );
+
     contactsList = contacts.contacts;
     driversList = contacts.drivers;
+
+    replies = posts.map(post => {
+      return { id: post._id, display: false };
+    });
   });
 
   const toggleReplies = id => {
