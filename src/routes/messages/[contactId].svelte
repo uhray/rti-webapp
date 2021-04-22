@@ -1,4 +1,4 @@
-<script context="module">
+<!-- <script context="module">
   import _ from 'lodash';
   import moment from 'moment';
   import { me, interval } from './data.js'; // #TODO: remove hardcoded me, get user data
@@ -28,9 +28,7 @@
       slug: contactId,
     };
   }
-</script>
-
-<script>
+</script><script>
   import { beforeUpdate, afterUpdate, onMount } from 'svelte';
   import Header from './Header.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
@@ -111,9 +109,7 @@
   // setInterval(async () => {
   //   await refetch();
   // }, interval || 1000);
-</script>
-
-<style lang="scss">
+</script><style lang="scss">
   .Messages {
     height: calc(100vh - 58px);
     max-height: calc(100vh - 58px);
@@ -185,9 +181,7 @@
       }
     }
   }
-</style>
-
-<svelte:head>
+</style><svelte:head>
   <title>Messages</title>
 </svelte:head>
 
@@ -207,7 +201,7 @@
       <MessagesHeader {contact} />
     </div>
     <div class="Messages-main-posts">
-      <!-- <MessagesDisplay
+      <MessagesDisplay
         {posts}
         {sortedPosts}
         {replies}
@@ -215,8 +209,8 @@
         {slug}
         {toggleReplies}
         {refetch}
-        contacts={contactsList} /> -->
+        contacts={contactsList} />
 
     </div>
   </div>
-</div>
+</div> -->
