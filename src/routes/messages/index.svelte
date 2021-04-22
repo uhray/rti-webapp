@@ -17,7 +17,7 @@
   import _ from 'lodash';
   import moment from 'moment';
   import { me, interval } from './data.js'; // #TODO: remove hardcoded me, get user data
-  import tools, { getContacts } from '../../tools/crudApi.ts';
+  import tools, { getContacts, addPost } from '../../tools/crudApi.ts';
   import { userStore } from '../../store';
 
   let posts;
@@ -25,6 +25,8 @@
   let contactsList;
   let driversList;
   let sortedPosts = {};
+
+  // OVERLAY VARIABLES
   let displayMessageOverlay = false;
   let teamsToMessage = [];
   const messageTypes = [
@@ -37,6 +39,7 @@
   let selectedMessageTypes = [];
   let inputMessageType = undefined;
   let message = '';
+  let canSubmit = false;
 
   beforeUpdate(async () => {
     sortedPosts = _.chain(posts)
@@ -104,22 +107,45 @@
   }
 
   function toggleMessageOverlay(team) {
-    console.log('Toggling Message Overlay', team);
     displayMessageOverlay = !displayMessageOverlay;
     teamsToMessage.push(team);
   }
 
-  function handleInput(input) {
-    console.log(input);
-    message = input;
+  function handleInput(input, basicContent) {
+    if (basicContent.length > 1) {
+      message = input;
+      canSubmit = true;
+    } else {
+      message = '';
+      canSubmit = false;
+    }
   }
 
   function handleMessageTypeInput(v) {
     inputMessageType = v;
   }
 
-  function send() {
-    console.log('Sending Message', message);
+  async function send() {
+    let payload = {
+      from: $userStore.user._id,
+      postType: 'ALERT',
+      message: message,
+      tags: selectedMessageTypes,
+      teamIds: teamsToMessage.map(t => t.name),
+    };
+
+    const res = await addPost(payload);
+
+    clearOverlayData();
+  }
+
+  function clearOverlayData() {
+    canSubmit = false;
+    teamsToMessage = [];
+    selectedMessageTypes = [];
+    message = '';
+    inputMessageType = undefined;
+    displayMessageOverlay = false;
   }
 
   // setInterval(async () => {
@@ -495,7 +521,6 @@
                       selectedMessageTypes.push(t);
                       selectedMessageTypes = selectedMessageTypes;
                     }
-                    console.log(selectedMessageTypes);
                   }}>
                   <div class="Dropdown-selection-check">
 
@@ -530,19 +555,20 @@
         </div>
 
         <div class=" MessageOverlay-buttons">
-          <div class="MessageOverlay-button">
+          <div
+            class="MessageOverlay-button"
+            on:click={() => {
+              clearOverlayData();
+            }}>
             <Button primary outline>Cancel</Button>
           </div>
 
           <div on:click={send}>
-            <Button primary>Send Message</Button>
+            <Button primary disabled={!canSubmit ? true : false}>
+              Send Message
+            </Button>
           </div>
         </div>
-        <!-- <DropDown
-            type="default"
-            text="Drop Down"
-            choiceHeader="Choice Header"
-            choices={['Choice One', 'Choice Two']} /> -->
 
       </div>
     </div>

@@ -91,6 +91,16 @@ export const getPosts = async () => {
   return res;
 };
 
+export const addPost = async data => {
+  const res = await tools.fetch(options().baseUrl + '/posts', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  // console.log(res);
+  return res;
+};
+
 export function serialize(obj, prefix?) {
   var str = [],
     p,

@@ -61,7 +61,7 @@
     htmlContent = quill.root.innerHTML;
 
     if (hideSend && handleInput) {
-      handleInput(htmlContent);
+      handleInput(htmlContent, content);
     }
   };
 
