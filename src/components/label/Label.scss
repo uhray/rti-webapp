@@ -62,6 +62,10 @@
       }
     }
 
+    &[textColor] {
+      color: var(--custom-text-color) !important;
+    }
+
     &[backgroundColor] {
       background-color: var(--custom-background-color) !important;
     }

@@ -1,4 +1,6 @@
 @import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+@import '../../theme/variables.scss';
+
 .RichText {
   .RichText-container {
     display: flex;
@@ -6,7 +8,7 @@
     align-items: flex-end;
     padding: 0px;
     background: #ffffff;
-    border: 0.5px solid darkgray;
+    border: 1px solid $color--lightgray;
     border-radius: 5px;
   }
   .RichText-container[isFocused='true'] {
@@ -53,6 +55,7 @@
     padding: 10px 0;
     width: 100%;
     border: none !important;
+    border-radius: 0 0 5px 5px;
     background: #f8f9fc;
     border-top: 1px solid lightgray !important;
     button {

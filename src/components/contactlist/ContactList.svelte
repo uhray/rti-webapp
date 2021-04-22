@@ -1,11 +1,12 @@
 <script>
-  export let slug;
-  export let driversList = [];
   import Icon from '../icon/Icon.svelte';
   import { colors } from '../../theme/variables.js';
   import _ from 'lodash';
 
+  export let slug;
+  export let driversList = [];
   export let collapsed = [];
+  export let toggleMessageOverlay = undefined;
 
   const collapse = id => {
     if (_.includes(collapsed, id)) {
@@ -21,7 +22,7 @@
 
 </style>
 
-<div class="ContactList ">
+<div class="ContactList">
   <a rel="prefetch" href="messages">
     <div class={`ContactList-allMessages ${slug === 'all' && 'active'}`}>
       <div class="uk-flex uk-flex-middle">
@@ -44,7 +45,11 @@
           </div>
           <div class="ContactList-group-text">{group.name}</div>
         </div>
-        <div class="ContactList-group-icon">
+        <div
+          class="ContactList-group-icon"
+          on:click={() => {
+            toggleMessageOverlay(group);
+          }}>
           <Icon type="message" />
         </div>
       </div>
