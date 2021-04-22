@@ -27,6 +27,16 @@
   let sortedPosts = {};
   let displayMessageOverlay = false;
   let teamsToMessage = [];
+  const messageTypes = [
+    'Safety',
+    'Driver Logs',
+    'Operations',
+    'Dispatching',
+    'Other',
+  ];
+  let selectedMessageTypes = [];
+  let inputMessageType = undefined;
+  let message = '';
 
   beforeUpdate(async () => {
     sortedPosts = _.chain(posts)
@@ -97,6 +107,19 @@
     console.log('Toggling Message Overlay', team);
     displayMessageOverlay = !displayMessageOverlay;
     teamsToMessage.push(team);
+  }
+
+  function handleInput(input) {
+    console.log(input);
+    message = input;
+  }
+
+  function handleMessageTypeInput(v) {
+    inputMessageType = v;
+  }
+
+  function send() {
+    console.log('Sending Message', message);
   }
 
   // setInterval(async () => {
@@ -197,6 +220,7 @@
     .MessageOverlay-container {
       position: relative;
       width: 600px;
+      max-height: 800px;
       background: #fff;
       border-radius: 8px;
       padding: 44px 30px 30px;
@@ -216,6 +240,10 @@
       flex-flow: column;
     }
 
+    .MessageOverlay-labels {
+      display: flex;
+      flex-flow: row wrap;
+    }
     .MessageOverlay-label {
       display: flex;
       flex-flow: row nowrap;
@@ -227,7 +255,8 @@
       border-radius: 4px;
       padding: 2px 4px 2px 8px;
       font-size: 14px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
+      margin-right: 5px;
     }
     .MessageOverlay-input {
       width: 100%;
@@ -243,6 +272,7 @@
       color: #a6adc4;
     }
     .MessageOverlay-rte {
+      max-height: 400px;
       margin-bottom: 30px;
     }
     .MessageOverlay-buttons {
@@ -253,6 +283,51 @@
     }
     .MessageOverlay-button {
       margin-right: 10px;
+    }
+  }
+
+  .Dropdown {
+    border-radius: 8px;
+    padding: 8px;
+    margin: 0;
+
+    .Dropdown-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 33px;
+      padding: 4px 20px 4px 15px;
+      background: #f6f7fb;
+      border-radius: 2px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 13px;
+
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #15224b;
+    }
+
+    .Dropdown-content {
+      margin: 8px;
+    }
+    .Dropdown-selection {
+      height: 40px;
+      font-size: 14px;
+      font-weight: 400;
+
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+
+      color: #15224b;
+
+      .Dropdown-selection-check {
+        margin: 0 8px;
+        width: 16px;
+      }
     }
   }
 </style>
@@ -322,66 +397,153 @@
       <div class="MessageOverlay-title">Fleet Message</div>
 
       <div class="MessageOverlay-form">
-        {#each teamsToMessage as team}
-          <div class="MessageOverlay-label uk-flex">
-            {team.name}
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill={'#15224B'}
-              xmlns="http://www.w3.org/2000/svg"
-              class="clickable"
-              on:click={() => {
-                teamsToMessage = teamsToMessage.filter(t => teamsToMessage._id != team._id);
-              }}>
-              <path
-                d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812
-                7.71875 19.75 12 19.75C16.2812 19.75 19.75 16.2812 19.75
-                12C19.75 7.71875 16.2812 4.25 12 4.25ZM12 18.75C8.28125 18.75
-                5.25 15.75 5.25 12C5.25 8.3125 8.25 5.25 12 5.25C15.6875 5.25
-                18.75 8.28125 18.75 12C18.75 15.7188 15.7188 18.75 12
-                18.75ZM14.9375 9.84375C15.0938 9.6875 15.0938 9.46875 14.9375
-                9.3125L14.6875 9.0625C14.5312 8.90625 14.3125 8.90625 14.1562
-                9.0625L12 11.2188L9.8125 9.0625C9.6875 8.90625 9.4375 8.90625
-                9.28125 9.0625L9.03125 9.3125C8.875 9.46875 8.875 9.6875 9.03125
-                9.84375L11.1875 12L9.03125 14.1875C8.875 14.3125 8.875 14.5625
-                9.03125 14.7188L9.28125 14.9688C9.4375 15.125 9.6875 15.125
-                9.8125 14.9688L12 12.8125L14.1562 14.9688C14.3125 15.125 14.5312
-                15.125 14.6875 14.9688L14.9375 14.7188C15.0938 14.5625 15.0938
-                14.3125 14.9375 14.1875L12.7812 12L14.9375 9.84375Z" />
-            </svg>
-          </div>
-          <div class="MessageOverlay-input">
-            <Input fill placeholder="Type Or Select Recipients" />
-          </div>
-          <div class="MessageOverlay-input">
-
-            <span class="MessageOverlay-inputLabel">Message Type</span>
-            <span class="MessageOverlay-inputLabelSub">(Optional)</span>
-
-            <Input fill placeholder="Choose Fleet Message Type" />
-          </div>
-
-          <div class="MessageOverlay-rte">
-            <RichText />
-          </div>
-
-          <div class=" MessageOverlay-buttons">
-            <div class="MessageOverlay-button">
-              <Button primary outline>Cancel</Button>
+        <div class="MessageOverlay-labels">
+          {#each teamsToMessage as team}
+            <div class="MessageOverlay-label uk-flex">
+              {team.name}
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill={'#15224B'}
+                xmlns="http://www.w3.org/2000/svg"
+                class="clickable"
+                on:click={() => {
+                  teamsToMessage = teamsToMessage.filter(t => teamsToMessage._id != team._id);
+                }}>
+                <path
+                  d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812
+                  7.71875 19.75 12 19.75C16.2812 19.75 19.75 16.2812 19.75
+                  12C19.75 7.71875 16.2812 4.25 12 4.25ZM12 18.75C8.28125 18.75
+                  5.25 15.75 5.25 12C5.25 8.3125 8.25 5.25 12 5.25C15.6875 5.25
+                  18.75 8.28125 18.75 12C18.75 15.7188 15.7188 18.75 12
+                  18.75ZM14.9375 9.84375C15.0938 9.6875 15.0938 9.46875 14.9375
+                  9.3125L14.6875 9.0625C14.5312 8.90625 14.3125 8.90625 14.1562
+                  9.0625L12 11.2188L9.8125 9.0625C9.6875 8.90625 9.4375 8.90625
+                  9.28125 9.0625L9.03125 9.3125C8.875 9.46875 8.875 9.6875
+                  9.03125 9.84375L11.1875 12L9.03125 14.1875C8.875 14.3125 8.875
+                  14.5625 9.03125 14.7188L9.28125 14.9688C9.4375 15.125 9.6875
+                  15.125 9.8125 14.9688L12 12.8125L14.1562 14.9688C14.3125
+                  15.125 14.5312 15.125 14.6875 14.9688L14.9375 14.7188C15.0938
+                  14.5625 15.0938 14.3125 14.9375 14.1875L12.7812 12L14.9375
+                  9.84375Z" />
+              </svg>
             </div>
+          {/each}
+        </div>
 
-            <div>
-              <Button primary>Send Message</Button>
+        <div class="MessageOverlay-input">
+          <Input fill placeholder="Type Or Select Recipients" />
+        </div>
+
+        <div class="MessageOverlay-labels">
+          {#each selectedMessageTypes as selectedMessageType}
+            <div class="MessageOverlay-label uk-flex">
+              {selectedMessageType}
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill={'#15224B'}
+                xmlns="http://www.w3.org/2000/svg"
+                class="clickable"
+                on:click={() => {
+                  selectedMessageTypes = selectedMessageTypes.filter(t => selectedMessageType != t);
+                }}>
+                <path
+                  d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812
+                  7.71875 19.75 12 19.75C16.2812 19.75 19.75 16.2812 19.75
+                  12C19.75 7.71875 16.2812 4.25 12 4.25ZM12 18.75C8.28125 18.75
+                  5.25 15.75 5.25 12C5.25 8.3125 8.25 5.25 12 5.25C15.6875 5.25
+                  18.75 8.28125 18.75 12C18.75 15.7188 15.7188 18.75 12
+                  18.75ZM14.9375 9.84375C15.0938 9.6875 15.0938 9.46875 14.9375
+                  9.3125L14.6875 9.0625C14.5312 8.90625 14.3125 8.90625 14.1562
+                  9.0625L12 11.2188L9.8125 9.0625C9.6875 8.90625 9.4375 8.90625
+                  9.28125 9.0625L9.03125 9.3125C8.875 9.46875 8.875 9.6875
+                  9.03125 9.84375L11.1875 12L9.03125 14.1875C8.875 14.3125 8.875
+                  14.5625 9.03125 14.7188L9.28125 14.9688C9.4375 15.125 9.6875
+                  15.125 9.8125 14.9688L12 12.8125L14.1562 14.9688C14.3125
+                  15.125 14.5312 15.125 14.6875 14.9688L14.9375 14.7188C15.0938
+                  14.5625 15.0938 14.3125 14.9375 14.1875L12.7812 12L14.9375
+                  9.84375Z" />
+              </svg>
+            </div>
+          {/each}
+        </div>
+
+        <div class="MessageOverlay-input">
+
+          <span class="MessageOverlay-inputLabel">Message Type</span>
+          <span class="MessageOverlay-inputLabelSub">(Optional)</span>
+
+          <Input
+            fill
+            placeholder="Choose Fleet Message Type"
+            onInput={handleMessageTypeInput} />
+          <div uk-dropdown="pos: bottom-justify; mode: click" class="Dropdown">
+            <div class="Dropdown-header">Select Message Type</div>
+            <div class="Dropdown-content">
+              {#each inputMessageType ? messageTypes.filter(type =>
+                    type.toLowerCase().includes(inputMessageType.toLowerCase())
+                  ) : messageTypes as t}
+                <div
+                  class="Dropdown-selection clickable"
+                  on:click={() => {
+                    if (selectedMessageTypes.includes(t)) {
+                      selectedMessageTypes = selectedMessageTypes.filter(type => type !== t);
+                    } else {
+                      selectedMessageTypes.push(t);
+                      selectedMessageTypes = selectedMessageTypes;
+                    }
+                    console.log(selectedMessageTypes);
+                  }}>
+                  <div class="Dropdown-selection-check">
+
+                    {#if selectedMessageTypes.includes(t)}
+                      <svg
+                        width="16"
+                        height="12"
+                        viewBox="0 0 16 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M13.5938 0.625L5.375 8.84375L2.375 5.8125C2.21875
+                          5.6875 1.96875 5.6875 1.84375 5.8125L0.9375
+                          6.71875C0.8125 6.84375 0.8125 7.09375 0.9375
+                          7.25L5.125 11.4062C5.28125 11.5625 5.5 11.5625 5.65625
+                          11.4062L15.0312 2.03125C15.1562 1.90625 15.1562
+                          1.65625 15.0312 1.5L14.125 0.625C14 0.46875 13.75
+                          0.46875 13.5938 0.625Z"
+                          fill="#2B8AF7" />
+                      </svg>
+                    {/if}
+                  </div>
+                  {t}
+                </div>
+              {/each}
             </div>
           </div>
-          <!-- <DropDown
+        </div>
+
+        <div class="MessageOverlay-rte">
+          <RichText {handleInput} hideSend={true} />
+        </div>
+
+        <div class=" MessageOverlay-buttons">
+          <div class="MessageOverlay-button">
+            <Button primary outline>Cancel</Button>
+          </div>
+
+          <div on:click={send}>
+            <Button primary>Send Message</Button>
+          </div>
+        </div>
+        <!-- <DropDown
             type="default"
             text="Drop Down"
             choiceHeader="Choice Header"
             choices={['Choice One', 'Choice Two']} /> -->
-        {/each}
+
       </div>
     </div>
   </div>

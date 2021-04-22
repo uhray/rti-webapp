@@ -14,6 +14,10 @@
   .RichText-container[isFocused='true'] {
     background-color: red;
   }
+  #editor {
+    max-height: 200px !important;
+    overflow-y: auto;
+  }
   .RichText-editor {
     border: none;
     min-height: 56px;

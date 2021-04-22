@@ -3,6 +3,8 @@
 
   // ========================= Quill.js Config ================== //
 
+  export let handleInput = undefined;
+  export let hideSend = undefined;
   export let label = undefined;
   export let send = undefined;
   let quill;
@@ -57,6 +59,10 @@
   const updateContent = () => {
     content = quill.getText();
     htmlContent = quill.root.innerHTML;
+
+    if (hideSend && handleInput) {
+      handleInput(htmlContent);
+    }
   };
 
   const sendMessage = () => {
@@ -99,28 +105,30 @@
       <button class="ql-list" />
       <div class="aligned-right">
         <button class="ql-attach" />
-        <button
-          class="send-msg"
-          on:click={() => {
-            sendMessage();
-          }}>
-          <svg
-            width="24"
-            height="25"
-            viewBox="0 0 24 25"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M18.0156 5.35938L5.32812 12.6602C4.83594 12.9336 4.89062
-              13.6445 5.38281 13.8359L8.30859 15.0664L16.1562 8.14844C16.293
-              8.01172 16.5117 8.20312 16.375 8.36719L9.8125
-              16.3789V18.5938C9.8125 19.25 10.5781 19.4961 10.9609
-              19.0312L12.7109 16.8984L16.1016 18.3477C16.4844 18.5117 16.9492
-              18.2656 17.0039 17.8281L18.9727 6.01562C19.082 5.46875 18.4805
-              5.08594 18.0156 5.35938Z"
-              fill="#243E93" />
-          </svg>
-        </button>
+        {#if !hideSend}
+          <button
+            class="send-msg"
+            on:click={() => {
+              sendMessage();
+            }}>
+            <svg
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M18.0156 5.35938L5.32812 12.6602C4.83594 12.9336 4.89062
+                13.6445 5.38281 13.8359L8.30859 15.0664L16.1562 8.14844C16.293
+                8.01172 16.5117 8.20312 16.375 8.36719L9.8125
+                16.3789V18.5938C9.8125 19.25 10.5781 19.4961 10.9609
+                19.0312L12.7109 16.8984L16.1016 18.3477C16.4844 18.5117 16.9492
+                18.2656 17.0039 17.8281L18.9727 6.01562C19.082 5.46875 18.4805
+                5.08594 18.0156 5.35938Z"
+                fill="#243E93" />
+            </svg>
+          </button>
+        {/if}
       </div>
     </div>
   </div>
