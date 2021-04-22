@@ -16,7 +16,6 @@
   import Button from '../button/Button.svelte';
   import _ from 'lodash';
   import moment from 'moment';
-  import { me, interval } from './data.js'; // #TODO: remove hardcoded me, get user data
   import tools, { getContacts, addPost } from '../../tools/crudApi.ts';
   import { userStore } from '../../store';
 
