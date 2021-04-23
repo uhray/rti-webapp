@@ -194,8 +194,10 @@
 
       {#each Object.values(sortedPosts[date]) as post}
         <div class="Post">
-          {#if post.postType === 'MESSAGE' || post.postType === 'ALERT'}
+          {#if post.postType === 'MESSAGE'}
             <MessageCard {post} {findContact} />
+          {:else if post.postType === 'ALERT'}
+            <MessageCard isAlert={true} {post} {findContact} />
           {:else if post.postType === 'ORDER'}
             <OrderMessageCard
               {me}
