@@ -182,7 +182,6 @@
             {post}
             {replies}
             {toggleReplies}
-            {replyPost}
             {handleReplyPost}
             {findContact} />
         </div>

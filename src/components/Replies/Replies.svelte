@@ -7,7 +7,6 @@
   export let post = undefined;
   export let replies = undefined;
   export let toggleReplies = undefined;
-  export let replyPost = undefined;
   export let handleReplyPost = undefined;
   export let findContact = undefined;
 </script>
