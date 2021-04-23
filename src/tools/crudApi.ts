@@ -57,7 +57,7 @@ export const auth = async () => {
   const res = await tools.fetch(options().baseUrl + '/users/me', {
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
-  console.log(res);
+  // console.log(res);
   return res;
 };
 
@@ -83,8 +83,9 @@ export const getContacts = async () => {
   return res;
 };
 
-export const getPosts = async () => {
+export const getPosts = async query => {
   const res = await tools.fetch(options().baseUrl + '/posts', {
+    qs: query,
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
   // console.log(res);
@@ -95,6 +96,15 @@ export const addPost = async data => {
   const res = await tools.fetch(options().baseUrl + '/posts', {
     method: 'POST',
     body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  // console.log(res);
+  return res;
+};
+
+export const getOrders = async query => {
+  const res = await tools.fetch(options().baseUrl + '/orders', {
+    qs: query,
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
   // console.log(res);

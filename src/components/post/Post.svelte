@@ -10,5 +10,9 @@
   }
 </script>
 
+<style src="./Post.scss">
+
+</style>
+
 <!-- HTML -->
-<div bind:this={div}>{message}</div>
+<div bind:this={div} class="Post">{message}</div>

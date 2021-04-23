@@ -8,7 +8,7 @@
   export let segment: string;
 
   onMount(async () => {
-    console.log('setting user');
+    // console.log('setting user');
     const user = await auth();
     if (user) {
       userStore.setCurrent(user);
@@ -17,24 +17,6 @@
     }
   });
 </script>
-
-{#if segment === 'signin' || segment === 'signup'}
-  <div class="wrapper-forSignin">
-    <main>
-      <slot />
-    </main>
-  </div>
-{:else}
-  <div class="wrapper">
-    <Nav {segment} />
-    <main>
-      <TopNav user={$userStore} />
-      <div class="main-content">
-        <slot />
-      </div>
-    </main>
-  </div>
-{/if}
 
 <style lang="scss" global>
   @import '../theme/theme.scss';
@@ -66,3 +48,21 @@
     // padding: 2em;
   }
 </style>
+
+{#if segment === 'signin' || segment === 'signup'}
+  <div class="wrapper-forSignin">
+    <main>
+      <slot />
+    </main>
+  </div>
+{:else}
+  <div class="wrapper">
+    <Nav {segment} />
+    <main>
+      <TopNav user={$userStore} />
+      <div class="main-content">
+        <slot />
+      </div>
+    </main>
+  </div>
+{/if}

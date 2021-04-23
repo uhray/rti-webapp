@@ -17,12 +17,15 @@
   import _ from 'lodash';
   import moment from 'moment';
   import tools, { getContacts, addPost } from '../../tools/crudApi.ts';
+  import { uuid } from '../../tools/uuid.ts';
   import { userStore } from '../../store';
 
-  let posts;
-  let replies;
-  let contactsList;
-  let driversList;
+  export let posts = [];
+  export let replies = [];
+  export let me;
+  export let contactsList;
+  export let driversList;
+  export let orders;
   let sortedPosts = {};
 
   // OVERLAY VARIABLES
@@ -56,19 +59,7 @@
       .value();
   });
 
-  onMount(async () => {
-    posts = await tools.fetch(`http://localhost:5000/api/v1/posts/`, {});
-    const contacts = await getContacts(
-      `http://localhost:5000/api/v1/users/contacts`
-    );
-
-    contactsList = contacts.contacts;
-    driversList = contacts.drivers;
-
-    replies = posts.map(post => {
-      return { id: post._id, display: false };
-    });
-  });
+  onMount(async () => {});
 
   const toggleReplies = id => {
     replies = replies.map(r => {
@@ -87,23 +78,23 @@
     return response.json();
   }
 
-  async function refetch() {
-    const id = me.id;
+  // async function refetch() {
+  //   const id = me.id;
 
-    getData('http://localhost:5000/api/v1/posts', {})
-      .then(async json => {
-        posts = json.data;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  //   getData('http://localhost:5000/api/v1/posts', {})
+  //     .then(async json => {
+  //       posts = json.data;
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
 
-    // #TODO: fetch to get user's contacts info instead of from ./data.js
+  //   // #TODO: fetch to get user's contacts info instead of from ./data.js
 
-    replies = await posts.map(post => {
-      return _.find(replies, { id: post._id });
-    });
-  }
+  //   replies = await posts.map(post => {
+  //     return _.find(replies, { id: post._id });
+  //   });
+  // }
 
   function toggleMessageOverlay(team) {
     displayMessageOverlay = !displayMessageOverlay;
@@ -176,14 +167,17 @@
       <MessagesHeader contact={undefined} />
     </div>
     <div class="Messages-main-posts">
-      <!-- <MessagesDisplay
+      <MessagesDisplay
         {posts}
         {sortedPosts}
         {replies}
         {me}
         {toggleReplies}
-        {refetch}
-        contacts={contactsList} /> -->
+        refetch={() => {
+          console.log('### REFETCH TRIGGER ###');
+        }}
+        contacts={contactsList}
+        {orders} />
     </div>
   </div>
 </div>
@@ -349,7 +343,7 @@
         </div>
 
         <div class="MessageOverlay-rte">
-          <RichText {handleInput} hideSend={true} />
+          <RichText id={uuid()} {handleInput} hideSend={true} />
         </div>
 
         <div class=" MessageOverlay-buttons">

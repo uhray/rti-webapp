@@ -7,6 +7,7 @@
   export let hideSend = undefined;
   export let label = undefined;
   export let send = undefined;
+  export let id = '';
   let quill;
   let htmlContent = 'type above';
   let content = undefined;
@@ -44,11 +45,11 @@
       },
     };
 
-    quill = new Quill('#editor', {
+    quill = new Quill(`#editor-${id}`, {
       theme: 'snow',
       placeholder: 'Type something...',
       modules: {
-        toolbar: '#toolbar',
+        toolbar: `#toolbar-${id}`,
         keyboard: {
           bindings: bindings,
         },
@@ -96,8 +97,8 @@
     {isFocused}
     on:focus={onFocus}
     on:blur={onBlur}>
-    <div id="editor" class="RichText-editor" on:keyup={updateContent} />
-    <div id="toolbar" class="RichText-toolbar">
+    <div id={`editor-${id}`} class="RichText-editor" on:keyup={updateContent} />
+    <div id={`toolbar-${id}`} class="RichText-toolbar">
       <button class="ql-bold" />
       <button class="ql-italic" />
       <button class="ql-strike" />

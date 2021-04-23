@@ -1,6 +1,6 @@
-<!-- <script>
+<script>
+  import PostHeader from '../PostHeader/PostHeader.svelte';
   import _ from 'lodash';
-  import { me as meData } from '../../routes/messages/data.js'; // #TODO: remove hardcoded me, get user data
   import { beforeUpdate, afterUpdate } from 'svelte';
   import { onMount } from 'svelte';
   import Label from '../label/Label.svelte';
@@ -8,6 +8,11 @@
   import RichText from '../richtext/RichText.svelte';
   import Post from '../post/Post.svelte';
   import moment from 'moment';
+  import { userStore } from '../../store';
+  import MessageCard from '../MessageCard/MessageCard.svelte';
+  import OrderMessageCard from '../OrderMessageCard/OrderMessageCard.svelte';
+  import { uuid } from '../../tools/uuid.ts';
+
   export let posts;
   export let sortedPosts;
   export let me;
@@ -15,6 +20,7 @@
   export let contacts = [];
   export let replies;
   export let toggleReplies;
+  export let orders;
   export let slug = undefined;
 
   let messages;
@@ -22,6 +28,13 @@
   let autoscroll;
   let maxHeight;
   let replyPost = null;
+
+  afterUpdate(() => {
+    // console.log('### CONTACTS', contacts);
+    // console.log('### ME', me);
+    // console.log('### SORTED POSTS ###', sortedPosts);
+    // console.log('### REPLIES ###', replies);
+  });
 
   onMount(() => {
     if (messages && input) {
@@ -35,17 +48,6 @@
         }
       });
     }
-  });
-
-  // #TODO: auto scrolling when div is populated
-  beforeUpdate(() => {
-    // autoscroll =
-    //   messages &&
-    //   messages.offsetHeight + messages.scrollTop > messages.scrollHeight - 20;
-  });
-
-  afterUpdate(() => {
-    // messages.scrollTo(0, messages.scrollHeight);
   });
 
   const scrollToBottom = (div = undefined) => {
@@ -172,9 +174,13 @@
 
     return datetime;
   }
-</script><style src="./MessagesDisplay.scss">
+</script>
 
-</style><div class="Display" id="Messages" bind:this={messages}>
+<style src="./MessagesDisplay.scss">
+
+</style>
+
+<div class="Display" id="Messages" bind:this={messages}>
   {#if sortedPosts}
     {#each Object.keys(sortedPosts) as date}
       <div class="Display-dateLabel">
@@ -185,37 +191,18 @@
             backgroundColor="rgba(166, 173, 196, 0.3);" />
         {/if}
       </div>
+
       {#each Object.values(sortedPosts[date]) as post}
         <div class="Post">
-          {#if post.from === me.id}
-            <div class="Post-header">
-              <img src={me.pic} alt={me?.name} />
-              <div class="Post-header-details">
-                <div class="Post-header-name">{me?.name}</div>
-                <div class="Post-header-timestamp">
-                  {moment(post.createdAt).format('h:mm A')}
-                </div>
-              </div>
-            </div>
-          {:else}
-            <div class="Post-header">
-              <img
-                src={findContact(post.from).pic || ''}
-                alt={findContact(post.from)?.name || ''} />
-              <div class="Post-header-details">
-                <div class="Post-header-name">
-                  {findContact(post.from)?.name || ''}
-                </div>
-                <div class="Post-header-timestamp">
-                  {moment(post.createdAt).format('h:mm A')}
-                </div>
-              </div>
-            </div>
+          {#if post.postType === 'MESSAGE' || post.postType === 'ALERT'}
+            <MessageCard {post} {findContact} />
+          {:else if post.postType === 'ORDER'}
+            <OrderMessageCard
+              {me}
+              {post}
+              {findContact}
+              order={_.find(orders, { orderId: post.orderId })} />
           {/if}
-
-          <div class="Post-message">
-            <Post message={post.message} />
-          </div>
 
           {#if post.subthread && post.subthread.length > 0}
             <div class="Post-replies">
@@ -235,36 +222,14 @@
                 <div class="Post-replies-wrapper">
                   {#each post.subthread as reply}
                     <div class="Post-replies-content">
-                      {#if reply.from === me.id}
-                        <div class="Post-header">
-                          <img src={me.pic} alt={me?.name} />
-                          <div class="Post-header-details">
-                            <div class="Post-header-name">{me?.name}</div>
-                            <div class="Post-header-timestamp">
-                              {reply.createdAt ? formatDate(reply.createdAt) : ''}
-                            </div>
-                          </div>
-                        </div>
-                      {:else}
-                        <div class="Post-header">
-                          <img
-                            src={findContact(reply.from).pic || ''}
-                            alt={findContact(reply.from)?.name || ''} />
-                          <div class="Post-header-details">
-                            <div class="Post-header-name">
-                              {findContact(reply.from)?.name || ''}
-                            </div>
-                            <div class="Post-header-timestamp">
-                              {reply.createdAt ? formatDate(reply.createdAt) : ''}
-                            </div>
-                          </div>
-                        </div>
-                      {/if}
+                      <PostHeader user={findContact(reply.from)} post={reply} />
+
                       <div class="Post-message">
                         <Post message={reply.message} />
                       </div>
                     </div>
                   {/each}
+
                   <div class="Post-reply">
                     <div
                       class="Post-reply-action"
@@ -326,6 +291,6 @@
         </div>
       </div>
     {/if}
-    <RichText {send} />
+    <RichText id={uuid()} {send} />
   </div>
-</div> -->
+</div>
