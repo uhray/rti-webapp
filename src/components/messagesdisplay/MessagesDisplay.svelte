@@ -7,11 +7,12 @@
   import Icon from '../icon/Icon.svelte';
   import RichText from '../richtext/RichText.svelte';
   import Post from '../post/Post.svelte';
-  import moment from 'moment';
-  import { userStore } from '../../store';
   import MessageCard from '../MessageCard/MessageCard.svelte';
   import OrderMessageCard from '../OrderMessageCard/OrderMessageCard.svelte';
+  import Replies from '../Replies/Replies.svelte';
   import { uuid } from '../../tools/uuid.ts';
+  import { userStore } from '../../store';
+  import moment from 'moment';
 
   export let posts;
   export let sortedPosts;
@@ -142,37 +143,8 @@
     return str.replace(/(<([^>]+)>)/gi, '');
   }
 
-  function formatDate(d) {
-    let datetime = '';
-
-    if (moment(new Date(d).toISOString()).isSame(moment(), 'day')) {
-      datetime = moment(d).format('h:mm A');
-    } else if (
-      moment(new Date(d).toISOString()).isSame(
-        moment().subtract(1, 'days'),
-        'day'
-      )
-    ) {
-      datetime = 'Yesterday ' + moment(d).format('h:mm A');
-    } else if (
-      moment(new Date(d).toISOString()).isSameOrAfter(
-        moment().subtract(7, 'days'),
-        'day'
-      )
-    ) {
-      datetime = moment(d).format('dddd h:mm A');
-    } else if (
-      moment(new Date(d).toISOString()).isSameOrAfter(
-        moment().subtract(11, 'months'),
-        'day'
-      )
-    ) {
-      datetime = moment(d).format('MMM D h:mm A');
-    } else {
-      datetime = moment(d).format('MMM D YYYY h:mm A');
-    }
-
-    return datetime;
+  function handleReplyPost(p) {
+    replyPost = p;
   }
 </script>
 
@@ -206,70 +178,13 @@
               order={_.find(orders, { orderId: post.orderId })} />
           {/if}
 
-          {#if post.subthread && post.subthread.length > 0}
-            <div class="Post-replies">
-
-              {#if _.find(replies, { id: post._id }).display}
-                <div
-                  class="Post-replies-show"
-                  on:click={() => toggleReplies(post._id)}>
-                  <span>
-                    Hide {post.subthread.length} repl{post.subthread.length > 1 ? 'ies' : 'y'}
-                  </span>
-                  <div class="Post-replies-icon">
-                    <Icon type="chev-up" />
-                  </div>
-                </div>
-
-                <div class="Post-replies-wrapper">
-                  {#each post.subthread as reply}
-                    <div class="Post-replies-content">
-                      <PostHeader user={findContact(reply.from)} post={reply} />
-
-                      <div class="Post-message">
-                        <Post message={reply.message} />
-                      </div>
-                    </div>
-                  {/each}
-
-                  <div class="Post-reply">
-                    <div
-                      class="Post-reply-action"
-                      on:click={() => {
-                        replyPost = post;
-                      }}>
-                      <Icon type="reply" color="#243E93" />
-                      <span>Reply in the thread</span>
-                    </div>
-                  </div>
-                </div>
-              {:else}
-                <div
-                  class="Post-replies-show"
-                  on:click={() => toggleReplies(post._id)}>
-                  <span>
-                    Show {post.subthread.length} repl{post.subthread.length > 1 ? 'ies' : 'y'}
-                  </span>
-                  <div class="Post-replies-icon">
-                    <Icon type="chev-down" />
-                  </div>
-                </div>
-              {/if}
-
-            </div>
-          {:else}
-            <div class="Post-reply">
-              <div
-                class="Post-reply-action"
-                on:click={() => {
-                  replyPost = post;
-                }}>
-                <Icon type="reply" color="#243E93" />
-                <span>Reply in the thread</span>
-              </div>
-            </div>
-          {/if}
-
+          <Replies
+            {post}
+            {replies}
+            {toggleReplies}
+            {replyPost}
+            {handleReplyPost}
+            {findContact} />
         </div>
       {/each}
     {/each}
