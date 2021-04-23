@@ -36,7 +36,7 @@
   <div class="Card-content">
     <div class="Card-header">
       <div class="Card-orderNumber">Order #{order.orderId}</div>
-      <Label text={capitalize(order.status)} small />
+      <Label status={order.status} text={capitalize(order.status)} small />
     </div>
 
     <div class="OrderCard-stops">
