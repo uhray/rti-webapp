@@ -9,6 +9,7 @@
   import Post from '../post/Post.svelte';
   import MessageCard from '../MessageCard/MessageCard.svelte';
   import OrderMessageCard from '../OrderMessageCard/OrderMessageCard.svelte';
+  import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
   import Replies from '../Replies/Replies.svelte';
   import { uuid } from '../../tools/uuid.ts';
   import { userStore } from '../../store';
@@ -152,61 +153,65 @@
 
 </style>
 
-<div class="Display" id="Messages" bind:this={messages}>
-  {#if sortedPosts}
-    {#each Object.keys(sortedPosts) as date}
-      <div class="Display-dateLabel">
-        {#if date}
-          <Label
-            text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
-            status="disabled"
-            backgroundColor="rgba(166, 173, 196, 0.3);" />
-        {/if}
-      </div>
+<div class="MessagesDisplay">
+  <div id="Messages" class="Messages">
+    <div class="Messages-container">
+      {#if sortedPosts}
+        {#each Object.keys(sortedPosts) as date}
+          <div class="Messages-dateLabel">
+            {#if date}
+              <Label
+                text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
+                status="disabled"
+                backgroundColor="rgba(166, 173, 196, 0.3);" />
+            {/if}
+          </div>
 
-      {#each Object.values(sortedPosts[date]) as post}
-        <div class="Post">
-          {#if post.postType === 'MESSAGE'}
-            <MessageCard {post} {findContact} />
-          {:else if post.postType === 'ALERT'}
-            <MessageCard isAlert={true} {post} {findContact} />
-          {:else if post.postType === 'ORDER'}
-            <OrderMessageCard
-              {me}
-              {post}
-              {findContact}
-              order={_.find(orders, { orderId: post.orderId })} />
-          {/if}
+          {#each Object.values(sortedPosts[date]) as post}
+            <div class="Post">
+              {#if post.postType === 'MESSAGE'}
+                <MessageCard {post} {findContact} />
+              {:else if post.postType === 'ALERT'}
+                <MessageCard isAlert={true} {post} {findContact} />
+              {:else if post.postType === 'ORDER'}
+                <OrderMessageCard
+                  {me}
+                  {post}
+                  {findContact}
+                  order={_.find(orders, { orderId: post.orderId })} />
+              {/if}
 
-          <Replies
-            {post}
-            {replies}
-            {toggleReplies}
-            {handleReplyPost}
-            {findContact} />
-        </div>
-      {/each}
-    {/each}
-  {/if}
-</div>
+              <MessageAttachments attachments={post.attachments} />
 
-<div id="Input" bind:this={input}>
-  <div class="Input-fade" />
-  <div class="Input-input">
-    {#if replyPost}
-      <div class="Input-input-replying">
-        <div class="uk-flex uk-flex-middle">
-          <span>Replying to: {removeTags(replyPost.message)}</span>
+              <Replies
+                {post}
+                {replies}
+                {toggleReplies}
+                {handleReplyPost}
+                {findContact} />
+            </div>
+          {/each}
+        {/each}
+      {/if}
+    </div>
+  </div>
+  <div class="Input" id="Input" bind:this={input}>
+    <div class="Input-input">
+      {#if replyPost}
+        <div class="Input-input-replying">
+          <div class="uk-flex uk-flex-middle">
+            <span>Replying to: {removeTags(replyPost.message)}</span>
+          </div>
+          <div
+            class="clickable"
+            on:click={() => {
+              replyPost = null;
+            }}>
+            <Icon type="close" />
+          </div>
         </div>
-        <div
-          class="clickable"
-          on:click={() => {
-            replyPost = null;
-          }}>
-          <Icon type="close" />
-        </div>
-      </div>
-    {/if}
-    <RichText id={uuid()} {send} />
+      {/if}
+      <RichText id={uuid()} {send} />
+    </div>
   </div>
 </div>

@@ -166,7 +166,7 @@
     <div class="Messages-main-header">
       <MessagesHeader contact={undefined} />
     </div>
-    <div class="Messages-main-posts">
+    <div id="Messages-Container" class="Messages-main-posts">
       <MessagesDisplay
         {posts}
         {sortedPosts}
