@@ -31,11 +31,19 @@
   let autoscroll;
   let maxHeight;
   let replyPost = null;
+  let inputAttachments;
+
+  afterUpdate(() => {
+    scrollToBottom();
+  });
 
   const scrollToBottom = (div = undefined) => {
     if (div) {
     } else {
-      messages.scrollTo(0, messages.scrollHeight);
+      if (messages) {
+        console.log('scrolling to messages');
+        messages.scrollTo(0, messages.scrollHeight);
+      }
     }
   };
 
@@ -118,7 +126,7 @@
 </style>
 
 <div class="MessagesDisplay">
-  <div id="Messages" class="Messages">
+  <div id="Messages" class="Messages" bind:this={messages}>
     <div class="Messages-container">
       {#if sortedPosts}
         {#each Object.keys(sortedPosts) as date}
@@ -161,8 +169,14 @@
   </div>
   <div class="Input" id="Input" bind:this={input}>
     <div class="Input-input">
+      {#if inputAttachments}
+        <div class="Input-input-attachments">
+          <MessageAttachments attachments={inputAttachments} />
+        </div>
+      {/if}
       {#if replyPost}
         <div class="Input-input-replying">
+
           <div class="Input-input-text">
             <!-- {console.log(JSON.stringify(findContact(replyPost.from).name))} -->
             {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
