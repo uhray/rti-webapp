@@ -31,7 +31,7 @@
   let autoscroll;
   let maxHeight;
   let replyPost = null;
-  let inputAttachments;
+  let attachments = [];
 
   afterUpdate(() => {
     scrollToBottom();
@@ -119,6 +119,29 @@
   function handleReplyPost(p) {
     replyPost = p;
   }
+
+  function addAttachment() {
+    console.log('adding attachment');
+    attachments.push({
+      name: 'Cybertruck',
+      format: 'image',
+      fileUrl: 'https://cdn.motor1.com/images/mgl/2RpBB/s1/tesla-truck.jpg',
+      size: '12 MB',
+    });
+    attachments = attachments;
+
+    console.log('### ATTACHMENTS ###', attachments);
+  }
+
+  function removeAttachment(data) {
+    console.log('removing attachment');
+    const filteredAttachments = attachments.filter(
+      a => a.fileUrl !== data.fileUrl
+    );
+    attachments = filteredAttachments;
+
+    console.log('### ATTACHMENTS ###', attachments);
+  }
 </script>
 
 <style src="./MessagesDisplay.scss">
@@ -153,7 +176,9 @@
                   order={_.find(orders, { orderId: post.orderId })} />
               {/if}
 
-              <MessageAttachments attachments={post.attachments} />
+              {#if post.attachments.length > 0}
+                <MessageAttachments attachments={post.attachments} />
+              {/if}
 
               <Replies
                 {post}
@@ -169,16 +194,18 @@
   </div>
   <div class="Input" id="Input" bind:this={input}>
     <div class="Input-input">
-      {#if inputAttachments}
+      {#if attachments.length > 0}
         <div class="Input-input-attachments">
-          <MessageAttachments attachments={inputAttachments} />
+          <MessageAttachments
+            isDisplay={false}
+            {removeAttachment}
+            {attachments} />
         </div>
       {/if}
       {#if replyPost}
         <div class="Input-input-replying">
 
           <div class="Input-input-text">
-            <!-- {console.log(JSON.stringify(findContact(replyPost.from).name))} -->
             {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
               <div>Replying to: {findContact(replyPost.from).name}</div>
               <div>{removeTags(replyPost.message)}</div>
@@ -197,7 +224,7 @@
           </div>
         </div>
       {/if}
-      <RichText id={uuid()} {send} />
+      <RichText {addAttachment} id={uuid()} {send} />
     </div>
   </div>
 </div>

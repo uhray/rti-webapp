@@ -1,6 +1,7 @@
 <script>
   export let attachments = undefined;
   export let isDisplay = true;
+  export let removeAttachment = undefined;
 </script>
 
 <style src="./MessageAttachments.scss">
@@ -25,12 +26,12 @@
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             class="MessageAttachments-imageIcon clickable"
-            onClick={() => {
-              handleRemoveAttachment(attachment);
+            on:click={() => {
+              removeAttachment(attachment);
             }}>
             <path
-              fillRule="evenodd"
-              clipRule="evenodd"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
               d="M11 1.25C5.62391 1.25 1.25 5.62391 1.25 11C1.25 16.3761 5.62391
               20.75 11 20.75C16.3761 20.75 20.75 16.3761 20.75 11C20.75 5.62391
               16.3761 1.25 11 1.25ZM14.5307 13.4704C14.7283 13.6581 14.8085
@@ -95,7 +96,8 @@
               10.647L12.4149 11.3541L14.8843 8.88423L14.1771 8.17719ZM11.7077
               11.3541L14.1771 13.8239L14.8843 13.1169L12.4149 10.647L11.7077
               11.3541Z"
-              fill="white" />
+              fill="white"
+              opacity="100%" />
           </svg>
         {/if}
 
@@ -145,12 +147,12 @@
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             class="MessageAttachments-imageIcon clickable"
-            onClick={() => {
-              handleRemoveAttachment(attachment);
+            on:click={() => {
+              removeAttachment(attachment);
             }}>
             <path
-              fillRule="evenodd"
-              clipRule="evenodd"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
               d="M11 1.25C5.62391 1.25 1.25 5.62391 1.25 11C1.25 16.3761 5.62391
               20.75 11 20.75C16.3761 20.75 20.75 16.3761 20.75 11C20.75 5.62391
               16.3761 1.25 11 1.25ZM14.5307 13.4704C14.7283 13.6581 14.8085

@@ -4,6 +4,7 @@
   // ========================= Quill.js Config ================== //
 
   export let handleInput = undefined;
+  export let addAttachment = undefined;
   export let hideSend = undefined;
   export let label = undefined;
   export let send = undefined;
@@ -105,7 +106,12 @@
       <button class="ql-link" />
       <button class="ql-list" />
       <div class="aligned-right">
-        <button class="ql-attach" />
+        <button
+          class="ql-attach"
+          on:click={e => {
+            e.preventDefault();
+            addAttachment();
+          }} />
         {#if !hideSend}
           <button
             class="send-msg"
