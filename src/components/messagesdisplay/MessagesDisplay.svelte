@@ -41,7 +41,6 @@
     if (div) {
     } else {
       if (messages) {
-        console.log('scrolling to messages');
         messages.scrollTo(0, messages.scrollHeight);
       }
     }
@@ -121,7 +120,6 @@
   }
 
   function addAttachment() {
-    console.log('adding attachment');
     attachments.push({
       name: 'Cybertruck',
       format: 'image',
@@ -134,13 +132,10 @@
   }
 
   function removeAttachment(data) {
-    console.log('removing attachment');
     const filteredAttachments = attachments.filter(
       a => a.fileUrl !== data.fileUrl
     );
     attachments = filteredAttachments;
-
-    console.log('### ATTACHMENTS ###', attachments);
   }
 </script>
 
