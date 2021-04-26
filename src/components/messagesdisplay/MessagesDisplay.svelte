@@ -12,6 +12,7 @@
   import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
   import Replies from '../Replies/Replies.svelte';
   import { uuid } from '../../tools/uuid.ts';
+  import { capitalize } from '../../tools/capitalize.ts';
   import { userStore } from '../../store';
   import moment from 'moment';
 
@@ -31,27 +32,6 @@
   let maxHeight;
   let replyPost = null;
 
-  afterUpdate(() => {
-    // console.log('### CONTACTS', contacts);
-    // console.log('### ME', me);
-    // console.log('### SORTED POSTS ###', sortedPosts);
-    // console.log('### REPLIES ###', replies);
-  });
-
-  onMount(() => {
-    if (messages && input) {
-      messages.style.paddingBottom = `${input.offsetHeight - 60}px`;
-
-      messages.scrollTo(0, messages.scrollHeight);
-
-      onElementHeightChange(input, function(h) {
-        if (messages) {
-          messages.style.paddingBottom = `${h - 60}px`;
-        }
-      });
-    }
-  });
-
   const scrollToBottom = (div = undefined) => {
     if (div) {
     } else {
@@ -62,22 +42,6 @@
   const findContact = id => {
     return _.find(contacts, { id: id });
   };
-
-  function onElementHeightChange(elm, callback) {
-    var lastHeight = elm.clientHeight,
-      newHeight;
-
-    (function run() {
-      newHeight = elm.clientHeight;
-      if (lastHeight != newHeight) callback(newHeight);
-      lastHeight = newHeight;
-
-      if (elm.onElementHeightChangeTimer)
-        clearTimeout(elm.onElementHeightChangeTimer);
-
-      elm.onElementHeightChangeTimer = setTimeout(run, 200);
-    })();
-  }
 
   async function send(message) {
     const id = meData.id;
@@ -199,8 +163,16 @@
     <div class="Input-input">
       {#if replyPost}
         <div class="Input-input-replying">
-          <div class="uk-flex uk-flex-middle">
-            <span>Replying to: {removeTags(replyPost.message)}</span>
+          <div class="Input-input-text">
+            <!-- {console.log(JSON.stringify(findContact(replyPost.from).name))} -->
+            {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
+              <div>Replying to: {findContact(replyPost.from).name}</div>
+              <div>{removeTags(replyPost.message)}</div>
+            {:else if replyPost.postType === 'ORDER'}
+              <div>
+                <span>Replying to: Order #{replyPost.orderId}</span>
+              </div>
+            {/if}
           </div>
           <div
             class="clickable"

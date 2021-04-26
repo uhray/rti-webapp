@@ -6,7 +6,28 @@
   align-items: center;
   position: relative;
   margin-top: 10px;
+  padding-bottom: 10px;
   overflow-x: auto;
+
+  /* width */
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #a6adc4;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #595f76;
+  }
 
   .MessageAttachments-imageContainer {
     display: flex;

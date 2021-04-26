@@ -1,6 +1,7 @@
 <script>
   import PostHeader from '../PostHeader/PostHeader.svelte';
   import Label from '../label/Label.svelte';
+  import { capitalize } from '../../tools/capitalize.ts';
 
   export let me;
   export let post;
@@ -8,12 +9,6 @@
   export let order;
 
   let user = findContact(me._id);
-
-  function capitalize(string) {
-    return string.replace(/\w\S*/g, w =>
-      w.replace(/^\w/, c => c.toUpperCase())
-    );
-  }
 
   function formatAddressCSZ(addressObject) {
     if (addressObject) {
