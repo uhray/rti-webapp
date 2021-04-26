@@ -3,6 +3,7 @@
   import { colors } from '../../theme/variables.js';
   import _ from 'lodash';
 
+  export let trigger;
   export let slug;
   export let driversList = [];
   export let collapsed = [];
@@ -23,7 +24,7 @@
 </style>
 
 <div class="ContactList">
-  <a rel="prefetch" href="messages">
+  <a rel="prefetch" href="messages/all" on:click={trigger('all')}>
     <div class={`ContactList-allMessages ${slug === 'all' && 'active'}`}>
       <div class="uk-flex uk-flex-middle">
         <div class="ContactList-allMessages-icon">
@@ -61,7 +62,11 @@
               <span class="ContactList-subgroup-text">{subgroup.name}</span>
 
               {#each subgroup.contacts as contact}
-                <a rel="prefetch" href={`messages/${contact.id}`}>
+                <!-- {`${JSON.stringify(contact)} // ${slug}`} -->
+                <a
+                  rel="prefetch"
+                  href={`messages/${contact.id}`}
+                  on:click={trigger(contact.id)}>
                   <div
                     class={`ContactList-contact ${slug === contact.id && 'active'}`}>
                     <div class="ContactList-contact-picture">

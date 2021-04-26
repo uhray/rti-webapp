@@ -20,12 +20,14 @@
   import { uuid } from '../../tools/uuid.ts';
   import { userStore } from '../../store';
 
+  export let trigger;
   export let posts = [];
   export let replies = [];
   export let me;
   export let contactsList;
   export let driversList;
   export let orders;
+  export let slug;
   let sortedPosts = {};
 
   // OVERLAY VARIABLES
@@ -159,7 +161,11 @@
       <SearchBar alternate />
     </div>
     <div class="Messages-nav-contacts">
-      <ContactList slug="all" {driversList} {toggleMessageOverlay} />
+      <ContactList
+        slug={slug ? slug : 'all'}
+        {driversList}
+        {toggleMessageOverlay}
+        {trigger} />
     </div>
   </div>
   <div class="Messages-main">
