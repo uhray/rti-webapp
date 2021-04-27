@@ -188,7 +188,7 @@
     </div>
   </div>
   <div class="Input" id="Input" bind:this={input}>
-    <div class="Input-input">
+    <div class={`Input-input ${replyPost && 'Input-replyingPadding'}`}>
       {#if attachments.length > 0}
         <div class="Input-attachments">
           <MessageAttachments
@@ -229,8 +229,16 @@
                     5.6875H14.5625V9.1875Z"
                     fill="#15224B" />
                 </svg>
-
-                <div>Replying to: Order #{replyPost.orderId}</div>
+                <div>
+                  <div class="Input-orderNumber">
+                    Order #{replyPost.orderId}
+                  </div>
+                  <!-- #TODO CHANGE THIS TO REPRESENT DATA -->
+                  <div class="Input-orderDetails">
+                    Trip Started: COOCAR - AMRLAW • Appointment Time: Jan 25,
+                    9:45 am
+                  </div>
+                </div>
               </div>
               <Label
                 status={_.find(orders, { orderId: replyPost.orderId }).status}

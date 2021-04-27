@@ -80,24 +80,6 @@
     return response.json();
   }
 
-  // async function refetch() {
-  //   const id = me.id;
-
-  //   getData('http://localhost:5000/api/v1/posts', {})
-  //     .then(async json => {
-  //       posts = json.data;
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-
-  //   // #TODO: fetch to get user's contacts info instead of from ./data.js
-
-  //   replies = await posts.map(post => {
-  //     return _.find(replies, { id: post._id });
-  //   });
-  // }
-
   function toggleMessageOverlay(team) {
     displayMessageOverlay = !displayMessageOverlay;
     teamsToMessage.push(team);
