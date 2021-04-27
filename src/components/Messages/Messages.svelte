@@ -26,6 +26,8 @@
   export let me;
   export let contactsList;
   export let driversList;
+  export let teamsList;
+  export let driverClassList;
   export let orders;
   export let slug;
   let sortedPosts = {};
@@ -33,6 +35,7 @@
   // OVERLAY VARIABLES
   let displayMessageOverlay = false;
   let teamsToMessage = [];
+  let driverClassesToMessage = [];
   const messageTypes = [
     'Safety',
     'Driver Logs',
@@ -77,7 +80,7 @@
 
   function toggleMessageOverlay(team) {
     displayMessageOverlay = !displayMessageOverlay;
-    teamsToMessage.push(team);
+    teamsToMessage.push(team.name);
   }
 
   function handleInput(input, basicContent) {
@@ -100,7 +103,8 @@
       postType: 'ALERT',
       message: message,
       tags: selectedMessageTypes,
-      teamIds: teamsToMessage.map(t => t.name),
+      teamIds: teamsToMessage,
+      driverClass: driverClassesToMessage,
     };
 
     const res = await addPost(payload);
@@ -195,7 +199,7 @@
         <div class="MessageOverlay-labels">
           {#each teamsToMessage as team}
             <div class="MessageOverlay-label uk-flex">
-              {team.name}
+              {team}
               <svg
                 width="24"
                 height="24"
@@ -204,7 +208,40 @@
                 xmlns="http://www.w3.org/2000/svg"
                 class="clickable"
                 on:click={() => {
-                  teamsToMessage = teamsToMessage.filter(t => teamsToMessage._id != team._id);
+                  teamsToMessage = teamsToMessage.filter(t => teamsToMessage != team);
+                }}>
+                <path
+                  d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812
+                  7.71875 19.75 12 19.75C16.2812 19.75 19.75 16.2812 19.75
+                  12C19.75 7.71875 16.2812 4.25 12 4.25ZM12 18.75C8.28125 18.75
+                  5.25 15.75 5.25 12C5.25 8.3125 8.25 5.25 12 5.25C15.6875 5.25
+                  18.75 8.28125 18.75 12C18.75 15.7188 15.7188 18.75 12
+                  18.75ZM14.9375 9.84375C15.0938 9.6875 15.0938 9.46875 14.9375
+                  9.3125L14.6875 9.0625C14.5312 8.90625 14.3125 8.90625 14.1562
+                  9.0625L12 11.2188L9.8125 9.0625C9.6875 8.90625 9.4375 8.90625
+                  9.28125 9.0625L9.03125 9.3125C8.875 9.46875 8.875 9.6875
+                  9.03125 9.84375L11.1875 12L9.03125 14.1875C8.875 14.3125 8.875
+                  14.5625 9.03125 14.7188L9.28125 14.9688C9.4375 15.125 9.6875
+                  15.125 9.8125 14.9688L12 12.8125L14.1562 14.9688C14.3125
+                  15.125 14.5312 15.125 14.6875 14.9688L14.9375 14.7188C15.0938
+                  14.5625 15.0938 14.3125 14.9375 14.1875L12.7812 12L14.9375
+                  9.84375Z" />
+              </svg>
+            </div>
+          {/each}
+
+          {#each driverClassesToMessage as driverClass}
+            <div class="MessageOverlay-label uk-flex">
+              {driverClass}
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill={'#15224B'}
+                xmlns="http://www.w3.org/2000/svg"
+                class="clickable"
+                on:click={() => {
+                  driverClassesToMessage = driverClassesToMessage.filter(dc => driverClassesToMessage != driverClass);
                 }}>
                 <path
                   d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812
@@ -228,7 +265,89 @@
         </div>
 
         <div class="MessageOverlay-input">
-          <Input fill placeholder="Type Or Select Recipients" />
+          <Input
+            fill
+            placeholder="Type or Select Recipients"
+            onInput={handleMessageTypeInput} />
+          <div uk-dropdown="pos: bottom-justify; mode: click" class="Dropdown">
+            <div class="Dropdown-header">Teams</div>
+            <div class="Dropdown-content">
+              {#each teamsList as t}
+                <div
+                  class="Dropdown-selection clickable"
+                  on:click={() => {
+                    if (teamsToMessage.includes(t)) {
+                      teamsToMessage = teamsToMessage.filter(tM => tM !== t);
+                    } else {
+                      teamsToMessage.push(t);
+                      teamsToMessage = teamsToMessage;
+                    }
+                  }}>
+                  <div class="Dropdown-selection-check">
+
+                    {#if teamsToMessage.includes(t)}
+                      <svg
+                        width="16"
+                        height="12"
+                        viewBox="0 0 16 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M13.5938 0.625L5.375 8.84375L2.375 5.8125C2.21875
+                          5.6875 1.96875 5.6875 1.84375 5.8125L0.9375
+                          6.71875C0.8125 6.84375 0.8125 7.09375 0.9375
+                          7.25L5.125 11.4062C5.28125 11.5625 5.5 11.5625 5.65625
+                          11.4062L15.0312 2.03125C15.1562 1.90625 15.1562
+                          1.65625 15.0312 1.5L14.125 0.625C14 0.46875 13.75
+                          0.46875 13.5938 0.625Z"
+                          fill="#2B8AF7" />
+                      </svg>
+                    {/if}
+                  </div>
+                  {t}
+                </div>
+              {/each}
+            </div>
+
+            <div class="Dropdown-header">Divisions</div>
+            <div class="Dropdown-content">
+              {#each driverClassList as dc}
+                <div
+                  class="Dropdown-selection clickable"
+                  on:click={() => {
+                    if (driverClassesToMessage.includes(dc)) {
+                      driverClassesToMessage = driverClassesToMessage.filter(sR => sR !== dc);
+                    } else {
+                      driverClassesToMessage.push(dc);
+                      driverClassesToMessage = driverClassesToMessage;
+                    }
+                  }}>
+                  <div class="Dropdown-selection-check">
+
+                    {#if driverClassesToMessage.includes(dc)}
+                      <svg
+                        width="16"
+                        height="12"
+                        viewBox="0 0 16 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M13.5938 0.625L5.375 8.84375L2.375 5.8125C2.21875
+                          5.6875 1.96875 5.6875 1.84375 5.8125L0.9375
+                          6.71875C0.8125 6.84375 0.8125 7.09375 0.9375
+                          7.25L5.125 11.4062C5.28125 11.5625 5.5 11.5625 5.65625
+                          11.4062L15.0312 2.03125C15.1562 1.90625 15.1562
+                          1.65625 15.0312 1.5L14.125 0.625C14 0.46875 13.75
+                          0.46875 13.5938 0.625Z"
+                          fill="#2B8AF7" />
+                      </svg>
+                    {/if}
+                  </div>
+                  {dc}
+                </div>
+              {/each}
+            </div>
+          </div>
         </div>
 
         <div class="MessageOverlay-labels">

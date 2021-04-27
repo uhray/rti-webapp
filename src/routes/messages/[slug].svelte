@@ -22,6 +22,8 @@
   let contactsList = [];
   let driversList = [];
   let driverIds = [];
+  let teamsList = [];
+  let driverClassList = [];
   let orders = [];
 
   onMount(async () => {
@@ -32,12 +34,16 @@
     driversList = contacts.drivers;
 
     driversList.forEach(d => {
+      teamsList.push(d.name);
       d.subgroups.forEach(s => {
+        driverClassList.push(s.name);
         s.contacts.forEach(c => {
           driverIds.push(c.id);
         });
       });
     });
+
+    driverClassList = _.uniq(driverClassList);
 
     me = $userStore.user;
     allPosts = await getPosts({ allMessages: true });
@@ -64,6 +70,8 @@
   {me}
   {contactsList}
   {driversList}
+  {teamsList}
+  {driverClassList}
   {orders}
   {slug}
   {trigger} />
