@@ -30,6 +30,7 @@
   export let driverClassList;
   export let orders;
   export let slug;
+  let filter = 'all';
   let sortedPosts = {};
 
   // OVERLAY VARIABLES
@@ -49,8 +50,8 @@
   let message = '';
   let canSubmit = false;
 
-  beforeUpdate(async () => {
-    sortedPosts = _.chain(posts)
+  afterUpdate(async () => {
+    sortedPosts = _.chain(filterPosts(posts))
       .map(p => {
         let newP = p;
 
@@ -100,6 +101,24 @@
 
   function handleRecipientInput(v) {
     inputRecipients = v;
+  }
+
+  function handleFilter(v) {
+    filter = v;
+  }
+
+  function filterPosts(v) {
+    let fPosts;
+
+    if (filter === 'all') {
+      fPosts = posts.filter(i => !i.archived);
+    } else if (filter === 'orders') {
+      fPosts = posts.filter(i => i.postType === 'ORDER' && !i.archived);
+    } else if (filter === 'macros') {
+      fPosts = posts.filter(i => i.postType === 'MACRO' && !i.archived);
+    }
+
+    return fPosts;
   }
 
   async function send() {
@@ -152,7 +171,10 @@
   </div>
   <div class="Messages-main">
     <div class="Messages-main-header">
-      <MessagesHeader contact={_.find(contactsList, { id: slug })} />
+      <MessagesHeader
+        contact={_.find(contactsList, { id: slug })}
+        {filter}
+        {handleFilter} />
 
     </div>
     <div id="Messages-Container" class="Messages-main-posts">
