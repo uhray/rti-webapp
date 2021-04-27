@@ -190,7 +190,7 @@
   <div class="Input" id="Input" bind:this={input}>
     <div class="Input-input">
       {#if attachments.length > 0}
-        <div class="Input-input-attachments">
+        <div class="Input-attachments">
           <MessageAttachments
             isDisplay={false}
             {removeAttachment}
@@ -198,18 +198,49 @@
         </div>
       {/if}
       {#if replyPost}
-        <div class="Input-input-replying">
+        <div class="Input-replying">
 
-          <div class="Input-input-text">
-            {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
+          {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
+            <div class="Input-info">
               <div>Replying to: {findContact(replyPost.from).name}</div>
               <div>{removeTags(replyPost.message)}</div>
-            {:else if replyPost.postType === 'ORDER'}
-              <div>
-                <span>Replying to: Order #{replyPost.orderId}</span>
+            </div>
+          {:else if replyPost.postType === 'ORDER'}
+            <div class="Input-orderInfo">
+              <div class="Input-orderText">
+                <svg
+                  width="16"
+                  height="11"
+                  viewBox="0 0 16 11"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="Input-orderIcon">
+                  <path
+                    d="M15.6289 4.70312L12.7578 0.574219C12.5117 0.246094
+                    12.1289 0 11.6641 0H4.30859C3.84375 0 3.46094 0.246094
+                    3.21484 0.574219L0.34375 4.70312C0.207031 4.92188 0.125
+                    5.16797 0.125 5.46875V9.1875C0.125 9.92578 0.699219 10.5
+                    1.4375 10.5H14.5625C15.2734 10.5 15.875 9.92578 15.875
+                    9.1875V5.46875C15.875 5.19531 15.793 4.92188 15.6289
+                    4.70312ZM4.30859 1.3125H11.6641L13.7969
+                    4.375H10.4609L9.58594 6.125H6.38672L5.51172
+                    4.375H2.17578L4.30859 1.3125ZM14.5625
+                    9.1875H1.4375V5.6875H4.71875L5.59375 7.4375H10.4062L11.2812
+                    5.6875H14.5625V9.1875Z"
+                    fill="#15224B" />
+                </svg>
+
+                <div>Replying to: Order #{replyPost.orderId}</div>
               </div>
-            {/if}
-          </div>
+              <Label
+                status={_.find(orders, { orderId: replyPost.orderId }).status}
+                text={capitalize(_.find(orders, {
+                    orderId: replyPost.orderId,
+                  }).status)}
+                small />
+            </div>
+          {/if}
+
           <div
             class="clickable"
             on:click={() => {

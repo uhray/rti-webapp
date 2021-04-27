@@ -64,22 +64,37 @@
     .Input-input {
       background-color: #fff;
       padding: 30px 30px 30px 30px;
+    }
+    .Input-attachments {
+      margin: 0 0 10px 0;
+    }
+    .Input-replying {
+      width: 100%;
+      padding: 0 0 30px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
 
-      .Input-input-attachments {
-        margin: 0 0 10px 0;
+      .Input.info {
+        display: flex;
+        flex-flow: column;
       }
 
-      .Input-input-replying {
-        padding: 0 0 30px;
+      .Input-orderInfo {
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
-        align-items: flex-start;
+        flex-grow: 1;
+      }
 
-        .Input-input.text {
-          display: flex;
-          flex-flow: column;
-        }
+      .Input-orderText {
+        display: flex;
+        flex-flow: row nowrap;
+      }
+
+      .Input-orderIcon {
+        margin-right: 5px;
       }
     }
   }
