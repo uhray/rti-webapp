@@ -75,11 +75,6 @@
     replies = replies;
   };
 
-  async function getData(url = '', data = {}) {
-    const response = await fetch(url, {});
-    return response.json();
-  }
-
   function toggleMessageOverlay(team) {
     displayMessageOverlay = !displayMessageOverlay;
     teamsToMessage.push(team);
@@ -121,10 +116,6 @@
     inputMessageType = undefined;
     displayMessageOverlay = false;
   }
-
-  // setInterval(async () => {
-  //   await refetch();
-  // }, interval || 1000);
 </script>
 
 <style src="./Messages.scss">
@@ -161,11 +152,9 @@
         {replies}
         {me}
         {toggleReplies}
-        refetch={() => {
-          console.log('### REFETCH TRIGGER ###');
-        }}
         contacts={contactsList}
-        {orders} />
+        {orders}
+        {slug} />
     </div>
   </div>
 </div>

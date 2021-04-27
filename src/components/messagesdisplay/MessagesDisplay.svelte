@@ -14,6 +14,7 @@
   import { uuid } from '../../tools/uuid.ts';
   import { capitalize } from '../../tools/capitalize.ts';
   import { userStore } from '../../store';
+  import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
 
   export let posts;
@@ -24,7 +25,7 @@
   export let replies;
   export let toggleReplies;
   export let orders;
-  export let slug = undefined;
+  export let slug;
 
   let messages;
   let input;
@@ -51,62 +52,40 @@
   };
 
   async function send(message) {
-    const id = meData.id;
-
     if (replyPost) {
-      replyPost.subthread.push({ from: id, message: message });
-
+      replyPost.subthread.push({ from: me._id, message: message });
+      if (attachments) {
+        attachments.forEach(a => {
+          replyPost.attachments.push(a);
+        });
+      }
       let payload = replyPost;
 
-      putData(`http://localhost:5000/api/v1/posts/${replyPost._id}`, payload)
-        .then(json => {
-          console.log(json.data);
-          refetch(payload._id);
+      editPost(replyPost._id, payload)
+        .then(res => {
+          console.log(res);
         })
         .catch(err => {
-          console.log(err);
+          console.log('Error adding reply: ', err);
         });
 
       replyPost = null;
     } else {
       let payload = {
-        from: id,
+        from: me._id,
         message: message,
-        to: [slug],
+        userId: slug,
+        attachments: attachments,
       };
 
-      postData('http://localhost:5000/api/v1/posts', payload)
-        .then(async json => {
-          console.log(json.data);
-          await refetch(json.data._id);
-          scrollToBottom();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      console.log(payload);
+
+      addPost(payload)
+        .then(res => console.log(res))
+        .catch(err => console.log('Error adding post: ', err));
     }
-  }
 
-  async function postData(url = '', data = {}) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(data),
-    });
-    return response.json();
-  }
-
-  async function putData(url = '', data = {}) {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(data),
-    });
-    return response.json();
+    attachments = [];
   }
 
   function removeTags(str) {
@@ -142,6 +121,14 @@
 <style src="./MessagesDisplay.scss">
 
 </style>
+
+<!-- <button
+  style={'position: fixed; top: 0; left: 0; padding: 30px; font-size: 20px; z-index: 9999'}
+  on:click={() => {
+    console.table({ slug: slug, me: me });
+  }}>
+  Test Data
+</button> -->
 
 <div class="MessagesDisplay">
   <div id="Messages" class="Messages" bind:this={messages}>
