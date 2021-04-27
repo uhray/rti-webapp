@@ -1,0 +1,97 @@
+.MessageAttachments {
+  // styles for image attachment
+  display: flex;
+  flex-flow: row nowrap;
+  // justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  height: 70px;
+  overflow-x: auto;
+
+  /* width */
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #a6adc4;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #595f76;
+  }
+
+  .MessageAttachments-imageContainer {
+    position: relative;
+    display: flex;
+    margin-right: 5px;
+  }
+  .MessageAttachments-imageHolder {
+    height: 55px;
+    width: 55px;
+    // margin: 13px -10px 15px 15px;
+  }
+  .MessageAttachments-image {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+  }
+  .MessageAttachments-imageIcon {
+    z-index: 400;
+    top: -10px;
+    right: -10px;
+    position: absolute;
+  }
+  // styles for file attachment
+  .MessageAttachments-fileBox {
+    display: flex;
+    margin-right: 5px;
+  }
+  .MessageAttachments-fileContainer {
+    box-sizing: border-box;
+    border: 0.5px solid rgba(21, 34, 75, 0.25);
+    border-radius: 4px;
+    height: 55px;
+    // width: fit-content;
+    padding: 4px;
+    // margin: 10px;
+    // margin: 11px -10px 15px 15px;
+  }
+  .MessageAttachments-fileHolder {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .MessageAttachments-fileIcon {
+    width: 36px !important;
+    height: 36px !important;
+    margin: auto 5px auto 5px;
+    max-width: none !important;
+  }
+  .MessageAttachments-fileName {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    color: #243e93;
+    margin: 4px 4px 2px 4px;
+  }
+  .MessageAttachments-fileSize {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: #595f76;
+    margin: 2px 4px 4px 4px;
+  }
+}

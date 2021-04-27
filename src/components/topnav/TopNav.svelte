@@ -2,8 +2,12 @@
   import Icon from '../icon/Icon.svelte';
   import DropDown from '../dropdown/DropDown.svelte';
   export let user;
-  console.log(user);
+  // console.log(user);
 </script>
+
+<style src="./TopNav.scss">
+
+</style>
 
 <!-- TODO: MOVE TOP NAV TO COMP, RENDER AT LAYOUT LEVEL -->
 <section class="TopNav">
@@ -14,9 +18,7 @@
         {#if user.isLoggedIn}
           {#if user.user.contactInfo.firstName}
             {user.user.contactInfo.firstName}
-          {:else}
-            {user.user.email}
-          {/if}
+          {:else}{user.user.email}{/if}
         {/if}
       </span>
       <Icon type="caretdown" />
@@ -25,5 +27,3 @@
 </section>
 
 <!-- ================================================== -->
-<style src="./TopNav.scss">
-</style>

@@ -1,23 +1,21 @@
 <script>
-  export let contacts = undefined;
-  export let getMessages;
   import Icon from '../icon/Icon.svelte';
   import { colors } from '../../theme/variables.js';
   import _ from 'lodash';
 
+  export let trigger;
+  export let slug;
+  export let driversList = [];
   export let collapsed = [];
+  export let toggleMessageOverlay = undefined;
 
   const collapse = id => {
-    // console.log('collapsing/expanding: ', id);
     if (_.includes(collapsed, id)) {
-      // console.log('found it');
       _.pull(collapsed, id);
     } else {
-      // console.log('not found');
       collapsed.push(id);
     }
     collapsed = collapsed;
-    console.log('collapsed = ', collapsed);
   };
 </script>
 
@@ -26,7 +24,18 @@
 </style>
 
 <div class="ContactList">
-  {#each contacts as group}
+  <a rel="prefetch" href="messages/all" on:click={trigger('all')}>
+    <div class={`ContactList-allMessages ${slug === 'all' && 'active'}`}>
+      <div class="uk-flex uk-flex-middle">
+        <div class="ContactList-allMessages-icon">
+          <Icon type="indicator" color={colors.darkblue} />
+        </div>
+        <div class="ContactList-allMessages-text">All Messages</div>
+      </div>
+    </div>
+  </a>
+
+  {#each driversList as group}
     <div class="ContactList-group">
       <div class="ContactList-group-header">
         <div class="uk-flex uk-flex-middle">
@@ -37,7 +46,11 @@
           </div>
           <div class="ContactList-group-text">{group.name}</div>
         </div>
-        <div class="ContactList-group-icon">
+        <div
+          class="ContactList-group-icon"
+          on:click={() => {
+            toggleMessageOverlay(group);
+          }}>
           <Icon type="message" />
         </div>
       </div>
@@ -47,13 +60,21 @@
           {#each group.subgroups as subgroup}
             <div class="ContactList-subgroup-container">
               <span class="ContactList-subgroup-text">{subgroup.name}</span>
+
               {#each subgroup.contacts as contact}
-                <div
-                  class="ContactList-contact"
-                  on:click={getMessages(contact.id, contact.name, contact.picture)}>
-                  <div class="ContactList-contact-picture">A</div>
-                  <div class="ContactList-contact-name">{contact.name}</div>
-                </div>
+                <!-- {`${JSON.stringify(contact)} // ${slug}`} -->
+                <a
+                  rel="prefetch"
+                  href={`messages/${contact.id}`}
+                  on:click={trigger(contact.id)}>
+                  <div
+                    class={`ContactList-contact ${slug === contact.id && 'active'}`}>
+                    <div class="ContactList-contact-picture">
+                      <img src={contact.picture} alt={contact.name} />
+                    </div>
+                    <div class="ContactList-contact-name">{contact.name}</div>
+                  </div>
+                </a>
               {/each}
             </div>
           {/each}

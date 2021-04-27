@@ -1,0 +1,204 @@
+.Messages {
+  height: calc(100vh - 58px);
+  max-height: calc(100vh - 58px);
+  padding: 0;
+
+  display: flex;
+  flex-flow: row nowrap;
+
+  .Messages-nav {
+    width: 250px;
+    max-width: 250px;
+    min-width: 250px;
+    border: 1px solid rgba(166, 173, 196, 0.5);
+    border-left: 0;
+    border-bottom: 0;
+
+    .Messages-nav-search {
+      box-sizing: border-box;
+      height: 60px;
+      border-bottom: 1px solid rgba(166, 173, 196, 0.5);
+      padding: 10px;
+    }
+
+    .Messages-nav-contacts {
+      box-sizing: border-box;
+      padding: 10px 0;
+      max-height: calc(100vh - 118px);
+      overflow-y: auto;
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: 1px;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: #fff;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #a6adc4;
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: #595f76;
+      }
+    }
+  }
+  .Messages-main {
+    width: 100%;
+    border-top: 1px solid rgba(166, 173, 196, 0.5);
+
+    .Messages-main-header {
+      display: flex;
+      flex-flow: column;
+      box-sizing: border-box;
+      height: 60px;
+      border-bottom: 1px solid rgba(166, 173, 196, 0.5);
+      padding: 10px 30px 10px 30px;
+    }
+
+    .Messages-main-posts {
+      position: relative;
+      height: calc(100vh - 119px);
+      max-height: calc(100vh - 119px);
+
+      // border: 1px solid red;
+    }
+  }
+}
+
+.MessageOverlay {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(22, 29, 53, 0.3);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    box-sizing: border-box;
+  }
+
+  .MessageOverlay-container {
+    position: relative;
+    width: 600px;
+    max-height: 800px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 44px 30px 30px;
+  }
+  .MessageOverlay-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .MessageOverlay-title {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+  .MessageOverlay-form {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .MessageOverlay-labels {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .MessageOverlay-label {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-start;
+    height: 28px;
+    background: rgba(36, 62, 147, 0.05);
+    border-radius: 4px;
+    padding: 2px 4px 2px 8px;
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+  .MessageOverlay-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .MessageOverlay-inputLabel {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .MessageOverlay-inputLabelSub {
+    font-size: 12px;
+    font-weight: 400;
+    color: #a6adc4;
+  }
+  .MessageOverlay-rte {
+    max-height: 400px;
+    margin-bottom: 30px;
+  }
+  .MessageOverlay-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .MessageOverlay-button {
+    margin-right: 10px;
+  }
+}
+
+.Dropdown {
+  border-radius: 8px;
+  padding: 8px;
+  margin: 0;
+
+  .Dropdown-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 33px;
+    padding: 4px 20px 4px 15px;
+    background: #f6f7fb;
+    border-radius: 2px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 13px;
+
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #15224b;
+  }
+
+  .Dropdown-content {
+    margin: 8px;
+  }
+  .Dropdown-selection {
+    height: 40px;
+    font-size: 14px;
+    font-weight: 400;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    color: #15224b;
+
+    .Dropdown-selection-check {
+      margin: 0 8px;
+      width: 16px;
+    }
+  }
+}

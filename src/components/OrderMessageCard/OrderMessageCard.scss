@@ -1,0 +1,76 @@
+@import '../../theme/variables.scss';
+
+.Card {
+  border: 1px solid rgba(166, 173, 196, 0.5);
+  border-radius: 8px;
+
+  .Card-content {
+    padding: 15px;
+
+    .Card-header {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      align-items: center;
+
+      .Card-orderNumber {
+        font-weight: 500;
+        font-size: 14px;
+        color: $color--darkblue;
+      }
+    }
+
+    .OrderCard-stops {
+      margin-top: 12px;
+
+      .OrderCard-stop {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        margin-bottom: 6px;
+
+        .OrderCard-stopDetails {
+          color: $color--darkblue;
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          font-size: 0.875rem;
+        }
+
+        .OrderCard-stopType {
+          margin: 0 0 0 5px;
+          font-weight: 500;
+        }
+
+        .OrderCard-address {
+          margin: 0 0 0 5px;
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          color: $color--darkgray;
+          font-size: 0.8125rem;
+        }
+      }
+    }
+  }
+
+  .Card-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $color--lightgray-thirty;
+    padding: 11px 0;
+
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    text-transform: capitalize;
+    color: $color--darkgray;
+  }
+}
+
+.OrderCard-svg {
+  width: 12px;
+  margin-right: 5px;
+}

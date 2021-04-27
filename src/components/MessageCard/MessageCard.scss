@@ -1,0 +1,18 @@
+@import '../../theme/variables.scss';
+
+.MessageCard {
+}
+
+.AlertCard {
+  border: 0.5px solid rgba(89, 95, 118, 0.15);
+  border-radius: 8px;
+  padding: 15px;
+
+  .AlertCard-tags {
+    font-size: 14px;
+    color: $color--darkblue;
+    font-weight: 500;
+
+    margin-bottom: 10px;
+  }
+}

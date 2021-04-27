@@ -21,3 +21,13 @@ body {
 label {
   font-size: 12px;
 }
+
+.clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+p {
+  margin: 0;
+}

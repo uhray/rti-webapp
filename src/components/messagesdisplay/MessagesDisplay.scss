@@ -1,16 +1,6 @@
 @import '../../theme/variables.scss';
 
-.Display {
-  display: flex;
-  flex-flow: column;
-  padding: 0px 30px 0px 30px;
-  margin: 10px 0 10px 0;
-  box-sizing: border-box;
-
-  height: 100%;
-  width: 100%;
-  max-width: calc(100vw - 500px);
-  max-height: calc(100vh - 138px);
+#Messages {
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -33,111 +23,78 @@
   &::-webkit-scrollbar-thumb:hover {
     background: #595f76;
   }
+}
 
-  .Post {
-    margin-bottom: 41px;
+.MessagesDisplay {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
 
-    .Post-header {
+  .Messages {
+    flex-grow: 1;
+    overflow: auto;
+
+    .Messages-container {
+      display: flex;
+      flex-flow: column;
+      padding: 15px 30px 0px 30px;
+      box-sizing: border-box;
+
+      width: 100%;
+      max-width: calc(100vw - 505px);
+
+      .Messages-dateLabel {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .Post {
+        margin-bottom: 41px;
+      }
+    }
+  }
+  .Input {
+    flex-shrink: 0;
+
+    border-top: 0.5px solid rgba(89, 95, 118, 0.15);
+    box-shadow: 0px 1px 6px 0px rgba(21, 34, 75, 0.15);
+
+    .Input-input {
+      background-color: #fff;
+      padding: 30px 30px 30px 30px;
+    }
+    .Input-attachments {
+      margin: 0 0 10px 0;
+    }
+    .Input-replying {
+      width: 100%;
+      padding: 0 0 30px;
       display: flex;
       flex-flow: row nowrap;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
-      margin-bottom: 11px;
 
-      img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-      }
-
-      .Post-header-details {
+      .Input.info {
         display: flex;
         flex-flow: column;
-        margin-left: 12px;
       }
 
-      .Post-header-name {
-        font-weight: 500;
-        font-size: 14px;
-        color: $color--darkblue;
-      }
-
-      .Post-header-timestamp {
-        font-weight: normal;
-        font-size: 12px;
-        color: $color--darkgray;
-      }
-    }
-
-    .Post-message {
-      font-weight: normal;
-      font-size: 15px;
-      color: $color--darkblue;
-    }
-
-    .Post-replies {
-      width: 100%;
-      margin-top: 10px;
-
-      .Post-replies-show {
+      .Input-orderInfo {
         display: flex;
         flex-flow: row nowrap;
-        justify-content: flex-start;
-        align-items: center;
-
-        font-weight: normal;
-        font-size: 14px;
-        color: $color--primary;
-
-        margin-bottom: 10px;
-
-        &:hover {
-          cursor: pointer;
-        }
+        justify-content: space-between;
+        flex-grow: 1;
       }
-      .Post-replies-icon {
-        &:hover {
-          cursor: pointer;
-        }
-      }
-      .Post-replies-content {
-        margin-left: 30px;
-        margin-bottom: 5px;
 
-        padding: 22px 15px 15px 15px;
-        background: $color--tablegray;
-        border-radius: 4px;
-
-        .Post-replies-content-message {
-          font-weight: normal;
-          font-size: 15px;
-          color: $color--darkblue;
-        }
-      }
-    }
-
-    .Post-reply {
-      padding: 7px 15px;
-      border-radius: 4px;
-      background: $color--tablegray;
-      color: $color--primary;
-      font-weight: normal;
-      font-size: 14px;
-      margin-top: 10px;
-
-      .Post-reply-action {
+      .Input-orderText {
         display: flex;
         flex-flow: row nowrap;
-        align-items: center;
-        width: fit-content;
+      }
 
-        &:hover {
-          cursor: pointer;
-        }
-
-        span {
-          margin-left: 3px;
-        }
+      .Input-orderIcon {
+        margin-right: 5px;
       }
     }
   }
