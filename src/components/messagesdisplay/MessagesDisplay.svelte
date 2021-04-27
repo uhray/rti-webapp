@@ -122,14 +122,6 @@
 
 </style>
 
-<!-- <button
-  style={'position: fixed; top: 0; left: 0; padding: 30px; font-size: 20px; z-index: 9999'}
-  on:click={() => {
-    console.table({ slug: slug, me: me });
-  }}>
-  Test Data
-</button> -->
-
 <div class="MessagesDisplay">
   <div id="Messages" class="Messages" bind:this={messages}>
     <div class="Messages-container">

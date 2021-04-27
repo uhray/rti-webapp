@@ -1,25 +1,12 @@
 <script>
   import Post from '../post/Post.svelte';
   import { formatDate } from '../../tools/formatDate';
+  import { formatInitials } from '../../tools/formatInitials';
   import moment from 'moment';
 
   export let isOrder;
   export let user;
   export let post;
-
-  function formatInitials(name) {
-    if (name) {
-      var names = name.split(' '),
-        initials = names[0].substring(0, 1).toUpperCase();
-
-      if (names.length > 1) {
-        initials += names[names.length - 1].substring(0, 1).toUpperCase();
-      }
-
-      return initials;
-    }
-    return;
-  }
 </script>
 
 <style src="./PostHeader.scss">

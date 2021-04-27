@@ -147,7 +147,8 @@
   </div>
   <div class="Messages-main">
     <div class="Messages-main-header">
-      <MessagesHeader contact={undefined} />
+      <MessagesHeader contact={_.find(contactsList, { id: slug })} />
+
     </div>
     <div id="Messages-Container" class="Messages-main-posts">
       <MessagesDisplay

@@ -1,7 +1,8 @@
 <script>
   import Label from '../../components/label/Label.svelte';
   import { colors } from '../../theme/variables';
-  export let contact = undefined;
+  import { formatInitials } from '../../tools/formatInitials';
+  export let contact;
 </script>
 
 <style src="./MessagesHeader.scss">
@@ -9,10 +10,13 @@
 </style>
 
 <div class="Header">
-
   {#if contact}
     <div class="Header-photo">
-      <img src={contact.avatarUrl || ''} alt={contact.name || ''} />
+      {#if contact.avatarUrl}
+        <img src={contact.avatarUrl || ''} alt={contact.name || ''} />
+      {:else}
+        <div class="Header-noPhoto">{formatInitials(contact.name)}</div>
+      {/if}
     </div>
 
     <div class="Header-content">
