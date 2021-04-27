@@ -44,7 +44,8 @@
     'Other',
   ];
   let selectedMessageTypes = [];
-  let inputMessageType = undefined;
+  let inputRecipients = '';
+  let inputMessageType = '';
   let message = '';
   let canSubmit = false;
 
@@ -95,6 +96,10 @@
 
   function handleMessageTypeInput(v) {
     inputMessageType = v;
+  }
+
+  function handleRecipientInput(v) {
+    inputRecipients = v;
   }
 
   async function send() {
@@ -269,85 +274,98 @@
           <Input
             fill
             placeholder="Type or Select Recipients"
-            onInput={handleMessageTypeInput} />
+            onInput={handleRecipientInput} />
           <div uk-dropdown="pos: bottom-justify; mode: click" class="Dropdown">
-            <div class="Dropdown-header">Teams</div>
-            <div class="Dropdown-content">
-              {#each teamsList as t}
-                <div
-                  class="Dropdown-selection clickable"
-                  on:click={() => {
-                    if (teamsToMessage.includes(t)) {
-                      teamsToMessage = teamsToMessage.filter(tM => tM !== t);
-                    } else {
-                      teamsToMessage.push(t);
-                      teamsToMessage = teamsToMessage;
-                    }
-                  }}>
-                  <div class="Dropdown-selection-check">
 
-                    {#if teamsToMessage.includes(t)}
-                      <svg
-                        width="16"
-                        height="12"
-                        viewBox="0 0 16 12"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M13.5938 0.625L5.375 8.84375L2.375 5.8125C2.21875
-                          5.6875 1.96875 5.6875 1.84375 5.8125L0.9375
-                          6.71875C0.8125 6.84375 0.8125 7.09375 0.9375
-                          7.25L5.125 11.4062C5.28125 11.5625 5.5 11.5625 5.65625
-                          11.4062L15.0312 2.03125C15.1562 1.90625 15.1562
-                          1.65625 15.0312 1.5L14.125 0.625C14 0.46875 13.75
-                          0.46875 13.5938 0.625Z"
-                          fill="#2B8AF7" />
-                      </svg>
-                    {/if}
+            {#if _.some(teamsList.filter(t =>
+                t.toLowerCase().includes(inputRecipients.toLowerCase())
+              ))}
+              <div class="Dropdown-header">Teams</div>
+
+              <div class="Dropdown-content">
+                {#each teamsList as t}
+                  <div
+                    class="Dropdown-selection clickable"
+                    on:click={() => {
+                      if (teamsToMessage.includes(t)) {
+                        teamsToMessage = teamsToMessage.filter(tM => tM !== t);
+                      } else {
+                        teamsToMessage.push(t);
+                        teamsToMessage = teamsToMessage;
+                      }
+                    }}>
+                    <div class="Dropdown-selection-check">
+
+                      {#if teamsToMessage.includes(t)}
+                        <svg
+                          width="16"
+                          height="12"
+                          viewBox="0 0 16 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M13.5938 0.625L5.375 8.84375L2.375 5.8125C2.21875
+                            5.6875 1.96875 5.6875 1.84375 5.8125L0.9375
+                            6.71875C0.8125 6.84375 0.8125 7.09375 0.9375
+                            7.25L5.125 11.4062C5.28125 11.5625 5.5 11.5625
+                            5.65625 11.4062L15.0312 2.03125C15.1562 1.90625
+                            15.1562 1.65625 15.0312 1.5L14.125 0.625C14 0.46875
+                            13.75 0.46875 13.5938 0.625Z"
+                            fill="#2B8AF7" />
+                        </svg>
+                      {/if}
+                    </div>
+                    {t}
                   </div>
-                  {t}
-                </div>
-              {/each}
-            </div>
+                {/each}
+              </div>
+            {/if}
 
-            <div class="Dropdown-header">Divisions</div>
-            <div class="Dropdown-content">
-              {#each driverClassList as dc}
-                <div
-                  class="Dropdown-selection clickable"
-                  on:click={() => {
-                    if (driverClassesToMessage.includes(dc)) {
-                      driverClassesToMessage = driverClassesToMessage.filter(sR => sR !== dc);
-                    } else {
-                      driverClassesToMessage.push(dc);
-                      driverClassesToMessage = driverClassesToMessage;
-                    }
-                  }}>
-                  <div class="Dropdown-selection-check">
+            {#if _.some(driverClassList.filter(dc =>
+                dc.toLowerCase().includes(inputRecipients.toLowerCase())
+              ))}
+              <div class="Dropdown-header">Divisions</div>
 
-                    {#if driverClassesToMessage.includes(dc)}
-                      <svg
-                        width="16"
-                        height="12"
-                        viewBox="0 0 16 12"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M13.5938 0.625L5.375 8.84375L2.375 5.8125C2.21875
-                          5.6875 1.96875 5.6875 1.84375 5.8125L0.9375
-                          6.71875C0.8125 6.84375 0.8125 7.09375 0.9375
-                          7.25L5.125 11.4062C5.28125 11.5625 5.5 11.5625 5.65625
-                          11.4062L15.0312 2.03125C15.1562 1.90625 15.1562
-                          1.65625 15.0312 1.5L14.125 0.625C14 0.46875 13.75
-                          0.46875 13.5938 0.625Z"
-                          fill="#2B8AF7" />
-                      </svg>
-                    {/if}
+              <div class="Dropdown-content">
+                {#each inputRecipients ? driverClassList.filter(dc =>
+                      dc.toLowerCase().includes(inputRecipients.toLowerCase())
+                    ) : driverClassList as dc}
+                  <div
+                    class="Dropdown-selection clickable"
+                    on:click={() => {
+                      if (driverClassesToMessage.includes(dc)) {
+                        driverClassesToMessage = driverClassesToMessage.filter(sR => sR !== dc);
+                      } else {
+                        driverClassesToMessage.push(dc);
+                        driverClassesToMessage = driverClassesToMessage;
+                      }
+                    }}>
+                    <div class="Dropdown-selection-check">
+
+                      {#if driverClassesToMessage.includes(dc)}
+                        <svg
+                          width="16"
+                          height="12"
+                          viewBox="0 0 16 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M13.5938 0.625L5.375 8.84375L2.375 5.8125C2.21875
+                            5.6875 1.96875 5.6875 1.84375 5.8125L0.9375
+                            6.71875C0.8125 6.84375 0.8125 7.09375 0.9375
+                            7.25L5.125 11.4062C5.28125 11.5625 5.5 11.5625
+                            5.65625 11.4062L15.0312 2.03125C15.1562 1.90625
+                            15.1562 1.65625 15.0312 1.5L14.125 0.625C14 0.46875
+                            13.75 0.46875 13.5938 0.625Z"
+                            fill="#2B8AF7" />
+                        </svg>
+                      {/if}
+                    </div>
+                    {dc}
                   </div>
-                  {dc}
-                </div>
-              {/each}
-            </div>
+                {/each}
+              </div>
+            {/if}
           </div>
         </div>
 
