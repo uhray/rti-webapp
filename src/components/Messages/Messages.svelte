@@ -31,6 +31,7 @@
   export let orders;
   export let slug;
   let filter = 'all';
+  let search = '';
   let sortedPosts = {};
 
   // OVERLAY VARIABLES
@@ -107,6 +108,10 @@
     filter = v;
   }
 
+  function handleSearch(v) {
+    search = v;
+  }
+
   function filterPosts(v) {
     let fPosts;
 
@@ -159,14 +164,15 @@
 <div class="Messages">
   <div class="Messages-nav">
     <div class="Messages-nav-search">
-      <SearchBar alternate />
+      <SearchBar {search} {handleSearch} alternate />
     </div>
     <div class="Messages-nav-contacts">
       <ContactList
         slug={slug ? slug : 'all'}
         {driversList}
         {toggleMessageOverlay}
-        {trigger} />
+        {trigger}
+        {search} />
     </div>
   </div>
   <div class="Messages-main">

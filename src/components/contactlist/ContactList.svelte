@@ -8,6 +8,7 @@
   export let driversList = [];
   export let collapsed = [];
   export let toggleMessageOverlay = undefined;
+  export let search;
 
   const collapse = id => {
     if (_.includes(collapsed, id)) {

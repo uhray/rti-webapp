@@ -1,6 +1,8 @@
 <script>
   export let fill = undefined;
   export let alternate = false;
+  export let handleSearch;
+  export let search;
 </script>
 
 <style src="./SearchBar.scss">
@@ -14,7 +16,17 @@
     <input
       class={`uk-search-input ${alternate ? 'SearchBar-alternate' : 'SearchBar-default'}`}
       type="search"
-      placeholder="Fleet Search..." />
+      placeholder="Fleet Search..."
+      value={search}
+      on:input={e => {
+        handleSearch(e.target.value);
+      }} />
+    {#if search}
+      <span
+        class="SearchBar-close clickable"
+        uk-icon="close"
+        on:click={() => handleSearch('')} />
+    {/if}
   </form>
 </section>
 
