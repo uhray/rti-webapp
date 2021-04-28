@@ -17,11 +17,11 @@
       <span class="TopNav-navName">
         {#if user.isLoggedIn}
           {#if user.user.contactInfo.firstName}
-            {user.user.contactInfo.firstName}
+            {user.user.contactInfo.firstName} {user.user.contactInfo.lastName}
           {:else}{user.user.email}{/if}
         {/if}
       </span>
-      <Icon type="caretdown" />
+      <Icon color="#161D35" type="caretdown" />
     </div>
   </DropDown>
 </section>
