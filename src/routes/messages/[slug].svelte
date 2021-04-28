@@ -55,7 +55,7 @@
     });
   });
 
-  async function trigger(id) {
+  function trigger(id) {
     posts = id === 'all' ? allPosts : allPosts.filter(p => p.userId == id);
     posts = posts;
     replies = posts.map(post => {
