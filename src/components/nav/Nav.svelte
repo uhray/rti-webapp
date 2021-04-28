@@ -8,7 +8,7 @@
   const items = [
     { icon: 'orders', text: 'Orders', link: 'orders' },
     { icon: 'macro', text: 'Driver Macros', link: 'macros', amount: 3 },
-    { icon: 'message', text: 'Messages', link: 'messages', amount: 999 },
+    { icon: 'message', text: 'Messages', link: 'messages/all', amount: 999 },
     { text: 'line' },
     { icon: 'users', text: 'User Management', link: 'users' },
     { icon: 'settings', text: 'Settings', link: 'settings' },

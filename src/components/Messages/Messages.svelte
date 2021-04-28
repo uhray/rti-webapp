@@ -24,10 +24,10 @@
   export let posts = [];
   export let replies = [];
   export let me;
-  export let contactsList;
-  export let driversList;
-  export let teamsList;
-  export let driverClassList;
+  export let contactsList = [];
+  export let driversList = [];
+  export let teamsList = [];
+  export let driverClassList = [];
   export let orders;
   export let slug;
   let filter = 'all';
@@ -296,7 +296,9 @@
           <Input
             fill
             placeholder="Type or Select Recipients"
-            onInput={handleRecipientInput} />
+            onInput={handleRecipientInput}
+            error="A team must be selected"
+            invalid={teamsToMessage.length <= 0} />
           <div uk-dropdown="pos: bottom-justify; mode: click" class="Dropdown">
 
             {#if _.some(teamsList.filter(t =>
@@ -493,7 +495,9 @@
           </div>
 
           <div on:click={send}>
-            <Button primary disabled={!canSubmit ? true : false}>
+            <Button
+              primary
+              disabled={canSubmit && teamsToMessage.length > 0 ? false : true}>
               Send Message
             </Button>
           </div>
