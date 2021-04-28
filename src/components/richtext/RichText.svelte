@@ -10,8 +10,9 @@
   export let send = undefined;
   export let id = '';
   let quill;
-  let htmlContent = 'type above';
-  let content = undefined;
+  let htmlContent = undefined;
+  let content = '';
+  let canSend = false;
 
   let iconImages = {
     bold:
@@ -117,7 +118,8 @@
             class="send-msg"
             on:click={() => {
               sendMessage();
-            }}>
+            }}
+            disabled={content.length > 1 ? false : true}>
             <svg
               width="24"
               height="25"
@@ -132,7 +134,7 @@
                 19.0312L12.7109 16.8984L16.1016 18.3477C16.4844 18.5117 16.9492
                 18.2656 17.0039 17.8281L18.9727 6.01562C19.082 5.46875 18.4805
                 5.08594 18.0156 5.35938Z"
-                fill="#243E93" />
+                fill={content.length > 1 ? '#243E93' : 'rgba(36, 62, 147, 0.15)'} />
             </svg>
           </button>
         {/if}
