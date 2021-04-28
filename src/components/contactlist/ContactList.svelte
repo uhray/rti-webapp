@@ -1,6 +1,7 @@
 <script>
   import Icon from '../icon/Icon.svelte';
   import { colors } from '../../theme/variables.js';
+  import { formatInitials } from '../../tools/formatInitials.ts';
   import _ from 'lodash';
 
   export let trigger;
@@ -72,7 +73,13 @@
                       class={`ContactList-contact ${slug === contact.id && 'active'}`}>
 
                       <div class="ContactList-contact-picture">
-                        <img src={contact.picture} alt={contact.name} />
+                        {#if contact.avatarUrl}
+                          <img src={contact.avatarUrl} alt={contact.name} />
+                        {:else}
+                          <div class="ContactList-contact-noPicture">
+                            {formatInitials(contact.name)}
+                          </div>
+                        {/if}
                       </div>
                       <div class="ContactList-contact-name">{contact.name}</div>
                     </div>
