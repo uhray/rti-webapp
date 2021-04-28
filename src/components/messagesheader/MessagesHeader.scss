@@ -9,42 +9,6 @@
   justify-content: center;
   align-items: center;
 
-  .Header-photo {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-width: 40px;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    background-color: $color--primary;
-    color: #fff;
-
-    img {
-      min-width: 40px;
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-    }
-  }
-
-  .Header-noPhoto {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 500;
-    background-color: $color--primary;
-    color: #fff;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
   .Header-content {
     display: flex;
     flex-flow: row nowrap;

@@ -1,5 +1,6 @@
 <script>
   import Label from '../../components/label/Label.svelte';
+  import Avatar from '../../components/Avatar/Avatar.svelte';
   import { colors } from '../../theme/variables';
   import { formatInitials } from '../../tools/formatInitials';
   export let contact;
@@ -13,13 +14,7 @@
 
 <div class="Header">
   {#if contact}
-    <div class="Header-photo">
-      {#if contact.avatarUrl}
-        <img src={contact.avatarUrl || ''} alt={contact.name || ''} />
-      {:else}
-        <div class="Header-noPhoto">{formatInitials(contact.name)}</div>
-      {/if}
-    </div>
+    <Avatar user={contact} size={40} />
 
     <div class="Header-content">
       <div class="Header-content-details">

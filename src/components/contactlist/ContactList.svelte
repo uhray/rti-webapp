@@ -1,5 +1,6 @@
 <script>
   import Icon from '../icon/Icon.svelte';
+  import Avatar from '../Avatar/Avatar.svelte';
   import { colors } from '../../theme/variables.js';
   import { formatInitials } from '../../tools/formatInitials.ts';
   import _ from 'lodash';
@@ -73,14 +74,10 @@
                       class={`ContactList-contact ${slug === contact.id && 'active'}`}>
 
                       <div class="ContactList-contact-picture">
-                        {#if contact.avatarUrl}
-                          <img src={contact.avatarUrl} alt={contact.name} />
-                        {:else}
-                          <div class="ContactList-contact-noPicture">
-                            {formatInitials(contact.name)}
-                          </div>
-                        {/if}
+                        <Avatar user={contact} size={24} />
+
                       </div>
+
                       <div class="ContactList-contact-name">{contact.name}</div>
                     </div>
                   </a>

@@ -1,5 +1,6 @@
 <script>
   import Post from '../post/Post.svelte';
+  import Avatar from '../Avatar/Avatar.svelte';
   import { formatDate } from '../../tools/formatDate';
   import { formatInitials } from '../../tools/formatInitials';
   import moment from 'moment';
@@ -14,14 +15,7 @@
 </style>
 
 <div class="Post-header">
-  {#if user.avatarUrl}
-    <img
-      class="Post-header-avatar"
-      src={user.avatarUrl || ''}
-      alt={user.name || ''} />
-  {:else}
-    <div class="Post-header-avatar">{formatInitials(user.name)}</div>
-  {/if}
+  <Avatar {user} size={40} />
   <div class="Post-header-details">
     <div class="Post-header-name">{user.name || ''}</div>
     <div class="Post-header-timestamp">
