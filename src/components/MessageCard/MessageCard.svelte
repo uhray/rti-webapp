@@ -3,6 +3,7 @@
   import PostHeader from '../PostHeader/PostHeader.svelte';
   import Label from '../label/Label.svelte';
   import moment from 'moment';
+  import _ from 'lodash';
 
   export let isAlert = false;
   export let post;
@@ -19,7 +20,10 @@
   <div class="AlertCard">
     <div class="AlertCard-header">
       <div class="AlertCard-tags">
-        Fleet Message • {post.tags.map((t, index) => (post.tags.length > 1 ? (index === post.tags.length - 1 ? t : t + ' - ') : t))}
+        Fleet Message {post.tags.length > 0 ? '•' : ''}
+        {#each post.tags as t, index}
+          {post.tags.length > 1 ? (index === post.tags.length - 1 ? t : t + ' - ') : t}
+        {/each}
       </div>
       <div class="AlertCard-labels">
         {#each post.teamIds as teamId}
