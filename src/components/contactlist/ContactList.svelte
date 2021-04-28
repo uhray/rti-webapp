@@ -63,19 +63,21 @@
               <span class="ContactList-subgroup-text">{subgroup.name}</span>
 
               {#each subgroup.contacts as contact}
-                <!-- {`${JSON.stringify(contact)} // ${slug}`} -->
-                <a
-                  rel="prefetch"
-                  href={`messages/${contact.id}`}
-                  on:click={trigger(contact.id)}>
-                  <div
-                    class={`ContactList-contact ${slug === contact.id && 'active'}`}>
-                    <div class="ContactList-contact-picture">
-                      <img src={contact.picture} alt={contact.name} />
+                {#if contact.name.toLowerCase().includes(search.toLowerCase())}
+                  <a
+                    rel="prefetch"
+                    href={`messages/${contact.id}`}
+                    on:click={trigger(contact.id)}>
+                    <div
+                      class={`ContactList-contact ${slug === contact.id && 'active'}`}>
+
+                      <div class="ContactList-contact-picture">
+                        <img src={contact.picture} alt={contact.name} />
+                      </div>
+                      <div class="ContactList-contact-name">{contact.name}</div>
                     </div>
-                    <div class="ContactList-contact-name">{contact.name}</div>
-                  </div>
-                </a>
+                  </a>
+                {/if}
               {/each}
             </div>
           {/each}
