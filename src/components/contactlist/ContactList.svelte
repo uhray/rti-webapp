@@ -11,6 +11,7 @@
   export let collapsed = [];
   export let toggleMessageOverlay = undefined;
   export let search;
+  export let loading;
 
   const collapse = id => {
     if (_.includes(collapsed, id)) {
@@ -27,67 +28,77 @@
 </style>
 
 <div class="ContactList">
-  <a rel="prefetch" href="messages/all" on:click={trigger('all')}>
-    <div class={`ContactList-allMessages ${slug === 'all' && 'active'}`}>
-      <div class="uk-flex uk-flex-middle">
-        <div class="ContactList-allMessages-icon">
-          <Icon type="indicator" color={colors.darkblue} />
-        </div>
-        <div class="ContactList-allMessages-text">All Messages</div>
-      </div>
-    </div>
-  </a>
 
-  {#each driversList as group}
-    <div class="ContactList-group">
-      <div class="ContactList-group-header">
+  {#if !loading}
+    <a rel="prefetch" href="messages/all" on:click={trigger('all')}>
+      <div class={`ContactList-allMessages ${slug === 'all' && 'active'}`}>
         <div class="uk-flex uk-flex-middle">
-          <div class="ContactList-group-icon" on:click={collapse(group.id)}>
-            <Icon
-              type={_.includes(collapsed, group.id) === false ? 'caretdown' : 'caretup'}
-              color={colors.darkblue} />
+          <div class="ContactList-allMessages-icon">
+            <Icon type="indicator" color={colors.darkblue} />
           </div>
-          <div class="ContactList-group-text">{group.name}</div>
-        </div>
-        <div
-          class="ContactList-group-icon"
-          on:click={() => {
-            toggleMessageOverlay(group);
-          }}>
-          <Icon type="message" />
+          <div class="ContactList-allMessages-text">All Messages</div>
         </div>
       </div>
+    </a>
 
-      {#if _.includes(collapsed, group.id) === false}
-        <div class="ContactList-subgroup">
-          {#each group.subgroups as subgroup}
-            <div class="ContactList-subgroup-container">
-              <span class="ContactList-subgroup-text">{subgroup.name}</span>
-
-              {#each subgroup.contacts as contact}
-                {#if contact.name.toLowerCase().includes(search.toLowerCase())}
-                  <a
-                    rel="prefetch"
-                    href={`messages/${contact.id}`}
-                    on:click={trigger(contact.id)}>
-                    <div
-                      class={`ContactList-contact ${slug === contact.id && 'active'}`}>
-
-                      <div class="ContactList-contact-picture">
-                        <Avatar user={contact} size={24} />
-
-                      </div>
-
-                      <div class="ContactList-contact-name">{contact.name}</div>
-                    </div>
-                  </a>
-                {/if}
-              {/each}
+    {#each driversList as group}
+      <div class="ContactList-group">
+        <div class="ContactList-group-header">
+          <div class="uk-flex uk-flex-middle">
+            <div class="ContactList-group-icon" on:click={collapse(group.id)}>
+              <Icon
+                type={_.includes(collapsed, group.id) === false ? 'caretdown' : 'caretup'}
+                color={colors.darkblue} />
             </div>
-          {/each}
+            <div class="ContactList-group-text">{group.name}</div>
+          </div>
+          <div
+            class="ContactList-group-icon"
+            on:click={() => {
+              toggleMessageOverlay(group);
+            }}>
+            <Icon type="message" />
+          </div>
         </div>
-      {/if}
-    </div>
-  {/each}
 
+        {#if _.includes(collapsed, group.id) === false}
+          <div class="ContactList-subgroup">
+            {#each group.subgroups as subgroup}
+              <div class="ContactList-subgroup-container">
+                <span class="ContactList-subgroup-text">{subgroup.name}</span>
+
+                {#each subgroup.contacts as contact}
+                  {#if contact.name
+                    .toLowerCase()
+                    .includes(search.toLowerCase())}
+                    <a
+                      rel="prefetch"
+                      href={`messages/${contact.id}`}
+                      on:click={trigger(contact.id)}>
+                      <div
+                        class={`ContactList-contact ${slug === contact.id && 'active'}`}>
+
+                        <div class="ContactList-contact-picture">
+                          <Avatar user={contact} size={24} />
+
+                        </div>
+
+                        <div class="ContactList-contact-name">
+                          {contact.name}
+                        </div>
+                      </div>
+                    </a>
+                  {/if}
+                {/each}
+              </div>
+            {/each}
+          </div>
+        {/if}
+      </div>
+    {/each}
+  {:else}
+    <div class="ContactList-loading">
+      <div uk-spinner />
+    </div>
+  {/if}
 </div>

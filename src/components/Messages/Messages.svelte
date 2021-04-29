@@ -21,8 +21,8 @@
   import { userStore } from '../../store';
 
   export let trigger;
-  export let posts = [];
-  export let replies = [];
+  export let posts = undefined;
+  export let replies = undefined;
   export let me;
   export let contactsList = [];
   export let driversList = [];
@@ -30,9 +30,10 @@
   export let driverClassList = [];
   export let orders;
   export let slug;
+  export let loading;
   let filter = 'all';
   let search = '';
-  let sortedPosts = {};
+  let sortedPosts = undefined;
 
   // OVERLAY VARIABLES
   let displayMessageOverlay = false;
@@ -184,7 +185,8 @@
         {driversList}
         {toggleMessageOverlay}
         {trigger}
-        {search} />
+        {search}
+        {loading} />
     </div>
   </div>
   <div class="Messages-main">
@@ -204,7 +206,8 @@
         {toggleReplies}
         contacts={contactsList}
         {orders}
-        {slug} />
+        {slug}
+        {loading} />
     </div>
   </div>
 </div>

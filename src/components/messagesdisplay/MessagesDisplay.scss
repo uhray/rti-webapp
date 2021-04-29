@@ -34,6 +34,13 @@
     flex-grow: 1;
     overflow: auto;
 
+    .Messages-loading {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+
     .Messages-container {
       display: flex;
       flex-flow: column;

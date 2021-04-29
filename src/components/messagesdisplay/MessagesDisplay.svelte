@@ -17,8 +17,8 @@
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
 
-  export let posts;
-  export let sortedPosts;
+  export let posts = undefined;
+  export let sortedPosts = undefined;
   export let me;
   export let refetch;
   export let contacts = [];
@@ -26,6 +26,7 @@
   export let toggleReplies;
   export let orders;
   export let slug;
+  export let loading;
 
   let messages;
   let input;
@@ -33,9 +34,16 @@
   let maxHeight;
   let replyPost = null;
   let attachments = [];
+  let previousSlug;
 
-  afterUpdate(() => {
-    // scrollToBottom();
+  beforeUpdate(() => {
+    if (previousSlug !== slug) {
+      console.log('### SLUG IS DIFFERENT ###', slug);
+      previousSlug = slug;
+      console.log(previousSlug);
+
+      scrollToBottom();
+    }
   });
 
   const scrollToBottom = (div = undefined) => {
@@ -122,49 +130,56 @@
 
 <div class="MessagesDisplay">
   <div id="Messages" class="Messages" bind:this={messages}>
-    <div class="Messages-container">
-      {#if sortedPosts && posts.length > 0}
-        {#each Object.keys(sortedPosts) as date}
-          <div class="Messages-dateLabel">
-            {#if date}
-              <Label
-                text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
-                status="disabled"
-                backgroundColor="rgba(166, 173, 196, 0.3);" />
-            {/if}
-          </div>
 
-          {#each Object.values(sortedPosts[date]) as post}
-            <div class="Post">
-              {#if post.postType === 'MESSAGE'}
-                <MessageCard {post} {findContact} />
-              {:else if post.postType === 'ALERT'}
-                <MessageCard isAlert={true} {post} {findContact} />
-              {:else if post.postType === 'ORDER'}
-                <OrderMessageCard
-                  {me}
-                  {post}
-                  {findContact}
-                  order={_.find(orders, { orderId: post.orderId })} />
+    {#if !loading}
+      <div class="Messages-container">
+        {#if sortedPosts && posts.length > 0}
+          {#each Object.keys(sortedPosts) as date}
+            <div class="Messages-dateLabel">
+              {#if date}
+                <Label
+                  text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
+                  status="disabled"
+                  backgroundColor="rgba(166, 173, 196, 0.3);" />
               {/if}
-
-              {#if post.attachments.length > 0}
-                <MessageAttachments attachments={post.attachments} />
-              {/if}
-
-              <Replies
-                {post}
-                {replies}
-                {toggleReplies}
-                {handleReplyPost}
-                {findContact} />
             </div>
+
+            {#each Object.values(sortedPosts[date]) as post}
+              <div class="Post">
+                {#if post.postType === 'MESSAGE'}
+                  <MessageCard {post} {findContact} />
+                {:else if post.postType === 'ALERT'}
+                  <MessageCard isAlert={true} {post} {findContact} />
+                {:else if post.postType === 'ORDER'}
+                  <OrderMessageCard
+                    {me}
+                    {post}
+                    {findContact}
+                    order={_.find(orders, { orderId: post.orderId })} />
+                {/if}
+
+                {#if post.attachments.length > 0}
+                  <MessageAttachments attachments={post.attachments} />
+                {/if}
+
+                <Replies
+                  {post}
+                  {replies}
+                  {toggleReplies}
+                  {handleReplyPost}
+                  {findContact} />
+              </div>
+            {/each}
           {/each}
-        {/each}
-      {:else}
-        <div class="Messages-empty">No Messages</div>
-      {/if}
-    </div>
+        {:else}
+          <div class="Messages-empty">No Messages</div>
+        {/if}
+      </div>
+    {:else}
+      <div class="Messages-loading">
+        <div uk-spinner />
+      </div>
+    {/if}
   </div>
 
   {#if (slug === 'all' && replyPost) || slug !== 'all'}

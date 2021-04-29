@@ -25,6 +25,7 @@
   let teamsList = [];
   let driverClassList = [];
   let orders = [];
+  let loading = true;
 
   onMount(async () => {
     const contacts = await getContacts();
@@ -60,6 +61,8 @@
     replies = posts.map(post => {
       return { id: post._id, display: false };
     });
+
+    loading = false;
   });
 
   function trigger(id) {
@@ -88,4 +91,5 @@
   {driverClassList}
   {orders}
   {slug}
-  {trigger} />
+  {trigger}
+  {loading} />

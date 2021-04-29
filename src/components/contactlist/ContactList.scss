@@ -5,6 +5,12 @@
     text-decoration: none;
   }
 
+  .ContactList-loading {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   .ContactList-allMessages {
     position: relative;
     display: flex;

@@ -5,7 +5,9 @@
   import Divider from '../../components/divider/Divider.svelte';
   import Input from '../../components/input/Input.svelte';
   import Header from './Header.svelte';
-  import {userStore} from '../../store';
+  import { userStore } from '../../store';
+
+  console.log($userStore.user);
 </script>
 
 <style lang="scss">
