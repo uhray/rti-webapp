@@ -57,13 +57,17 @@
       .map(p => {
         let newP = p;
 
-        if (p.createdAt) {
-          newP.date = moment(new Date(p.createdAt).toISOString()).format(
-            'MMM D, YYYY'
-          );
-        }
+        newP.date = moment(
+          new Date(
+            p.postType === 'ORDER' ? p.updatedAt : p.createdAt
+          ).toISOString()
+        ).format('MMM D, YYYY');
+
+        newP.sortDate = p.postType === 'ORDER' ? p.updatedAt : p.createdAt;
+
         return newP;
       })
+      .sortBy('sortDate')
       .groupBy('date')
       .value();
   });
