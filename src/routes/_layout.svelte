@@ -9,8 +9,8 @@
   let loading = true;
 
   onMount(async () => {
-    console.log('setting user');
     const user = await auth();
+
     if (user) {
       userStore.setCurrent(user);
 
@@ -24,7 +24,6 @@
     } else {
       segment = 'signin';
     }
-    console.log('done setting user');
     loading = false;
   });
 </script>
