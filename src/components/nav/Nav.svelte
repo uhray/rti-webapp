@@ -21,8 +21,6 @@
   function menuToggle() {
     isOpen = !isOpen;
   }
-
-  console.log('### segment ###', segment);
 </script>
 
 <style src="./Nav.scss">

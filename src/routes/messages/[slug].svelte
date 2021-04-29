@@ -41,8 +41,6 @@
     me = $userStore.user;
     dataStore.setPostsSlug(slug);
 
-    console.log(allPosts, contacts, orders, me, slug);
-
     sortDrivers();
     await trigger(slug);
 
@@ -84,8 +82,6 @@
   function trigger(id) {
     sortPosts(id);
     dataStore.setPostsSlug(id);
-
-    console.log('### TRIGGER ###', posts);
   }
 </script>
 
