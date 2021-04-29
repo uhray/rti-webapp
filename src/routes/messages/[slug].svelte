@@ -41,8 +41,10 @@
     me = $userStore.user;
     dataStore.setPostsSlug(slug);
 
+    console.log(allPosts, contacts, orders, me, slug);
+
     sortDrivers();
-    sortPosts();
+    await trigger(slug);
 
     loading = false;
   });
@@ -64,23 +66,7 @@
     driverClassList = _.uniq(driverClassList);
   }
 
-  async function sortPosts() {
-    posts =
-      slug === 'all'
-        ? allPosts
-        : allPosts.filter(
-            p =>
-              p.userId == slug ||
-              p.truckId == _.find(contactsList, { id: slug }).truckId
-          );
-    posts = posts;
-    replies = posts;
-    posts.map(post => {
-      return { id: post._id, display: false };
-    });
-  }
-
-  function trigger(id) {
+  async function sortPosts(id) {
     posts =
       id === 'all'
         ? allPosts
@@ -93,7 +79,13 @@
     replies = posts.map(post => {
       return { id: post._id, display: false };
     });
+  }
+
+  function trigger(id) {
+    sortPosts(id);
     dataStore.setPostsSlug(id);
+
+    console.log('### TRIGGER ###', posts);
   }
 </script>
 
