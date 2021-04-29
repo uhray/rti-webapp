@@ -48,7 +48,14 @@
     me = $userStore.user;
     allPosts = await getPosts({ allMessages: true });
 
-    posts = slug === 'all' ? allPosts : allPosts.filter(p => p.userId == slug);
+    posts =
+      slug === 'all'
+        ? allPosts
+        : allPosts.filter(
+            p =>
+              p.userId == slug ||
+              p.truckId == _.find(contactsList, { id: slug }).truckId
+          );
     posts = posts;
     replies = posts.map(post => {
       return { id: post._id, display: false };
@@ -56,7 +63,14 @@
   });
 
   function trigger(id) {
-    posts = id === 'all' ? allPosts : allPosts.filter(p => p.userId == id);
+    posts =
+      id === 'all'
+        ? allPosts
+        : allPosts.filter(
+            p =>
+              p.userId == id ||
+              p.truckId == _.find(contactsList, { id: id }).truckId
+          );
     posts = posts;
     replies = posts.map(post => {
       return { id: post._id, display: false };
