@@ -35,7 +35,7 @@
   let attachments = [];
 
   afterUpdate(() => {
-    scrollToBottom();
+    // scrollToBottom();
   });
 
   const scrollToBottom = (div = undefined) => {

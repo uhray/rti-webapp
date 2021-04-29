@@ -1,10 +1,10 @@
 import moment from 'moment';
 
-export function formatDate(d, canFormat = true) {
+export function formatDate(d, canFormatDate = false) {
   let datetime = '';
 
-  if (canFormat) {
-    if (d) {
+  if (d) {
+    if (canFormatDate) {
       if (moment(new Date(d).toISOString()).isSame(moment(), 'day')) {
         datetime = 'Today ' + moment(d).format('h:mm A');
       } else if (
@@ -31,9 +31,9 @@ export function formatDate(d, canFormat = true) {
       } else {
         datetime = moment(d).format('MMM D YYYY h:mm A');
       }
+    } else {
+      datetime = moment(d).format('h:mm A');
     }
-  } else {
-    datetime = moment(d).format('h:mm A');
   }
 
   return datetime;

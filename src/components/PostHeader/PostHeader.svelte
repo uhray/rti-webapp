@@ -8,6 +8,7 @@
   export let isOrder;
   export let user;
   export let post;
+  export let canFormatDate = false;
 </script>
 
 <style src="./PostHeader.scss">
@@ -19,8 +20,8 @@
   <div class="Post-header-details">
     <div class="Post-header-name">{user.name || ''}</div>
     <div class="Post-header-timestamp">
-      {formatDate(post.createdAt, false)}
-      {isOrder ? ` • Updated ${formatDate(post.updatedAt, false)}` : ''}
+      {formatDate(post.createdAt, canFormatDate)}
+      {isOrder ? ` • Updated ${formatDate(post.updatedAt, canFormatDate)}` : ''}
     </div>
   </div>
 </div>

@@ -33,7 +33,10 @@
       <div class="Post-replies-wrapper">
         {#each post.subthread as reply}
           <div class="Post-replies-content">
-            <PostHeader user={findContact(reply.from)} post={reply} />
+            <PostHeader
+              user={findContact(reply.from)}
+              post={reply}
+              canFormatDate={true} />
 
             <div class="Post-message">
               <Post message={reply.message} />
