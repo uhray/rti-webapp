@@ -49,12 +49,15 @@
   }
 
   main {
+    position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: inherit;
     background-color: white;
     box-sizing: border-box;
 
     .loader {
+      position: absolute;
       width: 100%;
       height: 100%;
       display: flex;
