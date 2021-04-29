@@ -53,10 +53,6 @@
     height: 100vh;
     background-color: white;
     box-sizing: border-box;
-  }
-  .main-content {
-    height: 100%;
-    // padding: 2em;
 
     .loader {
       width: 100%;
@@ -65,6 +61,10 @@
       justify-content: center;
       align-items: center;
     }
+  }
+  .main-content {
+    height: 100%;
+    // padding: 2em;
   }
 </style>
 
@@ -78,16 +78,18 @@
   <div class="wrapper">
     <Nav {segment} />
     <main>
-      <TopNav user={$userStore} />
-      <div class="main-content">
-        {#if loading}
-          <div class="loader">
-            <div uk-spinner="ratio: 2" />
-          </div>
-        {:else}
+      {#if loading}
+        <div class="loader">
+          <div uk-spinner="ratio: 2" />
+        </div>
+      {:else}
+        <TopNav user={$userStore} />
+        <div class="main-content">
+
           <slot />
-        {/if}
-      </div>
+
+        </div>
+      {/if}
     </main>
   </div>
 {/if}
