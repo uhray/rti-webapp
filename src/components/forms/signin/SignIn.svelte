@@ -4,7 +4,7 @@
   import Checkbox from '../../checkbox/Checkbox.svelte';
   import Button from '../../button/Button.svelte';
   import { userLogin, auth } from '../../../tools/crudApi';
-  import { userStore } from '../../../store';
+  import { userStore, postsStore } from '../../../store';
   import {
     isEmpty,
     validEmail,
@@ -29,6 +29,7 @@
         const user = await auth();
         if (user) {
           userStore.setCurrent(user);
+          postsStore.getPosts();
           goto('/');
         }
       }

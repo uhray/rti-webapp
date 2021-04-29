@@ -5,7 +5,7 @@
   import { formatInitials } from '../../tools/formatInitials';
   import moment from 'moment';
 
-  export let isOrder;
+  export let isOrder = false;
   export let user;
   export let post;
   export let canFormatDate = false;

@@ -10,7 +10,13 @@
 <script>
   import { getContext, onMount } from 'svelte';
   import { getContacts, getPosts, getOrders } from '../../tools/crudApi.ts';
-  import { userStore } from '../../store';
+  import {
+    userStore,
+    postsStore,
+    contactsStore,
+    ordersStore,
+    dataStore,
+  } from '../../store';
   import Messages from '../../components/Messages/Messages.svelte';
 
   export let slug;
@@ -24,13 +30,24 @@
   let driverIds = [];
   let teamsList = [];
   let driverClassList = [];
+  let contacts = [];
   let orders = [];
   let loading = true;
 
   onMount(async () => {
-    const contacts = await getContacts();
-    orders = await getOrders();
+    allPosts = $postsStore.posts;
+    contacts = $contactsStore.contacts;
+    orders = $ordersStore.orders;
+    me = $userStore.user;
+    dataStore.setPostsSlug(slug);
 
+    sortDrivers();
+    sortPosts();
+
+    loading = false;
+  });
+
+  async function sortDrivers() {
     contactsList = contacts.contacts;
     driversList = contacts.drivers;
 
@@ -45,10 +62,9 @@
     });
 
     driverClassList = _.uniq(driverClassList);
+  }
 
-    me = $userStore.user;
-    allPosts = await getPosts({ allMessages: true });
-
+  async function sortPosts() {
     posts =
       slug === 'all'
         ? allPosts
@@ -58,12 +74,11 @@
               p.truckId == _.find(contactsList, { id: slug }).truckId
           );
     posts = posts;
-    replies = posts.map(post => {
+    replies = posts;
+    posts.map(post => {
       return { id: post._id, display: false };
     });
-
-    loading = false;
-  });
+  }
 
   function trigger(id) {
     posts =
@@ -78,6 +93,7 @@
     replies = posts.map(post => {
       return { id: post._id, display: false };
     });
+    dataStore.setPostsSlug(id);
   }
 </script>
 

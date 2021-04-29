@@ -2,19 +2,30 @@
   import { onMount } from 'svelte';
   import Nav from '../components/nav/Nav.svelte';
   import TopNav from '../components/topnav/TopNav.svelte';
-  import { userStore } from '../store';
-  import { auth } from '../tools/crudApi';
+  import { userStore, postsStore, contactsStore, ordersStore } from '../store';
+  import { auth, getPosts, getContacts, getOrders } from '../tools/crudApi';
 
   export let segment: string;
+  let loading = true;
 
   onMount(async () => {
-    // console.log('setting user');
+    console.log('setting user');
     const user = await auth();
     if (user) {
       userStore.setCurrent(user);
+
+      const p = await getPosts({ allMessages: true });
+      const c = await getContacts();
+      const o = await getOrders();
+
+      postsStore.setPosts(p);
+      contactsStore.setContacts(c);
+      ordersStore.setOrders(o);
     } else {
       segment = 'signin';
     }
+    console.log('done setting user');
+    loading = false;
   });
 </script>
 
@@ -61,7 +72,11 @@
     <main>
       <TopNav user={$userStore} />
       <div class="main-content">
-        <slot />
+        {#if loading}
+          <div uk-spinner />
+        {:else}
+          <slot />
+        {/if}
       </div>
     </main>
   </div>

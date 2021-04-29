@@ -1,8 +1,8 @@
 <script>
   export let fill = undefined;
   export let alternate = false;
-  export let handleSearch;
-  export let search;
+  export let handleSearch = undefined;
+  export let search = '';
 </script>
 
 <style src="./SearchBar.scss">

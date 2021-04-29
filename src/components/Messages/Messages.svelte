@@ -18,7 +18,7 @@
   import moment from 'moment';
   import tools, { getContacts, addPost } from '../../tools/crudApi.ts';
   import { uuid } from '../../tools/uuid.ts';
-  import { userStore } from '../../store';
+  import { userStore, postsStore, dataStore } from '../../store';
 
   export let trigger;
   export let posts = undefined;

@@ -13,14 +13,13 @@
   import Replies from '../Replies/Replies.svelte';
   import { uuid } from '../../tools/uuid.ts';
   import { capitalize } from '../../tools/capitalize.ts';
-  import { userStore } from '../../store';
+  import { userStore, postsStore, dataStore } from '../../store';
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
 
   export let posts = undefined;
   export let sortedPosts = undefined;
   export let me;
-  export let refetch;
   export let contacts = [];
   export let replies;
   export let toggleReplies;
@@ -34,17 +33,10 @@
   let maxHeight;
   let replyPost = null;
   let attachments = [];
-  let previousSlug;
 
-  beforeUpdate(() => {
-    if (previousSlug !== slug) {
-      console.log('### SLUG IS DIFFERENT ###', slug);
-      previousSlug = slug;
-      console.log(previousSlug);
-
-      scrollToBottom();
-    }
-  });
+  $: {
+    scrollToBottom();
+  }
 
   const scrollToBottom = (div = undefined) => {
     if (div) {
