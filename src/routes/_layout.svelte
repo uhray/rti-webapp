@@ -50,12 +50,21 @@
 
   main {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: white;
     box-sizing: border-box;
   }
   .main-content {
+    height: 100%;
     // padding: 2em;
+
+    .loader {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 </style>
 
@@ -72,7 +81,9 @@
       <TopNav user={$userStore} />
       <div class="main-content">
         {#if loading}
-          <div uk-spinner />
+          <div class="loader">
+            <div uk-spinner="ratio: 2" />
+          </div>
         {:else}
           <slot />
         {/if}
