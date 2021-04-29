@@ -63,7 +63,7 @@
 
       editPost(replyPost._id, payload)
         .then(res => {
-          console.log(res);
+          // console.log(res);
         })
         .catch(err => {
           console.log('Error adding reply: ', err);
@@ -78,10 +78,10 @@
         attachments: attachments,
       };
 
-      console.log(payload);
-
       addPost(payload)
-        .then(res => console.log(res))
+        .then(res => {
+          // console.log(res);
+        })
         .catch(err => console.log('Error adding post: ', err));
     }
 
@@ -106,8 +106,6 @@
       size: '12 MB',
     });
     attachments = attachments;
-
-    console.log('### ATTACHMENTS ###', attachments);
   }
 
   function removeAttachment(data) {
@@ -125,7 +123,7 @@
 <div class="MessagesDisplay">
   <div id="Messages" class="Messages" bind:this={messages}>
     <div class="Messages-container">
-      {#if sortedPosts}
+      {#if sortedPosts && posts.length > 0}
         {#each Object.keys(sortedPosts) as date}
           <div class="Messages-dateLabel">
             {#if date}
@@ -163,6 +161,8 @@
             </div>
           {/each}
         {/each}
+      {:else}
+        <div class="Messages-empty">No Messages</div>
       {/if}
     </div>
   </div>

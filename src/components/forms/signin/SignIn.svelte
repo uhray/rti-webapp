@@ -24,13 +24,11 @@
   const handleLogin = async data => {
     if (!isDisabled) {
       const response = await userLogin(data);
-      console.log('### LOGIN RESPONSE ###', response);
       if (!response.error) {
         await localStorage.setItem('turnkey', response);
         const user = await auth();
         if (user) {
           userStore.setCurrent(user);
-          console.log('store', $userStore);
           goto('/');
         }
       }

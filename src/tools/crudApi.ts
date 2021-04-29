@@ -66,7 +66,7 @@ export const userSignup = async data => {
     method: 'POST',
     body: JSON.stringify(data),
   });
-  console.log('signup res', res);
+  // console.log('signup res', res);
   return res;
 };
 
