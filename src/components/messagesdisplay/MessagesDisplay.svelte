@@ -34,9 +34,7 @@
   let replyPost = null;
   let attachments = [];
 
-  $: {
-    scrollToBottom();
-  }
+  $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
 
   const scrollToBottom = (div = undefined) => {
     if (div) {
