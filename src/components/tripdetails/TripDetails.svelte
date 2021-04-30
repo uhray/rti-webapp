@@ -14,12 +14,10 @@
 
   let isOpen = true;
 
-  console.log(order);
   $: {
     if (order && order.stops) {
       s = _.first(order.stops).address;
       e = _.last(order.stops).address;
-      console.log(s);
       start = `${s.addressLine1} ${s.addressLine2}`;
       startCSZ = `${s.city}, ${s.state} ${s.zipcode}`;
       end = `${e.addressLine1} ${e.addressLine2}`;

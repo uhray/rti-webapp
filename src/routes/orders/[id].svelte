@@ -52,7 +52,7 @@
 <div class="Order">
   <TripDetails {order} />
 
-  <!-- {#if order.documents}
+  {#if order.documents && order.documents.length > 0}
     <h3>Uploaded Documents</h3>
 
     <Table {headers} data={order.documents} height={30} />
@@ -60,5 +60,5 @@
 
   <div style="margin-top: 18px;" />
 
-  <OrderStatus orderStatusData={order.statusDetails} /> -->
+  <OrderStatus orderStatusData={order.statusDetails} />
 </div>
