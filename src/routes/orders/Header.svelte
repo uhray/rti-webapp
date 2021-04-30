@@ -3,20 +3,22 @@
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
   import Dropdown from '../../components/Dropdown/Dropdown.svelte';
 
+  export let handleSort;
+
   let dropdownOpts = [
     {
       header: 'Date Created',
       opts: [
-        { text: 'Newest first', selected: true },
-        { text: 'Oldest first', selected: false },
+        { text: 'Newest first', value: 'new', selected: true },
+        { text: 'Oldest first', value: 'old', selected: false },
       ],
     },
   ];
 
-  function handleSelect(v) {
-    dropdownOpts = v;
+  function handleSelect(dOpts, v) {
+    dropdownOpts = dOpts;
 
-    console.log(dropdownOpts);
+    handleSort(v);
   }
 </script>
 
@@ -94,6 +96,7 @@
 
       <div class="Header-actions">
         <div class="uk-width-1-1 Header-actions-search">
+          <!-- #TODO: search -->
           <SearchBar fill />
         </div>
 

@@ -2,22 +2,26 @@
   import Table from '../../components/table/Table.svelte';
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
+  import _ from 'lodash';
 
   import Header from './Header.svelte';
 
   import { ordersStore } from '../../store';
 
   let orders = $ordersStore.orders;
-  let ordersMapped = orders.map(o => {
-    return {
-      orderId: o.orderId,
-      createdAt: o.createdAt,
-      status: o.status,
-      assignedTruck: o.assignedTruck,
-      startPoint: `${o.stops[0].address.city}, ${o.stops[0].address.state} ${o.stops[0].address.zipcode}`,
-      endPoint: `${o.stops[o.stops.length - 1].address.city}, ${o.stops[o.stops.length - 1].address.state} ${o.stops[o.stops.length - 1].address.zipcode}`,
-    };
-  });
+  let ordersMapped = _.sortBy(
+    orders.map(o => {
+      return {
+        orderId: o.orderId,
+        createdAt: o.createdAt,
+        status: o.status,
+        assignedTruck: o.assignedTruck,
+        startPoint: `${o.stops[0].address.city}, ${o.stops[0].address.state} ${o.stops[0].address.zipcode}`,
+        endPoint: `${o.stops[o.stops.length - 1].address.city}, ${o.stops[o.stops.length - 1].address.state} ${o.stops[o.stops.length - 1].address.zipcode}`,
+      };
+    }),
+    'createdAt'
+  ).reverse();
 
   export const headers = [
     { header: 'order', text: 'Order' },
@@ -30,6 +34,15 @@
   ];
 
   console.log(ordersMapped);
+
+  function handleSort(v) {
+    if (v === 'new') {
+      ordersMapped = _.sortBy(ordersMapped, 'createdAt').reverse();
+    } else if (v === 'old') {
+      console.log(_.sortBy(orders, 'createdAt').reverse());
+      ordersMapped = _.sortBy(ordersMapped, 'createdAt');
+    }
+  }
 </script>
 
 <style lang="scss">
@@ -42,7 +55,7 @@
   <title>Orders</title>
 </svelte:head>
 
-<Header />
+<Header {handleSort} />
 
 <div class="Orders">
   <Table {headers} data={ordersMapped} />

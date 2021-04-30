@@ -24,7 +24,8 @@
             }),
           };
         }
-      })
+      }),
+      option.value
     );
   }
 </script>
