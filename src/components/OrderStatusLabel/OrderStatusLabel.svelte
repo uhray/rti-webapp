@@ -2,8 +2,6 @@
   import Label from '../label/Label.svelte';
   export let status;
   export let isSmall = false;
-
-  console.log(isSmall);
 </script>
 
 {#if isSmall === true}
