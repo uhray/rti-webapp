@@ -145,7 +145,9 @@
                       </span>
                     {:else if header.header == 'view'}
                       <div class="alignRight">
-                        <a href={`/${data.type}/${item.id}`}>View</a>
+                        <span>
+                          <a href={`/${item.type}/${item.id}`}>View</a>
+                        </span>
                       </div>
                     {:else if header.header == 'actions'}
                       <div class="Table-row-actions alignRight">

@@ -12,6 +12,8 @@
   let ordersMapped = _.sortBy(
     orders.map(o => {
       return {
+        id: o._id,
+        type: 'orders',
         orderId: o.orderId,
         createdAt: o.createdAt,
         status: o.status,
