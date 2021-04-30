@@ -8,6 +8,7 @@
 </script>
 
 <script>
+  import { onMount } from 'svelte';
   import {
     userStore,
     postsStore,

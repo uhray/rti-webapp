@@ -121,6 +121,14 @@ export const getOrders = async query => {
   return res;
 };
 
+export const getOrder = async id => {
+  const res = await tools.fetch(options().baseUrl + '/orders/' + id, {
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
 export function serialize(obj, prefix?) {
   var str = [],
     p,

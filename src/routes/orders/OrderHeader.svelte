@@ -1,8 +1,8 @@
 <script>
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
-  import Label from '../../components/label/Label.svelte';
-  export let order = undefined;
+  import OrderStatusLabel from '../../components/OrderStatusLabel/OrderStatusLabel.svelte';
+  export let order = {};
 </script>
 
 <style lang="scss">
@@ -39,7 +39,7 @@
         font-size: 24px;
         line-height: 34px;
         color: #15224b;
-        margin: 5px 15px 0 5px;
+        margin: 0px 15px 0 5px;
         // margin-bottom: 0px;
       }
     }
@@ -72,19 +72,8 @@
   <div class="Header-container">
     <div class="Header-content">
       <div class="Header-titles">
-        <h2 class="Header-title">Order #{order.id}</h2>
-        {#if order.status == 'pending'}
-          <Label status="warning" text="Pending" />
-        {:else if order.status == 'completed'}
-          <Label status="success" text="Completed" />
-        {:else if order.status == 'declined'}
-          <Label status="danger" text="Declined" />
-        {:else if order.status == 'dispatched'}
-          <Label status="default" text="Dispatched" />
-        {:else if order.status == 'in progress'}
-          <Label status="active" text="In Progress" />
-        {/if}
-
+        <h2 class="Header-title">Order #{order.orderId}</h2>
+        <OrderStatusLabel status={order.status} />
       </div>
 
       <div class="Header-actions">

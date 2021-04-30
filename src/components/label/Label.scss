@@ -60,7 +60,7 @@
       background-color: $color--success;
     }
 
-    &[small] {
+    &[small='true'] {
       box-sizing: border-box;
       height: 24px !important;
       font-weight: 600;

@@ -1,5 +1,6 @@
 <script>
   import Checkbox from '../checkbox/Checkbox.svelte';
+  import OrderStatusLabel from '../OrderStatusLabel/OrderStatusLabel.svelte';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
   import moment from 'moment';
@@ -40,23 +41,7 @@
                   <td
                     class={header.header == 'fullName' || header.header == 'macroTitle' ? 'uk-width-1-2' : 'uk-width-1-6'}>
                     {#if header.header == 'status'}
-                      {#if item.status == 'pending'}
-                        <Label status="warning" text="Pending" />
-                      {:else if item.status == 'completed'}
-                        <Label status="success" text="Completed" />
-                      {:else if item.status == 'declined'}
-                        <Label status="danger" text="Declined" />
-                      {:else if item.status == 'dispatched'}
-                        <Label status="default" text="Dispatched" />
-                      {:else if item.status == 'in progress'}
-                        <Label status="active" text="In Progress" />
-                      {:else if item.status == 'active'}
-                        <Label status="default" text="Active" />
-                      {:else if item.status == 'inactive'}
-                        <Label status="disabled" text="Inactive" />
-                      {:else if item.status == 'approved'}
-                        <Label status="success" text="Approved" />
-                      {/if}
+                      <OrderStatusLabel status={item.status} />
                     {:else if header.header == 'order'}
                       <span class="Table-row-orderNumber">Hello</span>
                       <br />
@@ -122,21 +107,7 @@
                 {#each headers as header}
                   <td>
                     {#if header.header == 'status'}
-                      {#if item.status == 'pending'}
-                        <Label status="warning" text="Pending" />
-                      {:else if item.status == 'cancelled'}
-                        <Label status="danger" text="Cancelled" />
-                      {:else if item.status == 'completed'}
-                        <Label status="success" text="Completed" />
-                      {:else if item.status == 'accepted'}
-                        <Label status="active" text="Accepted" />
-                      {:else if item.status == 'declined'}
-                        <Label status="danger" text="Declined" />
-                      {:else if item.status == 'dispatched'}
-                        <Label status="warning" text="Dispatched" />
-                      {:else if item.status == 'inProgress'}
-                        <Label status="inProgress" text="In Progress" />
-                      {/if}
+                      <OrderStatusLabel status={item.status} />
                     {:else if header.header == 'order'}
                       <span class="Table-row-orderNumber">{item.orderId}</span>
                       <br />
