@@ -49,10 +49,10 @@
 
 <OrderHeader {order} />
 
-<!-- <div class="Order">
+<div class="Order">
   <TripDetails {order} />
 
-  {#if order.documents}
+  <!-- {#if order.documents}
     <h3>Uploaded Documents</h3>
 
     <Table {headers} data={order.documents} height={30} />
@@ -60,5 +60,5 @@
 
   <div style="margin-top: 18px;" />
 
-  <OrderStatus orderStatusData={order.statusDetails} />
-</div> -->
+  <OrderStatus orderStatusData={order.statusDetails} /> -->
+</div>

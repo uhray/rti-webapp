@@ -7,6 +7,9 @@
 
 <style lang="scss">
   .Header {
+    a {
+      text-decoration: none;
+    }
     .Header-container {
       position: relative;
       height: 175px;
@@ -78,7 +81,9 @@
 
       <div class="Header-actions">
         <div>
-          <Button outline>Back</Button>
+          <a href="/orders">
+            <Button outline>Back</Button>
+          </a>
         </div>
         <div>
           <Button primary>Send Message</Button>
