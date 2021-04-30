@@ -16,7 +16,7 @@
     <input
       class={`uk-search-input ${alternate ? 'SearchBar-alternate' : 'SearchBar-default'}`}
       type="search"
-      placeholder="Fleet Search..."
+      placeholder="Search..."
       value={search}
       on:input={e => {
         handleSearch(e.target.value);
