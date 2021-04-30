@@ -66,7 +66,7 @@ export const userSignup = async data => {
     method: 'POST',
     body: JSON.stringify(data),
   });
-  console.log('signup res', res);
+  // console.log('signup res', res);
   return res;
 };
 
@@ -99,6 +99,16 @@ export const addPost = async data => {
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
   // console.log(res);
+  return res;
+};
+
+export const editPost = async (postId, data) => {
+  const res = await tools.fetch(options().baseUrl + '/posts/' + postId, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
   return res;
 };
 

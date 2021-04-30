@@ -34,6 +34,13 @@
     flex-grow: 1;
     overflow: auto;
 
+    .Messages-loading {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+
     .Messages-container {
       display: flex;
       flex-flow: column;
@@ -48,6 +55,13 @@
         justify-content: center;
         width: 100%;
         margin: 10px 0;
+      }
+
+      .Messages-empty {
+        margin-top: 30px;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
       }
 
       .Post {
@@ -65,12 +79,16 @@
       background-color: #fff;
       padding: 30px 30px 30px 30px;
     }
+
+    .Input-replyingPadding {
+      padding: 10px 30px 30px 30px;
+    }
     .Input-attachments {
       margin: 0 0 10px 0;
     }
     .Input-replying {
       width: 100%;
-      padding: 0 0 30px;
+      padding: 0 0 11px;
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
@@ -85,6 +103,7 @@
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
+        align-items: center;
         flex-grow: 1;
       }
 
@@ -94,7 +113,17 @@
       }
 
       .Input-orderIcon {
-        margin-right: 5px;
+        margin-right: 10px;
+      }
+
+      .Input-orderNumber {
+        font-weight: 500;
+        font-size: 14px;
+        color: #15224b;
+      }
+
+      .Input-orderDetails {
+        font-size: 12px;
       }
     }
   }

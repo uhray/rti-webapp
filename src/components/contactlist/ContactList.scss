@@ -5,6 +5,12 @@
     text-decoration: none;
   }
 
+  .ContactList-loading {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   .ContactList-allMessages {
     position: relative;
     display: flex;
@@ -104,13 +110,6 @@
           min-width: 24px;
           margin-right: 8px;
           padding-left: 34px;
-
-          img {
-            min-width: 24px;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-          }
         }
 
         .ContactList-contact-name {

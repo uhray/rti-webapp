@@ -18,7 +18,9 @@
 {#if post.subthread && post.subthread.length > 0}
   <div class="Post-replies">
 
-    {#if _.find(replies, { id: post._id }).display}
+    {#if _.find(replies, {
+      id: post._id,
+    }) && _.find(replies, { id: post._id }).display}
       <div class="Post-replies-show" on:click={() => toggleReplies(post._id)}>
         <span>
           Hide {post.subthread.length} repl{post.subthread.length > 1 ? 'ies' : 'y'}
@@ -31,7 +33,10 @@
       <div class="Post-replies-wrapper">
         {#each post.subthread as reply}
           <div class="Post-replies-content">
-            <PostHeader user={findContact(reply.from)} post={reply} />
+            <PostHeader
+              user={findContact(reply.from)}
+              post={reply}
+              canFormatDate={true} />
 
             <div class="Post-message">
               <Post message={reply.message} />

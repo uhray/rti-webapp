@@ -7,13 +7,6 @@
   align-items: center;
   margin-bottom: 11px;
 
-  img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
   .Post-header-details {
     display: flex;
     flex-flow: column;
@@ -24,21 +17,6 @@
     font-weight: 500;
     font-size: 14px;
     color: $color--darkblue;
-  }
-
-  .Post-header-avatar {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 700;
-    background-color: #243e93;
-    color: #fff;
-    border-radius: 50%;
-    object-fit: cover;
   }
 
   .Post-header-timestamp {

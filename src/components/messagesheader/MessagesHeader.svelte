@@ -1,7 +1,11 @@
 <script>
   import Label from '../../components/label/Label.svelte';
+  import Avatar from '../../components/Avatar/Avatar.svelte';
   import { colors } from '../../theme/variables';
-  export let contact = undefined;
+  import { formatInitials } from '../../tools/formatInitials';
+  export let contact;
+  export let filter;
+  export let handleFilter;
 </script>
 
 <style src="./MessagesHeader.scss">
@@ -9,11 +13,8 @@
 </style>
 
 <div class="Header">
-
   {#if contact}
-    <div class="Header-photo">
-      <img src={contact.avatarUrl || ''} alt={contact.name || ''} />
-    </div>
+    <Avatar user={contact} size={40} />
 
     <div class="Header-content">
       <div class="Header-content-details">
@@ -25,31 +26,45 @@
         </span>
       </div>
       <div class="Header-content-actions">
-        <div>
+        <div
+          on:click={() => {
+            handleFilter('all');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             text="All Messages"
             iconLeft="message"
-            iconColor="#243E93"
+            iconColor={filter === 'all' ? '#243E93' : ''}
             backgroundColor={colors.tablegray} />
         </div>
-        <div>
+        <div
+          on:click={() => {
+            handleFilter('macros');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             text="Macros"
-            iconLeft="macro-outline"
+            iconLeft="macro"
+            iconColor={filter === 'macros' ? '#243E93' : ''}
             backgroundColor={colors.tablegray} />
         </div>
-        <div>
+        <div
+          on:click={() => {
+            handleFilter('orders');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             text="Orders"
-            iconLeft="orders-outline"
+            iconLeft="orders"
+            iconColor={filter === 'orders' ? '#243E93' : ''}
             backgroundColor={colors.tablegray} />
         </div>
-        <div>
+        <div
+          on:click={() => {
+            console.log(' #TODO ');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             iconLeft="overflow"
             backgroundColor={colors.tablegray} />
         </div>
@@ -61,31 +76,45 @@
         <span>All Messages</span>
       </div>
       <div class="Header-content-actions">
-        <div>
+        <div
+          on:click={() => {
+            handleFilter('all');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             text="All Messages"
             iconLeft="message"
-            iconColor="#243E93"
+            iconColor={filter === 'all' ? '#243E93' : ''}
             backgroundColor={colors.tablegray} />
         </div>
-        <div>
+        <div
+          on:click={() => {
+            handleFilter('macros');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             text="Macros"
-            iconLeft="macro-outline"
+            iconLeft="macro"
+            iconColor={filter === 'macros' ? '#243E93' : ''}
             backgroundColor={colors.tablegray} />
         </div>
-        <div>
+        <div
+          on:click={() => {
+            handleFilter('orders');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             text="Orders"
-            iconLeft="orders-outline"
+            iconLeft="orders"
+            iconColor={filter === 'orders' ? '#243E93' : ''}
             backgroundColor={colors.tablegray} />
         </div>
-        <div>
+        <div
+          on:click={() => {
+            console.log(' #TODO ');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             iconLeft="overflow"
             backgroundColor={colors.tablegray} />
         </div>

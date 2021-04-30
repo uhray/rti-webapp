@@ -13,18 +13,19 @@
   import Replies from '../Replies/Replies.svelte';
   import { uuid } from '../../tools/uuid.ts';
   import { capitalize } from '../../tools/capitalize.ts';
-  import { userStore } from '../../store';
+  import { userStore, postsStore, dataStore } from '../../store';
+  import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
 
-  export let posts;
-  export let sortedPosts;
+  export let posts = undefined;
+  export let sortedPosts = undefined;
   export let me;
-  export let refetch;
   export let contacts = [];
   export let replies;
   export let toggleReplies;
   export let orders;
-  export let slug = undefined;
+  export let slug;
+  export let loading;
 
   let messages;
   let input;
@@ -33,9 +34,7 @@
   let replyPost = null;
   let attachments = [];
 
-  afterUpdate(() => {
-    scrollToBottom();
-  });
+  $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
 
   const scrollToBottom = (div = undefined) => {
     if (div) {
@@ -51,62 +50,40 @@
   };
 
   async function send(message) {
-    const id = meData.id;
-
     if (replyPost) {
-      replyPost.subthread.push({ from: id, message: message });
-
+      replyPost.subthread.push({ from: me._id, message: message });
+      if (attachments) {
+        attachments.forEach(a => {
+          replyPost.attachments.push(a);
+        });
+      }
       let payload = replyPost;
 
-      putData(`http://localhost:5000/api/v1/posts/${replyPost._id}`, payload)
-        .then(json => {
-          console.log(json.data);
-          refetch(payload._id);
+      editPost(replyPost._id, payload)
+        .then(res => {
+          // console.log(res);
         })
         .catch(err => {
-          console.log(err);
+          console.log('Error adding reply: ', err);
         });
 
       replyPost = null;
     } else {
       let payload = {
-        from: id,
+        from: me._id,
         message: message,
-        to: [slug],
+        userId: slug,
+        attachments: attachments,
       };
 
-      postData('http://localhost:5000/api/v1/posts', payload)
-        .then(async json => {
-          console.log(json.data);
-          await refetch(json.data._id);
-          scrollToBottom();
+      addPost(payload)
+        .then(res => {
+          // console.log(res);
         })
-        .catch(err => {
-          console.log(err);
-        });
+        .catch(err => console.log('Error adding post: ', err));
     }
-  }
 
-  async function postData(url = '', data = {}) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(data),
-    });
-    return response.json();
-  }
-
-  async function putData(url = '', data = {}) {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(data),
-    });
-    return response.json();
+    attachments = [];
   }
 
   function removeTags(str) {
@@ -127,8 +104,6 @@
       size: '12 MB',
     });
     attachments = attachments;
-
-    console.log('### ATTACHMENTS ###', attachments);
   }
 
   function removeAttachment(data) {
@@ -145,112 +120,132 @@
 
 <div class="MessagesDisplay">
   <div id="Messages" class="Messages" bind:this={messages}>
-    <div class="Messages-container">
-      {#if sortedPosts}
-        {#each Object.keys(sortedPosts) as date}
-          <div class="Messages-dateLabel">
-            {#if date}
-              <Label
-                text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
-                status="disabled"
-                backgroundColor="rgba(166, 173, 196, 0.3);" />
-            {/if}
-          </div>
 
-          {#each Object.values(sortedPosts[date]) as post}
-            <div class="Post">
-              {#if post.postType === 'MESSAGE'}
-                <MessageCard {post} {findContact} />
-              {:else if post.postType === 'ALERT'}
-                <MessageCard isAlert={true} {post} {findContact} />
-              {:else if post.postType === 'ORDER'}
-                <OrderMessageCard
-                  {me}
+    {#if !loading}
+      <div class="Messages-container">
+        {#if sortedPosts && posts.length > 0}
+          {#each Object.keys(sortedPosts) as date}
+            <div class="Messages-dateLabel">
+              {#if date}
+                <Label
+                  text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
+                  status="disabled"
+                  backgroundColor="rgba(166, 173, 196, 0.3);" />
+              {/if}
+            </div>
+
+            {#each Object.values(sortedPosts[date]) as post}
+              <div class="Post">
+                {#if post.postType === 'MESSAGE'}
+                  <MessageCard {post} {findContact} />
+                {:else if post.postType === 'ALERT'}
+                  <MessageCard isAlert={true} {post} {findContact} />
+                {:else if post.postType === 'ORDER'}
+                  <OrderMessageCard
+                    {me}
+                    {post}
+                    {findContact}
+                    order={_.find(orders, { orderId: post.orderId })} />
+                {/if}
+
+                {#if post.attachments.length > 0}
+                  <MessageAttachments attachments={post.attachments} />
+                {/if}
+
+                <Replies
                   {post}
-                  {findContact}
-                  order={_.find(orders, { orderId: post.orderId })} />
-              {/if}
-
-              {#if post.attachments.length > 0}
-                <MessageAttachments attachments={post.attachments} />
-              {/if}
-
-              <Replies
-                {post}
-                {replies}
-                {toggleReplies}
-                {handleReplyPost}
-                {findContact} />
-            </div>
-          {/each}
-        {/each}
-      {/if}
-    </div>
-  </div>
-  <div class="Input" id="Input" bind:this={input}>
-    <div class="Input-input">
-      {#if attachments.length > 0}
-        <div class="Input-attachments">
-          <MessageAttachments
-            isDisplay={false}
-            {removeAttachment}
-            {attachments} />
-        </div>
-      {/if}
-      {#if replyPost}
-        <div class="Input-replying">
-
-          {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
-            <div class="Input-info">
-              <div>Replying to: {findContact(replyPost.from).name}</div>
-              <div>{removeTags(replyPost.message)}</div>
-            </div>
-          {:else if replyPost.postType === 'ORDER'}
-            <div class="Input-orderInfo">
-              <div class="Input-orderText">
-                <svg
-                  width="16"
-                  height="11"
-                  viewBox="0 0 16 11"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="Input-orderIcon">
-                  <path
-                    d="M15.6289 4.70312L12.7578 0.574219C12.5117 0.246094
-                    12.1289 0 11.6641 0H4.30859C3.84375 0 3.46094 0.246094
-                    3.21484 0.574219L0.34375 4.70312C0.207031 4.92188 0.125
-                    5.16797 0.125 5.46875V9.1875C0.125 9.92578 0.699219 10.5
-                    1.4375 10.5H14.5625C15.2734 10.5 15.875 9.92578 15.875
-                    9.1875V5.46875C15.875 5.19531 15.793 4.92188 15.6289
-                    4.70312ZM4.30859 1.3125H11.6641L13.7969
-                    4.375H10.4609L9.58594 6.125H6.38672L5.51172
-                    4.375H2.17578L4.30859 1.3125ZM14.5625
-                    9.1875H1.4375V5.6875H4.71875L5.59375 7.4375H10.4062L11.2812
-                    5.6875H14.5625V9.1875Z"
-                    fill="#15224B" />
-                </svg>
-
-                <div>Replying to: Order #{replyPost.orderId}</div>
+                  {replies}
+                  {toggleReplies}
+                  {handleReplyPost}
+                  {findContact} />
               </div>
-              <Label
-                status={_.find(orders, { orderId: replyPost.orderId }).status}
-                text={capitalize(_.find(orders, {
-                    orderId: replyPost.orderId,
-                  }).status)}
-                small />
-            </div>
-          {/if}
-
-          <div
-            class="clickable"
-            on:click={() => {
-              replyPost = null;
-            }}>
-            <Icon type="close" />
-          </div>
-        </div>
-      {/if}
-      <RichText {addAttachment} id={uuid()} {send} />
-    </div>
+            {/each}
+          {/each}
+        {:else}
+          <div class="Messages-empty">No Messages</div>
+        {/if}
+      </div>
+    {:else}
+      <div class="Messages-loading">
+        <div uk-spinner />
+      </div>
+    {/if}
   </div>
+
+  {#if (slug === 'all' && replyPost) || slug !== 'all'}
+    <div class="Input" id="Input" bind:this={input}>
+      <div class={`Input-input ${replyPost && 'Input-replyingPadding'}`}>
+        {#if attachments.length > 0}
+          <div class="Input-attachments">
+            <MessageAttachments
+              isDisplay={false}
+              {removeAttachment}
+              {attachments} />
+          </div>
+        {/if}
+        {#if replyPost}
+          <div class="Input-replying">
+
+            {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
+              <div class="Input-info">
+                <div>Replying to: {findContact(replyPost.from).name}</div>
+                <div>{removeTags(replyPost.message)}</div>
+              </div>
+            {:else if replyPost.postType === 'ORDER'}
+              <div class="Input-orderInfo">
+                <div class="Input-orderText">
+                  <svg
+                    width="16"
+                    height="11"
+                    viewBox="0 0 16 11"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="Input-orderIcon">
+                    <path
+                      d="M15.6289 4.70312L12.7578 0.574219C12.5117 0.246094
+                      12.1289 0 11.6641 0H4.30859C3.84375 0 3.46094 0.246094
+                      3.21484 0.574219L0.34375 4.70312C0.207031 4.92188 0.125
+                      5.16797 0.125 5.46875V9.1875C0.125 9.92578 0.699219 10.5
+                      1.4375 10.5H14.5625C15.2734 10.5 15.875 9.92578 15.875
+                      9.1875V5.46875C15.875 5.19531 15.793 4.92188 15.6289
+                      4.70312ZM4.30859 1.3125H11.6641L13.7969
+                      4.375H10.4609L9.58594 6.125H6.38672L5.51172
+                      4.375H2.17578L4.30859 1.3125ZM14.5625
+                      9.1875H1.4375V5.6875H4.71875L5.59375
+                      7.4375H10.4062L11.2812 5.6875H14.5625V9.1875Z"
+                      fill="#15224B" />
+                  </svg>
+                  <div>
+                    <div class="Input-orderNumber">
+                      Order #{replyPost.orderId}
+                    </div>
+                    <!-- #TODO CHANGE THIS TO REPRESENT DATA -->
+                    <div class="Input-orderDetails">
+                      Trip Started: COOCAR - AMRLAW • Appointment Time: Jan 25,
+                      9:45 am
+                    </div>
+                  </div>
+                </div>
+                <Label
+                  status={_.find(orders, { orderId: replyPost.orderId }).status}
+                  text={capitalize(_.find(orders, {
+                      orderId: replyPost.orderId,
+                    }).status)}
+                  small />
+              </div>
+            {/if}
+
+            <div
+              class="clickable"
+              on:click={() => {
+                replyPost = null;
+              }}>
+              <Icon type="close" />
+            </div>
+          </div>
+        {/if}
+        <RichText {addAttachment} id={uuid()} {send} />
+      </div>
+    </div>
+  {/if}
 </div>

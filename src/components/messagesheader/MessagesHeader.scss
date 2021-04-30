@@ -9,32 +9,11 @@
   justify-content: center;
   align-items: center;
 
-  .Header-photo {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-width: 40px;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    background-color: $color--darkblue;
-    color: #fff;
-
-    img {
-      min-width: 40px;
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-    }
-  }
-
   .Header-content {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     padding-left: 12px;
   }
@@ -77,8 +56,9 @@
   .Header-content-actions {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
+    height: 100%;
 
     div {
       margin-left: 10px;

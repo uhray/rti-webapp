@@ -14,7 +14,6 @@
   import Header from './Header.svelte';
 
   export let slug;
-  console.log('The Slug Received was --->', slug);
 </script>
 
 <style lang="scss">

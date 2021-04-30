@@ -10,7 +10,13 @@
 <script>
   import { getContext, onMount } from 'svelte';
   import { getContacts, getPosts, getOrders } from '../../tools/crudApi.ts';
-  import { userStore } from '../../store';
+  import {
+    userStore,
+    postsStore,
+    contactsStore,
+    ordersStore,
+    dataStore,
+  } from '../../store';
   import Messages from '../../components/Messages/Messages.svelte';
 
   export let slug;
@@ -22,39 +28,60 @@
   let contactsList = [];
   let driversList = [];
   let driverIds = [];
+  let teamsList = [];
+  let driverClassList = [];
+  let contacts = [];
   let orders = [];
+  let loading = true;
 
   onMount(async () => {
-    const contacts = await getContacts();
-    orders = await getOrders();
+    allPosts = $postsStore.posts;
+    contacts = $contactsStore.contacts;
+    orders = $ordersStore.orders;
+    me = $userStore.user;
+    dataStore.setPostsSlug(slug);
 
+    sortDrivers();
+    await trigger(slug);
+
+    loading = false;
+  });
+
+  async function sortDrivers() {
     contactsList = contacts.contacts;
     driversList = contacts.drivers;
 
     driversList.forEach(d => {
+      teamsList.push(d.name);
       d.subgroups.forEach(s => {
+        driverClassList.push(s.name);
         s.contacts.forEach(c => {
           driverIds.push(c.id);
         });
       });
     });
 
-    me = $userStore.user;
-    allPosts = await getPosts({ allMessages: true });
+    driverClassList = _.uniq(driverClassList);
+  }
 
-    posts = slug === 'all' ? allPosts : allPosts.filter(p => p.userId == slug);
+  async function sortPosts(id) {
+    posts =
+      id === 'all'
+        ? allPosts
+        : allPosts.filter(
+            p =>
+              p.userId == id ||
+              p.truckId == _.find(contactsList, { id: id }).truckId
+          );
     posts = posts;
     replies = posts.map(post => {
       return { id: post._id, display: false };
     });
-  });
+  }
 
-  async function trigger(id) {
-    posts = id === 'all' ? allPosts : allPosts.filter(p => p.userId == id);
-    posts = posts;
-    replies = posts.map(post => {
-      return { id: post._id, display: false };
-    });
+  function trigger(id) {
+    sortPosts(id);
+    dataStore.setPostsSlug(id);
   }
 </script>
 
@@ -64,6 +91,9 @@
   {me}
   {contactsList}
   {driversList}
+  {teamsList}
+  {driverClassList}
   {orders}
   {slug}
-  {trigger} />
+  {trigger}
+  {loading} />

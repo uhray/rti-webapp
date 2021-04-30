@@ -4,7 +4,7 @@
   import Checkbox from '../../checkbox/Checkbox.svelte';
   import Button from '../../button/Button.svelte';
   import { userLogin, auth } from '../../../tools/crudApi';
-  import { userStore } from '../../../store';
+  import { userStore, postsStore } from '../../../store';
   import {
     isEmpty,
     validEmail,
@@ -24,13 +24,12 @@
   const handleLogin = async data => {
     if (!isDisabled) {
       const response = await userLogin(data);
-      console.log('### LOGIN RESPONSE ###', response);
       if (!response.error) {
         await localStorage.setItem('turnkey', response);
         const user = await auth();
         if (user) {
           userStore.setCurrent(user);
-          console.log('store', $userStore);
+          postsStore.getPosts();
           goto('/');
         }
       }
