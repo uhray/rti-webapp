@@ -46,7 +46,7 @@
     &[status='dispatched'] {
       background-color: $color--default;
     }
-    &[status='in progress'] {
+    &[status='inProgress'] {
       background-color: $color--primary;
     }
     &[status='active'] {

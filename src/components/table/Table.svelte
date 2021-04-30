@@ -2,8 +2,10 @@
   import Checkbox from '../checkbox/Checkbox.svelte';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
-  export let headers = undefined;
-  export let data = undefined;
+  import moment from 'moment';
+
+  export let headers = [];
+  export let data = [];
   export let height = undefined;
   export let expand = false;
 </script>
@@ -32,7 +34,7 @@
             </tr>
           </thead>
           <tbody class="Table-body">
-            {#each data.data as item}
+            {#each data as item}
               <tr class="Table-row">
                 {#each headers as header}
                   <td
@@ -56,9 +58,9 @@
                         <Label status="success" text="Approved" />
                       {/if}
                     {:else if header.header == 'order'}
-                      <span class="Table-row-orderNumber">{item.order}</span>
+                      <span class="Table-row-orderNumber">Hello</span>
                       <br />
-                      <span class="Table-row-orderDate">{item.orderDate}</span>
+                      <span class="Table-row-orderDate">{item.createdAt}</span>
                     {:else if header.header == 'view'}
                       <div class="alignRight">
                         <a href="">View</a>
@@ -115,26 +117,32 @@
             </tr>
           </thead>
           <tbody class="Table-body">
-            {#each data.data as item}
+            {#each data as item}
               <tr class="Table-row">
                 {#each headers as header}
                   <td>
                     {#if header.header == 'status'}
                       {#if item.status == 'pending'}
                         <Label status="warning" text="Pending" />
+                      {:else if item.status == 'cancelled'}
+                        <Label status="danger" text="Cancelled" />
                       {:else if item.status == 'completed'}
                         <Label status="success" text="Completed" />
+                      {:else if item.status == 'accepted'}
+                        <Label status="active" text="Accepted" />
                       {:else if item.status == 'declined'}
                         <Label status="danger" text="Declined" />
                       {:else if item.status == 'dispatched'}
-                        <Label status="default" text="Dispatched" />
-                      {:else if item.status == 'in progress'}
-                        <Label status="active" text="In Progress" />
+                        <Label status="warning" text="Dispatched" />
+                      {:else if item.status == 'inProgress'}
+                        <Label status="inProgress" text="In Progress" />
                       {/if}
                     {:else if header.header == 'order'}
-                      <span class="Table-row-orderNumber">{item.id}</span>
+                      <span class="Table-row-orderNumber">{item.orderId}</span>
                       <br />
-                      <span class="Table-row-orderDate">{item.orderDate}</span>
+                      <span class="Table-row-orderDate">
+                        {moment(item.createdAt).format('MMM D, YYYY')}
+                      </span>
                     {:else if header.header == 'view'}
                       <div class="alignRight">
                         <a href={`/${data.type}/${item.id}`}>View</a>

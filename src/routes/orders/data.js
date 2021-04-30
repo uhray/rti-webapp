@@ -162,13 +162,3 @@ export const data = {
     },
   ],
 };
-
-export const headers = [
-  { header: 'order', text: 'Order' },
-  { header: 'status', text: 'Status' },
-  { header: 'vehicle', text: 'Vehicle' },
-  { header: 'startPoint', text: 'Start Point' },
-  { header: 'endPoint', text: 'End Point' },
-  { header: 'view', text: 'View' },
-  { header: 'actions', text: 'Actions' },
-];
