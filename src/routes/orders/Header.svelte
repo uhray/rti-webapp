@@ -1,6 +1,23 @@
 <script>
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
+  import Dropdown from '../../components/Dropdown/Dropdown.svelte';
+
+  let dropdownOpts = [
+    {
+      header: 'Date Created',
+      opts: [
+        { text: 'Newest first', selected: true },
+        { text: 'Oldest first', selected: false },
+      ],
+    },
+  ];
+
+  function handleSelect(v) {
+    dropdownOpts = v;
+
+    console.log(dropdownOpts);
+  }
 </script>
 
 <style lang="scss">
@@ -59,10 +76,6 @@
       }
     }
   }
-
-  .Orders {
-    padding: 2em;
-  }
 </style>
 
 <svelte:head>
@@ -83,7 +96,12 @@
         <div class="uk-width-1-1 Header-actions-search">
           <SearchBar fill />
         </div>
-        <Button height="40px" outline icon="sortup" fill>Sort By</Button>
+
+        <div>
+          <Button height="40px" outline icon="sortup" fill>Sort By</Button>
+          <Dropdown data={dropdownOpts} {handleSelect} />
+        </div>
+
       </div>
     </div>
   </div>
