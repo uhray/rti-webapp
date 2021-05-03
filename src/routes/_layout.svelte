@@ -14,6 +14,7 @@
       userStore.setCurrent(user);
     } else {
       segment = 'signin';
+      window.location = '/signin'
     }
   });
 </script>

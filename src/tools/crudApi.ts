@@ -84,6 +84,11 @@ export const getAllUsers = async () => {
   return res
 }
 
+export const getUser = async (id) => {
+  const res = await tools.fetch(`${options().baseUrl}/users/${id}`)
+  return res
+}
+
 export const deleteUser = async (id) => {
   console.log('deleting user', id)
   const res = await tools.fetch(`${options().baseUrl}/users/${id}`, {method:'DELETE'});

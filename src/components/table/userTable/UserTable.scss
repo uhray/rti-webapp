@@ -18,6 +18,8 @@
   }
   .UserTable-deleteMulti {
     position: absolute;
+    display: flex;
+    align-items: center;
     font-size: 0.8rem;
     top: -20px;
     right: 5px;

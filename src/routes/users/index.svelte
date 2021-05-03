@@ -1,8 +1,9 @@
 <script>
-  import { onMount, beforeUpdate } from 'svelte';
+  import { onMount, afterUpdate } from 'svelte';
   import Header from './Header.svelte';
   import UserTable from '../../components/table/userTable/UserTable.svelte';
   import Loading from '../../components/loading/Loading.svelte';
+  import { userStore } from '../../store';
   import { getAllUsers } from '../../tools/crudApi';
 
   let userView = '';
@@ -18,25 +19,31 @@
 
   onMount(async () => {
     isLoading = true;
-    users = await getAllUsers();
-    console.log('users', users);
-    console.log('drivers', drivers);
-    isLoading = false;
+    if ($userStore.user) {
+      users = await getAllUsers();
+      console.log('users', users);
+      console.log('drivers', drivers);
+      isLoading = false;
+    }
+  });
+
+  afterUpdate(async () => {
+    if (!users) {
+      if ($userStore.user) {
+        users = await getAllUsers();
+        isLoading = false;
+      }
+    }
   });
 </script>
 
 <svelte:head>
   <title>Users</title>
 </svelte:head>
+
 <!-- html -->
 <Header on:toggle={handleToggle} currentTab={userView} />
-<!-- Show This Link Tag Only If Users/Admins are Selected -->
-<!-- <div class="uk-flex uk-align-right delete-section">
-  <a class="delete-link">Delete Selections</a>
-  <Icon type="delete" color="#2b8af7" />
-</div> -->
 <section class="ManagePage">
-  <!-- Show This if Users Tab Is Active -->
   {#if isLoading}
     <Loading />
   {/if}

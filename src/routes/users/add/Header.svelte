@@ -1,19 +1,12 @@
 <script>
-  import NavLabel from '../../../components/navlabel/NavLabel.svelte';
-  export let firstName = 'John';
-  export let lastName = 'Smith'
+  export let usertype;
 </script>
-
-<svelte:head>
-  <title>Orders</title>
-</svelte:head>
 
 <div class="Header">
   <div class="Header-container">
-    <NavLabel page="USER MANAGEMENT" subpage={`${firstName} ${lastName}`} />
     <div class="Header-content">
       <div class="Header-titles">
-        <h2 class="Header-title">{`${firstName} ${lastName}`}</h2>
+        <h2 class="Header-title">Add {usertype}</h2>
       </div>
     </div>
   </div>
@@ -30,11 +23,14 @@
     .Header-content {
       box-sizing: border-box;
       width: 98%;
-      padding: 60px 30px 5px 30px;
+      padding: 70px 30px 5px 30px;
 
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
+    }
+    .Header-tabs {
+      margin-left: 30px;
     }
     .Header-titles {
       width: 100%;
@@ -72,6 +68,15 @@
 
       .Header-actions-search {
         margin-right: 5px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    .Header {
+      .Header-content {
+        flex-flow: wrap;
+        justify-content: flex-start;
       }
     }
   }

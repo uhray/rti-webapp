@@ -18,7 +18,7 @@
 
   onMount(() => (showPassword = false));
 
-  const togglePass = () => console.log('toggle');
+  const togglePass = () => (showPassword = !showPassword);
 
   let isFocused = false;
   const onFocus = () => {

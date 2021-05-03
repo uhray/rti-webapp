@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Icon from '../icon/Icon.svelte';
   export let fill = undefined;
   export let disabled = undefined;
@@ -11,6 +12,8 @@
   export let icon = undefined;
   export let iconColor = undefined;
   export let height = undefined;
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <!-- HTML -->
@@ -24,6 +27,7 @@
   {disabled}
   {outline}
   {large}
+  on:click={() => dispatch('click')}
 >
   <slot />
   {#if icon}
@@ -32,6 +36,5 @@
 </button>
 
 <!-- ==== -->
-
 <style src="./Button.scss">
 </style>

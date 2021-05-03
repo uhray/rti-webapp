@@ -29,7 +29,15 @@
         <div style="margin-left: 5px;" />
         <!-- Show this On Admin Tab -->
         {#if currentTab === 'Admins'}
-          <Button height="40px" primary fill>Add Admin</Button>
+          <Button
+            height="40px"
+            primary
+            fill
+            on:click={() => (window.location = '/users/add/admin')}
+            >Add Admin</Button
+          >
+        {:else}
+          <Button height="40px" primary fill on:click={() => (window.location = '/users/add/user')}>Add User</Button>
         {/if}
       </div>
     </div>
