@@ -76,7 +76,7 @@
         </div>
         <div class="TripDetails-content-cell">
           <h4>Est. Weight</h4>
-          <span>{order.currentWeight}</span>
+          <span>{order.currentWeight} lbs</span>
         </div>
       </div>
     </div>

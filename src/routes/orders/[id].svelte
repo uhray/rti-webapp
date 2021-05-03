@@ -52,6 +52,7 @@
 <div class="Order">
   <TripDetails {order} />
 
+  <!-- #TODO MAP DOCUMENTS BASED ON UPLOAD -->
   {#if order.documents && order.documents.length > 0}
     <h3>Uploaded Documents</h3>
 
@@ -60,5 +61,5 @@
 
   <div style="margin-top: 18px;" />
 
-  <OrderStatus orderStatusData={order.statusDetails} />
+  <OrderStatus {order} />
 </div>

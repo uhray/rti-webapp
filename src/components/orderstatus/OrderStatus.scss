@@ -57,7 +57,7 @@
     }
     .OrderStatus-cardLine {
       position: absolute;
-      left: 1.7em;
+      left: 1.8em;
       top: 1.5em;
       height: 90%;
       overflow: hidden;
@@ -96,6 +96,9 @@
     align-items: center;
     color: #595f76;
     margin: 3px 0px;
+  }
+  .OrderStatus-label {
+    margin-top: 10px;
   }
   .OrderStatus-chevron {
     margin: 3px 3px 3px auto;
