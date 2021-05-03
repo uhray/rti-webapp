@@ -43,6 +43,7 @@ export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
     });
 });
 
+/******************** USERS ********************/
 export const userLogin = async data => {
   // console.log(data);
   const res = await tools.fetch(options().turnkeyUrl + '/login', {
@@ -83,6 +84,7 @@ export const getContacts = async () => {
   return res;
 };
 
+/******************** POSTS ********************/
 export const getPosts = async query => {
   const res = await tools.fetch(options().baseUrl + '/posts', {
     qs: query,
@@ -112,6 +114,7 @@ export const editPost = async (postId, data) => {
   return res;
 };
 
+/******************** ORDERS ********************/
 export const getOrders = async query => {
   const res = await tools.fetch(options().baseUrl + '/orders', {
     qs: query,
@@ -123,6 +126,15 @@ export const getOrders = async query => {
 
 export const getOrder = async id => {
   const res = await tools.fetch(options().baseUrl + '/orders/' + id, {
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
+export const deleteOrder = async id => {
+  const res = await tools.fetch(options().baseUrl + '/orders/' + id, {
+    method: 'DELETE',
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
 

@@ -17,7 +17,7 @@
   import { getOrder } from '../../tools/crudApi.ts';
 
   export let id;
-  let order = {};
+  let order = undefined;
   const headers = [
     { header: 'filename', text: 'File Name' },
     { header: 'size', text: 'Size' },
@@ -43,22 +43,28 @@
 </style>
 
 <svelte:head>
-  <title>Order #{order.orderId}</title>
+  <title>Order #{order && order.orderId ? order.orderId : ''}</title>
 </svelte:head>
 
-<OrderHeader {order} />
+{#if order}
+  <OrderHeader {order} />
 
-<div class="Order">
-  <TripDetails {order} />
+  <div class="Order">
+    <TripDetails {order} />
 
-  <!-- #TODO MAP DOCUMENTS BASED ON UPLOAD -->
-  {#if order.documents && order.documents.length > 0}
-    <h3>Uploaded Documents</h3>
+    <!-- #TODO MAP DOCUMENTS BASED ON UPLOAD -->
+    {#if order.documents && order.documents.length > 0}
+      <h3>Uploaded Documents</h3>
 
-    <Table {headers} data={order.documents} height={30} />
-  {/if}
+      <Table {headers} data={order.documents} height={30} />
+    {/if}
 
-  <div style="margin-top: 18px;" />
+    <div style="margin-top: 18px;" />
 
-  <OrderStatus {order} />
-</div>
+    <OrderStatus {order} />
+  </div>
+{:else}
+  <div class="Loader">
+    <div uk-spinner="ratio: 2" />
+  </div>
+{/if}

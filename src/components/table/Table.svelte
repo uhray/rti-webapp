@@ -11,7 +11,7 @@
   export let expand = false;
 
   export let handleDelete = undefined;
-  export let handleDeleteAll = undefined;
+  export let handleDeleteSelected = undefined;
   export let handleCheck = undefined;
   export let selected = [];
 </script>
@@ -107,7 +107,7 @@
                     {#if selected.length > 0}
                       <div
                         on:click={() => {
-                          handleDeleteAll();
+                          handleDeleteSelected();
                         }}
                         class="Table-deleteAll">
                         <Icon color="#e86172" type="delete" hover />

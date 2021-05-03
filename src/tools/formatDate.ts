@@ -3,6 +3,10 @@ import moment from 'moment';
 export function formatDate(d, canFormatDate = false) {
   let datetime = '';
 
+  console.log(d);
+
+  d = new Date(d);
+
   if (d) {
     if (canFormatDate) {
       if (moment(new Date(d).toISOString()).isSame(moment(), 'day')) {
