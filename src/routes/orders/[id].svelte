@@ -18,11 +18,6 @@
 
   export let id;
   let order = {};
-
-  onMount(async () => {
-    order = await getOrder(id);
-  });
-
   const headers = [
     { header: 'filename', text: 'File Name' },
     { header: 'size', text: 'Size' },
@@ -31,6 +26,10 @@
     { header: 'view', text: 'View' },
     { header: 'actions', text: 'Actions' },
   ];
+
+  onMount(async () => {
+    order = await getOrder(id);
+  });
 </script>
 
 <style lang="scss">

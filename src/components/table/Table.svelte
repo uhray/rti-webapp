@@ -9,6 +9,11 @@
   export let data = [];
   export let height = undefined;
   export let expand = false;
+
+  export let handleDelete = undefined;
+  export let handleDeleteAll = undefined;
+  export let handleCheck = undefined;
+  export let selected = [];
 </script>
 
 <style src="./Table.scss">
@@ -93,9 +98,21 @@
           <thead>
             <tr class="Table-headerRow">
               {#each headers as header}
-                <th scope="col" class="Table-headerRow-headerCell">
-                  {#if header.header == 'view' || header.header == 'actions'}
+                <th
+                  scope="col"
+                  class={`Table-headerRow-headerCell ${header.header === 'actions' ? 'alignRight' : ''}`}>
+                  {#if header.header == 'view'}
                     {''}
+                  {:else if header.header == 'actions'}
+                    {#if selected.length > 0}
+                      <div
+                        on:click={() => {
+                          handleDeleteAll();
+                        }}
+                        class="Table-deleteAll">
+                        <Icon color="#e86172" type="delete" hover />
+                      </div>
+                    {/if}
                   {:else}{header.text}{/if}
                 </th>
               {/each}
@@ -122,9 +139,20 @@
                       </div>
                     {:else if header.header == 'actions'}
                       <div class="Table-row-actions alignRight">
-                        <Icon type="delete" hover />
+                        <div
+                          on:click={() => {
+                            handleDelete(item.id);
+                          }}>
+                          <Icon type="delete" hover />
+                        </div>
                         <div style="margin-left: 15px;" />
-                        <Checkbox secondary />
+                        <div
+                          on:click={() => {
+                            handleCheck(item.id);
+                          }}
+                          class="Table-checkbox">
+                          <Checkbox secondary />
+                        </div>
                       </div>
                     {:else if header.header == 'filename'}
                       <div class="Table-row-filename">

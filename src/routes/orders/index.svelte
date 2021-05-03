@@ -25,6 +25,8 @@
     'createdAt'
   ).reverse();
 
+  let ordersToDelete = [];
+
   export const headers = [
     { header: 'order', text: 'Order' },
     { header: 'status', text: 'Status' },
@@ -43,6 +45,23 @@
       ordersMapped = _.sortBy(ordersMapped, 'createdAt');
     }
   }
+
+  function handleDelete(orderId) {
+    console.log('DELETING ORDER ', orderId);
+  }
+
+  function handleDeleteAll() {
+    console.log('DELETING ALL ORDERS');
+  }
+
+  function handleCheck(orderId) {
+    if (ordersToDelete.includes(orderId)) {
+      ordersToDelete = ordersToDelete.filter(o => o !== orderId);
+    } else {
+      ordersToDelete.push(orderId);
+    }
+    ordersToDelete = ordersToDelete;
+  }
 </script>
 
 <style lang="scss">
@@ -54,9 +73,14 @@
 <svelte:head>
   <title>Orders</title>
 </svelte:head>
-
 <Header {handleSort} />
 
 <div class="Orders">
-  <Table {headers} data={ordersMapped} />
+  <Table
+    {headers}
+    data={ordersMapped}
+    {handleDelete}
+    {handleDeleteAll}
+    {handleCheck}
+    selected={ordersToDelete} />
 </div>

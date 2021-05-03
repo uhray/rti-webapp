@@ -27,6 +27,7 @@
       color: $color--darkblue;
       font-weight: 600;
       font-size: 15px;
+      position: relative;
     }
   }
 
@@ -67,6 +68,18 @@
 
   .Table-subSection {
     padding: 0 10px;
+  }
+
+  .Table-checkbox {
+    margin-right: 7px;
+  }
+
+  .Table-deleteAll {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    height: 16px;
+    padding-bottom: 4px;
   }
 }
 
