@@ -35,8 +35,6 @@
     { header: 'actions', text: 'Actions' },
   ];
 
-  console.log(ordersMapped);
-
   function handleSort(v) {
     if (v === 'new') {
       ordersMapped = _.sortBy(ordersMapped, 'createdAt').reverse();
