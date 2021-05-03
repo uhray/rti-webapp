@@ -23,7 +23,6 @@
     error = !error;
   };
   const onInput = e => {
-    console.log(e.target.value);
     errorMessage = e.target.value;
   };
 

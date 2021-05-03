@@ -29,6 +29,10 @@
   };
 </script>
 
+<style src="./Input.scss">
+
+</style>
+
 <!-- HTML -->
 <div class="Input-wrapper">
   {#if label}
@@ -37,11 +41,8 @@
   {/if}
   {#if type === 'text'}
     <div
-      class={`Input uk-inline ${
-        fill ? 'uk-width-1-1 uk-margin-small-right' : ''
-      }`}
-      {invalid}
-    >
+      class={`Input uk-inline ${fill ? 'uk-width-1-1 uk-margin-small-right' : ''}`}
+      {invalid}>
       <input
         class="uk-input"
         type="text"
@@ -52,26 +53,18 @@
         on:input
         on:focus={onFocus}
         on:blur={onBlur}
-      />
+        on:input={e => onInput(e.target.value)} />
 
       <span class="uk-form-icon uk-form-icon-flip">
         <Icon
           type={invalid ? 'close' : icon}
-          color={invalid
-            ? colors.warning
-            : isFocused
-            ? colors.darkblue
-            : colors.lightgray}
-        />
+          color={invalid ? colors.warning : isFocused ? colors.darkblue : colors.lightgray} />
       </span>
     </div>
   {:else if type === 'password'}
     <div
-      class={`Input uk-inline ${
-        fill ? 'uk-width-1-1 uk-margin-small-right' : ''
-      }`}
-      {invalid}
-    >
+      class={`Input uk-inline ${fill ? 'uk-width-1-1 uk-margin-small-right' : ''}`}
+      {invalid}>
       <input
         class="uk-input"
         type={showPassword ? 'text' : 'password'}
@@ -81,18 +74,12 @@
         {isFocused}
         on:input
         on:focus={onFocus}
-        on:blur={onBlur}
-      />
+        on:blur={onBlur} />
 
       <span class="uk-form-icon uk-form-icon-flip" on:click={togglePass}>
         <Icon
           type={showPassword ? 'show' : 'hide'}
-          color={invalid
-            ? colors.warning
-            : isFocused
-            ? colors.darkblue
-            : colors.lightgray}
-        />
+          color={invalid ? colors.warning : isFocused ? colors.darkblue : colors.lightgray} />
       </span>
     </div>
   {/if}
@@ -100,6 +87,3 @@
     <Error type="default-error" text={error && error} />
   {/if}
 </div>
-
-<style src="./Input.scss">
-</style>

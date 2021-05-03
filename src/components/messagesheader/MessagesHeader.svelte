@@ -1,12 +1,11 @@
 <script>
   import Label from '../../components/label/Label.svelte';
+  import Avatar from '../../components/Avatar/Avatar.svelte';
   import { colors } from '../../theme/variables';
+  import { formatInitials } from '../../tools/formatInitials';
   export let contact;
-  export let name = undefined;
-  export let vehicle = undefined;
-  export let tag = undefined;
-
-  console.log(contact);
+  export let filter;
+  export let handleFilter;
 </script>
 
 <style src="./MessagesHeader.scss">
@@ -14,44 +13,108 @@
 </style>
 
 <div class="Header">
-
   {#if contact}
-    <!-- #TODO: needs to become profile picture -->
-    <div class="Header-photo">
-      <img src={contact.pic || ''} alt={contact.name || ''} />
-    </div>
+    <Avatar user={contact} size={40} />
 
     <div class="Header-content">
       <div class="Header-content-details">
-        <span class="Header-content-name">{contact.name}</span>
-        <span class="Header-content-vehicle">{tag} • {vehicle}</span>
+        <span class="Header-content-name">
+          {contact ? contact.name : 'All Messages'}
+        </span>
+        <span class="Header-content-vehicle">
+          {contact.username.toUpperCase()} • {contact.truckId}
+        </span>
       </div>
       <div class="Header-content-actions">
-        <div>
+        <div
+          on:click={() => {
+            handleFilter('all');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             text="All Messages"
             iconLeft="message"
-            iconColor="#243E93"
+            iconColor={filter === 'all' ? '#243E93' : ''}
             backgroundColor={colors.tablegray} />
         </div>
-        <div>
+        <div
+          on:click={() => {
+            handleFilter('macros');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             text="Macros"
-            iconLeft="macro-outline"
+            iconLeft="macro"
+            iconColor={filter === 'macros' ? '#243E93' : ''}
             backgroundColor={colors.tablegray} />
         </div>
-        <div>
+        <div
+          on:click={() => {
+            handleFilter('orders');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
             text="Orders"
-            iconLeft="orders-outline"
+            iconLeft="orders"
+            iconColor={filter === 'orders' ? '#243E93' : ''}
             backgroundColor={colors.tablegray} />
         </div>
-        <div>
+        <div
+          on:click={() => {
+            console.log(' #TODO ');
+          }}>
           <Label
-            status="disabled"
+            status="inactive"
+            iconLeft="overflow"
+            backgroundColor={colors.tablegray} />
+        </div>
+      </div>
+    </div>
+  {:else}
+    <div class="Header-content-all">
+      <div class="Header-content-title">
+        <span>All Messages</span>
+      </div>
+      <div class="Header-content-actions">
+        <div
+          on:click={() => {
+            handleFilter('all');
+          }}>
+          <Label
+            status="inactive"
+            text="All Messages"
+            iconLeft="message"
+            iconColor={filter === 'all' ? '#243E93' : ''}
+            backgroundColor={colors.tablegray} />
+        </div>
+        <div
+          on:click={() => {
+            handleFilter('macros');
+          }}>
+          <Label
+            status="inactive"
+            text="Macros"
+            iconLeft="macro"
+            iconColor={filter === 'macros' ? '#243E93' : ''}
+            backgroundColor={colors.tablegray} />
+        </div>
+        <div
+          on:click={() => {
+            handleFilter('orders');
+          }}>
+          <Label
+            status="inactive"
+            text="Orders"
+            iconLeft="orders"
+            iconColor={filter === 'orders' ? '#243E93' : ''}
+            backgroundColor={colors.tablegray} />
+        </div>
+        <div
+          on:click={() => {
+            console.log(' #TODO ');
+          }}>
+          <Label
+            status="inactive"
             iconLeft="overflow"
             backgroundColor={colors.tablegray} />
         </div>

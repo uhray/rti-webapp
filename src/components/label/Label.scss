@@ -34,6 +34,38 @@
     &[status='default'] {
       background-color: $color--default;
     }
+    &[status='pending'] {
+      background-color: $color--warning;
+    }
+    &[status='completed'] {
+      background-color: $color--success;
+    }
+    &[status='declined'] {
+      background-color: $color--danger;
+    }
+    &[status='dispatched'] {
+      background-color: $color--default;
+    }
+    &[status='in progress'] {
+      background-color: $color--primary;
+    }
+    &[status='active'] {
+      background-color: $color--default;
+    }
+    &[status='inactive'] {
+      background-color: $color--disabled;
+      color: $color--darkblue;
+    }
+    &[status='approved'] {
+      background-color: $color--success;
+    }
+
+    &[small] {
+      box-sizing: border-box;
+      height: 24px !important;
+      font-weight: 600;
+      font-size: 12px;
+    }
 
     .statusColor {
       width: 16px;
@@ -60,6 +92,10 @@
       &[statusColor='default'] {
         background-color: $color--default;
       }
+    }
+
+    &[textColor] {
+      color: var(--custom-text-color) !important;
     }
 
     &[backgroundColor] {

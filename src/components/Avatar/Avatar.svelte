@@ -1,0 +1,20 @@
+<script>
+  import { formatInitials } from '../../tools/formatInitials';
+
+  export let user;
+  export let size;
+</script>
+
+<style src="./Avatar.scss">
+
+</style>
+
+<div
+  class="Avatar"
+  style={`width: ${size ? size + 'px' : '40px'}; height: ${size ? size + 'px' : '40px'};`}>
+  {#if user}
+    {#if user.avatarUrl}
+      <img src={user.avatarUrl} alt={user.name || user.username} />
+    {:else}{formatInitials(user.name)}{/if}
+  {/if}
+</div>

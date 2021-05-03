@@ -1,0 +1,21 @@
+@import '../../theme/variables.scss';
+
+.Avatar {
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: $color--primary;
+  color: #fff;
+  border-radius: 50%;
+  object-fit: cover;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
