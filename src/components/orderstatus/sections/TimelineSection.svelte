@@ -3,14 +3,17 @@
   import Icon from '../../icon/Icon.svelte';
   import moment from 'moment';
 
+  export let documents;
   export let stop;
+  export let index;
 </script>
 
 <style src="../OrderStatus.scss">
 
 </style>
 
-{#if stop}
+{#if stop && documents}
+
   <section class="OrderStatus">
     <div class="OrderStatus-timelineSection">
       <div class="uk-flex">
@@ -47,14 +50,19 @@
         </div>
       </div>
       <Divider />
-      <h4 class="OrderStatus-timelineHeader">Uploaded Documents</h4>
-      <div class="OrderStatus-timelineContent uk-flex">
-        {#if stop.documents}
-          {#each stop.documents as document}
-            <div class="OrderStatus-file">
-              <Icon type="file" color="#a6adc4" />
-            </div>
-            <p class="OrderStatus-timelineContentText grayed">{document}</p>
+      <h4 class=" OrderStatus-timelineHeader">Uploaded Documents</h4>
+      <div class="OrderStatus-documents uk-flex">
+        {#if documents}
+          {#each documents as document}
+            {#if document.stopIndex === index}
+              <div class="OrderStatus-file">
+                <Icon type="file" color="#161D35" />
+              </div>
+              <span class="OrderStatus-timelineContentText">
+                {document.filename}
+                <span class="OrderStatus-filesize">({document.size})</span>
+              </span>
+            {/if}
           {/each}
         {/if}
       </div>

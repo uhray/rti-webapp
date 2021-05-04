@@ -180,7 +180,10 @@
 
               {#if selectedTab === 'TIMELINE'}
                 <!-- TIMELINE SECTION -->
-                <TimelineSection stop={order.stops[selectedStop]} />
+                <TimelineSection
+                  documents={order.documents}
+                  stop={order.stops[selectedStop]}
+                  index={selectedStop} />
               {:else if selectedTab === 'CUSTOMER INFO'}
                 <!-- CUSTOMER INFO SECTION -->
                 <CustomerSection stop={order.stops[selectedStop]} />

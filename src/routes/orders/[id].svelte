@@ -106,6 +106,16 @@
     );
     attachments = filteredAttachments;
   }
+
+  function mapDocs(docs) {
+    return docs.map(d => {
+      if (d.stopIndex !== undefined && d.stopIndex !== null) {
+        return { ...d, location: order.stops[d.stopIndex].companyId };
+      } else {
+        return { ...d, location: '' };
+      }
+    });
+  }
 </script>
 
 <style lang="scss">
@@ -222,7 +232,7 @@
     {#if order.documents && order.documents.length > 0}
       <h3>Uploaded Documents</h3>
 
-      <Table {headers} data={order.documents} height={30} />
+      <Table {headers} data={mapDocs(order.documents)} height={'200px'} />
     {/if}
 
     <div style="margin-top: 18px;" />

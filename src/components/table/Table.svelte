@@ -23,7 +23,7 @@
 <section class="Table">
   {#if expand}
     <div class="Table-outer">
-      <div class="Table-inner" style={`height: ${height}vh`}>
+      <div class="Table-inner" style={`height: ${height}`}>
         <table
           class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
           <thead>
