@@ -148,12 +148,12 @@
                           <Icon type="delete" hover />
                         </div>
                         <div style="margin-left: 15px;" />
-                        <div
-                          on:click={() => {
-                            handleCheck(item.id);
-                          }}
-                          class="Table-checkbox">
-                          <Checkbox secondary />
+                        <div class="Table-checkbox">
+                          <Checkbox
+                            on:click={() => {
+                              handleCheck(item.id);
+                            }}
+                            secondary />
                         </div>
                       </div>
                     {:else if header.header == 'filename'}

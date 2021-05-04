@@ -2,6 +2,7 @@
   import Table from '../../components/table/Table.svelte';
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
+  import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
   import { deleteOrder } from '../../tools/crudApi.ts';
   import _ from 'lodash';
 
@@ -12,6 +13,8 @@
   let orders;
   let ordersMapped;
   let ordersToDelete = [];
+  let displayOverlayDelete = false;
+  let isMultiple = false;
 
   $: {
     orders = $ordersStore.orders;
@@ -52,28 +55,27 @@
   }
 
   async function handleDelete(orderId) {
-    console.log('DELETING ORDER ', orderId);
-    const res = await deleteOrder(orderId);
-
-    const ordersAfterDelete = orders.filter(o => o._id !== orderId);
-    ordersStore.setOrders(ordersAfterDelete);
-
-    console.log(ordersAfterDelete);
+    ordersToDelete.push(orderId);
+    displayOverlayDelete = true;
+    isMultiple = false;
+    // console.log('DELETING ORDER ', orderId);
+    // const res = await deleteOrder(orderId);
+    // const ordersAfterDelete = orders.filter(o => o._id !== orderId);
+    // ordersStore.setOrders(ordersAfterDelete);
+    // console.log(ordersAfterDelete);
   }
 
   function handleDeleteSelected() {
-    console.log('DELETING ALL ORDERS');
-    ordersToDelete.forEach(async o => {
-      await deleteOrder(o);
-    });
-
-    const ordersAfterDelete = orders.filter(
-      o => !ordersToDelete.includes(o._id)
-    );
-
-    ordersStore.setOrders(ordersAfterDelete);
-
-    console.log(ordersAfterDelete);
+    displayOverlayDelete = true;
+    isMultiple = true;
+    // console.log('DELETING ALL ORDERS');
+    // ordersToDelete.forEach(async o => {
+    //   await deleteOrder(o);
+    // });
+    // const ordersAfterDelete = orders.filter(
+    //   o => !ordersToDelete.includes(o._id)
+    // );
+    // ordersStore.setOrders(ordersAfterDelete);
   }
 
   function handleCheck(orderId) {
@@ -83,6 +85,30 @@
       ordersToDelete.push(orderId);
     }
     ordersToDelete = ordersToDelete;
+
+    console.log(ordersToDelete);
+  }
+
+  function clearOverlayData() {
+    ordersToDelete = [];
+    displayOverlayDelete = false;
+    let checkboxes = document.getElementsByClassName('uk-checkbox');
+    console.log(checkboxes);
+    Array.from(checkboxes).forEach(c => (c.checked = false));
+  }
+
+  function deleteOrders() {
+    console.log('DELETING', ordersToDelete);
+
+    ordersToDelete.forEach(async o => {
+      await deleteOrder(o);
+    });
+    const ordersAfterDelete = orders.filter(
+      o => !ordersToDelete.includes(o._id)
+    );
+    ordersStore.setOrders(ordersAfterDelete);
+
+    clearOverlayData();
   }
 </script>
 
@@ -106,3 +132,11 @@
     {handleCheck}
     selected={ordersToDelete} />
 </div>
+
+{#if displayOverlayDelete}
+  <OverlayDelete
+    {clearOverlayData}
+    send={deleteOrders}
+    type={'order'}
+    {isMultiple} />
+{/if}

@@ -9,11 +9,15 @@ button[secondary='true'] {
 }
 
 button[warning='true'] {
-  background-color: $color--danger;
+  background-color: $color--warning;
 }
 
 button[success='true'] {
   background-color: $color--success;
+}
+
+button[danger='true'] {
+  background-color: $color--danger;
 }
 
 button {
@@ -63,13 +67,18 @@ button {
     }
     &[warning='true'] {
       background-color: transparent !important;
-      color: $color--danger;
-      border: 1px solid $color--danger;
+      color: $color--warning;
+      border: 1px solid $color--warning;
     }
     &[success='true'] {
       background-color: transparent !important;
       color: $color--success;
       border: 1px solid $color--success;
+    }
+    &[danger='true'] {
+      background-color: transparent !important;
+      color: $color--danger;
+      border: 1px solid $color--danger;
     }
   }
 

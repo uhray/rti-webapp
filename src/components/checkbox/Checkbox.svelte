@@ -9,6 +9,12 @@
 </style>
 
 <!-- HTML -->
-<input class="uk-checkbox" type="checkbox" {primary} {secondary} {disabled} />
+<input
+  on:click
+  class="uk-checkbox"
+  type="checkbox"
+  {primary}
+  {secondary}
+  {disabled} />
 
 <!-- ==== -->
