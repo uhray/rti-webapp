@@ -197,8 +197,10 @@ export function changePageIfDifferent(url, page) {
 
 const options = () => {
   return {
-    baseUrl: 'http://localhost:5000/api/v1',
-    turnkeyUrl: 'http://localhost:5000/turnkey',
+    // baseUrl: 'http://localhost:5000/api/v1',
+    // turnkeyUrl: 'http://localhost:5000/turnkey',
+    baseUrl: 'https://truck-ops-api--staging.herokuapp.com/api/v1',
+    turnkeyUrl: 'https://truck-ops-api--staging.herokuapp.com/turnkey',
     baseOptions: {
       headers: {
         'Content-Type': 'application/json',
