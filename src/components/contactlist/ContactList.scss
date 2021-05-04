@@ -1,6 +1,50 @@
 @import '../../theme/variables.scss';
 
 .ContactList {
+  a {
+    text-decoration: none;
+  }
+
+  .ContactList-loading {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ContactList-allMessages {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    height: 34px;
+
+    &.active {
+      background-color: rgba(166, 173, 196, 0.3);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .ContactList-allMessages-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+      padding-bottom: 1px;
+      padding-left: 10px;
+    }
+
+    .ContactList-allMessages-text {
+      font-weight: 500;
+      font-size: 14px;
+      color: $color--darkblue;
+    }
+  }
+
   .ContactList-group {
     .ContactList-group-header {
       display: flex;
@@ -11,7 +55,9 @@
       .ContactList-group-icon {
         width: 24px;
         height: 24px;
+        padding-left: 10px;
         padding-bottom: 3px;
+        padding-right: 10px;
 
         &:hover {
           cursor: pointer;
@@ -34,14 +80,16 @@
     margin-bottom: 30px;
 
     .ContactList-subgroup-container {
-      padding-left: 24px;
+      // padding-left: 24px;
 
       .ContactList-subgroup-text {
         font-size: 12px;
         font-weight: 500;
+        padding-left: 34px;
       }
 
       .ContactList-contact {
+        position: relative;
         display: flex;
         align-items: center;
         height: 34px;
@@ -50,17 +98,18 @@
           cursor: pointer;
         }
 
+        &.active {
+          background-color: rgba(166, 173, 196, 0.3);
+        }
+
         .ContactList-contact-picture {
           display: flex;
           justify-content: center;
           align-items: center;
           color: #fff;
           min-width: 24px;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          background-color: $color--primary;
           margin-right: 8px;
+          padding-left: 34px;
         }
 
         .ContactList-contact-name {

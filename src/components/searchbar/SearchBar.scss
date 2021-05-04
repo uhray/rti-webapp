@@ -23,6 +23,12 @@
     width: 100%;
     background-color: $color--tablegray;
   }
+
+  .SearchBar-close {
+    position: absolute;
+    right: 5px;
+    top: calc(50% - 10px);
+  }
 }
 
 ::-webkit-input-placeholder {
