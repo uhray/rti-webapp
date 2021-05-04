@@ -3,6 +3,7 @@
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
   import OrderStatusLabel from '../../components/OrderStatusLabel/OrderStatusLabel.svelte';
   export let order = {};
+  export let toggleMessage = () => {};
 </script>
 
 <style lang="scss">
@@ -86,7 +87,7 @@
           }}>
           <Button outline>Back</Button>
         </div>
-        <div>
+        <div on:click={toggleMessage}>
           <Button primary>Send Message</Button>
         </div>
       </div>

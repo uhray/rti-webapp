@@ -14,6 +14,7 @@
   import Input from '../input/Input.svelte';
   import DropDown from '../dropdown/DropDown.svelte';
   import Button from '../button/Button.svelte';
+  import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
   import _ from 'lodash';
   import moment from 'moment';
   import tools, { getContacts, addPost } from '../../tools/crudApi.ts';
@@ -52,6 +53,7 @@
   let message = '';
   let canSubmit = false;
   let sendConfirmation = false;
+  let attachments = [];
 
   afterUpdate(async () => {
     sortedPosts = _.chain(filterPosts(posts))
@@ -130,6 +132,23 @@
     }
 
     return fPosts;
+  }
+
+  function addAttachment() {
+    attachments.push({
+      name: 'Cybertruck',
+      format: 'image',
+      fileUrl: 'https://cdn.motor1.com/images/mgl/2RpBB/s1/tesla-truck.jpg',
+      size: '12 MB',
+    });
+    attachments = attachments;
+  }
+
+  function removeAttachment(data) {
+    const filteredAttachments = attachments.filter(
+      a => a.fileUrl !== data.fileUrl
+    );
+    attachments = filteredAttachments;
   }
 
   async function send() {
@@ -550,8 +569,21 @@
             </div>
           </div>
 
+          {#if attachments.length > 0}
+            <div class="MessageOverlay-attachments">
+              <MessageAttachments
+                isDisplay={false}
+                {removeAttachment}
+                {attachments} />
+            </div>
+          {/if}
+
           <div class="MessageOverlay-rte">
-            <RichText id={uuid()} {handleInput} hideSend={true} />
+            <RichText
+              id={uuid()}
+              {handleInput}
+              {addAttachment}
+              hideSend={true} />
           </div>
 
           <div class=" MessageOverlay-buttons">

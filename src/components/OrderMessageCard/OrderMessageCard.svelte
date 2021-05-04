@@ -123,8 +123,8 @@
         {/each}
       </div>
     </div>
-    <div class="Card-button clickable">
-      <a href={`/orders/${order._id}`}>View</a>
-    </div>
+    <a href={`/orders/${order._id}`}>
+      <div class="Card-button clickable">View</div>
+    </a>
   </div>
 {/if}
