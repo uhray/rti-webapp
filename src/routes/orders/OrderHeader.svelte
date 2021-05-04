@@ -80,10 +80,11 @@
       </div>
 
       <div class="Header-actions">
-        <div>
-          <a href="/orders">
-            <Button outline>Back</Button>
-          </a>
+        <div
+          on:click={() => {
+            window.history.back();
+          }}>
+          <Button outline>Back</Button>
         </div>
         <div>
           <Button primary>Send Message</Button>

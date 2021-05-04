@@ -33,7 +33,7 @@
           <h4 class="OrderStatus-timelineHeader">Appointment Time</h4>
           <div class="OrderStatus-timelineContent">
             <p class="OrderStatus-timelineContentText">
-              {moment(stop.apptTime).format('MMM D, YYYY • h:mm a')}
+              {moment(stop.appointmentTime).format('MMM D, YYYY • h:mm a')}
             </p>
           </div>
         </div>

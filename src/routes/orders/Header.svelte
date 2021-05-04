@@ -75,6 +75,7 @@
 
       .Header-actions-search {
         margin-right: 5px;
+        max-width: 350px;
       }
     }
   }
