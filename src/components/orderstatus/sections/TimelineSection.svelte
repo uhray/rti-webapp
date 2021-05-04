@@ -20,7 +20,7 @@
         <div class="uk-width-1-2">
           <h4 class="OrderStatus-timelineHeader">Trailer #</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">{stop.trailerNumber}</p>
+            <p class="OrderStatus-timelineContentText">{stop.trailerId}</p>
           </div>
         </div>
         <div class="uk-width-1-2">
