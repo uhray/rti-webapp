@@ -160,9 +160,11 @@
                   <p class="OrderStatus-cardText">
                     {`${order.stops[order.stops.length - 1].address.city}, ${order.stops[order.stops.length - 1].address.state} ${order.stops[order.stops.length - 1].address.zipcode} • ${formatDate(order.stops[order.stops.length - 1].startTime, true)}`}
                   </p>
-                  <Label
-                    status={order.stops[order.stops.length - 1].status === 'inProgress' ? 'default' : 'disabled'}
-                    text={_.startCase(order.stops[order.stops.length - 1].status)} />
+                  <div class="OrderStatus-label">
+                    <Label
+                      status={order.stops[order.stops.length - 1].status === 'inProgress' ? 'default' : 'disabled'}
+                      text={_.startCase(order.stops[order.stops.length - 1].status)} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -170,29 +172,32 @@
         </div>
         <div style="margin-left: 4px;" />
         <div class="uk-width-3-4">
-          <Card type="input-card">
-            <div class="OrderStatus-cardSection">
-              <TabMenu
-                type="default"
-                tabs={['TIMELINE', 'CUSTOMER INFO', 'REFERENCE NUMBERS']}
-                {selectedTab}
-                {handleTab} />
+          <div class="OrderStatus-cardContainer">
+            <Card type="input-card" height="100%">
+              <div class="OrderStatus-cardSection">
+                <TabMenu
+                  type="default"
+                  tabs={['TIMELINE', 'CUSTOMER INFO', 'REFERENCE NUMBERS']}
+                  {selectedTab}
+                  {handleTab} />
 
-              {#if selectedTab === 'TIMELINE'}
-                <!-- TIMELINE SECTION -->
-                <TimelineSection
-                  documents={order.documents}
-                  stop={order.stops[selectedStop]}
-                  index={selectedStop} />
-              {:else if selectedTab === 'CUSTOMER INFO'}
-                <!-- CUSTOMER INFO SECTION -->
-                <CustomerSection stop={order.stops[selectedStop]} />
-              {:else if selectedTab === 'REFERENCE NUMBERS'}
-                <!-- REFERENCE SECTION -->
-                <ReferenceSection stop={order.stops[selectedStop]} />
-              {/if}
-            </div>
-          </Card>
+                {#if selectedTab === 'TIMELINE'}
+                  <!-- TIMELINE SECTION -->
+                  <TimelineSection
+                    documents={order.documents}
+                    stop={order.stops[selectedStop]}
+                    index={selectedStop} />
+                {:else if selectedTab === 'CUSTOMER INFO'}
+                  <!-- CUSTOMER INFO SECTION -->
+                  <CustomerSection stop={order.stops[selectedStop]} />
+                {:else if selectedTab === 'REFERENCE NUMBERS'}
+                  <!-- REFERENCE SECTION -->
+                  <ReferenceSection stop={order.stops[selectedStop]} />
+                {/if}
+              </div>
+            </Card>
+
+          </div>
         </div>
       </div>
     </Card>

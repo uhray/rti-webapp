@@ -232,7 +232,7 @@
     {#if order.documents && order.documents.length > 0}
       <h3>Uploaded Documents</h3>
 
-      <Table {headers} data={mapDocs(order.documents)} height={'200px'} />
+      <Table {headers} data={mapDocs(order.documents)} height={'267px'} />
     {/if}
 
     <div style="margin-top: 18px;" />

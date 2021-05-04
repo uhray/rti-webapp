@@ -1,4 +1,6 @@
 <script>
+  // 54px (header) + 71px for each row for exact rows before scrolling
+  // Example: 3 rows = 267px (54 + (71 x 3))
   import Checkbox from '../checkbox/Checkbox.svelte';
   import OrderStatusLabel from '../OrderStatusLabel/OrderStatusLabel.svelte';
   import Label from '../label/Label.svelte';
@@ -92,7 +94,7 @@
     </div>
   {:else}
     <div class="Table-outer">
-      <div class="Table-inner" style={`height: ${height}vh`}>
+      <div class="Table-inner" style={`height: ${height}`}>
         <table
           class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
           <thead>
