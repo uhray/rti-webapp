@@ -12,6 +12,7 @@
   export let icon = undefined;
   export let iconColor = undefined;
   export let height = undefined;
+  export let width = undefined;
 </script>
 
 <style src="./Button.scss">
