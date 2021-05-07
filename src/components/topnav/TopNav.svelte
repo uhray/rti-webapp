@@ -1,7 +1,7 @@
 <script>
   import Avatar from '../Avatar/Avatar.svelte';
   import Icon from '../icon/Icon.svelte';
-  import DropDown from '../dropdown/DropDown.svelte';
+  import DropDown from '../UK-DropDown/DropDown.svelte';
   export let user;
   // console.log(user);
 </script>

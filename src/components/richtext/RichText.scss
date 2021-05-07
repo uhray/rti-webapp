@@ -16,14 +16,16 @@
   }
   #editor {
     max-height: 200px !important;
-    overflow-y: auto;
   }
   .RichText-editor {
     border: none;
     min-height: 56px;
     width: 100%;
     font-size: 1rem;
+    max-height: 200px !important;
+    overflow: auto;
     .ql-editor {
+      max-height: 200px !important;
       * {
         color: darkgray a {
           color: blue, strong, em, s {
@@ -54,6 +56,7 @@
       }
     }
   }
+
   .RichText-toolbar {
     position: relative;
     padding: 10px 0;

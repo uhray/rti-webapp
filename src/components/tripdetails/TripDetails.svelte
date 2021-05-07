@@ -1,14 +1,38 @@
 <script>
+  import { beforeUpdate } from 'svelte';
   import Divider from '../divider/Divider.svelte';
   import Icon from '../icon/Icon.svelte';
-  export let order = undefined;
+  import _ from 'lodash';
+
+  export let order = {};
+  let s;
+  let e;
+  let start = '';
+  let startCSZ = '';
+  let end = '';
+  let endCSZ = '';
 
   let isOpen = true;
+
+  $: {
+    if (order && order.stops) {
+      s = _.first(order.stops).address;
+      e = _.last(order.stops).address;
+      start = `${s.addressLine1} ${s.addressLine2}`;
+      startCSZ = `${s.city}, ${s.state} ${s.zipcode}`;
+      end = `${e.addressLine1} ${e.addressLine2}`;
+      endCSZ = `${e.city}, ${e.state} ${e.zipcode}`;
+    }
+  }
 
   const toggle = () => {
     isOpen = !isOpen;
   };
 </script>
+
+<style src="./TripDetails.scss">
+
+</style>
 
 <!-- HTML -->
 <div class="TripDetails">
@@ -28,23 +52,31 @@
       <div class="TripDetails-content-row">
         <div class="TripDetails-content-cell">
           <h4>Start Point</h4>
-          <span>{order.startPoint}</span>
+          <span>
+            {start}
+            <br />
+            {startCSZ}
+          </span>
         </div>
         <div class="TripDetails-content-cell">
           <h4>End Point</h4>
-          <span>{order.endPoint}</span>
+          <span>
+            {end}
+            <br />
+            {endCSZ}
+          </span>
         </div>
         <div class="TripDetails-content-cell">
           <h4>Vehicle Number</h4>
-          <span>{order.vehicle}</span>
+          <span>{order.assignedTruck}</span>
         </div>
         <div class="TripDetails-content-cell">
           <h4>Total Miles</h4>
-          <span>{order.totalMiles} mi</span>
+          <span>{order.mileage} mi</span>
         </div>
         <div class="TripDetails-content-cell">
           <h4>Est. Weight</h4>
-          <span>{order.estWeight} lbs</span>
+          <span>{order.currentWeight} lbs</span>
         </div>
       </div>
     </div>
@@ -52,6 +84,3 @@
 </div>
 
 <!-- ==== -->
-
-<style src="./TripDetails.scss">
-</style>

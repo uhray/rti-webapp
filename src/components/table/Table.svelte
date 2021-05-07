@@ -1,11 +1,38 @@
 <script>
+  // 54px (header) + 71px for each row for exact rows before scrolling
+  // Example: 3 rows = 267px (54 + (71 x 3))
   import Checkbox from '../checkbox/Checkbox.svelte';
+  import OrderStatusLabel from '../OrderStatusLabel/OrderStatusLabel.svelte';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
-  export let headers = undefined;
-  export let data = undefined;
+  import { formatDate } from '../../tools/formatDate.ts';
+  import moment from 'moment';
+
+  export let headers = [];
+  export let data = [];
   export let height = undefined;
   export let expand = false;
+
+  export let handleDelete = undefined;
+  export let handleDeleteSelected = undefined;
+  export let handleCheck = undefined;
+  export let selected = [];
+
+  function getHeaderSize(size) {
+    if (size === 'small') {
+      return 'uk-width-small';
+    } else if (size === 'medium') {
+      return 'uk-width-medium';
+    } else if (size === 'large') {
+      return 'uk-width-large';
+    } else if (size === 'expand') {
+      return 'uk-table-expand';
+    } else if (size === 'shrink') {
+      return 'uk-table-shrink';
+    } else {
+      return 'uk-width-auto';
+    }
+  }
 </script>
 
 <style src="./Table.scss">
@@ -15,7 +42,7 @@
 <section class="Table">
   {#if expand}
     <div class="Table-outer">
-      <div class="Table-inner" style={`height: ${height}vh`}>
+      <div class="Table-inner" style={`height: ${height}`}>
         <table
           class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
           <thead>
@@ -23,7 +50,7 @@
               {#each headers as header}
                 <th
                   scope="col"
-                  class={header.header == 'fullName' || header.header == 'macroTitle' ? 'uk-width-1-2 Table-headerRow-headerCell' : 'uk-width-1-6 Table-headerRow-headerCell'}>
+                  class={`Table-headerRow-headerCell ${getHeaderSize(header.size)}`}>
                   {#if header.header == 'view' || header.header == 'timeoff-view' || header.header == 'actions' || header.header == 'user-actions' || header.header == 'sub-actions'}
                     {''}
                   {:else}{header.text}{/if}
@@ -32,33 +59,16 @@
             </tr>
           </thead>
           <tbody class="Table-body">
-            {#each data.data as item}
+            {#each data as item}
               <tr class="Table-row">
                 {#each headers as header}
-                  <td
-                    class={header.header == 'fullName' || header.header == 'macroTitle' ? 'uk-width-1-2' : 'uk-width-1-6'}>
+                  <td class={`${getHeaderSize(header.size)}`}>
                     {#if header.header == 'status'}
-                      {#if item.status == 'pending'}
-                        <Label status="warning" text="Pending" />
-                      {:else if item.status == 'completed'}
-                        <Label status="success" text="Completed" />
-                      {:else if item.status == 'declined'}
-                        <Label status="danger" text="Declined" />
-                      {:else if item.status == 'dispatched'}
-                        <Label status="default" text="Dispatched" />
-                      {:else if item.status == 'in progress'}
-                        <Label status="active" text="In Progress" />
-                      {:else if item.status == 'active'}
-                        <Label status="default" text="Active" />
-                      {:else if item.status == 'inactive'}
-                        <Label status="disabled" text="Inactive" />
-                      {:else if item.status == 'approved'}
-                        <Label status="success" text="Approved" />
-                      {/if}
+                      <OrderStatusLabel status={item.status} />
                     {:else if header.header == 'order'}
-                      <span class="Table-row-orderNumber">{item.order}</span>
+                      <span class="Table-row-orderNumber">Hello</span>
                       <br />
-                      <span class="Table-row-orderDate">{item.orderDate}</span>
+                      <span class="Table-row-orderDate">{item.createdAt}</span>
                     {:else if header.header == 'view'}
                       <div class="alignRight">
                         <a href="">View</a>
@@ -100,50 +110,68 @@
     </div>
   {:else}
     <div class="Table-outer">
-      <div class="Table-inner" style={`height: ${height}vh`}>
+      <div class="Table-inner" style={`height: ${height}`}>
         <table
           class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
           <thead>
             <tr class="Table-headerRow">
               {#each headers as header}
-                <th scope="col" class="Table-headerRow-headerCell">
-                  {#if header.header == 'view' || header.header == 'actions'}
+                <th
+                  scope="col"
+                  class={`Table-headerRow-headerCell ${getHeaderSize(header.size)}
+                  ${header.header === 'actions' ? 'alignRight' : ''}`}>
+                  {#if header.header == 'view'}
                     {''}
+                  {:else if header.header == 'actions'}
+                    {#if selected.length > 0}
+                      <div
+                        on:click={() => {
+                          handleDeleteSelected();
+                        }}
+                        class="Table-deleteAll">
+                        <Icon color="#e86172" type="delete" hover />
+                      </div>
+                    {/if}
                   {:else}{header.text}{/if}
                 </th>
               {/each}
             </tr>
           </thead>
           <tbody class="Table-body">
-            {#each data.data as item}
+            {#each data as item, index}
               <tr class="Table-row">
                 {#each headers as header}
-                  <td>
+                  <td class={`${getHeaderSize(header.size)}`}>
                     {#if header.header == 'status'}
-                      {#if item.status == 'pending'}
-                        <Label status="warning" text="Pending" />
-                      {:else if item.status == 'completed'}
-                        <Label status="success" text="Completed" />
-                      {:else if item.status == 'declined'}
-                        <Label status="danger" text="Declined" />
-                      {:else if item.status == 'dispatched'}
-                        <Label status="default" text="Dispatched" />
-                      {:else if item.status == 'in progress'}
-                        <Label status="active" text="In Progress" />
-                      {/if}
+                      <OrderStatusLabel status={item.status} />
                     {:else if header.header == 'order'}
-                      <span class="Table-row-orderNumber">{item.id}</span>
+                      <span class="Table-row-orderNumber">{item.orderId}</span>
                       <br />
-                      <span class="Table-row-orderDate">{item.orderDate}</span>
+                      <span class="Table-row-orderDate">
+                        {moment(item.createdAt).format('MMM D, YYYY')}
+                      </span>
                     {:else if header.header == 'view'}
                       <div class="alignRight">
-                        <a href={`/${data.type}/${item.id}`}>View</a>
+                        <span>
+                          <a href={`/${item.type}/${item.id}`}>View</a>
+                        </span>
                       </div>
                     {:else if header.header == 'actions'}
                       <div class="Table-row-actions alignRight">
-                        <Icon type="delete" hover />
+                        <div
+                          on:click={() => {
+                            item.id ? handleDelete(item.id) : handleDelete(index);
+                          }}>
+                          <Icon type="delete" hover />
+                        </div>
                         <div style="margin-left: 15px;" />
-                        <Checkbox secondary />
+                        <div class="Table-checkbox">
+                          <Checkbox
+                            on:click={() => {
+                              item.id ? handleCheck(item.id) : handleCheck(index);
+                            }}
+                            secondary />
+                        </div>
                       </div>
                     {:else if header.header == 'filename'}
                       <div class="Table-row-filename">
@@ -151,8 +179,10 @@
                           <Icon type="file" color="#15224B" />
                         </div>
 
-                        <div>{item.filename}</div>
+                        <div>{item.fileName}</div>
                       </div>
+                    {:else if header.header == 'createdAt' || header.header == 'updatedAt'}
+                      {formatDate(item[header.header], true)}
                     {:else}{item[header.header]}{/if}
                   </td>
                 {/each}

@@ -6,7 +6,7 @@
   import Button from '../../components/button/Button.svelte';
   import Divider from '../../components/divider/Divider.svelte';
   import Icon from '../../components/icon/Icon.svelte';
-  import DropDown from '../../components/dropdown/DropDown.svelte';
+  import DropDown from '../../components/UK-DropDown/DropDown.svelte';
   import Input from '../../components/input/Input.svelte';
   import Error from '../../components/error/Error.svelte';
   import Table from '../../components/table/Table.svelte';

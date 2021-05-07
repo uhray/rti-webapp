@@ -8,8 +8,7 @@
 </script>
 
 <script>
-  import { getContext, onMount } from 'svelte';
-  import { getContacts, getPosts, getOrders } from '../../tools/crudApi.ts';
+  import { onMount } from 'svelte';
   import {
     userStore,
     postsStore,

@@ -4,6 +4,11 @@
   border: 1px solid rgba(166, 173, 196, 0.5);
   border-radius: 8px;
 
+  a {
+    color: $color--darkgray;
+    text-decoration: none;
+  }
+
   .Card-content {
     padding: 15px;
 

@@ -5,6 +5,7 @@
   export let primary = undefined;
   export let secondary = undefined;
   export let warning = undefined;
+  export let danger = undefined;
   export let success = undefined;
   export let outline = undefined;
   export let large = undefined;
@@ -13,8 +14,13 @@
   export let height = undefined;
 </script>
 
+<style src="./Button.scss">
+
+</style>
+
 <!-- HTML -->
 <button
+  on:click
   class={fill ? 'uk-button uk-width-1-1' : 'uk-button'}
   style={`${height && `height: ${height}`}`}
   {primary}
@@ -24,7 +30,7 @@
   {disabled}
   {outline}
   {large}
->
+  {danger}>
   <slot />
   {#if icon}
     <Icon type={icon} color={iconColor} />
@@ -32,6 +38,3 @@
 </button>
 
 <!-- ==== -->
-
-<style src="./Button.scss">
-</style>

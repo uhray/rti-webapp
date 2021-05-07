@@ -7,7 +7,7 @@
   import RichText from '../../../components/richtext/RichText.svelte';
   import Card from '../../../components/card/Card.svelte';
   import Button from '../../../components/button/Button.svelte';
-  import DropDown from '../../../components/dropdown/DropDown.svelte';
+  import DropDown from '../../../components/UK-DropDown/DropDown.svelte';
   import Label from '../../../components/label/Label.svelte';
   import { headers, data } from './data';
 </script>

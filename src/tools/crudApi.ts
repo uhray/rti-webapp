@@ -43,6 +43,7 @@ export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
     });
 });
 
+/******************** USERS ********************/
 export const userLogin = async data => {
   // console.log(data);
   const res = await tools.fetch(options().turnkeyUrl + '/login', {
@@ -83,6 +84,7 @@ export const getContacts = async () => {
   return res;
 };
 
+/******************** POSTS ********************/
 export const getPosts = async query => {
   const res = await tools.fetch(options().baseUrl + '/posts', {
     qs: query,
@@ -112,12 +114,39 @@ export const editPost = async (postId, data) => {
   return res;
 };
 
+/******************** ORDERS ********************/
 export const getOrders = async query => {
   const res = await tools.fetch(options().baseUrl + '/orders', {
     qs: query,
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
   // console.log(res);
+  return res;
+};
+
+export const getOrder = async id => {
+  const res = await tools.fetch(options().baseUrl + '/orders/' + id, {
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
+export const editOrder = async (orderId, data) => {
+  const res = await tools.fetch(options().baseUrl + '/orders/' + orderId, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  return res;
+};
+
+export const deleteOrder = async id => {
+  const res = await tools.fetch(options().baseUrl + '/orders/' + id, {
+    method: 'DELETE',
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
   return res;
 };
 
@@ -197,10 +226,10 @@ export function changePageIfDifferent(url, page) {
 
 const options = () => {
   return {
-    // baseUrl: 'http://localhost:5000/api/v1',
-    // turnkeyUrl: 'http://localhost:5000/turnkey',
-    baseUrl: 'https://truck-ops-api--staging.herokuapp.com/api/v1',
-    turnkeyUrl: 'https://truck-ops-api--staging.herokuapp.com/turnkey',
+    baseUrl: 'http://localhost:5000/api/v1',
+    turnkeyUrl: 'http://localhost:5000/turnkey',
+    // baseUrl: 'https://truck-ops-api--staging.herokuapp.com/api/v1',
+    // turnkeyUrl: 'https://truck-ops-api--staging.herokuapp.com/turnkey',
     baseOptions: {
       headers: {
         'Content-Type': 'application/json',

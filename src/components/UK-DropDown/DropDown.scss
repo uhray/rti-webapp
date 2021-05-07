@@ -1,0 +1,91 @@
+.DropDown {
+  .DropDown-chevIcon {
+    margin-left: 15px;
+    &.forlogo {
+      margin-left: 0px;
+      width: 40px;
+      height: 40px;
+      background: #f6f7fb;
+      border: 0.5px solid #15224b;
+      border-left: none;
+      box-sizing: border-box;
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+  }
+  .DropDown-button {
+    border-radius: 5px !important;
+    // margin-left: 20px;
+    // margin-right: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    &.logo {
+      padding: 0px;
+      margin-left: 0px !important;
+    }
+  }
+  .DropDown-container {
+    border-radius: 8px;
+  }
+  .DropDown-listItem {
+    margin-top: 9px;
+    margin-bottom: 9px;
+    &.forlogo {
+      margin: auto !important;
+      text-align: center;
+    }
+  }
+  .DropDown-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 20px 4px 15px;
+    background: #f6f7fb;
+    border-radius: 2px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #15224b;
+  }
+  .DropDown-text {
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #73767f;
+    &.forlogo {
+      width: 40px;
+      height: 40px;
+      border: 0.5px solid #15224b;
+      box-sizing: border-box;
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+  }
+  .DropDown-choice {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #15224b;
+    margin-left: 9px;
+  }
+  .DropDown-spacing {
+    margin-left: auto;
+  }
+  .DropDown-logoDrop {
+    width: 25px;
+    border-radius: 5px;
+  }
+}

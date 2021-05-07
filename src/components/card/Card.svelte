@@ -3,10 +3,15 @@
   export let header = undefined;
   export let content = undefined;
   export let nospace = undefined;
+  export let height = undefined;
 </script>
 
+<style src="./Card.scss">
+
+</style>
+
 <!-- HTML -->
-<section class="Card">
+<section class="Card" style={height ? `height: ${height}` : ''}>
   {#if type === 'card-gray-border'}
     <div class="uk-card Card-grayBorder">
       <div class={nospace ? 'uk-card-body uk-padding-remove' : 'uk-card-body'}>
@@ -52,5 +57,3 @@
 </section>
 
 <!-- ==== -->
-<style src="./Card.scss">
-</style>

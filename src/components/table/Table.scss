@@ -11,6 +11,10 @@
     -webkit-appearance: none;
     width: 12px;
   }
+
+  .Table-container {
+    position: relative;
+  }
   .Table-outer {
     border-radius: 8px;
   }
@@ -23,10 +27,12 @@
   }
 
   .Table-headerRow {
+    width: 100%;
     .Table-headerRow-headerCell {
       color: $color--darkblue;
       font-weight: 600;
       font-size: 15px;
+      // position: relative;
     }
   }
 
@@ -60,13 +66,25 @@
     .Table-row-actions {
       display: flex;
       flex-flow: row nowrap;
-      // justify-content: flex-end;
+      justify-content: flex-end;
       align-items: center;
     }
   }
 
   .Table-subSection {
     padding: 0 10px;
+  }
+
+  .Table-checkbox {
+    margin-right: 7px;
+  }
+
+  .Table-deleteAll {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    height: 16px;
+    padding-bottom: 4px;
   }
 }
 
@@ -81,7 +99,7 @@
   thead {
     flex: 0 1 auto;
     display: block;
-    padding-right: 15px;
+    // padding-right: 15px;
 
     tr {
       width: 100%;

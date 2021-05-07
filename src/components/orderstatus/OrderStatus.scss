@@ -11,7 +11,11 @@
     margin: 0px 4px 8px 4px;
   }
   .OrderStatus-cardSection {
-    height: 550px;
+    // height: 550px;
+    height: 100%;
+  }
+  .OrderStatus-cardContainer {
+    width: 99%;
   }
   .OrderStatus-timelineSection {
     margin: 1px 20px;
@@ -23,12 +27,11 @@
     font-size: 12px;
     line-height: 14px;
     color: #15224b;
-    margin: 16px 0px !important;
+    margin: 22px 0px 8px !important;
   }
   .OrderStatus-timelineContent {
-    min-height: 55px;
-    margin: 6px 0px;
-    padding: 6px 0px;
+    margin: 3px 0px 22px;
+    padding: 3px 0px;
   }
   .OrderStatus-timelineContentText {
     font-family: Poppins;
@@ -42,8 +45,21 @@
       color: #a6adc4;
     }
   }
+  .OrderStatus-documents {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 22px;
+    min-height: 32px;
+    &.grayed {
+      color: #a6adc4;
+    }
+  }
   .OrderStatus-file {
     margin: 0px 3px;
+  }
+  .OrderStatus-filesize {
+    color: #a5adc4;
   }
   //   Styles for the status minicard
   .OrderStatus-statusCard {
@@ -57,7 +73,7 @@
     }
     .OrderStatus-cardLine {
       position: absolute;
-      left: 1.7em;
+      left: 1.8em;
       top: 1.5em;
       height: 90%;
       overflow: hidden;
@@ -96,6 +112,9 @@
     align-items: center;
     color: #595f76;
     margin: 3px 0px;
+  }
+  .OrderStatus-label {
+    margin-top: 10px;
   }
   .OrderStatus-chevron {
     margin: 3px 3px 3px auto;

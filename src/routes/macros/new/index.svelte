@@ -5,84 +5,8 @@
   import RichText from '../../../components/richtext/RichText.svelte';
   import Card from '../../../components/card/Card.svelte';
   import Button from '../../../components/button/Button.svelte';
-  import DropDown from '../../../components/dropdown/DropDown.svelte';
+  import DropDown from '../../../components/UK-DropDown/DropDown.svelte';
 </script>
-
-<Header />
-<section class="NewMacro">
-  <h3>Macro Information</h3>
-  <div class="uk-flex">
-    <Input label="Title" placeholder="Enter Macro Title" />
-    <DropDown
-      type="logo"
-      label="Icon"
-      text="Text"
-      choices={['vehicle', 'archive', 'trailer']}
-    />
-  </div>
-  <br />
-  <RichText label="Helper Note (Optional)" />
-
-  <h3>Macro Configurations</h3>
-  <Card type="card-gray-bg">
-    <h6 class="NewMacro-cardTitle">Form Fields</h6>
-    <Card type="input-card">
-      <div class="uk-flex uk-width-1-1">
-        <div class="uk-width-2-3 input-space">
-          <Input placeholder="Enter Field Name" fill />
-        </div>
-        <div style="margin-left: 4px;" />
-        <div class="uk-width-1-4 input-space">
-          <Input placeholder="Enter Field Type" fill icon="caretdown" />
-        </div>
-        <div class="NewMacro-deleteIcon">
-          <Icon type="close-red" />
-        </div>
-      </div>
-    </Card>
-    <div class="uk-flex NewMacro-addSection">
-      <Icon type="add-circle" color="#2b8af7" />
-      <a class="NewMacro-linkText">Add New</a>
-    </div>
-  </Card>
-  <br />
-  <Card type="card-gray-bg">
-    <h6 class="NewMacro-cardTitle">Recipient</h6>
-    <Card type="input-card">
-      <div class="uk-flex uk-width-1-1">
-        <div class="uk-width-2-3 input-space">
-          <Input
-            placeholder="Type or Select Recipients"
-            fill
-            icon="caretdown"
-          />
-        </div>
-      </div>
-    </Card>
-  </Card>
-  <br />
-  <Card type="card-gray-bg">
-    <h6 class="NewMacro-cardTitle">Add Statuses</h6>
-    <Card type="input-card">
-      <div class="uk-flex">
-        <p class="NewMacro-toggleText">
-          Status<span> (Off/On)</span>
-        </p>
-        <Icon type="toggle-disabled" />
-      </div>
-      <p class="NewMacro-toggleP">
-        Switch the toggle on if you’d like to assign personal statuses to the
-        macro submissions.
-      </p>
-    </Card>
-  </Card>
-  <br />
-
-  <div>
-    <Button primary>Add Macro</Button>
-    <Button outline>Cancel</Button>
-  </div>
-</section>
 
 <style lang="scss">
   .NewMacro {
@@ -139,3 +63,78 @@
     }
   }
 </style>
+
+<Header />
+<section class="NewMacro">
+  <h3>Macro Information</h3>
+  <div class="uk-flex">
+    <Input label="Title" placeholder="Enter Macro Title" />
+    <DropDown
+      type="logo"
+      label="Icon"
+      text="Text"
+      choices={['vehicle', 'archive', 'trailer']} />
+  </div>
+  <br />
+  <RichText label="Helper Note (Optional)" />
+
+  <h3>Macro Configurations</h3>
+  <Card type="card-gray-bg">
+    <h6 class="NewMacro-cardTitle">Form Fields</h6>
+    <Card type="input-card">
+      <div class="uk-flex uk-width-1-1">
+        <div class="uk-width-2-3 input-space">
+          <Input placeholder="Enter Field Name" fill />
+        </div>
+        <div style="margin-left: 4px;" />
+        <div class="uk-width-1-4 input-space">
+          <Input placeholder="Enter Field Type" fill icon="caretdown" />
+        </div>
+        <div class="NewMacro-deleteIcon">
+          <Icon type="close-red" />
+        </div>
+      </div>
+    </Card>
+    <div class="uk-flex NewMacro-addSection">
+      <Icon type="add-circle" color="#2b8af7" />
+      <a class="NewMacro-linkText">Add New</a>
+    </div>
+  </Card>
+  <br />
+  <Card type="card-gray-bg">
+    <h6 class="NewMacro-cardTitle">Recipient</h6>
+    <Card type="input-card">
+      <div class="uk-flex uk-width-1-1">
+        <div class="uk-width-2-3 input-space">
+          <Input
+            placeholder="Type or Select Recipients"
+            fill
+            icon="caretdown" />
+        </div>
+      </div>
+    </Card>
+  </Card>
+  <br />
+  <Card type="card-gray-bg">
+    <h6 class="NewMacro-cardTitle">Add Statuses</h6>
+    <Card type="input-card">
+      <div class="uk-flex">
+        <p class="NewMacro-toggleText">
+          Status
+          <span>(Off/On)</span>
+        </p>
+        <Icon type="toggle-disabled" />
+      </div>
+      <p class="NewMacro-toggleP">
+        Switch the toggle on if you’d like to assign personal statuses to the
+        macro submissions.
+      </p>
+    </Card>
+  </Card>
+  <br />
+
+  <div>
+    <Button primary>Add Macro</Button>
+    <Button outline>Cancel</Button>
+  </div>
+</section>
