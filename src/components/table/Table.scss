@@ -27,6 +27,7 @@
   }
 
   .Table-headerRow {
+    width: 100%;
     .Table-headerRow-headerCell {
       color: $color--darkblue;
       font-weight: 600;
@@ -98,7 +99,7 @@
   thead {
     flex: 0 1 auto;
     display: block;
-    padding-right: 15px;
+    // padding-right: 15px;
 
     tr {
       width: 100%;

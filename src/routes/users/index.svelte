@@ -1,13 +1,52 @@
 <script>
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
-  import Icon from '../../components/icon/Icon.svelte';
-  import {
-    usersHeaders,
-    adminsHeaders,
-    usersTable,
-    adminsTable,
-  } from '../../data/fakeTableData';
+  import { contactsStore } from '../../store';
+  import _ from 'lodash';
+
+  let drivers = [];
+  let users = [];
+  let usersMapped;
+
+  $: {
+    drivers = $contactsStore.contacts.drivers;
+    console.log(drivers);
+
+    drivers.forEach(d => {
+      d.subgroups.forEach(s => {
+        s.contacts.forEach(c => {
+          users.push(c);
+        });
+      });
+    });
+
+    users = users;
+    usersMapped = _.sortBy(
+      users.map(u => {
+        return {
+          id: u._id,
+          type: 'users',
+          name: u.name,
+          username: u.username,
+          teamId: u.teamId,
+          truckId: u.truckId,
+          status: u.status,
+        };
+      }),
+      'createdAt'
+    );
+
+    console.log(users);
+  }
+
+  export const headers = [
+    { header: 'name', text: 'Full Name', size: 'large' },
+    { header: 'username', text: 'User ID' },
+    { header: 'teamId', text: 'Driver Manager' },
+    { header: 'truckId', text: 'Vehicle' },
+    { header: 'status', text: 'Status' },
+    { header: 'actions', text: 'Actions', size: 'small' },
+  ];
 </script>
 
 <style lang="scss">
@@ -45,8 +84,8 @@
 </div> -->
 <section class="ManagePage">
   <!-- Show This if Users Tab Is Active -->
-  <Table height={60} headers={usersHeaders} data={usersTable} expand />
+  <Table height={60} {headers} data={usersMapped} expand />
   <br />
   <!-- Show This if Admins Tab Is Active -->
-  <Table height={25} headers={adminsHeaders} data={adminsTable} expand />
+  <!-- <Table height={25} headers={adminsHeaders} data={adminsTable} expand /> -->
 </section>

@@ -17,6 +17,22 @@
   export let handleDeleteSelected = undefined;
   export let handleCheck = undefined;
   export let selected = [];
+
+  function getHeaderSize(size) {
+    if (size === 'small') {
+      return 'uk-width-small';
+    } else if (size === 'medium') {
+      return 'uk-width-medium';
+    } else if (size === 'large') {
+      return 'uk-width-large';
+    } else if (size === 'expand') {
+      return 'uk-table-expand';
+    } else if (size === 'shrink') {
+      return 'uk-table-shrink';
+    } else {
+      return 'uk-width-auto';
+    }
+  }
 </script>
 
 <style src="./Table.scss">
@@ -34,7 +50,7 @@
               {#each headers as header}
                 <th
                   scope="col"
-                  class={header.header == 'fullName' || header.header == 'macroTitle' ? 'uk-width-1-2 Table-headerRow-headerCell' : 'uk-width-1-6 Table-headerRow-headerCell'}>
+                  class={`Table-headerRow-headerCell ${getHeaderSize(header.size)}`}>
                   {#if header.header == 'view' || header.header == 'timeoff-view' || header.header == 'actions' || header.header == 'user-actions' || header.header == 'sub-actions'}
                     {''}
                   {:else}{header.text}{/if}
@@ -46,8 +62,7 @@
             {#each data as item}
               <tr class="Table-row">
                 {#each headers as header}
-                  <td
-                    class={header.header == 'fullName' || header.header == 'macroTitle' ? 'uk-width-1-2' : 'uk-width-1-6'}>
+                  <td class={`${getHeaderSize(header.size)}`}>
                     {#if header.header == 'status'}
                       <OrderStatusLabel status={item.status} />
                     {:else if header.header == 'order'}
@@ -103,7 +118,8 @@
               {#each headers as header}
                 <th
                   scope="col"
-                  class={`Table-headerRow-headerCell ${header.header === 'actions' ? 'alignRight' : ''}`}>
+                  class={`Table-headerRow-headerCell ${getHeaderSize(header.size)}
+                  ${header.header === 'actions' ? 'alignRight' : ''}`}>
                   {#if header.header == 'view'}
                     {''}
                   {:else if header.header == 'actions'}
@@ -125,7 +141,7 @@
             {#each data as item, index}
               <tr class="Table-row">
                 {#each headers as header}
-                  <td>
+                  <td class={`${getHeaderSize(header.size)}`}>
                     {#if header.header == 'status'}
                       <OrderStatusLabel status={item.status} />
                     {:else if header.header == 'order'}
