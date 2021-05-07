@@ -5,6 +5,7 @@
   import OrderStatusLabel from '../OrderStatusLabel/OrderStatusLabel.svelte';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
+  import { formatDate } from '../../tools/formatDate.ts';
   import moment from 'moment';
 
   export let headers = [];
@@ -162,8 +163,10 @@
                           <Icon type="file" color="#15224B" />
                         </div>
 
-                        <div>{item.filename}</div>
+                        <div>{item.fileName}</div>
                       </div>
+                    {:else if header.header == 'createdAt' || header.header == 'updatedAt'}
+                      {formatDate(item[header.header], true)}
                     {:else}{item[header.header]}{/if}
                   </td>
                 {/each}

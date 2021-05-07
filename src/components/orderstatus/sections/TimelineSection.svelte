@@ -59,7 +59,7 @@
                 <Icon type="file" color="#161D35" />
               </div>
               <span class="OrderStatus-timelineContentText">
-                {document.filename}
+                {document.fileName}
                 <span class="OrderStatus-filesize">({document.size})</span>
               </span>
             {/if}

@@ -33,7 +33,7 @@
     { header: 'filename', text: 'File Name' },
     { header: 'size', text: 'Size' },
     { header: 'location', text: 'Location' },
-    { header: 'uploaded_at', text: 'Time Uploaded' },
+    { header: 'createdAt', text: 'Time Uploaded' },
     { header: 'view', text: 'View' },
     { header: 'actions', text: 'Actions' },
   ];
