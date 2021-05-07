@@ -43,18 +43,12 @@
       const lsLastLogin = localStorage.getItem('lastLogin');
       const dbLastLogin = user.lastLogin;
 
-      console.log(`DB: ${dbLastLogin} // LS: ${lsLastLogin}`);
-
       if (
         lsLastLogin &&
         dbLastLogin &&
         moment(dbLastLogin).isSame(lsLastLogin, 'minute')
       ) {
-        console.log('NOT CHANGING LAST LOGIN');
       } else {
-        console.log('CHANGING USER LAST LOGIN TO: ', moment().toString());
-        console.log('LOCAL STORAGE', localStorage.getItem('lastLogin'));
-
         const newUser = user;
         newUser.lastLogin = moment().toString();
 

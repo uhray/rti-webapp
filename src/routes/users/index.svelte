@@ -42,6 +42,7 @@
     users = [];
 
     contacts.forEach(d => {
+      console.log(d);
       d.subgroups.forEach(s => {
         s.contacts.forEach(c => {
           users.push(c);
@@ -62,6 +63,9 @@
     } else if (selectedTab === 'Managers') {
       users = users.filter(u => u.role === 'MANAGER');
       headers = managerHeaders;
+      if (role === 'MANAGER') {
+        headers = headers.filter(h => h.header !== 'userActions');
+      }
     } else if (selectedTab === 'Admins' && role === 'ADMIN') {
       users = users.filter(u => u.role === 'ADMIN');
       headers = adminHeaders;
