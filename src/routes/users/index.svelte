@@ -42,10 +42,10 @@
   export const headers = [
     { header: 'name', text: 'Full Name', size: 'large' },
     { header: 'username', text: 'User ID' },
-    { header: 'teamId', text: 'Driver Manager' },
+    { header: 'teamId', text: 'Driver Manager', size: 'medium' },
     { header: 'truckId', text: 'Vehicle' },
     { header: 'status', text: 'Status' },
-    { header: 'actions', text: 'Actions', size: 'small' },
+    { header: 'userActions', text: 'Actions', size: 'small' },
   ];
 </script>
 
@@ -75,7 +75,7 @@
 <svelte:head>
   <title>Users</title>
 </svelte:head>
-<!-- html -->
+
 <Header />
 <!-- Show This Link Tag Only If Users/Admins are Selected -->
 <!-- <div class="uk-flex uk-align-right delete-section">
@@ -84,7 +84,7 @@
 </div> -->
 <section class="ManagePage">
   <!-- Show This if Users Tab Is Active -->
-  <Table height={60} {headers} data={usersMapped} expand />
+  <Table {headers} data={usersMapped} />
   <br />
   <!-- Show This if Admins Tab Is Active -->
   <!-- <Table height={25} headers={adminsHeaders} data={adminsTable} expand /> -->
