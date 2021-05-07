@@ -122,7 +122,7 @@
             </tr>
           </thead>
           <tbody class="Table-body">
-            {#each data as item}
+            {#each data as item, index}
               <tr class="Table-row">
                 {#each headers as header}
                   <td>
@@ -144,7 +144,7 @@
                       <div class="Table-row-actions alignRight">
                         <div
                           on:click={() => {
-                            handleDelete(item.id);
+                            item.id ? handleDelete(item.id) : handleDelete(index);
                           }}>
                           <Icon type="delete" hover />
                         </div>
@@ -152,7 +152,7 @@
                         <div class="Table-checkbox">
                           <Checkbox
                             on:click={() => {
-                              handleCheck(item.id);
+                              item.id ? handleCheck(item.id) : handleCheck(index);
                             }}
                             secondary />
                         </div>

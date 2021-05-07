@@ -132,6 +132,15 @@ export const getOrder = async id => {
   return res;
 };
 
+export const editOrder = async (orderId, data) => {
+  const res = await tools.fetch(options().baseUrl + '/orders/' + orderId, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  return res;
+};
+
 export const deleteOrder = async id => {
   const res = await tools.fetch(options().baseUrl + '/orders/' + id, {
     method: 'DELETE',

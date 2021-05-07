@@ -28,7 +28,9 @@
           status: o.status,
           assignedTruck: o.assignedTruck,
           startPoint: `${o.stops[0].address.city}, ${o.stops[0].address.state} ${o.stops[0].address.zipcode}`,
-          endPoint: `${o.stops[o.stops.length - 1].address.city}, ${o.stops[o.stops.length - 1].address.state} ${o.stops[o.stops.length - 1].address.zipcode}`,
+          endPoint: `${o.stops[o.stops.length - 1].address.city}, ${
+            o.stops[o.stops.length - 1].address.state
+          } ${o.stops[o.stops.length - 1].address.zipcode}`,
         };
       }),
       'createdAt'
@@ -58,24 +60,11 @@
     ordersToDelete.push(orderId);
     displayOverlayDelete = true;
     isMultiple = false;
-    // console.log('DELETING ORDER ', orderId);
-    // const res = await deleteOrder(orderId);
-    // const ordersAfterDelete = orders.filter(o => o._id !== orderId);
-    // ordersStore.setOrders(ordersAfterDelete);
-    // console.log(ordersAfterDelete);
   }
 
   function handleDeleteSelected() {
     displayOverlayDelete = true;
     isMultiple = true;
-    // console.log('DELETING ALL ORDERS');
-    // ordersToDelete.forEach(async o => {
-    //   await deleteOrder(o);
-    // });
-    // const ordersAfterDelete = orders.filter(
-    //   o => !ordersToDelete.includes(o._id)
-    // );
-    // ordersStore.setOrders(ordersAfterDelete);
   }
 
   function handleCheck(orderId) {
@@ -85,21 +74,16 @@
       ordersToDelete.push(orderId);
     }
     ordersToDelete = ordersToDelete;
-
-    console.log(ordersToDelete);
   }
 
   function clearOverlayData() {
     ordersToDelete = [];
     displayOverlayDelete = false;
     let checkboxes = document.getElementsByClassName('uk-checkbox');
-    console.log(checkboxes);
     Array.from(checkboxes).forEach(c => (c.checked = false));
   }
 
   function deleteOrders() {
-    console.log('DELETING', ordersToDelete);
-
     ordersToDelete.forEach(async o => {
       await deleteOrder(o);
     });
@@ -111,12 +95,6 @@
     clearOverlayData();
   }
 </script>
-
-<style lang="scss">
-  .Orders {
-    padding: 2em;
-  }
-</style>
 
 <svelte:head>
   <title>Orders</title>
@@ -130,7 +108,8 @@
     {handleDelete}
     {handleDeleteSelected}
     {handleCheck}
-    selected={ordersToDelete} />
+    selected={ordersToDelete}
+  />
 </div>
 
 {#if displayOverlayDelete}
@@ -138,5 +117,12 @@
     {clearOverlayData}
     send={deleteOrders}
     type={'order'}
-    {isMultiple} />
+    {isMultiple}
+  />
 {/if}
+
+<style lang="scss">
+  .Orders {
+    padding: 2em;
+  }
+</style>
