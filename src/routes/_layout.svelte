@@ -3,13 +3,21 @@
   import Nav from '../components/nav/Nav.svelte';
   import TopNav from '../components/topnav/TopNav.svelte';
   import { userStore, postsStore, contactsStore, ordersStore } from '../store';
-  import { auth, getPosts, getContacts, getOrders } from '../tools/crudApi';
+  import {
+    auth,
+    getPosts,
+    getContacts,
+    getOrders,
+    editUser,
+  } from '../tools/crudApi';
+  import moment from 'moment';
 
   export let segment: string;
   let loading = true;
+  let user = undefined;
 
   onMount(async () => {
-    const user = await auth();
+    user = await auth();
 
     if (user) {
       userStore.setCurrent(user);
@@ -26,6 +34,36 @@
     }
     loading = false;
   });
+
+  $: {
+    if ($userStore && $userStore.user) {
+      const user = $userStore.user;
+      localStorage.setItem('lastLogin', moment().toISOString());
+
+      const lsLastLogin = localStorage.getItem('lastLogin');
+      const dbLastLogin = user.lastLogin;
+
+      console.log(`DB: ${dbLastLogin} // LS: ${lsLastLogin}`);
+
+      if (
+        lsLastLogin &&
+        dbLastLogin &&
+        moment(dbLastLogin).isSame(lsLastLogin, 'minute')
+      ) {
+        console.log('NOT CHANGING LAST LOGIN');
+      } else {
+        console.log('CHANGING USER LAST LOGIN TO: ', moment().toString());
+        console.log('LOCAL STORAGE', localStorage.getItem('lastLogin'));
+
+        const newUser = user;
+        newUser.lastLogin = moment().toString();
+
+        editUser(user._id, newUser).then(res => {
+          userStore.setCurrent(res);
+        });
+      }
+    }
+  }
 </script>
 
 <style lang="scss" global>

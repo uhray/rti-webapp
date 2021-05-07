@@ -84,6 +84,16 @@ export const getContacts = async () => {
   return res;
 };
 
+export const editUser = async (userId, data) => {
+  const res = await tools.fetch(options().baseUrl + '/users/' + userId, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
 /******************** POSTS ********************/
 export const getPosts = async query => {
   const res = await tools.fetch(options().baseUrl + '/posts', {
