@@ -34,6 +34,7 @@
 
   let selectedTab = 'Users';
   let search = undefined;
+  let filter = undefined;
 
   $: {
     role = $userStore.user.role;
@@ -71,24 +72,24 @@
       headers = adminHeaders;
     }
 
-    usersMapped = users.map(u => {
-      return {
-        id: u.id,
-        type: 'users',
-        name: u.name || '',
-        username: u.username || '',
-        teamId: u.teamId || '',
-        truckId: u.truckId || '',
-        status: u.status || '',
-        email: u.contactInfo.email || '',
-        lastLogin: u.lastLogin
-          ? moment(u.lastLogin).format('MMM D YYYY • h:mm a')
-          : '',
-      };
-    });
-
-    if (search) {
-      usersMapped = usersMapped.filter(u =>
+    usersMapped = users
+      .map(u => {
+        return {
+          id: u.id,
+          type: 'users',
+          name: u.name || '',
+          username: u.username || '',
+          teamId: u.teamId || '',
+          truckId: u.truckId || '',
+          status: u.status || '',
+          email: u.contactInfo.email || '',
+          lastLogin: u.lastLogin
+            ? moment(u.lastLogin).format('MMM D YYYY • h:mm a')
+            : '',
+        };
+      })
+      .filter(u => (filter ? (u.status === filter ? true : false) : true))
+      .filter(u =>
         Object.keys(u).some(k => {
           if (['name', 'username', 'teamId', 'truckId'].includes(k)) {
             let regex = new RegExp(search, 'i');
@@ -96,7 +97,6 @@
           }
         })
       );
-    }
 
     handleSort();
   }
@@ -113,6 +113,10 @@
     } else {
       usersMapped = _.sortBy(usersMapped, 'name');
     }
+  }
+
+  function handleFilter(v) {
+    filter = v;
   }
 
   function handleTab(tab) {
@@ -153,7 +157,14 @@
   <title>Users</title>
 </svelte:head>
 
-<Header {role} {handleSort} {selectedTab} {handleTab} {search} {handleSearch} />
+<Header
+  {role}
+  {handleSort}
+  {selectedTab}
+  {handleTab}
+  {search}
+  {handleSearch}
+  {handleFilter} />
 <!-- Show This Link Tag Only If Users/Admins are Selected -->
 <!-- <div class="uk-flex uk-align-right delete-section">
   <a class="delete-link">Delete Selections</a>

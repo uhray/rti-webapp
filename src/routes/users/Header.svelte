@@ -10,8 +10,9 @@
   export let handleTab;
   export let search;
   export let handleSearch;
+  export let handleFilter;
 
-  let dropdownOpts = [
+  let sortOpts = [
     {
       header: 'Name',
       opts: [
@@ -28,10 +29,25 @@
     },
   ];
 
-  function handleSelect(dOpts, v) {
-    dropdownOpts = dOpts;
+  let filterOpts = [
+    {
+      header: 'By Status',
+      opts: [
+        { text: 'Show All', value: '', selected: true },
+        { text: 'Show Active', value: 'active', selected: false },
+        { text: 'Show Inactive', value: 'inactive', selected: false },
+      ],
+    },
+  ];
 
+  function handleSortSelect(dOpts, v) {
+    sortOpts = dOpts;
     handleSort(v);
+  }
+
+  function handleFilterSelect(dOpts, v) {
+    filterOpts = dOpts;
+    handleFilter(v);
   }
 </script>
 
@@ -119,7 +135,7 @@
         <!-- Show This On Both Tabs -->
         <div>
           <Button height="40px" outline icon="sortup" fill>Sort By</Button>
-          <Dropdown data={dropdownOpts} {handleSelect} />
+          <Dropdown data={sortOpts} handleSelect={handleSortSelect} />
         </div>
         <div style="margin-left: 5px;" />
         <!-- Show This On User Tab -->
@@ -127,6 +143,7 @@
           <Button height="40px" width="100px" outline icon="filter">
             Filter
           </Button>
+          <Dropdown data={filterOpts} handleSelect={handleFilterSelect} />
         </div>
         <div style="margin-left: 5px;" />
         <!-- Show this On Admin Tab -->
