@@ -92,7 +92,7 @@
                     <div class="Table-row-actions alignRight">
                       <div
                         on:click={() => {
-                          item.id ? handleDelete(item.id) : handleDelete(index);
+                          item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
                         }}>
                         <Icon type="delete" hover />
                       </div>
@@ -100,7 +100,7 @@
                       <div class="Table-checkbox">
                         <Checkbox
                           on:click={() => {
-                            item.id ? handleCheck(item.id) : handleCheck(index);
+                            item.id && item.orderId ? handleCheck(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
                           }}
                           secondary />
                       </div>
@@ -116,7 +116,7 @@
                       <div style="margin-left: 10px;" />
                       <div
                         on:click={() => {
-                          item.id ? handleDelete(item.id) : handleDelete(index);
+                          item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
                         }}>
                         <Icon type="delete" hover />
                       </div>
@@ -124,7 +124,7 @@
                       <div class="Table-checkbox">
                         <Checkbox
                           on:click={() => {
-                            item.id ? handleCheck(item.id) : handleCheck(index);
+                            item.id && item.orderId ? handleCheck(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
                           }}
                           secondary />
                       </div>
