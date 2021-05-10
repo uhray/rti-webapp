@@ -3,7 +3,6 @@
   // Example: 3 rows = 267px (54 + (71 x 3))
   import Checkbox from '../checkbox/Checkbox.svelte';
   import OrderStatusLabel from '../OrderStatusLabel/OrderStatusLabel.svelte';
-  import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
   import { formatDate } from '../../tools/formatDate.ts';
   import moment from 'moment';
@@ -11,7 +10,6 @@
   export let headers = [];
   export let data = [];
   export let height = undefined;
-  export let expand = false;
 
   export let handleDelete = undefined;
   export let handleDeleteSelected = undefined;

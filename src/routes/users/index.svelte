@@ -84,7 +84,7 @@
         status: u.status || '',
         email: u.contactInfo.email || '',
         lastLogin: u.lastLogin
-          ? moment(u.lastLogin).format('MMM D h:mm A')
+          ? moment(u.lastLogin).format('MMM D YYYY • h:mm a')
           : '',
       };
     });
