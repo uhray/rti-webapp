@@ -42,7 +42,6 @@
     users = [];
 
     contacts.forEach(d => {
-      console.log(d);
       d.subgroups.forEach(s => {
         s.contacts.forEach(c => {
           users.push(c);
@@ -70,8 +69,6 @@
       users = users.filter(u => u.role === 'ADMIN');
       headers = adminHeaders;
     }
-
-    console.log(users);
 
     usersMapped = users.map(u => {
       return {
