@@ -7,11 +7,11 @@
 </script>
 
 <script>
-  import Button from '../../../components/button/Button.svelte';
-  import Icon from '../../../components/icon/Icon.svelte';
-  import Divider from '../../../components/divider/Divider.svelte';
-  import Input from '../../../components/input/Input.svelte';
-  import Header from './Header.svelte';
+  import Button from '../../components/button/Button.svelte';
+  import Icon from '../../components/icon/Icon.svelte';
+  import Divider from '../../components/divider/Divider.svelte';
+  import Input from '../../components/input/Input.svelte';
+  import ProfileHeader from './ProfileHeader.svelte';
 
   export let slug;
 </script>
@@ -54,7 +54,7 @@
   <title>Account/User Profile</title>
 </svelte:head>
 
-<Header />
+<ProfileHeader />
 <div class="Account">
   <h3>Profile Photo</h3>
 

@@ -1,21 +1,6 @@
 <script>
-  import NavLabel from '../../../components/navlabel/NavLabel.svelte';
+  import NavLabel from '../../components/navlabel/NavLabel.svelte';
 </script>
-
-<svelte:head>
-  <title>Orders</title>
-</svelte:head>
-
-<div class="Header">
-  <div class="Header-container">
-    <NavLabel page="USER MANAGEMENT" subpage="JOHN SMITH" />
-    <div class="Header-content">
-      <div class="Header-titles">
-        <h2 class="Header-title">John Smithy</h2>
-      </div>
-    </div>
-  </div>
-</div>
 
 <style lang="scss">
   .Header {
@@ -74,3 +59,18 @@
     }
   }
 </style>
+
+<svelte:head>
+  <title>Orders</title>
+</svelte:head>
+
+<div class="Header">
+  <div class="Header-container">
+    <NavLabel page="USER MANAGEMENT" subpage="JOHN SMITH" />
+    <div class="Header-content">
+      <div class="Header-titles">
+        <h2 class="Header-title">John Smithy</h2>
+      </div>
+    </div>
+  </div>
+</div>
