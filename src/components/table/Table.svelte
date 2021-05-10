@@ -72,7 +72,7 @@
             {#each data as item, index}
               <tr class="Table-row">
                 {#each headers as header}
-                  <td class={`${getHeaderSize(header.size)}`}>
+                  <td class={`Table-cell ${getHeaderSize(header.size)}`}>
                     {#if header.header == 'status'}
                       <OrderStatusLabel status={item.status} />
                     {:else if header.header == 'order'}
@@ -115,7 +115,7 @@
                         <div style="margin-left: 10px;" />
                         <div
                           on:click={() => {
-                            item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
+                            item.id ? handleDelete(item.id) : handleDelete(index);
                           }}>
                           <Icon type="delete" hover />
                         </div>
@@ -123,7 +123,7 @@
                         <div class="Table-checkbox">
                           <Checkbox
                             on:click={() => {
-                              item.id && item.orderId ? handleCheck(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
+                              item.id ? handleCheck(item.id) : handleCheck(index);
                             }}
                             secondary />
                         </div>

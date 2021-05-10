@@ -1,6 +1,8 @@
 <script>
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
+  import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
+  import { deleteUser } from '../../tools/crudApi.ts';
   import { contactsStore, userStore } from '../../store';
   import moment from 'moment';
   import _ from 'lodash';
@@ -35,6 +37,9 @@
   let selectedTab = 'Users';
   let search = undefined;
   let filter = undefined;
+  let usersToDelete = [];
+  let displayOverlayDelete = false;
+  let isMultiple = false;
 
   $: {
     role = $userStore.user.role;
@@ -126,6 +131,52 @@
   function handleSearch(v) {
     search = v;
   }
+
+  function handleCheck(id) {
+    if (usersToDelete.includes(id)) {
+      usersToDelete = usersToDelete.filter(o => o !== id);
+    } else {
+      usersToDelete.push(id);
+    }
+
+    usersToDelete = usersToDelete;
+
+    console.log(usersToDelete);
+  }
+
+  async function handleDelete(id) {
+    console.log('handle delete called');
+    usersToDelete.push(id);
+    displayOverlayDelete = true;
+    isMultiple = false;
+  }
+
+  function handleDeleteSelected() {
+    displayOverlayDelete = true;
+    isMultiple = true;
+  }
+
+  function clearOverlayData() {
+    usersToDelete = [];
+    displayOverlayDelete = false;
+    let checkboxes = document.getElementsByClassName('uk-checkbox');
+    Array.from(checkboxes).forEach(c => (c.checked = false));
+  }
+
+  function deleteUsers() {
+    usersToDelete.forEach(async u => {
+      console.log('Deleting user: ' + u);
+      await deleteUser(u);
+    });
+
+    const usersAfterDelete = users.filter(u => !usersToDelete.includes(u._id));
+
+    console.log(usersAfterDelete);
+    // usersStore.setOrders(ordersAfterDelete);
+    // postsStore.setPosts(postsAfterDelete);
+
+    clearOverlayData();
+  }
 </script>
 
 <style lang="scss">
@@ -171,9 +222,20 @@
   <Icon type="delete" color="#2b8af7" />
 </div> -->
 <section class="ManagePage">
-  <!-- Show This if Users Tab Is Active -->
-  <Table {headers} data={usersMapped} />
+  <Table
+    {headers}
+    data={usersMapped}
+    {handleDelete}
+    {handleDeleteSelected}
+    {handleCheck}
+    selected={usersToDelete} />
   <br />
-  <!-- Show This if Admins Tab Is Active -->
-  <!-- <Table height={25} headers={adminsHeaders} data={adminsTable} expand /> -->
 </section>
+
+{#if displayOverlayDelete}
+  <OverlayDelete
+    {clearOverlayData}
+    send={deleteUsers}
+    type={'user'}
+    {isMultiple} />
+{/if}

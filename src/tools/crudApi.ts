@@ -94,6 +94,15 @@ export const editUser = async (userId, data) => {
   return res;
 };
 
+export const deleteUser = async userId => {
+  const res = await tools.fetch(options().baseUrl + '/users/' + userId, {
+    method: 'DELETE',
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
 /******************** POSTS ********************/
 export const getPosts = async query => {
   const res = await tools.fetch(options().baseUrl + '/posts', {
