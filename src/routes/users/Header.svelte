@@ -8,6 +8,8 @@
   export let handleSort;
   export let selectedTab;
   export let handleTab;
+  export let search;
+  export let handleSearch;
 
   let dropdownOpts = [
     {
@@ -112,7 +114,7 @@
 
       <div class="Header-actions">
         <div class="uk-width-1-1 Header-actions-search">
-          <SearchBar fill />
+          <SearchBar {search} {handleSearch} fill />
         </div>
         <!-- Show This On Both Tabs -->
         <div>

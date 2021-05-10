@@ -33,6 +33,7 @@
   let headers = driverHeaders;
 
   let selectedTab = 'Users';
+  let search = undefined;
 
   $: {
     role = $userStore.user.role;
@@ -86,6 +87,17 @@
       };
     });
 
+    if (search) {
+      usersMapped = usersMapped.filter(u =>
+        Object.keys(u).some(k => {
+          if (['name', 'username', 'teamId', 'truckId'].includes(k)) {
+            let regex = new RegExp(search, 'i');
+            return regex.test(u[k]);
+          }
+        })
+      );
+    }
+
     handleSort();
   }
 
@@ -105,6 +117,10 @@
 
   function handleTab(tab) {
     selectedTab = tab;
+  }
+
+  function handleSearch(v) {
+    search = v;
   }
 </script>
 
@@ -137,7 +153,7 @@
   <title>Users</title>
 </svelte:head>
 
-<Header {role} {handleSort} {selectedTab} {handleTab} />
+<Header {role} {handleSort} {selectedTab} {handleTab} {search} {handleSearch} />
 <!-- Show This Link Tag Only If Users/Admins are Selected -->
 <!-- <div class="uk-flex uk-align-right delete-section">
   <a class="delete-link">Delete Selections</a>

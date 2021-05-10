@@ -68,80 +68,86 @@
           </tr>
         </thead>
         <tbody class="Table-body">
-          {#each data as item, index}
-            <tr class="Table-row">
-              {#each headers as header}
-                <td class={`${getHeaderSize(header.size)}`}>
-                  {#if header.header == 'status'}
-                    <OrderStatusLabel status={item.status} />
-                  {:else if header.header == 'order'}
-                    <span class="Table-row-orderNumber">{item.orderId}</span>
-                    <br />
-                    <span class="Table-row-orderDate">
-                      {moment(item.createdAt).format('MMM D, YYYY')}
-                    </span>
-                  {:else if header.header == 'view'}
-                    <div class="alignRight">
-                      <span>
-                        <a href={`/${item.type}/${item.id}`}>View</a>
+          {#if data && data.length > 0}
+            {#each data as item, index}
+              <tr class="Table-row">
+                {#each headers as header}
+                  <td class={`${getHeaderSize(header.size)}`}>
+                    {#if header.header == 'status'}
+                      <OrderStatusLabel status={item.status} />
+                    {:else if header.header == 'order'}
+                      <span class="Table-row-orderNumber">{item.orderId}</span>
+                      <br />
+                      <span class="Table-row-orderDate">
+                        {moment(item.createdAt).format('MMM D, YYYY')}
                       </span>
-                    </div>
-                  {:else if header.header == 'actions'}
-                    <div class="Table-row-actions alignRight">
-                      <div
-                        on:click={() => {
-                          item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
-                        }}>
-                        <Icon type="delete" hover />
+                    {:else if header.header == 'view'}
+                      <div class="alignRight">
+                        <span>
+                          <a href={`/${item.type}/${item.id}`}>View</a>
+                        </span>
                       </div>
-                      <div style="margin-left: 10px;" />
-                      <div class="Table-checkbox">
-                        <Checkbox
+                    {:else if header.header == 'actions'}
+                      <div class="Table-row-actions alignRight">
+                        <div
                           on:click={() => {
-                            item.id && item.orderId ? handleCheck(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
-                          }}
-                          secondary />
+                            item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
+                          }}>
+                          <Icon type="delete" hover />
+                        </div>
+                        <div style="margin-left: 10px;" />
+                        <div class="Table-checkbox">
+                          <Checkbox
+                            on:click={() => {
+                              item.id && item.orderId ? handleCheck(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
+                            }}
+                            secondary />
+                        </div>
                       </div>
-                    </div>
-                  {:else if header.header == 'userActions'}
-                    <div class="Table-row-actions alignRight">
-                      <div
-                        on:click={() => {
-                          console.log('#TODO edit');
-                        }}>
-                        <Icon type="edit" hover />
-                      </div>
-                      <div style="margin-left: 10px;" />
-                      <div
-                        on:click={() => {
-                          item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
-                        }}>
-                        <Icon type="delete" hover />
-                      </div>
-                      <div style="margin-left: 10px;" />
-                      <div class="Table-checkbox">
-                        <Checkbox
+                    {:else if header.header == 'userActions'}
+                      <div class="Table-row-actions alignRight">
+                        <div
                           on:click={() => {
-                            item.id && item.orderId ? handleCheck(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
-                          }}
-                          secondary />
+                            console.log('#TODO edit');
+                          }}>
+                          <Icon type="edit" hover />
+                        </div>
+                        <div style="margin-left: 10px;" />
+                        <div
+                          on:click={() => {
+                            item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
+                          }}>
+                          <Icon type="delete" hover />
+                        </div>
+                        <div style="margin-left: 10px;" />
+                        <div class="Table-checkbox">
+                          <Checkbox
+                            on:click={() => {
+                              item.id && item.orderId ? handleCheck(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
+                            }}
+                            secondary />
+                        </div>
                       </div>
-                    </div>
-                  {:else if header.header == 'filename'}
-                    <div class="Table-row-filename">
-                      <div>
-                        <Icon type="file" color="#15224B" />
-                      </div>
+                    {:else if header.header == 'filename'}
+                      <div class="Table-row-filename">
+                        <div>
+                          <Icon type="file" color="#15224B" />
+                        </div>
 
-                      <div>{item.fileName}</div>
-                    </div>
-                  {:else if header.header == 'createdAt' || header.header == 'updatedAt'}
-                    {formatDate(item[header.header], true)}
-                  {:else}{item[header.header]}{/if}
-                </td>
-              {/each}
+                        <div>{item.fileName}</div>
+                      </div>
+                    {:else if header.header == 'createdAt' || header.header == 'updatedAt'}
+                      {formatDate(item[header.header], true)}
+                    {:else}{item[header.header]}{/if}
+                  </td>
+                {/each}
+              </tr>
+            {/each}
+          {:else}
+            <tr class="Table-row">
+              <td colspan="100%" class="Table-empty">No results</td>
             </tr>
-          {/each}
+          {/if}
         </tbody>
       </table>
     </div>
