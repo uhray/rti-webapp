@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
@@ -40,6 +41,8 @@
   let usersToDelete = [];
   let displayOverlayDelete = false;
   let isMultiple = false;
+
+  let headerHeight = 0;
 
   $: {
     role = $userStore.user.role;
@@ -105,6 +108,17 @@
 
     handleSort();
   }
+
+  onMount(() => {
+    if (document) {
+      let hHeight = document.getElementById('Header').offsetHeight;
+      let tabsHeight = document.getElementById('Header-tabs').offsetHeight;
+
+      headerHeight = hHeight + tabsHeight;
+
+      console.log('Header height is: ', headerHeight);
+    }
+  });
 
   function handleSort(v) {
     if (v === 'new') {
@@ -228,7 +242,9 @@
     {handleDelete}
     {handleDeleteSelected}
     {handleCheck}
-    selected={usersToDelete} />
+    selected={usersToDelete}
+    height={'100vh'}
+    {headerHeight} />
   <br />
 </section>
 

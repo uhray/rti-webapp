@@ -10,6 +10,7 @@
   export let headers = [];
   export let data = [];
   export let height = undefined;
+  export let headerHeight = 0;
 
   export let handleDelete = undefined;
   export let handleDeleteSelected = undefined;
@@ -40,7 +41,9 @@
 <section class="Table">
 
   <div class="Table-outer">
-    <div class="Table-inner" style={`height: ${height}`}>
+    <div
+      class="Table-inner"
+      style={height ? `height: calc(${height} - ${headerHeight}px)` : ''}>
       <table
         class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
         <thead>

@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import Table from '../../components/table/Table.svelte';
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
@@ -17,6 +18,8 @@
   let postOrderIdsToDelete = [];
   let displayOverlayDelete = false;
   let isMultiple = false;
+
+  let headerHeight = 0;
 
   $: {
     orders = $ordersStore.orders;
@@ -48,6 +51,15 @@
     { header: 'view', text: 'View' },
     { header: 'actions', text: 'Actions' },
   ];
+
+  onMount(() => {
+    if (document) {
+      headerHeight = document.getElementById('Header').offsetHeight;
+      headerHeight = headerHeight + 75;
+
+      console.log('Header height is: ', headerHeight);
+    }
+  });
 
   function handleSort(v) {
     if (v === 'new') {
@@ -129,7 +141,9 @@
     {handleDelete}
     {handleDeleteSelected}
     {handleCheck}
-    selected={ordersToDelete} />
+    selected={ordersToDelete}
+    height={'100vh'}
+    {headerHeight} />
 </div>
 
 {#if displayOverlayDelete}

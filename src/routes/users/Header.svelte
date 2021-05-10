@@ -11,8 +11,7 @@
   export let search;
   export let handleSearch;
   export let handleFilter;
-
-  let sortOpts = [
+  export let sortOpts = [
     {
       header: 'Name',
       opts: [
@@ -120,7 +119,7 @@
   <title>User Management</title>
 </svelte:head>
 
-<div class="Header">
+<div class="Header" id="Header">
   <div class="Header-container">
     <div class="Header-content">
       <div class="Header-titles">
@@ -146,13 +145,37 @@
           <Dropdown data={filterOpts} handleSelect={handleFilterSelect} />
         </div>
         <div style="margin-left: 5px;" />
-        <!-- Show this On Admin Tab -->
-        <div>
-          <Button height="40px" width="100px" primary>Add Admin</Button>
-        </div>
+
+        {#if role === 'ADMIN' && selectedTab === 'Managers'}
+          <div>
+            <Button
+              height="40px"
+              width="100px"
+              primary
+              on:click={() => {
+                console.log('#TODO');
+              }}>
+              Add Manager
+            </Button>
+          </div>
+        {/if}
+
+        {#if role === 'ADMIN' && selectedTab === 'Admins'}
+          <div>
+            <Button
+              height="40px"
+              width="100px"
+              primary
+              on:click={() => {
+                console.log('#TODO');
+              }}>
+              Add Admin
+            </Button>
+          </div>
+        {/if}
       </div>
     </div>
-    <div class="Header-tabs">
+    <div class="Header-tabs" id="Header-tabs">
       <TabMenu
         type="default"
         tabs={role === 'ADMIN' ? ['Users', 'Managers', 'Admins'] : ['Users', 'Managers']}
