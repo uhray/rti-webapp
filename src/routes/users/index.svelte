@@ -13,25 +13,25 @@
   let users = [];
   let usersMapped;
   let driverHeaders = [
-    { header: 'name', text: 'Full Name' },
+    { header: 'name', text: 'Full Name', size: 'large' },
     { header: 'username', text: 'User ID' },
     { header: 'teamId', text: 'Driver Manager' },
     { header: 'truckId', text: 'Vehicle' },
     { header: 'status', text: 'Status' },
-    { header: 'userActions', text: 'Actions', size: 'auto' },
+    { header: 'userActions', text: 'Actions' },
   ];
   let managerHeaders = [
     { header: 'name', text: 'Full Name', size: 'large' },
     { header: 'teamId', text: 'Teams' },
     { header: 'email', text: 'Email' },
-    { header: 'lastLogin', text: 'Last Login Date', size: 'medium' },
-    { header: 'userActions', text: 'Actions', size: 'auto' },
+    { header: 'lastLogin', text: 'Last Login Date' },
+    { header: 'userActions', text: 'Actions' },
   ];
   let adminHeaders = [
     { header: 'name', text: 'Full Name', size: 'large' },
-    { header: 'email', text: 'Email', size: 'medium' },
+    { header: 'email', text: 'Email' },
     { header: 'lastLogin', text: 'Last Login Date' },
-    { header: 'actions', text: 'Actions', size: 'auto' },
+    { header: 'actions', text: 'Actions' },
   ];
   let headers = driverHeaders;
 

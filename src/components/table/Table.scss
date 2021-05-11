@@ -35,6 +35,9 @@
       color: $color--darkblue;
       font-weight: 600;
       font-size: 15px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 
@@ -51,6 +54,9 @@
 
     .Table-cell {
       line-height: 32px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     .Table-row-orderNumber {
@@ -145,13 +151,16 @@
 }
 
 .large {
-  width: 500px;
+  min-width: 300px;
+  width: auto;
 }
 .medium {
-  width: 350px;
+  min-width: 200px;
+  width: auto;
 }
 .small {
-  width: 200px;
+  min-width: 100px;
+  width: auto;
 }
 .auto {
   width: auto;

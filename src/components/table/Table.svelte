@@ -19,11 +19,11 @@
 
   function getHeaderSize(size) {
     if (size === 'small') {
-      return 'small';
+      return 'uk-width-1-6';
     } else if (size === 'medium') {
-      return 'medium';
+      return 'uk-width-1-4';
     } else if (size === 'large') {
-      return 'large';
+      return 'uk-width-1-3 ';
     } else if (size === 'expand') {
       return 'uk-table-expand';
     } else if (size === 'shrink') {
@@ -31,7 +31,7 @@
     } else if (size === 'auto') {
       return 'auto';
     } else {
-      return 'small';
+      return 'auto';
     }
   }
 </script>
