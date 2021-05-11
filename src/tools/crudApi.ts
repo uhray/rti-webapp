@@ -84,6 +84,15 @@ export const getContacts = async () => {
   return res;
 };
 
+export const getUser = async userId => {
+  const res = await tools.fetch(options().baseUrl + '/users/' + userId, {
+    method: 'GET',
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
 export const editUser = async (userId, data) => {
   const res = await tools.fetch(options().baseUrl + '/users/' + userId, {
     method: 'PUT',
@@ -166,6 +175,25 @@ export const deleteOrder = async id => {
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
 
+  return res;
+};
+
+/******************** TRUCKS ********************/
+export const getTrucks = async query => {
+  const res = await tools.fetch(options().baseUrl + '/trucks', {
+    qs: query,
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  // console.log(res);
+  return res;
+};
+
+export const editTruck = async (id, data) => {
+  const res = await tools.fetch(options().baseUrl + '/orders/' + id, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
   return res;
 };
 

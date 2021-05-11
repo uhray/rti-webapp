@@ -12,7 +12,9 @@
   export let label = undefined;
   export let placeholder = undefined;
   export let onInput = undefined;
+  export let onChange = undefined;
   export let value = '';
+  export let name = undefined;
 
   let showPassword = false;
 
@@ -46,6 +48,7 @@
       <input
         class="uk-input"
         type="text"
+        {name}
         {value}
         {placeholder}
         {invalid}
@@ -53,7 +56,8 @@
         on:input
         on:focus={onFocus}
         on:blur={onBlur}
-        on:input={e => onInput(e.target.value)} />
+        on:input={onInput ? e => onInput(e.target.value) : () => {}}
+        on:change={onChange ? e => onChange(e) : () => {}} />
 
       <span class="uk-form-icon uk-form-icon-flip">
         <Icon

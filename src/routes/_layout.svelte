@@ -2,12 +2,19 @@
   import { onMount } from 'svelte';
   import Nav from '../components/nav/Nav.svelte';
   import TopNav from '../components/topnav/TopNav.svelte';
-  import { userStore, postsStore, contactsStore, ordersStore } from '../store';
+  import {
+    userStore,
+    postsStore,
+    contactsStore,
+    ordersStore,
+    trucksStore,
+  } from '../store';
   import {
     auth,
     getPosts,
     getContacts,
     getOrders,
+    getTrucks,
     editUser,
   } from '../tools/crudApi';
   import moment from 'moment';
@@ -25,10 +32,12 @@
       const p = await getPosts({ allMessages: true });
       const c = await getContacts();
       const o = await getOrders();
+      const t = await getTrucks();
 
       postsStore.setPosts(p);
       contactsStore.setContacts(c);
       ordersStore.setOrders(o);
+      trucksStore.setTrucks(t);
     } else {
       segment = 'signin';
     }

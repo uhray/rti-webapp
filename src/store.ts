@@ -5,6 +5,7 @@ const currentUser = writable({});
 const posts = writable({});
 const contacts = writable({});
 const orders = writable({});
+const trucks = writable({});
 const data = writable({});
 
 export const userStore = {
@@ -26,6 +27,11 @@ export const contactsStore = {
 export const ordersStore = {
   subscribe: orders.subscribe,
   setOrders: o => orders.set({ orders: o }),
+};
+
+export const trucksStore = {
+  subscribe: trucks.subscribe,
+  setTrucks: t => trucks.set({ trucks: t }),
 };
 
 export const dataStore = {

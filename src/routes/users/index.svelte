@@ -10,7 +10,9 @@
 
   let role;
   let teams = [];
+  let allUsers = [];
   let users = [];
+
   let usersMapped;
   let driverHeaders = [
     { header: 'name', text: 'Full Name', size: 'large' },
@@ -47,17 +49,18 @@
   $: {
     role = $userStore.user.role;
     teams = $contactsStore.contacts.teams;
-    let allUsers = $contactsStore.contacts.users;
+    allUsers = $contactsStore.contacts.users;
 
     users = [];
 
     if (role === 'ADMIN') {
-      users = allUsers;
+      users = allUsers.filter(u => !u.states.isDeleted);
     } else {
       teams.forEach(d => {
         d.subgroups.forEach(s => {
           s.contacts.forEach(c => {
-            users.push(c);
+            console.log(c);
+            !c.states.isDeleted && users.push(c);
           });
         });
       });
@@ -94,7 +97,7 @@
           username: u.username || '',
           teamId: u.teamId || '',
           truckId: u.truckId || '',
-          status: u.status || '',
+          status: u.states.isActive ? 'active' : 'inactive',
           email: u.contactInfo.email || '',
           lastLogin: u.lastLogin
             ? moment(u.lastLogin).format('MMM D YYYY • h:mm a')
@@ -186,9 +189,17 @@
       await deleteUser(u);
     });
 
-    const usersAfterDelete = users.filter(u => !usersToDelete.includes(u._id));
+    const usersAfterDelete = allUsers.filter(
+      u => !usersToDelete.includes(u._id)
+    );
 
     console.log(usersAfterDelete);
+
+    contactsStore.setContacts({
+      teams: $contactsStore.contacts.teams,
+      users: usersAfterDelete,
+    });
+
     // usersStore.setOrders(ordersAfterDelete);
     // postsStore.setPosts(postsAfterDelete);
 

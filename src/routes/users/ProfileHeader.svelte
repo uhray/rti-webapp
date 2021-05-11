@@ -1,5 +1,7 @@
 <script>
   import NavLabel from '../../components/navlabel/NavLabel.svelte';
+
+  export let name = '';
 </script>
 
 <style lang="scss">
@@ -66,10 +68,10 @@
 
 <div class="Header">
   <div class="Header-container">
-    <NavLabel page="USER MANAGEMENT" subpage="JOHN SMITH" />
+    <NavLabel page="USER MANAGEMENT" subpage={name.toUpperCase()} />
     <div class="Header-content">
       <div class="Header-titles">
-        <h2 class="Header-title">John Smithy</h2>
+        <h2 class="Header-title">{name}</h2>
       </div>
     </div>
   </div>
