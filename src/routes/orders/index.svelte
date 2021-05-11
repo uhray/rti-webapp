@@ -49,15 +49,13 @@
     { header: 'startPoint', text: 'Start Point' },
     { header: 'endPoint', text: 'End Point' },
     { header: 'view', text: 'View' },
-    { header: 'actions', text: 'Actions' },
+    { header: 'actions', text: 'Actions', size: 'auto' },
   ];
 
   onMount(() => {
     if (document) {
       headerHeight = document.getElementById('Header').offsetHeight;
       headerHeight = headerHeight + 75;
-
-      console.log('Header height is: ', headerHeight);
     }
   });
 

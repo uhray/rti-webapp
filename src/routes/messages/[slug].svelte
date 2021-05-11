@@ -47,8 +47,8 @@
   });
 
   async function sortDrivers() {
-    contactsList = contacts.contacts;
-    driversList = contacts.drivers;
+    contactsList = contacts.users;
+    driversList = contacts.teams;
 
     driversList.forEach(d => {
       teamsList.push(d.name);

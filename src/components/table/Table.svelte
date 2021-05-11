@@ -19,17 +19,19 @@
 
   function getHeaderSize(size) {
     if (size === 'small') {
-      return 'uk-width-small';
+      return 'small';
     } else if (size === 'medium') {
-      return 'uk-width-medium';
+      return 'medium';
     } else if (size === 'large') {
-      return 'uk-width-large';
+      return 'large';
     } else if (size === 'expand') {
       return 'uk-table-expand';
     } else if (size === 'shrink') {
       return 'uk-table-shrink';
+    } else if (size === 'auto') {
+      return 'auto';
     } else {
-      return 'uk-width-auto';
+      return 'small';
     }
   }
 </script>

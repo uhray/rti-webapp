@@ -9,29 +9,29 @@
   import _ from 'lodash';
 
   let role;
-  let contacts = [];
+  let teams = [];
   let users = [];
   let usersMapped;
   let driverHeaders = [
-    { header: 'name', text: 'Full Name', size: 'large' },
+    { header: 'name', text: 'Full Name' },
     { header: 'username', text: 'User ID' },
-    { header: 'teamId', text: 'Driver Manager', size: 'medium' },
+    { header: 'teamId', text: 'Driver Manager' },
     { header: 'truckId', text: 'Vehicle' },
     { header: 'status', text: 'Status' },
-    { header: 'userActions', text: 'Actions', size: 'small' },
+    { header: 'userActions', text: 'Actions', size: 'auto' },
   ];
   let managerHeaders = [
     { header: 'name', text: 'Full Name', size: 'large' },
     { header: 'teamId', text: 'Teams' },
     { header: 'email', text: 'Email' },
     { header: 'lastLogin', text: 'Last Login Date', size: 'medium' },
-    { header: 'userActions', text: 'Actions', size: 'small' },
+    { header: 'userActions', text: 'Actions', size: 'auto' },
   ];
   let adminHeaders = [
     { header: 'name', text: 'Full Name', size: 'large' },
     { header: 'email', text: 'Email', size: 'medium' },
-    { header: 'lastLogin', text: 'Last Login Date', size: 'medium' },
-    { header: 'actions', text: 'Actions', size: 'small' },
+    { header: 'lastLogin', text: 'Last Login Date' },
+    { header: 'actions', text: 'Actions', size: 'auto' },
   ];
   let headers = driverHeaders;
 
@@ -46,23 +46,27 @@
 
   $: {
     role = $userStore.user.role;
-    contacts = $contactsStore.contacts.drivers;
-    let allUsers = $contactsStore.contacts.contacts;
+    teams = $contactsStore.contacts.teams;
+    let allUsers = $contactsStore.contacts.users;
 
     users = [];
 
-    contacts.forEach(d => {
-      d.subgroups.forEach(s => {
-        s.contacts.forEach(c => {
-          users.push(c);
+    if (role === 'ADMIN') {
+      users = allUsers;
+    } else {
+      teams.forEach(d => {
+        d.subgroups.forEach(s => {
+          s.contacts.forEach(c => {
+            users.push(c);
+          });
         });
       });
-    });
-    allUsers.forEach(u => {
-      if (u.role === 'MANAGER') {
-        users.push(u);
-      }
-    });
+      allUsers.forEach(u => {
+        if (u.role === 'MANAGER') {
+          users.push(u);
+        }
+      });
+    }
 
     users = users;
 
@@ -72,6 +76,7 @@
     } else if (selectedTab === 'Managers') {
       users = users.filter(u => u.role === 'MANAGER');
       headers = managerHeaders;
+      console.log(users);
       if (role === 'MANAGER') {
         headers = headers.filter(h => h.header !== 'userActions');
       }
@@ -115,8 +120,6 @@
       let tabsHeight = document.getElementById('Header-tabs').offsetHeight;
 
       headerHeight = hHeight + tabsHeight + 50;
-
-      console.log('Header height is: ', headerHeight);
     }
   });
 

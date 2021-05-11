@@ -30,11 +30,11 @@
 
   .Table-headerRow {
     width: 100%;
+
     .Table-headerRow-headerCell {
       color: $color--darkblue;
       font-weight: 600;
       font-size: 15px;
-      // position: relative;
     }
   }
 
@@ -62,7 +62,6 @@
     .Table-row-filename {
       display: flex;
       flex-flow: row nowrap;
-      // justify-content: flex-end;
       align-items: center;
       :first-child {
         margin-right: 5px;
@@ -143,4 +142,17 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
+}
+
+.large {
+  width: 500px;
+}
+.medium {
+  width: 350px;
+}
+.small {
+  width: 200px;
+}
+.auto {
+  width: auto;
 }

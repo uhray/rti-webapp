@@ -138,13 +138,16 @@
         </div>
         <div style="margin-left: 5px;" />
         <!-- Show This On User Tab -->
-        <div>
-          <Button height="40px" width="100px" outline icon="filter">
-            Filter
-          </Button>
-          <Dropdown data={filterOpts} handleSelect={handleFilterSelect} />
-        </div>
-        <div style="margin-left: 5px;" />
+
+        {#if selectedTab === 'Users'}
+          <div>
+            <Button height="40px" width="100px" outline icon="filter">
+              Filter
+            </Button>
+            <Dropdown data={filterOpts} handleSelect={handleFilterSelect} />
+          </div>
+          <div style="margin-left: 5px;" />
+        {/if}
 
         {#if role === 'ADMIN' && selectedTab === 'Managers'}
           <div>
