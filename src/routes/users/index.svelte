@@ -114,7 +114,7 @@
       let hHeight = document.getElementById('Header').offsetHeight;
       let tabsHeight = document.getElementById('Header-tabs').offsetHeight;
 
-      headerHeight = hHeight + tabsHeight;
+      headerHeight = hHeight + tabsHeight + 50;
 
       console.log('Header height is: ', headerHeight);
     }
