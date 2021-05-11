@@ -189,11 +189,23 @@ export const getTrucks = async query => {
 };
 
 export const editTruck = async (id, data) => {
-  const res = await tools.fetch(options().baseUrl + '/orders/' + id, {
+  const res = await tools.fetch(options().baseUrl + '/trucks/' + id, {
     method: 'PUT',
     body: JSON.stringify(data),
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
+  return res;
+};
+
+/******************** TEAMS ********************/
+export const getTeamTruckIds = async id => {
+  const res = await tools.fetch(
+    options().baseUrl + '/teams/' + id + '/truckIds',
+    {
+      headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+    }
+  );
+
   return res;
 };
 

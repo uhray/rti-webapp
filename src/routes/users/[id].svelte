@@ -12,8 +12,9 @@
   import Icon from '../../components/icon/Icon.svelte';
   import Divider from '../../components/divider/Divider.svelte';
   import Input from '../../components/input/Input.svelte';
+  import Dropdown from '../../components/Dropdown/Dropdown.svelte';
   import ProfileHeader from './ProfileHeader.svelte';
-  import { getUser, editUser } from '../../tools/crudApi.ts';
+  import { getUser, editUser, getTeamTruckIds } from '../../tools/crudApi.ts';
   import { contactsStore, trucksStore } from '../../store';
   import { onMount } from 'svelte';
   import _ from 'lodash';
@@ -25,12 +26,29 @@
   let contacts;
   let basicInfo = { first: '', last: '', dm: '', truckId: '' };
   let statusSwitch = false;
+  let truckOpts = [];
+  let dropdownOpts = [];
 
   $: {
     console.log($contactsStore.contacts);
     user = _.find($contactsStore.contacts.users, { id: id });
     console.log(user);
     contacts = $contactsStore.contacts;
+
+    getTeamTruckIds(user.teamId).then(res => (truckOpts = res));
+  }
+
+  $: {
+    if (truckOpts.length > 0) {
+      dropdownOpts = [
+        {
+          header: 'Vehicles',
+          opts: truckOpts.map(o => {
+            return { text: o, value: o, selected: false };
+          }),
+        },
+      ];
+    }
   }
 
   onMount(async () => {
@@ -55,12 +73,15 @@
     });
   }
 
+  function handleSelect(v) {
+    basicInfo.truckId = v;
+  }
+
   async function handleInput(e) {
     basicInfo[e.target.name] = e.target.value;
 
-    if (e.target.name === 'truckId') {
-      //remove from truck
-      //add to truck
+    if (e.target.name === 'dm') {
+      basicInfo.truckId = '';
     }
 
     const updatedUser = await editUser(id, {
@@ -178,11 +199,14 @@
           label="Driver Manager"
           value={basicInfo.dm}
           onChange={handleInput} />
-        <Input
-          name="truckId"
-          label="Vehicle"
-          value={basicInfo.truckId}
-          onChange={handleInput} />
+        <div>
+          <Input
+            name="truckId"
+            label="Vehicle"
+            value={basicInfo.truckId}
+            onChange={handleInput} />
+          <Dropdown simpleSelect={true} data={dropdownOpts} {handleSelect} />
+        </div>
       </div>
     </form>
 
