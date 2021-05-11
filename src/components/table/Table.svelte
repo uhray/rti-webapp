@@ -111,12 +111,10 @@
                       </div>
                     {:else if header.header == 'userActions'}
                       <div class="Table-row-actions alignRight">
-                        <div
-                          on:click={() => {
-                            console.log('#TODO edit');
-                          }}>
+                        <a href={`/${item.type}/${item.id}`}>
                           <Icon type="edit" hover />
-                        </div>
+                        </a>
+
                         <div style="margin-left: 10px;" />
                         <div
                           on:click={() => {
