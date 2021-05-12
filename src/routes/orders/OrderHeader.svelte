@@ -1,6 +1,6 @@
 <script>
   import Button from '../../components/button/Button.svelte';
-  import SearchBar from '../../components/searchbar/SearchBar.svelte';
+  import NavLabel from '../../components/navlabel/NavLabel.svelte';
   import OrderStatusLabel from '../../components/OrderStatusLabel/OrderStatusLabel.svelte';
   export let order = {};
   export let toggleMessage = () => {};
@@ -74,6 +74,10 @@
 
 <div class="Header">
   <div class="Header-container">
+    <NavLabel
+      page="ORDERS"
+      pageUrl={'/orders'}
+      subpage={`ORDER #${order.orderId}`} />
     <div class="Header-content">
       <div class="Header-titles">
         <h2 class="Header-title">Order #{order.orderId}</h2>
