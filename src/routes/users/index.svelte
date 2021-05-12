@@ -185,33 +185,30 @@
     });
 
     // // #TODO map data without fetching
-    let teamsAfterDelete = $contactsStore.contacts.teams;
-    // teamsAfterDelete = teams.map(d => {
-    //   console.log(d);
-    //   return {
-    //     ...d,
-    //     subgroups: d.subgroups.map(s => {
-    //       console.log(s);
-    //       return {
-    //         ...s,
-    //         contacts: s.contacts.map(c => {
-    //           console.log(c);
-    //           if (!c.states.isDeleted && !usersToDelete.includes(c.id)) {
-    //             return c;
-    //           }
-    //         }),
-    //       };
-    //     }),
-    //   };
-    // });
+    let teamsAfterDelete = $contactsStore.contacts.teams.map(d => {
+      return {
+        ...d,
+        subgroups: d.subgroups.map(s => {
+          return {
+            ...s,
+            contacts: s.contacts.flatMap(c =>
+              !c.states.isDeleted && !usersToDelete.includes(c.id) ? c : []
+            ),
+          };
+        }),
+      };
+    });
 
-    console.log(teamsAfterDelete);
+    teamsAfterDelete = teamsAfterDelete.map(d => {
+      return {
+        ...d,
+        subgroups: d.subgroups.flatMap(s => (s.contacts.length > 0 ? s : [])),
+      };
+    });
 
     const usersAfterDelete = $contactsStore.contacts.users.filter(
       u => !usersToDelete.includes(u._id)
     );
-
-    console.log(usersAfterDelete);
 
     contactsStore.setContacts({
       teams: teamsAfterDelete,

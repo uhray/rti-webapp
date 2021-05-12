@@ -94,8 +94,6 @@
   }
 
   async function updateUser() {
-    console.log(`${user._id}`, basicInfo);
-
     const updatedUser = await editUser(id, {
       ...user,
       truckId: basicInfo.truckId,
@@ -111,28 +109,17 @@
     updatedUser.id = updatedUser._id;
 
     if (updatedUser.truckId !== user.truckId) {
-      console.log('\n\n');
-      console.log('### TRUCKS ###', trucks);
-      console.log('\n\n');
-
       const updatedTrucks = trucks.map(t => {
         if (t.truckId === user.truckId) {
-          console.log('FOUND OLD TRUCK', t.truckId, t.drivers.length);
           return { ...t, drivers: t.drivers.filter(d => d !== user._id) };
         } else if (t.truckId === updatedUser.truckId) {
-          console.log('FOUND NEW TRUCK', t.truckId, t.drivers.length);
           return { ...t, drivers: [...t.drivers, user._id] };
         } else {
           return t;
         }
       });
 
-      console.log('\n\n');
-      console.log('### UPDATED TRUCKS ###', updatedTrucks);
-      console.log('\n\n');
-
       trucksStore.setTrucks(updatedTrucks);
-      console.log($trucksStore.trucks);
     }
 
     // #TODO adjust drivers in store?
@@ -149,13 +136,10 @@
       };
     });
 
-    console.log(t);
-
     const c = $contactsStore.contacts.users.map(u =>
       u.id === user.id ? updatedUser : u
     );
 
-    console.log(c);
     contactsStore.setContacts({ teams: t, users: c });
   }
 </script>
