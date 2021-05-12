@@ -161,7 +161,6 @@
   }
 
   async function handleDelete(id) {
-    console.log('handle delete called');
     usersToDelete.push(id);
     displayOverlayDelete = true;
     isMultiple = false;
@@ -184,7 +183,6 @@
       await deleteUser(u);
     });
 
-    // // #TODO map data without fetching
     let teamsAfterDelete = $contactsStore.contacts.teams.map(d => {
       return {
         ...d,

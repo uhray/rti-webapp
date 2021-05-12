@@ -110,7 +110,7 @@
     const postsAfterDelete = posts.filter(
       p => !postOrderIdsToDelete.includes(p.orderId)
     );
-    console.log(postsAfterDelete);
+
     ordersStore.setOrders(ordersAfterDelete);
     postsStore.setPosts(postsAfterDelete);
 

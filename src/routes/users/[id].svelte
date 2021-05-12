@@ -121,26 +121,75 @@
 
       trucksStore.setTrucks(updatedTrucks);
     }
+    let teamsAfterUpdate;
 
-    // #TODO adjust drivers in store?
-    let t = $contactsStore.contacts.teams;
-    t = $contactsStore.contacts.teams.map(d => {
+    if (updatedUser.teamId !== user.teamId) {
+      teamsAfterUpdate = $contactsStore.contacts.teams.map(t => {
+        if (t.name === user.teamId) {
+          return {
+            ...t,
+            subgroups: t.subgroups.map(s => {
+              if (s.name === user.driverClass) {
+                return {
+                  ...s,
+                  contacts: s.contacts.filter(d => d.id !== user._id),
+                };
+              } else {
+                return s;
+              }
+            }),
+          };
+        } else if (t.name === updatedUser.teamId) {
+          const check = _.find(t.subgroups, { name: user.driverClass });
+
+          if (!check) {
+            t.subgroups.push({ name: user.driverClass, contacts: [] });
+          }
+          return {
+            ...t,
+            subgroups: t.subgroups.map(s => {
+              if (s.name === user.driverClass) {
+                return { ...s, contacts: [...s.contacts, updatedUser] };
+              } else {
+                return s;
+              }
+            }),
+          };
+        } else {
+          return t;
+        }
+      });
+    } else {
+      teamsAfterUpdate = $contactsStore.contacts.teams.map(d => {
+        return {
+          ...d,
+          subgroups: d.subgroups.map(s => {
+            return {
+              ...s,
+              contacts: s.contacts.map(c =>
+                c.id === user.id ? updatedUser : c
+              ),
+            };
+          }),
+        };
+      });
+    }
+
+    teamsAfterUpdate = teamsAfterUpdate.map(d => {
       return {
         ...d,
-        subgroups: d.subgroups.map(s => {
-          return {
-            ...s,
-            contacts: s.contacts.map(c => (c.id === user.id ? updatedUser : c)),
-          };
-        }),
+        subgroups: d.subgroups.flatMap(s => (s.contacts.length > 0 ? s : [])),
       };
     });
 
-    const c = $contactsStore.contacts.users.map(u =>
+    const usersAfterUpdate = $contactsStore.contacts.users.map(u =>
       u.id === user.id ? updatedUser : u
     );
 
-    contactsStore.setContacts({ teams: t, users: c });
+    contactsStore.setContacts({
+      teams: teamsAfterUpdate,
+      users: usersAfterUpdate,
+    });
   }
 </script>
 
