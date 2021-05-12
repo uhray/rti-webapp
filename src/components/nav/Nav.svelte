@@ -7,21 +7,36 @@
 
   const items = [
     { icon: 'orders', text: 'Orders', link: 'orders' },
-    // { icon: 'macro', text: 'Driver Macros', link: 'macros', amount: 3 },
+
     { icon: 'message', text: 'Messages', link: 'messages', amount: 999 },
+    { icon: 'macro', text: 'Driver Macros', link: 'macros', amount: 3 },
+    {
+      icon: 'maintenance',
+      text: 'Maintenance',
+      link: 'maintenance',
+    },
+    {
+      icon: 'vehicle-fill',
+      text: 'Equipment',
+      link: 'equipment',
+    },
     { text: 'line' },
     { icon: 'users', text: 'User Management', link: 'users' },
     { icon: 'settings', text: 'Settings', link: 'settings' },
-    { text: 'line' },
-    { icon: 'home', text: 'Home', link: '' },
-    { icon: 'components', text: 'Components', link: 'components' },
-    { text: 'Account', link: 'account' },
+    // { text: 'line' },
+    // { icon: 'home', text: 'Home', link: '' },
+    // { icon: 'components', text: 'Components', link: 'components' },
+    // { text: 'Account', link: 'account' },
   ];
 
   function menuToggle() {
     isOpen = !isOpen;
   }
 </script>
+
+<style src="./Nav.scss">
+
+</style>
 
 <nav class={isOpen ? 'Nav' : 'Nav-closed'}>
   <div class="collapse" on:click={menuToggle}>
@@ -41,8 +56,7 @@
           isActive={segment == item.link ? true : false}
           {isOpen}
           icon={item.icon}
-          amount={item.amount}
-        >
+          amount={item.amount}>
           <span>{item.text}</span>
         </NavItem>
       </a>
@@ -60,6 +74,3 @@
     </div>
   </div>
 </nav>
-
-<style src="./Nav.scss">
-</style>
