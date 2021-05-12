@@ -96,7 +96,7 @@
                       <div class="Table-row-actions alignRight">
                         <div
                           on:click={() => {
-                            item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
+                            item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleDelete(item.id) : handleDelete(index);
                           }}>
                           <Icon type="delete" hover />
                         </div>

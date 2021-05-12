@@ -48,10 +48,6 @@
   let displayOverlayDelete = false;
   let isMultiple = false;
 
-  onMount(async () => {
-    order = await getOrder(id);
-  });
-
   function toggleMessage() {
     displayMessageOverlay = true;
   }
