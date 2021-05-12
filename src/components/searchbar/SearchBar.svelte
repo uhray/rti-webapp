@@ -11,23 +11,24 @@
 
 <!-- HTML -->
 <section class="SearchBar">
-  <form class="uk-search uk-search-default SearchBar-formContainer" {fill}>
+  <div class="uk-search uk-search-default SearchBar-formContainer" {fill}>
     <span uk-search-icon />
     <input
       class={`uk-search-input ${alternate ? 'SearchBar-alternate' : 'SearchBar-default'}`}
-      type="search"
       placeholder="Search..."
       value={search}
       on:input={e => {
+        e.preventDefault();
         handleSearch(e.target.value);
-      }} />
+      }}
+      on:submit|preventDefault|stopPropagation />
     {#if search}
       <span
         class="SearchBar-close clickable"
         uk-icon="close"
         on:click={() => handleSearch('')} />
     {/if}
-  </form>
+  </div>
 </section>
 
 <!-- ==== -->

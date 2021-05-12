@@ -76,9 +76,9 @@
 can set height based of vh units ( height={100} -> height: 100vh )
 defaults to [height: 100%] with no scrolling if no height value
 ------------------------------------------------------------------>
-  <Table {headers} data={tableDataSmall} />
+  <!-- <Table {headers} data={tableDataSmall} /> -->
   <br />
-  <Table {headers} data={tableData} height={50} />
+  <!-- <Table {headers} data={tableData} height={50} /> -->
 
   <h2>Divider</h2>
   <Divider />

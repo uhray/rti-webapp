@@ -124,11 +124,15 @@
     let fPosts;
 
     if (filter === 'all') {
-      fPosts = posts.filter(i => !i.archived);
+      fPosts = posts.filter(i => !i.states.isArchived);
     } else if (filter === 'orders') {
-      fPosts = posts.filter(i => i.postType === 'ORDER' && !i.archived);
+      fPosts = posts.filter(
+        i => i.postType === 'ORDER' && !i.states.isArchived
+      );
     } else if (filter === 'macros') {
-      fPosts = posts.filter(i => i.postType === 'MACRO' && !i.archived);
+      fPosts = posts.filter(
+        i => i.postType === 'MACRO' && !i.states.isArchived
+      );
     }
 
     return fPosts;

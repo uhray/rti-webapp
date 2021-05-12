@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import Table from '../../components/table/Table.svelte';
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
@@ -8,13 +9,17 @@
 
   import Header from './Header.svelte';
 
-  import { ordersStore } from '../../store';
+  import { ordersStore, postsStore } from '../../store';
 
   let orders;
+  let posts;
   let ordersMapped;
   let ordersToDelete = [];
+  let postOrderIdsToDelete = [];
   let displayOverlayDelete = false;
   let isMultiple = false;
+
+  let headerHeight = 0;
 
   $: {
     orders = $ordersStore.orders;
@@ -28,13 +33,13 @@
           status: o.status,
           assignedTruck: o.assignedTruck,
           startPoint: `${o.stops[0].address.city}, ${o.stops[0].address.state} ${o.stops[0].address.zipcode}`,
-          endPoint: `${o.stops[o.stops.length - 1].address.city}, ${
-            o.stops[o.stops.length - 1].address.state
-          } ${o.stops[o.stops.length - 1].address.zipcode}`,
+          endPoint: `${o.stops[o.stops.length - 1].address.city}, ${o.stops[o.stops.length - 1].address.state} ${o.stops[o.stops.length - 1].address.zipcode}`,
         };
       }),
       'createdAt'
     ).reverse();
+
+    posts = $postsStore.posts;
   }
 
   export const headers = [
@@ -44,8 +49,15 @@
     { header: 'startPoint', text: 'Start Point' },
     { header: 'endPoint', text: 'End Point' },
     { header: 'view', text: 'View' },
-    { header: 'actions', text: 'Actions' },
+    { header: 'actions', text: 'Actions', size: 'auto' },
   ];
+
+  onMount(() => {
+    if (document) {
+      headerHeight = document.getElementById('Header').offsetHeight;
+      headerHeight = headerHeight + 75;
+    }
+  });
 
   function handleSort(v) {
     if (v === 'new') {
@@ -56,8 +68,9 @@
     }
   }
 
-  async function handleDelete(orderId) {
-    ordersToDelete.push(orderId);
+  async function handleDelete(id, orderId) {
+    ordersToDelete.push(id);
+    postOrderIdsToDelete.push(orderId);
     displayOverlayDelete = true;
     isMultiple = false;
   }
@@ -67,12 +80,15 @@
     isMultiple = true;
   }
 
-  function handleCheck(orderId) {
-    if (ordersToDelete.includes(orderId)) {
-      ordersToDelete = ordersToDelete.filter(o => o !== orderId);
+  function handleCheck(id, orderId) {
+    if (ordersToDelete.includes(id)) {
+      ordersToDelete = ordersToDelete.filter(o => o !== id);
+      postOrderIdsToDelete = postOrderIdsToDelete.filter(p => p !== orderId);
     } else {
-      ordersToDelete.push(orderId);
+      ordersToDelete.push(id);
+      postOrderIdsToDelete.push(orderId);
     }
+    postOrderIdsToDelete = postOrderIdsToDelete;
     ordersToDelete = ordersToDelete;
   }
 
@@ -87,14 +103,26 @@
     ordersToDelete.forEach(async o => {
       await deleteOrder(o);
     });
+
     const ordersAfterDelete = orders.filter(
       o => !ordersToDelete.includes(o._id)
     );
+    const postsAfterDelete = posts.filter(
+      p => !postOrderIdsToDelete.includes(p.orderId)
+    );
+
     ordersStore.setOrders(ordersAfterDelete);
+    postsStore.setPosts(postsAfterDelete);
 
     clearOverlayData();
   }
 </script>
+
+<style lang="scss">
+  .Orders {
+    padding: 2em;
+  }
+</style>
 
 <svelte:head>
   <title>Orders</title>
@@ -109,7 +137,8 @@
     {handleDeleteSelected}
     {handleCheck}
     selected={ordersToDelete}
-  />
+    height={'100vh'}
+    {headerHeight} />
 </div>
 
 {#if displayOverlayDelete}
@@ -117,12 +146,5 @@
     {clearOverlayData}
     send={deleteOrders}
     type={'order'}
-    {isMultiple}
-  />
+    {isMultiple} />
 {/if}
-
-<style lang="scss">
-  .Orders {
-    padding: 2em;
-  }
-</style>
