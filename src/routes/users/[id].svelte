@@ -70,26 +70,19 @@
 
   function handleSwitch(v) {
     statusSwitch = v;
-
-    editUser(id, {
-      ...user,
-      states: { ...user.states, isActive: statusSwitch },
-    });
+    updateUser();
   }
 
   function handleSelect(v) {
     basicInfo.truckId = v;
-
     updateUser();
   }
 
   function handleInput(e) {
     basicInfo[e.target.name] = e.target.value;
-
     if (e.target.name === 'dm') {
       basicInfo.truckId = '';
     }
-
     updateUser();
   }
 
@@ -103,6 +96,7 @@
         firstName: basicInfo.first,
         lastName: basicInfo.last,
       },
+      states: { ...user.states, isActive: statusSwitch },
     });
 
     updatedUser.name = getDisplayName(updatedUser);
