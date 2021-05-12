@@ -17,7 +17,7 @@
       class={`uk-search-input ${alternate ? 'SearchBar-alternate' : 'SearchBar-default'}`}
       placeholder="Search..."
       value={search}
-      on:change={e => {
+      on:input={e => {
         e.preventDefault();
         handleSearch(e.target.value);
       }}

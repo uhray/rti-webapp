@@ -68,7 +68,10 @@
 
 <div class="Header">
   <div class="Header-container">
-    <NavLabel page="USER MANAGEMENT" subpage={name.toUpperCase()} />
+    <NavLabel
+      page="USER MANAGEMENT"
+      pageUrl={'/users'}
+      subpage={name.toUpperCase()} />
     <div class="Header-content">
       <div class="Header-titles">
         <h2 class="Header-title">{name}</h2>
