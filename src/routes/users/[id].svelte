@@ -14,7 +14,12 @@
   import Input from '../../components/input/Input.svelte';
   import Dropdown from '../../components/Dropdown/Dropdown.svelte';
   import ProfileHeader from './ProfileHeader.svelte';
-  import { getUser, editUser, getTeamTruckIds } from '../../tools/crudApi.ts';
+  import {
+    getUser,
+    editUser,
+    getTeamTruckIds,
+    getContacts,
+  } from '../../tools/crudApi.ts';
   import { contactsStore, trucksStore } from '../../store';
   import { onMount } from 'svelte';
   import _ from 'lodash';
@@ -24,15 +29,15 @@
 
   let user;
   let contacts;
+  let trucks;
   let basicInfo = { first: '', last: '', dm: '', truckId: '' };
   let statusSwitch = false;
   let truckOpts = [];
   let dropdownOpts = [];
 
   $: {
-    console.log($contactsStore.contacts);
     user = _.find($contactsStore.contacts.users, { id: id });
-    console.log(user);
+    trucks = $trucksStore.trucks;
     contacts = $contactsStore.contacts;
 
     getTeamTruckIds(user.teamId).then(res => (truckOpts = res));
@@ -64,7 +69,6 @@
   });
 
   function handleSwitch(v) {
-    console.log(v);
     statusSwitch = v;
 
     editUser(id, {
@@ -75,14 +79,22 @@
 
   function handleSelect(v) {
     basicInfo.truckId = v;
+
+    updateUser();
   }
 
-  async function handleInput(e) {
+  function handleInput(e) {
     basicInfo[e.target.name] = e.target.value;
 
     if (e.target.name === 'dm') {
       basicInfo.truckId = '';
     }
+
+    updateUser();
+  }
+
+  async function updateUser() {
+    console.log(`${user._id}`, basicInfo);
 
     const updatedUser = await editUser(id, {
       ...user,
@@ -98,18 +110,53 @@
     updatedUser.name = getDisplayName(updatedUser);
     updatedUser.id = updatedUser._id;
 
+    if (updatedUser.truckId !== user.truckId) {
+      console.log('\n\n');
+      console.log('### TRUCKS ###', trucks);
+      console.log('\n\n');
+
+      const updatedTrucks = trucks.map(t => {
+        if (t.truckId === user.truckId) {
+          console.log('FOUND OLD TRUCK', t.truckId, t.drivers.length);
+          return { ...t, drivers: t.drivers.filter(d => d !== user._id) };
+        } else if (t.truckId === updatedUser.truckId) {
+          console.log('FOUND NEW TRUCK', t.truckId, t.drivers.length);
+          return { ...t, drivers: [...t.drivers, user._id] };
+        } else {
+          return t;
+        }
+      });
+
+      console.log('\n\n');
+      console.log('### UPDATED TRUCKS ###', updatedTrucks);
+      console.log('\n\n');
+
+      trucksStore.setTrucks(updatedTrucks);
+      console.log($trucksStore.trucks);
+    }
+
+    // #TODO adjust drivers in store?
+    let t = $contactsStore.contacts.teams;
+    t = $contactsStore.contacts.teams.map(d => {
+      return {
+        ...d,
+        subgroups: d.subgroups.map(s => {
+          return {
+            ...s,
+            contacts: s.contacts.map(c => (c.id === user.id ? updatedUser : c)),
+          };
+        }),
+      };
+    });
+
+    console.log(t);
+
     const c = $contactsStore.contacts.users.map(u =>
       u.id === user.id ? updatedUser : u
     );
 
     console.log(c);
-
-    contactsStore.setContacts({
-      teams: $contactsStore.contacts.teams,
-      users: c,
-    });
-
-    // const _.find(contacts, { id: user._id });
+    contactsStore.setContacts({ teams: t, users: c });
   }
 </script>
 
@@ -204,7 +251,8 @@
             name="truckId"
             label="Vehicle"
             value={basicInfo.truckId}
-            onChange={handleInput} />
+            onChange={handleInput}
+            icon="caretdown" />
           <Dropdown simpleSelect={true} data={dropdownOpts} {handleSelect} />
         </div>
       </div>

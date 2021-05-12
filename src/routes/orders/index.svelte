@@ -90,9 +90,6 @@
     }
     postOrderIdsToDelete = postOrderIdsToDelete;
     ordersToDelete = ordersToDelete;
-
-    console.log(ordersToDelete);
-    console.log(postOrderIdsToDelete);
   }
 
   function clearOverlayData() {

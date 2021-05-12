@@ -3,7 +3,7 @@
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
-  import { deleteUser } from '../../tools/crudApi.ts';
+  import { deleteUser, getContacts } from '../../tools/crudApi.ts';
   import { contactsStore, userStore } from '../../store';
   import moment from 'moment';
   import _ from 'lodash';
@@ -59,7 +59,6 @@
       teams.forEach(d => {
         d.subgroups.forEach(s => {
           s.contacts.forEach(c => {
-            console.log(c);
             !c.states.isDeleted && users.push(c);
           });
         });
@@ -79,7 +78,6 @@
     } else if (selectedTab === 'Managers') {
       users = users.filter(u => u.role === 'MANAGER');
       headers = managerHeaders;
-      console.log(users);
       if (role === 'MANAGER') {
         headers = headers.filter(h => h.header !== 'userActions');
       }
@@ -160,8 +158,6 @@
     }
 
     usersToDelete = usersToDelete;
-
-    console.log(usersToDelete);
   }
 
   async function handleDelete(id) {
@@ -183,25 +179,44 @@
     Array.from(checkboxes).forEach(c => (c.checked = false));
   }
 
-  function deleteUsers() {
+  async function deleteUsers() {
     usersToDelete.forEach(async u => {
-      console.log('Deleting user: ' + u);
       await deleteUser(u);
     });
 
-    const usersAfterDelete = allUsers.filter(
+    // // #TODO map data without fetching
+    let teamsAfterDelete = $contactsStore.contacts.teams;
+    // teamsAfterDelete = teams.map(d => {
+    //   console.log(d);
+    //   return {
+    //     ...d,
+    //     subgroups: d.subgroups.map(s => {
+    //       console.log(s);
+    //       return {
+    //         ...s,
+    //         contacts: s.contacts.map(c => {
+    //           console.log(c);
+    //           if (!c.states.isDeleted && !usersToDelete.includes(c.id)) {
+    //             return c;
+    //           }
+    //         }),
+    //       };
+    //     }),
+    //   };
+    // });
+
+    console.log(teamsAfterDelete);
+
+    const usersAfterDelete = $contactsStore.contacts.users.filter(
       u => !usersToDelete.includes(u._id)
     );
 
     console.log(usersAfterDelete);
 
     contactsStore.setContacts({
-      teams: $contactsStore.contacts.teams,
+      teams: teamsAfterDelete,
       users: usersAfterDelete,
     });
-
-    // usersStore.setOrders(ordersAfterDelete);
-    // postsStore.setPosts(postsAfterDelete);
 
     clearOverlayData();
   }
