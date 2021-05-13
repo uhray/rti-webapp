@@ -53,7 +53,11 @@
     driversList.forEach(d => {
       teamsList.push(d.name);
       d.subgroups.forEach(s => {
-        driverClassList.push(s.name);
+        if (s.name) {
+          driverClassList.push(s.name);
+        } else {
+          driverClassList.push('Unclassified');
+        }
         s.contacts.forEach(c => {
           driverIds.push(c.id);
         });

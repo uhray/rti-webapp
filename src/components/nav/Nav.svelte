@@ -9,17 +9,17 @@
     { icon: 'orders', text: 'Orders', link: 'orders' },
 
     { icon: 'message', text: 'Messages', link: 'messages', amount: 999 },
-    { icon: 'macro', text: 'Driver Macros', link: 'macros', amount: 3 },
-    {
-      icon: 'maintenance',
-      text: 'Maintenance',
-      link: 'maintenance',
-    },
-    {
-      icon: 'vehicle-fill',
-      text: 'Equipment',
-      link: 'equipment',
-    },
+    // { icon: 'macro', text: 'Driver Macros', link: 'macros', amount: 3 },
+    // {
+    //   icon: 'maintenance',
+    //   text: 'Maintenance',
+    //   link: 'maintenance',
+    // },
+    // {
+    //   icon: 'vehicle-fill',
+    //   text: 'Equipment',
+    //   link: 'equipment',
+    // },
     { text: 'line' },
     { icon: 'users', text: 'User Management', link: 'users' },
     { icon: 'settings', text: 'Settings', link: 'settings' },
