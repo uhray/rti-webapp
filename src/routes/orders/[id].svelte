@@ -294,7 +294,7 @@
   </div>
 {:else}
   <div class="Loader">
-    <div uk-spinner="ratio: 2" />
+    <div uk-spinner="ratio: 2" class="Loader-color" />
   </div>
 {/if}
 

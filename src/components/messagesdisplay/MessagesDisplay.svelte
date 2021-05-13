@@ -190,7 +190,7 @@
       </div>
     {:else}
       <div class="Messages-loading">
-        <div uk-spinner />
+        <div uk-spinner class="Loader-color" />
       </div>
     {/if}
   </div>

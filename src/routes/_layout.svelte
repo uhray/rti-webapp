@@ -129,7 +129,7 @@
     <main>
       {#if loading}
         <div class="loader">
-          <div uk-spinner="ratio: 2" />
+          <div uk-spinner="ratio: 2" class="Loader-color" />
         </div>
       {:else}
         <TopNav user={$userStore} />

@@ -1,7 +1,18 @@
+@import '../../theme/variables.scss';
+
 .Dropdown {
   border-radius: 8px;
   padding: 8px;
   margin: 0;
+
+  .Dropdown-loader {
+    position: relative;
+    color: $color--primary;
+    padding: 10px 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .Dropdown-header {
     display: flex;
