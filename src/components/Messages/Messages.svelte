@@ -19,11 +19,10 @@
   import moment from 'moment';
   import tools, { getContacts, addPost } from '../../tools/crudApi.ts';
   import { uuid } from '../../tools/uuid.ts';
-  import { userStore, postsStore, dataStore } from '../../store';
+  import { userStore, postsStore, repliesStore, dataStore } from '../../store';
 
   export let trigger;
   export let posts = undefined;
-  export let replies = undefined;
   export let me;
   export let contactsList = [];
   export let driversList = [];
@@ -78,15 +77,11 @@
   onMount(async () => {});
 
   const toggleReplies = id => {
-    replies = replies.map(r => {
-      if (r.id == id) {
-        return { id: r.id, display: !r.display };
-      } else {
-        return r;
-      }
-    });
+    const r = $repliesStore.replies.map(r =>
+      r.id == id ? { id: r.id, display: !r.display } : r
+    );
 
-    replies = replies;
+    repliesStore.setReplies(r);
   };
 
   function toggleMessageOverlay(team) {
@@ -167,6 +162,11 @@
 
     addPost(payload)
       .then(res => {
+        postsStore.setPosts([...$postsStore.posts, res]);
+        repliesStore.setReplies([
+          ...$repliesStore.replies,
+          { id: res._id, display: false },
+        ]);
         sendConfirmation = true;
       })
       .catch(err => {
@@ -224,7 +224,6 @@
       <MessagesDisplay
         {posts}
         {sortedPosts}
-        {replies}
         {me}
         {toggleReplies}
         contacts={contactsList}

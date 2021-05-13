@@ -13,7 +13,7 @@
   import Replies from '../Replies/Replies.svelte';
   import { uuid } from '../../tools/uuid.ts';
   import { capitalize } from '../../tools/capitalize.ts';
-  import { userStore, postsStore, dataStore } from '../../store';
+  import { userStore, postsStore, repliesStore, dataStore } from '../../store';
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
 
@@ -21,7 +21,6 @@
   export let sortedPosts = undefined;
   export let me;
   export let contacts = [];
-  export let replies;
   export let toggleReplies;
   export let orders;
   export let slug;
@@ -61,13 +60,33 @@
 
       editPost(replyPost._id, payload)
         .then(res => {
-          // console.log(res);
+          postsStore.setPosts(
+            $postsStore.posts.map(p =>
+              p._id === res._id ? { ...p, subthread: res.subthread } : p
+            )
+          );
+
+          replyPost = null;
+
+          return res._id;
+        })
+        .then(id => {
+          console.log(id);
+          console.log(
+            $repliesStore.replies.map(r => {
+              return r.id === id ? { ...r, display: true } : r;
+            })
+          );
+          repliesStore.setReplies(
+            $repliesStore.replies.map(r => {
+              return r._id === id ? { ...r, display: true } : r;
+            })
+          );
         })
         .catch(err => {
           console.log('Error adding reply: ', err);
+          replyPost = null;
         });
-
-      replyPost = null;
     } else {
       let payload = {
         from: me._id,
@@ -77,8 +96,13 @@
       };
 
       addPost(payload)
-        .then(res => {
-          // console.log(res);
+        .then(async res => {
+          await postsStore.setPosts([...$postsStore.posts, res]);
+          repliesStore.setReplies([
+            ...$repliesStore.replies,
+            { id: res._id, display: false },
+          ]);
+          scrollToBottom();
         })
         .catch(err => console.log('Error adding post: ', err));
     }
@@ -154,7 +178,6 @@
 
                 <Replies
                   {post}
-                  {replies}
                   {toggleReplies}
                   {handleReplyPost}
                   {findContact} />
@@ -167,7 +190,7 @@
       </div>
     {:else}
       <div class="Messages-loading">
-        <div uk-spinner />
+        <div uk-spinner class="Loader-color" />
       </div>
     {/if}
   </div>

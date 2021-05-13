@@ -34,6 +34,7 @@
   let statusSwitch = false;
   let truckOpts = [];
   let dropdownOpts = [];
+  let isVehicleLoading = false;
 
   $: {
     user = _.find($contactsStore.contacts.users, { id: id });
@@ -82,6 +83,7 @@
     basicInfo[e.target.name] = e.target.value;
     if (e.target.name === 'dm') {
       basicInfo.truckId = '';
+      isVehicleLoading = true;
     }
     updateUser();
   }
@@ -184,6 +186,8 @@
       teams: teamsAfterUpdate,
       users: usersAfterUpdate,
     });
+
+    isVehicleLoading = false;
   }
 </script>
 
@@ -280,7 +284,11 @@
             value={basicInfo.truckId}
             onChange={handleInput}
             icon="caretdown" />
-          <Dropdown simpleSelect={true} data={dropdownOpts} {handleSelect} />
+          <Dropdown
+            loading={isVehicleLoading}
+            simpleSelect={true}
+            data={dropdownOpts}
+            {handleSelect} />
         </div>
       </div>
     </form>

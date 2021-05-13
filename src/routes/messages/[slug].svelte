@@ -12,6 +12,7 @@
   import {
     userStore,
     postsStore,
+    repliesStore,
     contactsStore,
     ordersStore,
     dataStore,
@@ -33,7 +34,7 @@
   let orders = [];
   let loading = true;
 
-  onMount(async () => {
+  $: {
     allPosts = $postsStore.posts;
     contacts = $contactsStore.contacts;
     orders = $ordersStore.orders;
@@ -41,10 +42,10 @@
     dataStore.setPostsSlug(slug);
 
     sortDrivers();
-    await trigger(slug);
+    trigger(slug);
 
     loading = false;
-  });
+  }
 
   async function sortDrivers() {
     contactsList = contacts.users;
@@ -77,9 +78,6 @@
               p.truckId == _.find(contactsList, { id: id }).truckId
           );
     posts = posts;
-    replies = posts.map(post => {
-      return { id: post._id, display: false };
-    });
   }
 
   function trigger(id) {
@@ -90,7 +88,6 @@
 
 <Messages
   {posts}
-  {replies}
   {me}
   {contactsList}
   {driversList}

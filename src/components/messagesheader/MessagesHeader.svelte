@@ -22,7 +22,8 @@
           {contact ? contact.name : 'All Messages'}
         </span>
         <span class="Header-content-vehicle">
-          {contact.username.toUpperCase()} • {contact.truckId}
+          {contact.username.toUpperCase()}
+          {contact.truckId ? ' • ' + contact.truckId : ''}
         </span>
       </div>
       <div class="Header-content-actions">

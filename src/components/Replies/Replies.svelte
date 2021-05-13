@@ -3,12 +3,15 @@
   import Post from '../post/Post.svelte';
   import Icon from '../icon/Icon.svelte';
   import _ from 'lodash';
+  import { repliesStore } from '../../store';
 
   export let post = undefined;
-  export let replies = undefined;
   export let toggleReplies = undefined;
   export let handleReplyPost = undefined;
   export let findContact = undefined;
+
+  let replies;
+  $: replies = $repliesStore.replies;
 </script>
 
 <style src="./Replies.scss">

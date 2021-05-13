@@ -98,7 +98,7 @@
     {/each}
   {:else}
     <div class="ContactList-loading">
-      <div uk-spinner />
+      <div uk-spinner class="Loader-color" />
     </div>
   {/if}
 </div>
