@@ -5,6 +5,7 @@
   import {
     userStore,
     postsStore,
+    repliesStore,
     contactsStore,
     ordersStore,
     trucksStore,
@@ -33,8 +34,12 @@
       const c = await getContacts();
       const o = await getOrders();
       const t = await getTrucks();
+      const r = p.map(post => {
+        return { id: post._id, display: false };
+      });
 
       postsStore.setPosts(p);
+      repliesStore.setReplies(r);
       contactsStore.setContacts(c);
       ordersStore.setOrders(o);
       trucksStore.setTrucks(t);

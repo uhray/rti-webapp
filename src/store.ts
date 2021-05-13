@@ -3,6 +3,7 @@ import { getContacts, getPosts, getOrders } from './tools/crudApi';
 
 const currentUser = writable({});
 const posts = writable({});
+const replies = writable({});
 const contacts = writable({});
 const orders = writable({});
 const trucks = writable({});
@@ -17,6 +18,11 @@ export const userStore = {
 export const postsStore = {
   subscribe: posts.subscribe,
   setPosts: p => posts.set({ posts: p }),
+};
+
+export const repliesStore = {
+  subscribe: replies.subscribe,
+  setReplies: r => replies.set({ replies: r }),
 };
 
 export const contactsStore = {
