@@ -1,7 +1,7 @@
 <script>
   import PostHeader from '../PostHeader/PostHeader.svelte';
   import Label from '../label/Label.svelte';
-  import { capitalize } from '../../tools/capitalize.ts';
+  import { capitalize } from '../../tools/tools.ts';
 
   export let me;
   export let post;

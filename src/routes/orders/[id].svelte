@@ -19,7 +19,7 @@
   import MessageAttachments from '../../components/MessageAttachments/MessageAttachments.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
   import { getOrder, editPost, editOrder } from '../../tools/crudApi.ts';
-  import { uuid } from '../../tools/uuid.ts';
+  import { uuid } from '../../tools/tools.ts';
   import { userStore, ordersStore, postsStore } from '../../store.ts';
 
   export let id;

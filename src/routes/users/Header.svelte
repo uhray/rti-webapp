@@ -11,6 +11,7 @@
   export let search;
   export let handleSearch;
   export let handleFilter;
+  export let handleAdd;
   export let sortOpts = [
     {
       header: 'Name',
@@ -156,7 +157,7 @@
               width="100px"
               primary
               on:click={() => {
-                console.log('#TODO');
+                handleAdd('MANAGER');
               }}>
               Add Manager
             </Button>
@@ -170,7 +171,7 @@
               width="100px"
               primary
               on:click={() => {
-                console.log('#TODO');
+                handleAdd('ADMIN');
               }}>
               Add Admin
             </Button>

@@ -40,3 +40,43 @@ export function formatDate(d, canFormatDate = false) {
 
   return datetime;
 }
+
+export function formatInitials(name) {
+  if (name) {
+    var names = name.split(' '),
+      initials = names[0].substring(0, 1).toUpperCase();
+
+    if (names.length > 1) {
+      initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    }
+
+    return initials;
+  }
+  return;
+}
+
+export const getDisplayName = user => {
+  if (!user.contactInfo?.firstName) {
+    return user.username;
+  } else if (user.contactInfo?.firstName && !user.contactInfo?.lastName) {
+    return user.contactInfo.firstName;
+  } else {
+    return user.contactInfo.firstName + ' ' + user.contactInfo.lastName;
+  }
+};
+
+export function capitalize(string) {
+  if (string) {
+    return string.replace(/\w\S*/g, w =>
+      w.replace(/^\w/, c => c.toUpperCase())
+    );
+  }
+}
+
+export function uuid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}

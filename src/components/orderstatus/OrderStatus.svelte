@@ -6,8 +6,8 @@
   import TimelineSection from './sections/TimelineSection.svelte';
   import CustomerSection from './sections/CustomerSection.svelte';
   import ReferenceSection from './sections/ReferenceSection.svelte';
-  import { capitalize } from '../../tools/capitalize.ts';
-  import { formatDate } from '../../tools/formatDate.ts';
+  import { capitalize } from '../../tools/tools.ts';
+  import { formatDate } from '../../tools/tools.ts';
   import _ from 'lodash';
 
   export let order;
