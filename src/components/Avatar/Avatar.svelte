@@ -1,5 +1,5 @@
 <script>
-  import { formatInitials } from '../../tools/formatInitials';
+  import { formatInitials } from '../../tools/tools.ts';
 
   export let user;
   export let size;
