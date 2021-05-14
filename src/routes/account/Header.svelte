@@ -1,6 +1,5 @@
 <script>
-  import Button from '../../components/button/Button.svelte';
-  import SearchBar from '../../components/searchbar/SearchBar.svelte';
+
 </script>
 
 <style lang="scss">

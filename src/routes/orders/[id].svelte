@@ -1,7 +1,7 @@
 <script context="module">
   import _ from 'lodash';
 
-  export async function preload(page, session) {
+  export async function preload(page) {
     const { id } = page.params;
 
     return { id };
@@ -9,7 +9,6 @@
 </script>
 
 <script>
-  import { onMount } from 'svelte';
   import OrderHeader from './OrderHeader.svelte';
   import TripDetails from '../../components/tripdetails/TripDetails.svelte';
   import OrderStatus from '../../components/orderstatus/OrderStatus.svelte';
@@ -18,7 +17,7 @@
   import RichText from '../../components/richtext/RichText.svelte';
   import MessageAttachments from '../../components/MessageAttachments/MessageAttachments.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
-  import { getOrder, editPost, editOrder } from '../../tools/crudApi.ts';
+  import { editPost, editOrder } from '../../tools/crudApi.ts';
   import { uuid } from '../../tools/tools.ts';
   import { userStore, ordersStore, postsStore } from '../../store.ts';
 

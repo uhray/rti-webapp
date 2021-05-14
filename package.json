@@ -7,7 +7,7 @@
     "build": "sapper build",
     "export": "sapper export",
     "start": "node __sapper__/build",
-    "validate": "svelte-check --ignore src/node_modules/@sapper"
+    "validate": "svelte-check --ignore src/node_modules/@sapper --compiler-warnings 'css-unused-selector:ignore,unused-export-let:ignore'"
   },
   "dependencies": {
     "@types/form-data": "^2.5.0",
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@tsconfig/svelte": "^1.0.10",
     "@types/compression": "^1.7.0",
+    "@types/lodash": "^4.14.169",
     "@types/node": "^14.11.1",
     "@types/polka": "^0.5.1",
     "file-loader": "^6.0.0",

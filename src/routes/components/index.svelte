@@ -9,13 +9,11 @@
   import DropDown from '../../components/UK-DropDown/DropDown.svelte';
   import Input from '../../components/input/Input.svelte';
   import Error from '../../components/error/Error.svelte';
-  import Table from '../../components/table/Table.svelte';
   import Label from '../../components/label/Label.svelte';
   import TabMenu from '../../components/tabmenu/TabMenu.svelte';
   import ToolTip from '../../components/tooltip/ToolTip.svelte';
   import RichText from '../../components/richtext/RichText.svelte';
   import Card from '../../components/card/Card.svelte';
-  import { headers, tableData, tableDataSmall } from '../../data/fakeTableData';
 
   let error = false;
   let errorMessage = 'test';

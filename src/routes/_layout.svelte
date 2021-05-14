@@ -32,8 +32,8 @@
 
       const p = await getPosts({ allMessages: true });
       const c = await getContacts();
-      const o = await getOrders();
-      const t = await getTrucks();
+      const o = await getOrders({});
+      const t = await getTrucks({});
       const r = p.map(post => {
         return { id: post._id, display: false };
       });

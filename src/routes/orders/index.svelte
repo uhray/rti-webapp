@@ -1,8 +1,6 @@
 <script>
   import { onMount } from 'svelte';
   import Table from '../../components/table/Table.svelte';
-  import Button from '../../components/button/Button.svelte';
-  import SearchBar from '../../components/searchbar/SearchBar.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
   import { deleteOrder } from '../../tools/crudApi.ts';
   import _ from 'lodash';

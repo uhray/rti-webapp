@@ -1,5 +1,5 @@
 <script context="module">
-  export async function preload(page, session) {
+  export async function preload(page) {
     const { id } = page.params;
 
     return { id };
@@ -14,12 +14,7 @@
   import Input from '../../components/input/Input.svelte';
   import Dropdown from '../../components/Dropdown/Dropdown.svelte';
   import ProfileHeader from './ProfileHeader.svelte';
-  import {
-    getUser,
-    editUser,
-    getTeamTruckIds,
-    getContacts,
-  } from '../../tools/crudApi.ts';
+  import { editUser, getTeamTruckIds } from '../../tools/crudApi.ts';
   import { contactsStore, trucksStore } from '../../store';
   import { onMount } from 'svelte';
   import _ from 'lodash';
@@ -28,7 +23,6 @@
   export let id;
 
   let user;
-  let contacts;
   let trucks;
   let basicInfo = { first: '', last: '', dm: '', truckId: '' };
   let statusSwitch = false;
@@ -39,7 +33,6 @@
   $: {
     user = _.find($contactsStore.contacts.users, { id: id });
     trucks = $trucksStore.trucks;
-    contacts = $contactsStore.contacts;
 
     getTeamTruckIds(user.teamId).then(res => (truckOpts = res));
   }

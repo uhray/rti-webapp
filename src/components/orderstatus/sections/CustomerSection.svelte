@@ -1,6 +1,5 @@
 <script>
   import Divider from '../../divider/Divider.svelte';
-  import Icon from '../../icon/Icon.svelte';
 
   export let stop;
 </script>

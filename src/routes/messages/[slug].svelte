@@ -1,6 +1,5 @@
 <script context="module">
-  import { setContext } from 'svelte';
-  export async function preload(page, session) {
+  export async function preload(page) {
     const { slug } = page.params;
 
     return { slug };
@@ -8,11 +7,9 @@
 </script>
 
 <script>
-  import { onMount } from 'svelte';
   import {
     userStore,
     postsStore,
-    repliesStore,
     contactsStore,
     ordersStore,
     dataStore,
@@ -23,7 +20,6 @@
 
   let allPosts = [];
   let posts = [];
-  let replies = [];
   let me = {};
   let contactsList = [];
   let driversList = [];
