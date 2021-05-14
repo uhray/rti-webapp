@@ -3,8 +3,22 @@
   import Input from '../../input/Input.svelte';
   import Checkbox from '../../checkbox/Checkbox.svelte';
   import Button from '../../button/Button.svelte';
-  import { userLogin, auth } from '../../../tools/crudApi';
-  import { userStore, postsStore } from '../../../store';
+  import {
+    userLogin,
+    auth,
+    getPosts,
+    getContacts,
+    getOrders,
+    getTrucks,
+  } from '../../../tools/crudApi';
+  import {
+    userStore,
+    postsStore,
+    repliesStore,
+    contactsStore,
+    ordersStore,
+    trucksStore,
+  } from '../../../store';
   import {
     isEmpty,
     validEmail,
@@ -29,7 +43,20 @@
         const user = await auth();
         if (user) {
           userStore.setCurrent(user);
-          postsStore.getPosts();
+
+          const p = await getPosts({ allMessages: true });
+          const c = await getContacts();
+          const o = await getOrders();
+          const t = await getTrucks();
+          const r = p.map(post => {
+            return { id: post._id, display: false };
+          });
+
+          postsStore.setPosts(p);
+          repliesStore.setReplies(r);
+          contactsStore.setContacts(c);
+          ordersStore.setOrders(o);
+          trucksStore.setTrucks(t);
           goto('/');
         }
       }
