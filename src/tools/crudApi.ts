@@ -66,6 +66,7 @@ export const userSignup = async data => {
   const res = await tools.fetch(options().baseUrl + '/users', {
     method: 'POST',
     body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
   // console.log('signup res', res);
   return res;

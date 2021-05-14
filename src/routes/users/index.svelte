@@ -3,7 +3,9 @@
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
-  import { deleteUser, getContacts } from '../../tools/crudApi.ts';
+  import OverlayAddUser from '../../components/OverlayAddUser/OverlayAddUser.svelte';
+  import { deleteUser, userSignup } from '../../tools/crudApi.ts';
+  import { getDisplayName } from '../../tools/tools.ts';
   import { contactsStore, userStore } from '../../store';
   import moment from 'moment';
   import _ from 'lodash';
@@ -42,7 +44,11 @@
   let filter = undefined;
   let usersToDelete = [];
   let displayOverlayDelete = false;
+  let displayOverlayAdd = false;
   let isMultiple = false;
+  let sendConfirmation = false;
+  let addUserType = 'MANAGER';
+  let overlayError = '';
 
   let headerHeight = 0;
 
@@ -171,11 +177,55 @@
     isMultiple = true;
   }
 
+  function handleAdd(role) {
+    addUserType = role;
+
+    displayOverlayAdd = true;
+  }
+
   function clearOverlayData() {
     usersToDelete = [];
     displayOverlayDelete = false;
     let checkboxes = document.getElementsByClassName('uk-checkbox');
     Array.from(checkboxes).forEach(c => (c.checked = false));
+
+    displayOverlayAdd = false;
+    sendConfirmation = false;
+  }
+
+  function addUser(data) {
+    overlayError = null;
+    const user = {
+      contactInfo: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+      },
+      username: data.username,
+      password: data.password,
+      role: data.role,
+      teamId: data.teamId,
+    };
+    console.log('add');
+
+    userSignup(user)
+      .then(res => {
+        console.log(res);
+        sendConfirmation = true;
+
+        contactsStore.setContacts({
+          ...$contactsStore.contacts,
+          users: [
+            ...$contactsStore.contacts.users,
+            { ...res, name: getDisplayName(res) },
+          ],
+        });
+      })
+      .catch(err => {
+        console.log('ERROR FROM INDEX', err);
+
+        overlayError = err.code;
+      });
   }
 
   async function deleteUsers() {
@@ -253,7 +303,8 @@
   {handleTab}
   {search}
   {handleSearch}
-  {handleFilter} />
+  {handleFilter}
+  {handleAdd} />
 <!-- Show This Link Tag Only If Users/Admins are Selected -->
 <!-- <div class="uk-flex uk-align-right delete-section">
   <a class="delete-link">Delete Selections</a>
@@ -278,4 +329,13 @@
     send={deleteUsers}
     type={'user'}
     {isMultiple} />
+{/if}
+
+{#if displayOverlayAdd}
+  <OverlayAddUser
+    {overlayError}
+    {addUserType}
+    {sendConfirmation}
+    {clearOverlayData}
+    send={addUser} />
 {/if}

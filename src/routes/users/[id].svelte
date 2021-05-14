@@ -23,7 +23,7 @@
   import { contactsStore, trucksStore } from '../../store';
   import { onMount } from 'svelte';
   import _ from 'lodash';
-  import { getDisplayName } from '../../tools/getDisplayName';
+  import { getDisplayName } from '../../tools/tools.ts';
 
   export let id;
 
