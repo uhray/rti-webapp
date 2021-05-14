@@ -18,7 +18,7 @@
   import _ from 'lodash';
   import moment from 'moment';
   import tools, { getContacts, addPost } from '../../tools/crudApi.ts';
-  import { uuid } from '../../tools/uuid.ts';
+  import { uuid } from '../../tools/tools.ts';
   import { userStore, postsStore, repliesStore, dataStore } from '../../store';
 
   export let trigger;

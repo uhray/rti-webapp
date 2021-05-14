@@ -4,7 +4,7 @@
   import Checkbox from '../checkbox/Checkbox.svelte';
   import OrderStatusLabel from '../OrderStatusLabel/OrderStatusLabel.svelte';
   import Icon from '../icon/Icon.svelte';
-  import { formatDate } from '../../tools/formatDate.ts';
+  import { formatDate } from '../../tools/tools.ts';
   import moment from 'moment';
 
   export let headers = [];

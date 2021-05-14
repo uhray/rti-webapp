@@ -11,8 +11,8 @@
   import OrderMessageCard from '../OrderMessageCard/OrderMessageCard.svelte';
   import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
   import Replies from '../Replies/Replies.svelte';
-  import { uuid } from '../../tools/uuid.ts';
-  import { capitalize } from '../../tools/capitalize.ts';
+  import { uuid } from '../../tools/tools.ts';
+  import { capitalize } from '../../tools/tools.ts';
   import { userStore, postsStore, repliesStore, dataStore } from '../../store';
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
