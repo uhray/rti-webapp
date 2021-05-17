@@ -9,6 +9,7 @@
     contactsStore,
     ordersStore,
     trucksStore,
+    teamsStore,
   } from '../store';
   import {
     auth,
@@ -17,6 +18,7 @@
     getOrders,
     getTrucks,
     editUser,
+    getTeams,
   } from '../tools/crudApi';
   import moment from 'moment';
 
@@ -34,6 +36,7 @@
       const c = await getContacts();
       const o = await getOrders({});
       const t = await getTrucks({});
+      const m = await getTeams({ noAggregate: true });
       const r = p.map(post => {
         return { id: post._id, display: false };
       });
@@ -43,6 +46,7 @@
       contactsStore.setContacts(c);
       ordersStore.setOrders(o);
       trucksStore.setTrucks(t);
+      teamsStore.setTeams(m);
     } else {
       segment = 'signin';
     }

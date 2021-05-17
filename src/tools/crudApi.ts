@@ -199,6 +199,15 @@ export const editTruck = async (id, data) => {
 };
 
 /******************** TEAMS ********************/
+export const getTeams = async query => {
+  const res = await tools.fetch(options().baseUrl + '/teams', {
+    qs: query,
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
 export const getTeamTruckIds = async id => {
   const res = await tools.fetch(
     options().baseUrl + '/teams/' + id + '/truckIds',

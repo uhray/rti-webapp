@@ -22,6 +22,7 @@
     // },
     { text: 'line' },
     { icon: 'users', text: 'User Management', link: 'users' },
+    { icon: 'users', text: 'Teams Management', link: 'teams' },
     { icon: 'settings', text: 'Settings', link: 'settings' },
     // { text: 'line' },
     // { icon: 'home', text: 'Home', link: '' },
