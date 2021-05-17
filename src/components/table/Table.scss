@@ -57,6 +57,7 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      align-self: center;
     }
 
     .Table-row-orderNumber {
@@ -105,6 +106,20 @@
 
   .Table-empty {
     text-align: center;
+  }
+
+  .Table-label {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-start;
+    height: 28px;
+    background: rgba(36, 62, 147, 0.05);
+    border-radius: 4px;
+    padding: 2px 4px 2px 8px;
+    font-size: 14px;
+    margin-right: 5px;
   }
 }
 

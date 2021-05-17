@@ -3,8 +3,7 @@
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
-  import OverlayAddUser from '../../components/OverlayAddUser/OverlayAddUser.svelte';
-  import { deleteUser, userSignup } from '../../tools/crudApi.ts';
+  import { deleteTeam } from '../../tools/crudApi.ts';
   import { getDisplayName } from '../../tools/tools.ts';
   import { contactsStore, teamsStore, userStore } from '../../store';
   import moment from 'moment';
@@ -15,16 +14,16 @@
   let teamsMapped = [];
 
   let headers = [
-    { header: 'name', text: 'Full Name' },
+    { header: 'name', text: 'Team Name' },
     { header: 'dm', text: 'Driver Manager' },
     { header: 'trucks', text: 'Trucks' },
     { header: 'userActions', text: 'Actions' },
   ];
 
-  let selectedTab = 'Users';
+  let selectedTab = 'Teams';
   let search = undefined;
   let filter = undefined;
-  let usersToDelete = [];
+  let teamsToDelete = [];
   let displayOverlayDelete = false;
   let displayOverlayAdd = false;
   let isMultiple = false;
@@ -33,39 +32,48 @@
   let headerHeight = 0;
 
   $: {
+    role = $userStore.user.role;
     teams = $teamsStore.teams;
     console.log(teams);
-    teams.forEach(t =>
-      teamsMapped.push({
-        name: t.teamId,
-        dm: getDisplayName(t.manager[0]),
-        trucks: t.trucks.map(tr => tr.truckId).join(', '),
+    teamsMapped = teams
+      .map(t => {
+        return {
+          type: 'teams',
+          id: t._id,
+          name: t.teamId,
+          dm: t.manager[0] ? getDisplayName(t.manager[0]) : '',
+          trucks: t.trucks.map(tr => tr.truckId),
+        };
       })
-    );
+      .filter(u =>
+        Object.keys(u).some(k => {
+          if (['name', 'dm', 'trucks'].includes(k)) {
+            let regex = new RegExp(search, 'i');
+            return regex.test(u[k]);
+          }
+        })
+      );
 
-    console.log(teamsMapped);
+    handleSort();
   }
 
   onMount(() => {
     if (document) {
-      let hHeight = document.getElementById('Header').offsetHeight;
-      let tabsHeight = document.getElementById('Header-tabs').offsetHeight;
-
-      headerHeight = hHeight + tabsHeight + 50;
+      headerHeight = document.getElementById('Header').offsetHeight + 100;
     }
   });
 
   function handleSort(v) {
     if (v === 'new') {
-      usersMapped = _.sortBy(usersMapped, 'createdAt').reverse();
+      teamsMapped = _.sortBy(teamsMapped, 'createdAt').reverse();
     } else if (v === 'old') {
-      usersMapped = _.sortBy(usersMapped, 'createdAt');
+      teamsMapped = _.sortBy(teamsMapped, 'createdAt');
     } else if (v === 'aToZ') {
-      usersMapped = _.sortBy(usersMapped, 'name');
+      teamsMapped = _.sortBy(teamsMapped, 'name');
     } else if (v === 'zToA') {
-      usersMapped = _.sortBy(usersMapped, 'name').reverse();
+      teamsMapped = _.sortBy(teamsMapped, 'name').reverse();
     } else {
-      usersMapped = _.sortBy(usersMapped, 'name');
+      teamsMapped = _.sortBy(teamsMapped, 'name');
     }
   }
 
@@ -82,17 +90,17 @@
   }
 
   function handleCheck(id) {
-    if (usersToDelete.includes(id)) {
-      usersToDelete = usersToDelete.filter(o => o !== id);
+    if (teamsToDelete.includes(id)) {
+      teamsToDelete = teamsToDelete.filter(o => o !== id);
     } else {
-      usersToDelete.push(id);
+      teamsToDelete.push(id);
     }
 
-    usersToDelete = usersToDelete;
+    teamsToDelete = teamsToDelete;
   }
 
   async function handleDelete(id) {
-    usersToDelete.push(id);
+    teamsToDelete.push(id);
     displayOverlayDelete = true;
     isMultiple = false;
   }
@@ -103,13 +111,12 @@
   }
 
   function handleAdd(role) {
-    addUserType = role;
-
-    displayOverlayAdd = true;
+    console.log('#todo');
+    // displayOverlayAdd = true;
   }
 
   function clearOverlayData() {
-    usersToDelete = [];
+    teamsToDelete = [];
     displayOverlayDelete = false;
     let checkboxes = document.getElementsByClassName('uk-checkbox');
     Array.from(checkboxes).forEach(c => (c.checked = false));
@@ -118,22 +125,22 @@
     sendConfirmation = false;
   }
 
-  function addUser(data) {
+  function addTeam(data) {
     overlayError = null;
-    const user = {
+    const team = {
       contactInfo: {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
       },
-      username: data.username,
+      teamname: data.teamname,
       password: data.password,
       role: data.role,
       teamId: data.teamId,
     };
     console.log('add');
 
-    userSignup(user)
+    teamSignup(team)
       .then(res => {
         console.log(res);
         sendConfirmation = true;
@@ -153,50 +160,25 @@
       });
   }
 
-  async function deleteUsers() {
-    usersToDelete.forEach(async u => {
-      await deleteUser(u);
+  async function deleteTeams() {
+    teamsToDelete.forEach(async u => {
+      await deleteTeam(u);
     });
 
-    let teamsAfterDelete = $contactsStore.contacts.teams.map(d => {
-      return {
-        ...d,
-        subgroups: d.subgroups.map(s => {
-          return {
-            ...s,
-            contacts: s.contacts.flatMap(c =>
-              !c.states.isDeleted && !usersToDelete.includes(c.id) ? c : []
-            ),
-          };
-        }),
-      };
-    });
+    console.log($teamsStore.teams.filter(u => !teamsToDelete.includes(u._id)));
 
-    teamsAfterDelete = teamsAfterDelete.map(d => {
-      return {
-        ...d,
-        subgroups: d.subgroups.flatMap(s => (s.contacts.length > 0 ? s : [])),
-      };
-    });
-
-    const usersAfterDelete = $contactsStore.contacts.users.filter(
-      u => !usersToDelete.includes(u._id)
+    teamsStore.setTeams(
+      $teamsStore.teams.filter(u => !teamsToDelete.includes(u._id))
     );
-
-    contactsStore.setContacts({
-      teams: teamsAfterDelete,
-      users: usersAfterDelete,
-    });
 
     clearOverlayData();
   }
 </script>
 
 <style lang="scss">
-  .ManagePage {
+  .TeamsPage {
     box-sizing: border-box;
     padding: 2em;
-    margin-top: 3em;
 
     .delete-section {
       margin: 0px 15px 5px 0px;
@@ -218,7 +200,7 @@
 </style>
 
 <svelte:head>
-  <title>Users</title>
+  <title>Teams</title>
 </svelte:head>
 
 <Header
@@ -230,19 +212,15 @@
   {handleSearch}
   {handleFilter}
   {handleAdd} />
-<!-- Show This Link Tag Only If Users/Admins are Selected -->
-<!-- <div class="uk-flex uk-align-right delete-section">
-  <a class="delete-link">Delete Selections</a>
-  <Icon type="delete" color="#2b8af7" />
-</div> -->
-<section class="ManagePage">
+
+<section class="TeamsPage">
   <Table
     {headers}
     data={teamsMapped}
     {handleDelete}
     {handleDeleteSelected}
     {handleCheck}
-    selected={usersToDelete}
+    selected={teamsToDelete}
     height={'100vh'}
     {headerHeight} />
   <br />
@@ -251,16 +229,16 @@
 {#if displayOverlayDelete}
   <OverlayDelete
     {clearOverlayData}
-    send={deleteUsers}
-    type={'user'}
+    send={deleteTeams}
+    type={'team'}
     {isMultiple} />
 {/if}
 
-{#if displayOverlayAdd}
-  <OverlayAddUser
+<!-- {#if displayOverlayAdd}
+  <OverlayAddTeam
     {overlayError}
-    {addUserType}
+    {addTeamType}
     {sendConfirmation}
     {clearOverlayData}
-    send={addUser} />
-{/if}
+    send={addTeam} />
+{/if} -->

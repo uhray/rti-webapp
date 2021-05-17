@@ -117,15 +117,15 @@
 </style>
 
 <svelte:head>
-  <title>User Management</title>
+  <title>Team Management</title>
 </svelte:head>
 
 <div class="Header" id="Header">
   <div class="Header-container">
     <div class="Header-content">
       <div class="Header-titles">
-        <h2 class="Header-title">User Management</h2>
-        <p class="Header-subtitle">Here you can manage your active users.</p>
+        <h2 class="Header-title">Team Management</h2>
+        <p class="Header-subtitle">Here you can manage your teams.</p>
       </div>
 
       <div class="Header-actions">
@@ -150,41 +150,22 @@
           <div style="margin-left: 5px;" />
         {/if}
 
-        {#if role === 'ADMIN' && selectedTab === 'Managers'}
+        {#if role === 'ADMIN'}
           <div>
             <Button
               height="40px"
               width="100px"
               primary
               on:click={() => {
-                handleAdd('MANAGER');
+                handleAdd();
               }}>
-              Add Manager
+              Add Team
             </Button>
           </div>
         {/if}
 
-        {#if role === 'ADMIN' && selectedTab === 'Admins'}
-          <div>
-            <Button
-              height="40px"
-              width="100px"
-              primary
-              on:click={() => {
-                handleAdd('ADMIN');
-              }}>
-              Add Admin
-            </Button>
-          </div>
-        {/if}
       </div>
     </div>
-    <div class="Header-tabs" id="Header-tabs">
-      <TabMenu
-        type="default"
-        tabs={role === 'ADMIN' ? ['Users', 'Managers', 'Admins'] : ['Users', 'Managers']}
-        {selectedTab}
-        {handleTab} />
-    </div>
+
   </div>
 </div>
