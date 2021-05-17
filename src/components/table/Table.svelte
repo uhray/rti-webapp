@@ -8,6 +8,8 @@
   import { formatDate } from '../../tools/tools.ts';
   import moment from 'moment';
   import NavItem from '../navitem/NavItem.svelte';
+  import Dropdown from '../Dropdown/Dropdown.svelte';
+  import { values } from 'lodash';
 
   export let headers = [];
   export let data = [];
@@ -18,6 +20,10 @@
   export let handleDeleteSelected = undefined;
   export let handleCheck = undefined;
   export let selected = [];
+
+  export let removeTruckFromTeam = undefined;
+  export let truckOpts = undefined;
+  export let handleSelectTruck = undefined;
 
   function getHeaderSize(size) {
     if (size === 'small') {
@@ -35,11 +41,6 @@
     } else {
       return 'auto';
     }
-  }
-
-  $: {
-    data = data;
-    console.log(data);
   }
 </script>
 
@@ -110,7 +111,7 @@
                                   xmlns="http://www.w3.org/2000/svg"
                                   class="clickable"
                                   on:click={() => {
-                                    console.log('#todo');
+                                    removeTruckFromTeam(item.id, truck);
                                   }}>
                                   <path
                                     d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25
@@ -139,11 +140,7 @@
                               &nbsp;
                             {/each}
 
-                            <div
-                              class="Table-label uk-flex clickable"
-                              on:click={() => {
-                                console.log('#todo');
-                              }}>
+                            <div class="Table-label uk-flex clickable">
                               Add
                               <svg
                                 width="24"
@@ -161,7 +158,15 @@
                                   17.75V12.75H17.75C17.875 12.75 18 12.6562 18
                                   12.5V11.5C18 11.375 17.875 11.25 17.75 11.25Z" />
                               </svg>
+
                             </div>
+                            <Dropdown
+                              simpleSelect={true}
+                              data={truckOpts}
+                              handleSelect={v => {
+                                handleSelectTruck(item.id, v);
+                              }} />
+
                           </div>
                         {/if}
                       {:else if header.header == 'view'}

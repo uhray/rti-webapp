@@ -219,6 +219,15 @@ export const getTeamTruckIds = async id => {
   return res;
 };
 
+export const editTeam = async (id, data) => {
+  const res = await tools.fetch(options().baseUrl + '/teams/' + id, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  return res;
+};
+
 export const deleteTeam = async id => {
   const res = await tools.fetch(options().baseUrl + '/teams/' + id, {
     method: 'DELETE',

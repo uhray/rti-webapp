@@ -3,15 +3,21 @@
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
-  import { deleteTeam } from '../../tools/crudApi.ts';
+  import { deleteTeam, editTeam } from '../../tools/crudApi.ts';
   import { getDisplayName } from '../../tools/tools.ts';
-  import { contactsStore, teamsStore, userStore } from '../../store';
+  import {
+    contactsStore,
+    teamsStore,
+    trucksStore,
+    userStore,
+  } from '../../store';
   import moment from 'moment';
   import _ from 'lodash';
 
   let role;
   let teams = [];
   let teamsMapped = [];
+  let truckOpts = [];
 
   let headers = [
     { header: 'name', text: 'Team Name' },
@@ -34,7 +40,26 @@
   $: {
     role = $userStore.user.role;
     teams = $teamsStore.teams;
-    console.log(teams);
+    let trucks = $trucksStore.trucks;
+    let busyTrucks = [];
+
+    teams.forEach(t => {
+      t.trucks.forEach(tr => {
+        busyTrucks.push(tr.truckId);
+      });
+    });
+
+    truckOpts = [
+      {
+        header: 'Available Trucks',
+        opts: trucks
+          .flatMap(t => (!busyTrucks.includes(t.truckId) ? t.truckId : []))
+          .map(o => {
+            return { text: o, value: o, selected: false };
+          }),
+      },
+    ];
+
     teamsMapped = teams
       .map(t => {
         return {
@@ -165,13 +190,43 @@
       await deleteTeam(u);
     });
 
-    console.log($teamsStore.teams.filter(u => !teamsToDelete.includes(u._id)));
-
     teamsStore.setTeams(
       $teamsStore.teams.filter(u => !teamsToDelete.includes(u._id))
     );
 
     clearOverlayData();
+  }
+
+  function removeTruckFromTeam(teamId, truckId) {
+    console.log(`Removing ${truckId} from ${teamId}`);
+  }
+
+  function handleSelectTruck(teamId, truckId) {
+    console.log(`Adding ${truckId} to ${teamId}`);
+
+    let teamToEdit = _.find(teams, { _id: teamId });
+
+    console.log(teamToEdit);
+    // teamToEdit.trucks = [...teamToEdit.trucks.map(t => t.truckId), truckId];
+    // teamToEdit.manager = teamToEdit.manager.map(m => m._id);
+
+    let t = teamToEdit.trucks.map(t => t.truckId);
+    console.log(t);
+
+    teamToEdit = {
+      ...teamToEdit,
+      manager: teamToEdit.manager.map(m => m._id),
+      trucks: [...t, truckId],
+    };
+
+    console.log(teamToEdit);
+    delete teamToEdit.truckIds;
+
+    editTeam(teamToEdit.teamId, teamToEdit).then(res => {
+      console.log(res);
+
+      // EDIT STORE
+    });
   }
 </script>
 
@@ -222,7 +277,10 @@
     {handleCheck}
     selected={teamsToDelete}
     height={'100vh'}
-    {headerHeight} />
+    {headerHeight}
+    {removeTruckFromTeam}
+    {truckOpts}
+    {handleSelectTruck} />
   <br />
 </section>
 

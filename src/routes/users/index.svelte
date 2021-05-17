@@ -206,11 +206,9 @@
       role: data.role,
       teamId: data.teamId,
     };
-    console.log('add');
 
     userSignup(user)
       .then(res => {
-        console.log(res);
         sendConfirmation = true;
 
         contactsStore.setContacts({
