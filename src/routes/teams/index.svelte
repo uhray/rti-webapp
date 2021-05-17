@@ -198,20 +198,38 @@
   }
 
   function removeTruckFromTeam(teamId, truckId) {
-    console.log(`Removing ${truckId} from ${teamId}`);
+    let teamToEdit = _.find(teams, { _id: teamId });
+
+    let t = teamToEdit.trucks.map(t => t.truckId).filter(t => t !== truckId);
+
+    teamToEdit = {
+      ...teamToEdit,
+      manager: teamToEdit.manager.map(m => m._id),
+      trucks: t,
+    };
+
+    delete teamToEdit.truckIds;
+    delete teamToEdit.__v;
+
+    editTeam(teamToEdit.teamId, teamToEdit).then(res => {
+      teamsStore.setTeams(
+        $teamsStore.teams.map(t => {
+          if (t._id == teamId) {
+            return {
+              ...t,
+              trucks: t.trucks.filter(tr => tr.truckId !== truckId),
+            };
+          } else {
+            return t;
+          }
+        })
+      );
+    });
   }
 
   function handleSelectTruck(teamId, truckId) {
-    console.log(`Adding ${truckId} to ${teamId}`);
-
     let teamToEdit = _.find(teams, { _id: teamId });
-
-    console.log(teamToEdit);
-    // teamToEdit.trucks = [...teamToEdit.trucks.map(t => t.truckId), truckId];
-    // teamToEdit.manager = teamToEdit.manager.map(m => m._id);
-
     let t = teamToEdit.trucks.map(t => t.truckId);
-    console.log(t);
 
     teamToEdit = {
       ...teamToEdit,
@@ -219,13 +237,23 @@
       trucks: [...t, truckId],
     };
 
-    console.log(teamToEdit);
     delete teamToEdit.truckIds;
+    delete teamToEdit.__v;
 
     editTeam(teamToEdit.teamId, teamToEdit).then(res => {
-      console.log(res);
-
-      // EDIT STORE
+      teamsStore.setTeams(
+        $teamsStore.teams.map(t => {
+          if (t._id == teamId) {
+            let newTruck = _.find($trucksStore.trucks, { truckId: truckId });
+            return {
+              ...t,
+              trucks: [...t.trucks, newTruck],
+            };
+          } else {
+            return t;
+          }
+        })
+      );
     });
   }
 </script>
