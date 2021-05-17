@@ -16,6 +16,10 @@
     &[disabled] {
       background-color: #fff;
     }
+
+    &[noborder] {
+      border: 0 !important;
+    }
   }
 
   input[invalid='true'] {

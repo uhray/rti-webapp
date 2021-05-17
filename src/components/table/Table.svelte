@@ -9,6 +9,7 @@
   import moment from 'moment';
   import NavItem from '../navitem/NavItem.svelte';
   import Dropdown from '../Dropdown/Dropdown.svelte';
+  import Input from '../input/Input.svelte';
   import { values } from 'lodash';
 
   export let headers = [];
@@ -23,7 +24,9 @@
 
   export let removeTruckFromTeam = undefined;
   export let truckOpts = undefined;
+  export let managerOpts = undefined;
   export let handleSelectTruck = undefined;
+  export let handleSelectManager = undefined;
 
   function getHeaderSize(size) {
     if (size === 'small') {
@@ -97,6 +100,18 @@
                         <span class="Table-row-orderDate">
                           {moment(item.createdAt).format('MMM D, YYYY')}
                         </span>
+                      {:else if header.header == 'dm'}
+                        <Input
+                          value={item[header.header]}
+                          icon="caretdown"
+                          disabled
+                          noborder />
+                        <Dropdown
+                          simpleSelect={true}
+                          data={managerOpts}
+                          handleSelect={v => {
+                            handleSelectManager(item.id, v);
+                          }} />
                       {:else if header.header == 'trucks'}
                         {#if item.trucks}
                           <div class="uk-flex">

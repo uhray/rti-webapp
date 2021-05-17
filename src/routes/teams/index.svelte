@@ -18,6 +18,7 @@
   let teams = [];
   let teamsMapped = [];
   let truckOpts = [];
+  let managerOpts = [];
 
   let headers = [
     { header: 'name', text: 'Team Name' },
@@ -41,22 +42,43 @@
     role = $userStore.user.role;
     teams = $teamsStore.teams;
     let trucks = $trucksStore.trucks;
-    let busyTrucks = [];
+    let unavailableTrucks = [];
+    let unavailableManagers = [];
 
     teams.forEach(t => {
       t.trucks.forEach(tr => {
-        busyTrucks.push(tr.truckId);
+        unavailableTrucks.push(tr.truckId);
       });
+      unavailableManagers.push(t.manager[0]._id);
     });
+
+    let managers = $contactsStore.contacts.users.filter(
+      u => u.role === 'MANAGER'
+    );
 
     truckOpts = [
       {
         header: 'Available Trucks',
         opts: trucks
-          .flatMap(t => (!busyTrucks.includes(t.truckId) ? t.truckId : []))
+          .flatMap(t =>
+            !unavailableTrucks.includes(t.truckId) ? t.truckId : []
+          )
           .map(o => {
             return { text: o, value: o, selected: false };
           }),
+      },
+    ];
+
+    managerOpts = [
+      {
+        header: 'Available Managers',
+        opts: [{ text: '-', value: null, selected: false }].concat(
+          managers
+            .flatMap(t => (!unavailableManagers.includes(t._id) ? t : []))
+            .map(o => {
+              return { text: o.name, value: o._id, selected: false };
+            })
+        ),
       },
     ];
 
@@ -256,6 +278,10 @@
       );
     });
   }
+
+  function handleSelectManager(teamId, managerId) {
+    console.log(`Selecting ${managerId} for team ${teamId}`);
+  }
 </script>
 
 <style lang="scss">
@@ -308,7 +334,9 @@
     {headerHeight}
     {removeTruckFromTeam}
     {truckOpts}
-    {handleSelectTruck} />
+    {managerOpts}
+    {handleSelectTruck}
+    {handleSelectManager} />
   <br />
 </section>
 

@@ -16,6 +16,7 @@
   export let value = '';
   export let name = undefined;
   export let disabled = undefined;
+  export let noborder = undefined;
 
   let showPassword = false;
 
@@ -55,6 +56,7 @@
         {invalid}
         {isFocused}
         {disabled}
+        {noborder}
         on:input
         on:focus={onFocus}
         on:blur={onBlur}
