@@ -11,7 +11,7 @@
 
 <div
   class="Avatar"
-  style={`width: ${size ? size + 'px' : '40px'}; height: ${size ? size + 'px' : '40px'};`}>
+  style={`width: ${size ? size + 'px' : '40px'}; height: ${size ? size + 'px' : '40px'}; font-size: ${size ? size / 2 + 'px' : '10px'}`}>
   {#if user}
     {#if user.avatarUrl}
       <img src={user.avatarUrl} alt={user.name || user.username} />

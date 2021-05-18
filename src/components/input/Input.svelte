@@ -80,6 +80,8 @@
         {placeholder}
         {invalid}
         {isFocused}
+        {disabled}
+        {noborder}
         on:input
         on:focus={onFocus}
         on:blur={onBlur} />
