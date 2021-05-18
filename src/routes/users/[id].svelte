@@ -16,7 +16,7 @@
   import Dropdown from '../../components/Dropdown/Dropdown.svelte';
   import ProfileHeader from './ProfileHeader.svelte';
   import { editUser, getTeamTruckIds } from '../../tools/crudApi.ts';
-  import { contactsStore, trucksStore } from '../../store';
+  import { contactsStore, trucksStore, userStore } from '../../store';
   import { onMount } from 'svelte';
   import _ from 'lodash';
   import { getDisplayName } from '../../tools/tools.ts';
@@ -30,10 +30,17 @@
   let truckOpts = [];
   let dropdownOpts = [];
   let isVehicleLoading = false;
+  let disabled = false;
 
   $: {
     user = _.find($contactsStore.contacts.users, { id: id });
     trucks = $trucksStore.trucks;
+    disabled =
+      user.role === 'MANAGER'
+        ? $userStore.user.role !== 'ADMIN'
+          ? true
+          : false
+        : false;
 
     if (user.role === 'DRIVER') {
       getTeamTruckIds(user.teamId).then(res => (truckOpts = res));
@@ -233,17 +240,18 @@
 
     <br />
 
-    <div
-      on:click={() => {
-        console.log('#TODO');
-      }}>
-      <Button primary outline>
-        Upload New Image
-        <Icon type="upload" color="#15224b" slotend />
-      </Button>
-    </div>
-
-    <br />
+    {#if !disabled}
+      <div
+        on:click={() => {
+          console.log('#TODO');
+        }}>
+        <Button primary outline>
+          Upload New Image
+          <Icon type="upload" color="#15224b" slotend />
+        </Button>
+      </div>
+      <br />
+    {/if}
 
     <div class="uk-width-2-3">
       <Divider />
@@ -257,12 +265,14 @@
           name="first"
           label="First Name"
           value={basicInfo.first}
-          onChange={handleInput} />
+          onChange={handleInput}
+          {disabled} />
         <Input
           name="last"
           label="Last Name"
           value={basicInfo.last}
-          onChange={handleInput} />
+          onChange={handleInput}
+          {disabled} />
       </div>
       <br />
       {#if user.role === 'DRIVER'}
@@ -296,30 +306,32 @@
       <Divider />
     </div>
     <!-- Section for User Status -->
-    <h3>User Status</h3>
-    <div class="uk-flex">
-      <p class="toggle-text">Status Active (Off/On)</p>
-      <Switch {handleSwitch} checked={statusSwitch} />
-    </div>
+    {#if user.role === 'MANAGER' ? ($userStore.user.role !== 'ADMIN' ? false : true) : true}
+      <h3>User Status</h3>
+      <div class="uk-flex">
+        <p class="toggle-text">Status Active (Off/On)</p>
+        <Switch {handleSwitch} checked={statusSwitch} {disabled} />
+      </div>
 
-    <br />
+      <br />
 
-    <div class="uk-width-2-3">
-      <Divider />
-    </div>
+      <div class="uk-width-2-3">
+        <Divider />
+      </div>
+    {/if}
 
     <h3>Login Information</h3>
 
     <form class="uk-form-stacked">
       <div class="half">
         <div class="row">
-          <Input label="User ID" />
+          <Input label="User ID" {disabled} />
         </div>
         <div class="row">
-          <Input type="password" label="Password" />
+          <Input type="password" label="Password" {disabled} />
         </div>
         <br />
-        <Button primary>Reset Password</Button>
+        <Button primary {disabled}>Reset Password</Button>
       </div>
     </form>
   </div>
