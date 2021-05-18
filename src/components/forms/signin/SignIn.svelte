@@ -10,6 +10,7 @@
     getContacts,
     getOrders,
     getTrucks,
+    getTeams,
   } from '../../../tools/crudApi';
   import {
     userStore,
@@ -18,6 +19,7 @@
     contactsStore,
     ordersStore,
     trucksStore,
+    teamsStore,
   } from '../../../store';
   import {
     isEmpty,
@@ -44,24 +46,30 @@
         if (user) {
           userStore.setCurrent(user);
 
-          const p = await getPosts({ allMessages: true });
-          const c = await getContacts();
-          const o = await getOrders();
-          const t = await getTrucks();
-          const r = p.map(post => {
-            return { id: post._id, display: false };
-          });
-
-          postsStore.setPosts(p);
-          repliesStore.setReplies(r);
-          contactsStore.setContacts(c);
-          ordersStore.setOrders(o);
-          trucksStore.setTrucks(t);
+          await setData();
           goto('/');
         }
       }
     }
   };
+
+  async function setData() {
+    const p = await getPosts({ allMessages: true });
+    const c = await getContacts();
+    const o = await getOrders({});
+    const t = await getTrucks({});
+    const m = await getTeams({ noAggregate: true });
+    const r = p.map(post => {
+      return { id: post._id, display: false };
+    });
+
+    postsStore.setPosts(p);
+    repliesStore.setReplies(r);
+    contactsStore.setContacts(c);
+    ordersStore.setOrders(o);
+    trucksStore.setTrucks(t);
+    teamsStore.setTeams(m);
+  }
 </script>
 
 <style src="./SignIn.scss">

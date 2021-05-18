@@ -27,6 +27,7 @@
   export let managerOpts = undefined;
   export let handleSelectTruck = undefined;
   export let handleSelectManager = undefined;
+  export let role = undefined;
 
   function getHeaderSize(size) {
     if (size === 'small') {
@@ -102,18 +103,21 @@
                         </span>
                       {:else if header.header == 'dm'}
                         <div class="uk-width-medium">
-                          <Input
-                            fill
-                            value={item[header.header]}
-                            icon="caretdown"
-                            disabled
-                            noborder />
-                          <Dropdown
-                            simpleSelect={true}
-                            data={managerOpts}
-                            handleSelect={v => {
-                              handleSelectManager(item.id, v);
-                            }} />
+                          {#if role === 'ADMIN'}
+                            <Input
+                              fill
+                              value={item[header.header]}
+                              icon="caretdown"
+                              disabled
+                              noborder />
+
+                            <Dropdown
+                              simpleSelect={true}
+                              data={managerOpts}
+                              handleSelect={v => {
+                                handleSelectManager(item.id, v);
+                              }} />
+                          {:else}{item[header.header]}{/if}
                         </div>
                       {:else if header.header == 'trucks'}
                         {#if item.trucks}

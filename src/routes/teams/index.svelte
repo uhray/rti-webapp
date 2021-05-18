@@ -187,11 +187,9 @@
       role: data.role,
       teamId: data.teamId,
     };
-    console.log('add');
 
     teamSignup(team)
       .then(res => {
-        console.log(res);
         sendConfirmation = true;
 
         contactsStore.setContacts({
@@ -203,8 +201,6 @@
         });
       })
       .catch(err => {
-        console.log('ERROR FROM INDEX', err);
-
         overlayError = err.code;
       });
   }
@@ -282,8 +278,6 @@
   }
 
   function handleSelectManager(teamId, managerId) {
-    console.log(`Selecting ${managerId} for team ${teamId}`);
-
     let teamToEdit = _.find(teams, { _id: teamId });
 
     let t = teamToEdit.trucks.map(t => t.truckId);
@@ -293,22 +287,52 @@
     delete teamToEdit.truckIds;
     delete teamToEdit.__v;
 
-    editTeam(teamToEdit.teamId, teamToEdit).then(res => {
-      console.log(res);
+    editTeam(teamToEdit.teamId, teamToEdit)
+      .then(res => {
+        teamsStore.setTeams(
+          $teamsStore.teams.map(t => {
+            if (t._id == teamId) {
+              return {
+                ...t,
+                manager: res.manager,
+              };
+            } else {
+              return t;
+            }
+          })
+        );
 
-      teamsStore.setTeams(
-        $teamsStore.teams.map(t => {
-          if (t._id == teamId) {
-            return {
-              ...t,
-              manager: res.manager,
-            };
-          } else {
-            return t;
-          }
-        })
-      );
-    });
+        contactsStore.setContacts({
+          ...$contactsStore.contacts,
+          teams: $contactsStore.contacts.teams.map(t => {
+            if (t.id === teamId) {
+              return {
+                ...t,
+                subgroups: t.subgroups.map(s => {
+                  if (s.name === 'Driver Manager') {
+                    if (managerId === null) {
+                      return { ...s, contacts: [] };
+                    } else {
+                      let m = res.manager[0];
+                      m.id = m._id;
+                      m.name = getDisplayName(m);
+
+                      return { ...s, contacts: [m] };
+                    }
+                  } else {
+                    return s;
+                  }
+                }),
+              };
+            } else {
+              return t;
+            }
+          }),
+        });
+
+        console.log($contactsStore.contacts);
+      })
+      .catch(err => console.log(err));
   }
 </script>
 
@@ -364,7 +388,8 @@
     {truckOpts}
     {managerOpts}
     {handleSelectTruck}
-    {handleSelectManager} />
+    {handleSelectManager}
+    {role} />
   <br />
 </section>
 
