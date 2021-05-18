@@ -28,6 +28,7 @@
     formValid,
   } from '../../form-helpers/validation';
   import Card from '../../card/Card.svelte';
+  import { setData } from '../../../tools/tools';
 
   let username = '';
   let password = '';
@@ -52,24 +53,6 @@
       }
     }
   };
-
-  async function setData() {
-    const p = await getPosts({ allMessages: true });
-    const c = await getContacts();
-    const o = await getOrders({});
-    const t = await getTrucks({});
-    const m = await getTeams({ noAggregate: true });
-    const r = p.map(post => {
-      return { id: post._id, display: false };
-    });
-
-    postsStore.setPosts(p);
-    repliesStore.setReplies(r);
-    contactsStore.setContacts(c);
-    ordersStore.setOrders(o);
-    trucksStore.setTrucks(t);
-    teamsStore.setTeams(m);
-  }
 </script>
 
 <style src="./SignIn.scss">

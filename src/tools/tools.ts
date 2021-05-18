@@ -1,4 +1,19 @@
 import moment from 'moment';
+import {
+  contactsStore,
+  ordersStore,
+  postsStore,
+  repliesStore,
+  teamsStore,
+  trucksStore,
+} from '../store';
+import {
+  getContacts,
+  getOrders,
+  getPosts,
+  getTeams,
+  getTrucks,
+} from './crudApi';
 
 export function formatDate(d, canFormatDate = false) {
   let datetime = '';
@@ -79,4 +94,50 @@ export function uuid() {
       v = c == 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
+}
+
+export async function setData(opts?) {
+  let grabPosts;
+  let grabContacts;
+  let grabOrders;
+  let grabTrucks;
+  let grabTeams;
+  if (!opts) {
+    grabPosts = true;
+    grabContacts = true;
+    grabOrders = true;
+    grabTrucks = true;
+    grabTeams = true;
+  } else {
+    grabPosts = opts.posts === true ? true : false;
+    grabContacts = opts.contacts === true ? true : false;
+    grabOrders = opts.orders === true ? true : false;
+    grabTrucks = opts.trucks === true ? true : false;
+    grabTeams = opts.teams === true ? true : false;
+  }
+
+  if (grabPosts) {
+    const p = await getPosts({ allMessages: true });
+    const r = p.map(post => {
+      return { id: post._id, display: false };
+    });
+    await postsStore.setPosts(p);
+    await repliesStore.setReplies(r);
+  }
+  if (grabContacts) {
+    const c = await getContacts();
+    await contactsStore.setContacts(c);
+  }
+  if (grabOrders) {
+    const o = await getOrders({});
+    await ordersStore.setOrders(o);
+  }
+  if (grabTrucks) {
+    const t = await getTrucks({});
+    await trucksStore.setTrucks(t);
+  }
+  if (grabTeams) {
+    const m = await getTeams({ noAggregate: true });
+    await teamsStore.setTeams(m);
+  }
 }
