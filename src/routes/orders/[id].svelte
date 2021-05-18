@@ -38,10 +38,12 @@
     { header: 'actions', text: 'Actions', size: 'auto' },
   ];
 
-  $: posts = $postsStore.posts;
-  $: orders = $ordersStore.orders;
-  $: order = _.find($ordersStore.orders, { _id: id });
-  $: me = $userStore.user;
+  $: {
+    posts = $postsStore.posts;
+    orders = $ordersStore.orders;
+    order = _.find($ordersStore.orders, { _id: id });
+    me = $userStore.user;
+  }
 
   let docsToDelete = [];
   let displayOverlayDelete = false;

@@ -1,5 +1,4 @@
 <script>
-  import Icon from '../icon/Icon.svelte';
   import NavItem from '../navitem/NavItem.svelte';
   import Logo from '../../../static/images/rti.png';
   export let segment;

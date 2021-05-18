@@ -12,7 +12,7 @@
   let quill;
   let htmlContent = undefined;
   let content = '';
-  let canSend = false;
+  // let canSend = false;
 
   let iconImages = {
     bold:

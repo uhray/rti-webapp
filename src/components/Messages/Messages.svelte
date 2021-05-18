@@ -1,25 +1,19 @@
-<script context="module">
-  export async function preload({ params }) {}
-</script>
-
 <script>
-  import { beforeUpdate, afterUpdate, onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
   import Header from './Header.svelte';
   import SearchBar from '../searchbar/SearchBar.svelte';
   import MessagesHeader from '../messagesheader/MessagesHeader.svelte';
   import ContactList from '../contactlist/ContactList.svelte';
   import MessagesDisplay from '../messagesdisplay/MessagesDisplay.svelte';
   import RichText from '../richtext/RichText.svelte';
-  import Icon from '../icon/Icon.svelte';
   import Input from '../input/Input.svelte';
-  import DropDown from '../dropdown/DropDown.svelte';
   import Button from '../button/Button.svelte';
   import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
   import _ from 'lodash';
   import moment from 'moment';
-  import tools, { getContacts, addPost } from '../../tools/crudApi.ts';
+  import { addPost } from '../../tools/crudApi.ts';
   import { uuid } from '../../tools/tools.ts';
-  import { userStore, postsStore, repliesStore, dataStore } from '../../store';
+  import { userStore, postsStore, repliesStore } from '../../store';
 
   export let trigger;
   export let posts = undefined;
@@ -73,8 +67,6 @@
       .groupBy('date')
       .value();
   });
-
-  onMount(async () => {});
 
   const toggleReplies = id => {
     const r = $repliesStore.replies.map(r =>

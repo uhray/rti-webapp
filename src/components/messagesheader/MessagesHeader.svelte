@@ -2,7 +2,6 @@
   import Label from '../../components/label/Label.svelte';
   import Avatar from '../../components/Avatar/Avatar.svelte';
   import { colors } from '../../theme/variables';
-  import { formatInitials } from '../../tools/tools.ts';
   export let contact;
   export let filter;
   export let handleFilter;

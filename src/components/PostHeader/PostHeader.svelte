@@ -1,9 +1,6 @@
 <script>
-  import Post from '../post/Post.svelte';
   import Avatar from '../Avatar/Avatar.svelte';
   import { formatDate } from '../../tools/tools';
-  import { formatInitials } from '../../tools/tools';
-  import moment from 'moment';
 
   export let isOrder = false;
   export let user;

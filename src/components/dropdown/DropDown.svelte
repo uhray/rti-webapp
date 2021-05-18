@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
-
   export let data = [];
   export let handleSelect;
   export let simpleSelect = false;

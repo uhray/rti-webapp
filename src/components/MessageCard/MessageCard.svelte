@@ -2,7 +2,6 @@
   import Post from '../post/Post.svelte';
   import PostHeader from '../PostHeader/PostHeader.svelte';
   import Label from '../label/Label.svelte';
-  import moment from 'moment';
   import _ from 'lodash';
 
   export let isAlert = false;

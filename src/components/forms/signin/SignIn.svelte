@@ -3,31 +3,9 @@
   import Input from '../../input/Input.svelte';
   import Checkbox from '../../checkbox/Checkbox.svelte';
   import Button from '../../button/Button.svelte';
-  import {
-    userLogin,
-    auth,
-    getPosts,
-    getContacts,
-    getOrders,
-    getTrucks,
-    getTeams,
-  } from '../../../tools/crudApi';
-  import {
-    userStore,
-    postsStore,
-    repliesStore,
-    contactsStore,
-    ordersStore,
-    trucksStore,
-    teamsStore,
-  } from '../../../store';
-  import {
-    isEmpty,
-    validEmail,
-    validPass,
-    formValid,
-  } from '../../form-helpers/validation';
-  import Card from '../../card/Card.svelte';
+  import { userLogin, auth } from '../../../tools/crudApi';
+  import { userStore } from '../../../store';
+  import { isEmpty, validPass, formValid } from '../../form-helpers/validation';
   import { setData } from '../../../tools/tools';
 
   let username = '';
@@ -42,7 +20,7 @@
     if (!isDisabled) {
       const response = await userLogin(data);
       if (!response.error) {
-        await localStorage.setItem('turnkey', response);
+        localStorage.setItem('turnkey', response);
         const user = await auth();
         if (user) {
           userStore.setCurrent(user);

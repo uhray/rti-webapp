@@ -1,7 +1,6 @@
 <script>
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
-  import TabMenu from '../../components/tabmenu/TabMenu.svelte';
   import Dropdown from '../../components/Dropdown/Dropdown.svelte';
 
   export let role;

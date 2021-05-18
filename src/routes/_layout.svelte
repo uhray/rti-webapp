@@ -2,24 +2,8 @@
   import { onMount } from 'svelte';
   import Nav from '../components/nav/Nav.svelte';
   import TopNav from '../components/topnav/TopNav.svelte';
-  import {
-    userStore,
-    postsStore,
-    repliesStore,
-    contactsStore,
-    ordersStore,
-    trucksStore,
-    teamsStore,
-  } from '../store';
-  import {
-    auth,
-    getPosts,
-    getContacts,
-    getOrders,
-    getTrucks,
-    editUser,
-    getTeams,
-  } from '../tools/crudApi';
+  import { userStore } from '../store';
+  import { auth, editUser } from '../tools/crudApi';
   import moment from 'moment';
   import { setData } from '../tools/tools';
 

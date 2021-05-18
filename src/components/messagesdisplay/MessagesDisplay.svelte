@@ -1,19 +1,15 @@
 <script>
-  import PostHeader from '../PostHeader/PostHeader.svelte';
   import _ from 'lodash';
-  import { beforeUpdate, afterUpdate } from 'svelte';
-  import { onMount } from 'svelte';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
   import RichText from '../richtext/RichText.svelte';
-  import Post from '../post/Post.svelte';
   import MessageCard from '../MessageCard/MessageCard.svelte';
   import OrderMessageCard from '../OrderMessageCard/OrderMessageCard.svelte';
   import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
   import Replies from '../Replies/Replies.svelte';
   import { uuid } from '../../tools/tools.ts';
   import { capitalize } from '../../tools/tools.ts';
-  import { userStore, postsStore, repliesStore, dataStore } from '../../store';
+  import { postsStore, repliesStore } from '../../store';
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
 
@@ -28,8 +24,6 @@
 
   let messages;
   let input;
-  let autoscroll;
-  let maxHeight;
   let replyPost = null;
   let attachments = [];
 
@@ -96,8 +90,8 @@
       };
 
       addPost(payload)
-        .then(async res => {
-          await postsStore.setPosts([...$postsStore.posts, res]);
+        .then(res => {
+          postsStore.setPosts([...$postsStore.posts, res]);
           repliesStore.setReplies([
             ...$repliesStore.replies,
             { id: res._id, display: false },

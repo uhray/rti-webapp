@@ -2,7 +2,6 @@
   import Icon from '../icon/Icon.svelte';
   import Avatar from '../Avatar/Avatar.svelte';
   import { colors } from '../../theme/variables.js';
-  import { formatInitials } from '../../tools/tools.ts';
   import _ from 'lodash';
 
   export let trigger;

@@ -1,5 +1,4 @@
 <script>
-  import { colors } from '../../theme/variables';
   import Icon from '../icon/Icon.svelte';
   export let text = '';
   export let status = 'default';
