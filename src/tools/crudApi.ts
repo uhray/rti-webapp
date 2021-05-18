@@ -199,6 +199,15 @@ export const editTruck = async (id, data) => {
 };
 
 /******************** TEAMS ********************/
+export const getTeams = async query => {
+  const res = await tools.fetch(options().baseUrl + '/teams', {
+    qs: query,
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
 export const getTeamTruckIds = async id => {
   const res = await tools.fetch(
     options().baseUrl + '/teams/' + id + '/truckIds',
@@ -210,6 +219,25 @@ export const getTeamTruckIds = async id => {
   return res;
 };
 
+export const editTeam = async (id, data) => {
+  const res = await tools.fetch(options().baseUrl + '/teams/' + id, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  return res;
+};
+
+export const deleteTeam = async id => {
+  const res = await tools.fetch(options().baseUrl + '/teams/' + id, {
+    method: 'DELETE',
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
+/******************** FUNCTIONS ********************/
 export function serialize(obj, prefix?) {
   var str = [],
     p,

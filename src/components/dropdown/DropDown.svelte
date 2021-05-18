@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from 'svelte';
+
   export let data = [];
   export let handleSelect;
   export let simpleSelect = false;
@@ -7,6 +9,10 @@
   function select(header, option) {
     if (simpleSelect) {
       handleSelect(option.value);
+      // let dropdown = document.body.getElementsByClassName('uk-open');
+      // Array.from(dropdown).forEach(d => {
+      //   d.classList.remove('uk-open');
+      // });
     } else {
       handleSelect(
         data.map(item => {

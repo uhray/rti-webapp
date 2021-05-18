@@ -12,6 +12,18 @@
     border-radius: 4px;
     border: 1px solid $color--lightgray;
     color: $color--darkgray;
+
+    &[disabled] {
+      background-color: #fff;
+    }
+
+    &[noborder] {
+      border: 0 !important;
+
+      &:hover {
+        cursor: pointer !important;
+      }
+    }
   }
 
   input[invalid='true'] {
@@ -56,5 +68,3 @@
     color: #595f76;
   }
 }
-
-

@@ -276,7 +276,8 @@
             label="Vehicle"
             value={basicInfo.truckId}
             onChange={handleInput}
-            icon="caretdown" />
+            icon="caretdown"
+            disabled />
           <Dropdown
             loading={isVehicleLoading}
             simpleSelect={true}

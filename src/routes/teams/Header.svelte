@@ -52,15 +52,15 @@
 </script>
 
 <style lang="scss">
-  .UserHeader {
+  .Header {
     background: #f8f9fc;
-    .UserHeader-container {
+    .Header-container {
       position: relative;
       height: 175px;
       width: 100%;
       background: #f8f9fc;
     }
-    .UserHeader-content {
+    .Header-content {
       background: #f8f9fc;
       box-sizing: border-box;
       width: 100%;
@@ -70,14 +70,14 @@
       flex-flow: row nowrap;
       justify-content: space-between;
     }
-    .UserHeader-tabs {
+    .Header-tabs {
       background: #f8f9fc;
       padding: 32px 0 0 30px;
     }
-    .UserHeader-titles {
+    .Header-titles {
       width: 100%;
 
-      .UserHeader-title {
+      .Header-title {
         font-family: Poppins;
         font-style: normal;
         font-weight: 500;
@@ -87,7 +87,7 @@
         margin: 5px;
         margin-bottom: 0px;
       }
-      .UserHeader-subtitle {
+      .Header-subtitle {
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
@@ -99,7 +99,7 @@
       }
     }
 
-    .UserHeader-actions {
+    .Header-actions {
       width: 100%;
 
       display: flex;
@@ -108,7 +108,7 @@
       align-items: center;
       position: relative;
 
-      .UserHeader-actions-search {
+      .Header-actions-search {
         margin-right: 5px;
         max-width: 350px;
       }
@@ -117,21 +117,19 @@
 </style>
 
 <svelte:head>
-  <title>User Management</title>
+  <title>Team Management</title>
 </svelte:head>
 
-<div class="UserHeader" id="UserHeader">
-  <div class="UserHeader-container">
-    <div class="UserHeader-content">
-      <div class="UserHeader-titles">
-        <h2 class="UserHeader-title">User Management</h2>
-        <p class="UserHeader-subtitle">
-          Here you can manage your active users.
-        </p>
+<div class="Header" id="Header">
+  <div class="Header-container">
+    <div class="Header-content">
+      <div class="Header-titles">
+        <h2 class="Header-title">Team Management</h2>
+        <p class="Header-subtitle">Here you can manage your teams.</p>
       </div>
 
-      <div class="UserHeader-actions">
-        <div class="uk-width-1-1 UserHeader-actions-search">
+      <div class="Header-actions">
+        <div class="uk-width-1-1 Header-actions-search">
           <SearchBar {search} {handleSearch} fill />
         </div>
         <!-- Show This On Both Tabs -->
@@ -152,41 +150,22 @@
           <div style="margin-left: 5px;" />
         {/if}
 
-        {#if role === 'ADMIN' && selectedTab === 'Managers'}
+        {#if role === 'ADMIN'}
           <div>
             <Button
               height="40px"
               width="100px"
               primary
               on:click={() => {
-                handleAdd('MANAGER');
+                handleAdd();
               }}>
-              Add Manager
+              Add Team
             </Button>
           </div>
         {/if}
 
-        {#if role === 'ADMIN' && selectedTab === 'Admins'}
-          <div>
-            <Button
-              height="40px"
-              width="100px"
-              primary
-              on:click={() => {
-                handleAdd('ADMIN');
-              }}>
-              Add Admin
-            </Button>
-          </div>
-        {/if}
       </div>
     </div>
-    <div class="UserHeader-tabs" id="UserHeader-tabs">
-      <TabMenu
-        type="default"
-        tabs={role === 'ADMIN' ? ['Users', 'Managers', 'Admins'] : ['Users', 'Managers']}
-        {selectedTab}
-        {handleTab} />
-    </div>
+
   </div>
 </div>
