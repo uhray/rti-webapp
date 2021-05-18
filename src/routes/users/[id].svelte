@@ -9,6 +9,7 @@
 <script>
   import Button from '../../components/button/Button.svelte';
   import Switch from '../../components/Switch/Switch.svelte';
+  import Avatar from '../../components/Avatar/Avatar.svelte';
   import Icon from '../../components/icon/Icon.svelte';
   import Divider from '../../components/divider/Divider.svelte';
   import Input from '../../components/input/Input.svelte';
@@ -34,7 +35,9 @@
     user = _.find($contactsStore.contacts.users, { id: id });
     trucks = $trucksStore.trucks;
 
-    getTeamTruckIds(user.teamId).then(res => (truckOpts = res));
+    if (user.role === 'DRIVER') {
+      getTeamTruckIds(user.teamId).then(res => (truckOpts = res));
+    }
   }
 
   $: {
@@ -51,8 +54,6 @@
   }
 
   onMount(async () => {
-    // user = await getUser(id);
-
     basicInfo = {
       first: user.contactInfo.firstName,
       last: user.contactInfo.lastName,
@@ -228,7 +229,7 @@
   <div class="Account">
     <h3>Profile Photo</h3>
 
-    <img class="Account-photo" src={user.avatarUrl} alt="Your profile" />
+    <Avatar {user} size={100} />
 
     <br />
 
@@ -264,27 +265,29 @@
           onChange={handleInput} />
       </div>
       <br />
-      <div class="row">
-        <Input
-          name="dm"
-          label="Driver Manager"
-          value={basicInfo.dm}
-          onChange={handleInput} />
-        <div>
+      {#if user.role === 'DRIVER'}
+        <div class="row">
           <Input
-            name="truckId"
-            label="Vehicle"
-            value={basicInfo.truckId}
-            onChange={handleInput}
-            icon="caretdown"
-            disabled />
-          <Dropdown
-            loading={isVehicleLoading}
-            simpleSelect={true}
-            data={dropdownOpts}
-            {handleSelect} />
+            name="dm"
+            label="Driver Manager"
+            value={basicInfo.dm}
+            onChange={handleInput} />
+          <div>
+            <Input
+              name="truckId"
+              label="Vehicle"
+              value={basicInfo.truckId}
+              onChange={handleInput}
+              icon="caretdown"
+              disabled />
+            <Dropdown
+              loading={isVehicleLoading}
+              simpleSelect={true}
+              data={dropdownOpts}
+              {handleSelect} />
+          </div>
         </div>
-      </div>
+      {/if}
     </form>
 
     <br />
@@ -313,7 +316,7 @@
           <Input label="User ID" />
         </div>
         <div class="row">
-          <Input label="Password" />
+          <Input type="password" label="Password" />
         </div>
         <br />
         <Button primary>Reset Password</Button>
