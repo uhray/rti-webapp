@@ -101,17 +101,20 @@
                           {moment(item.createdAt).format('MMM D, YYYY')}
                         </span>
                       {:else if header.header == 'dm'}
-                        <Input
-                          value={item[header.header]}
-                          icon="caretdown"
-                          disabled
-                          noborder />
-                        <Dropdown
-                          simpleSelect={true}
-                          data={managerOpts}
-                          handleSelect={v => {
-                            handleSelectManager(item.id, v);
-                          }} />
+                        <div class="uk-width-medium">
+                          <Input
+                            fill
+                            value={item[header.header]}
+                            icon="caretdown"
+                            disabled
+                            noborder />
+                          <Dropdown
+                            simpleSelect={true}
+                            data={managerOpts}
+                            handleSelect={v => {
+                              handleSelectManager(item.id, v);
+                            }} />
+                        </div>
                       {:else if header.header == 'trucks'}
                         {#if item.trucks}
                           <div class="uk-flex">

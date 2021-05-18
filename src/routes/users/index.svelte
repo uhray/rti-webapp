@@ -123,8 +123,8 @@
 
   onMount(() => {
     if (document) {
-      let hHeight = document.getElementById('Header').offsetHeight;
-      let tabsHeight = document.getElementById('Header-tabs').offsetHeight;
+      let hHeight = document.getElementById('UserHeader').offsetHeight;
+      let tabsHeight = document.getElementById('UserHeader-tabs').offsetHeight;
 
       headerHeight = hHeight + tabsHeight + 50;
     }

@@ -52,15 +52,15 @@
 </script>
 
 <style lang="scss">
-  .Header {
+  .UserHeader {
     background: #f8f9fc;
-    .Header-container {
+    .UserHeader-container {
       position: relative;
       height: 175px;
       width: 100%;
       background: #f8f9fc;
     }
-    .Header-content {
+    .UserHeader-content {
       background: #f8f9fc;
       box-sizing: border-box;
       width: 100%;
@@ -70,14 +70,14 @@
       flex-flow: row nowrap;
       justify-content: space-between;
     }
-    .Header-tabs {
+    .UserHeader-tabs {
       background: #f8f9fc;
       padding: 32px 0 0 30px;
     }
-    .Header-titles {
+    .UserHeader-titles {
       width: 100%;
 
-      .Header-title {
+      .UserHeader-title {
         font-family: Poppins;
         font-style: normal;
         font-weight: 500;
@@ -87,7 +87,7 @@
         margin: 5px;
         margin-bottom: 0px;
       }
-      .Header-subtitle {
+      .UserHeader-subtitle {
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
@@ -99,7 +99,7 @@
       }
     }
 
-    .Header-actions {
+    .UserHeader-actions {
       width: 100%;
 
       display: flex;
@@ -108,7 +108,7 @@
       align-items: center;
       position: relative;
 
-      .Header-actions-search {
+      .UserHeader-actions-search {
         margin-right: 5px;
         max-width: 350px;
       }
@@ -120,16 +120,18 @@
   <title>User Management</title>
 </svelte:head>
 
-<div class="Header" id="Header">
-  <div class="Header-container">
-    <div class="Header-content">
-      <div class="Header-titles">
-        <h2 class="Header-title">User Management</h2>
-        <p class="Header-subtitle">Here you can manage your active users.</p>
+<div class="UserHeader" id="UserHeader">
+  <div class="UserHeader-container">
+    <div class="UserHeader-content">
+      <div class="UserHeader-titles">
+        <h2 class="UserHeader-title">User Management</h2>
+        <p class="UserHeader-subtitle">
+          Here you can manage your active users.
+        </p>
       </div>
 
-      <div class="Header-actions">
-        <div class="uk-width-1-1 Header-actions-search">
+      <div class="UserHeader-actions">
+        <div class="uk-width-1-1 UserHeader-actions-search">
           <SearchBar {search} {handleSearch} fill />
         </div>
         <!-- Show This On Both Tabs -->
@@ -179,7 +181,7 @@
         {/if}
       </div>
     </div>
-    <div class="Header-tabs" id="Header-tabs">
+    <div class="UserHeader-tabs" id="UserHeader-tabs">
       <TabMenu
         type="default"
         tabs={role === 'ADMIN' ? ['Users', 'Managers', 'Admins'] : ['Users', 'Managers']}

@@ -19,6 +19,10 @@
 
     &[noborder] {
       border: 0 !important;
+
+      &:hover {
+        cursor: pointer !important;
+      }
     }
   }
 

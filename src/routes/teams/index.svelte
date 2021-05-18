@@ -24,7 +24,7 @@
     { header: 'name', text: 'Team Name' },
     { header: 'dm', text: 'Driver Manager' },
     { header: 'trucks', text: 'Trucks' },
-    { header: 'userActions', text: 'Actions' },
+    { header: 'actions', text: 'Actions' },
   ];
 
   let selectedTab = 'Teams';
@@ -49,7 +49,9 @@
       t.trucks.forEach(tr => {
         unavailableTrucks.push(tr.truckId);
       });
-      unavailableManagers.push(t.manager[0]._id);
+      unavailableManagers.push(
+        t.manager && t.manager[0] ? t.manager[0]._id : 'None'
+      );
     });
 
     let managers = $contactsStore.contacts.users.filter(
@@ -72,7 +74,7 @@
     managerOpts = [
       {
         header: 'Available Managers',
-        opts: [{ text: '-', value: null, selected: false }].concat(
+        opts: [{ text: 'None', value: null, selected: false }].concat(
           managers
             .flatMap(t => (!unavailableManagers.includes(t._id) ? t : []))
             .map(o => {
@@ -88,7 +90,7 @@
           type: 'teams',
           id: t._id,
           name: t.teamId,
-          dm: t.manager[0] ? getDisplayName(t.manager[0]) : '',
+          dm: t.manager[0] ? getDisplayName(t.manager[0]) : 'None',
           trucks: t.trucks.map(tr => tr.truckId),
         };
       })
@@ -281,6 +283,32 @@
 
   function handleSelectManager(teamId, managerId) {
     console.log(`Selecting ${managerId} for team ${teamId}`);
+
+    let teamToEdit = _.find(teams, { _id: teamId });
+
+    let t = teamToEdit.trucks.map(t => t.truckId);
+
+    teamToEdit = { ...teamToEdit, manager: managerId, trucks: t };
+
+    delete teamToEdit.truckIds;
+    delete teamToEdit.__v;
+
+    editTeam(teamToEdit.teamId, teamToEdit).then(res => {
+      console.log(res);
+
+      teamsStore.setTeams(
+        $teamsStore.teams.map(t => {
+          if (t._id == teamId) {
+            return {
+              ...t,
+              manager: res.manager,
+            };
+          } else {
+            return t;
+          }
+        })
+      );
+    });
   }
 </script>
 
