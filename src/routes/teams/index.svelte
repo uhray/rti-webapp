@@ -3,7 +3,7 @@
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
-  import { deleteTeam, editTeam } from '../../tools/crudApi.ts';
+  import { deleteTeam, editTeam, editUser } from '../../tools/crudApi.ts';
   import { getDisplayName } from '../../tools/tools.ts';
   import {
     contactsStore,
@@ -279,6 +279,11 @@
 
   function handleSelectManager(teamId, managerId) {
     let teamToEdit = _.find(teams, { _id: teamId });
+    let oldManagerId = teamToEdit.manager[0]
+      ? teamToEdit.manager[0]._id
+      : undefined;
+
+    console.log(oldManagerId, managerId);
 
     let t = teamToEdit.trucks.map(t => t.truckId);
 
@@ -289,6 +294,25 @@
 
     editTeam(teamToEdit.teamId, teamToEdit)
       .then(res => {
+        if (oldManagerId) {
+          let updatedOldManager = _.find($contactsStore.contacts.users, {
+            id: oldManagerId,
+          });
+          updatedOldManager.teamId = '';
+          editUser(oldManagerId, updatedOldManager).catch(err =>
+            console.log(err)
+          );
+        }
+
+        if (managerId) {
+          let updatedNewManager = _.find($contactsStore.contacts.users, {
+            id: managerId,
+          });
+          console.log(updatedNewManager);
+          updatedNewManager.teamId = res.teamId;
+          editUser(managerId, updatedNewManager).catch(err => console.log(err));
+        }
+
         teamsStore.setTeams(
           $teamsStore.teams.map(t => {
             if (t._id == teamId) {
