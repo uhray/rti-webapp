@@ -1,33 +1,46 @@
 <script>
   import NavItem from '../navitem/NavItem.svelte';
   import Logo from '../../../static/images/rti.png';
+  import { userStore } from '../../store';
+  import { flatMap } from 'lodash';
   export let segment;
   export let isOpen = true;
+  export let user = undefined;
+  export let role;
 
-  const items = [
-    { icon: 'orders', text: 'Orders', link: 'orders' },
+  let items = [];
 
-    { icon: 'message', text: 'Messages', link: 'messages', amount: 999 },
-    // { icon: 'macro', text: 'Driver Macros', link: 'macros', amount: 3 },
-    // {
-    //   icon: 'maintenance',
-    //   text: 'Maintenance',
-    //   link: 'maintenance',
-    // },
-    // {
-    //   icon: 'vehicle-fill',
-    //   text: 'Equipment',
-    //   link: 'equipment',
-    // },
-    { text: 'line' },
-    { icon: 'users', text: 'User Management', link: 'users' },
-    { icon: 'users', text: 'Teams Management', link: 'teams' },
-    { icon: 'settings', text: 'Settings', link: 'settings' },
-    // { text: 'line' },
-    // { icon: 'home', text: 'Home', link: '' },
-    // { icon: 'components', text: 'Components', link: 'components' },
-    // { text: 'Account', link: 'account' },
-  ];
+  $: {
+    user = $userStore;
+
+    if (user && user.user) role = user.user.role;
+
+    items = flatMap([
+      { icon: 'orders', text: 'Orders', link: 'orders' },
+      { icon: 'message', text: 'Messages', link: 'messages', amount: 999 },
+      // { icon: 'macro', text: 'Driver Macros', link: 'macros', amount: 3 },
+      // {
+      //   icon: 'maintenance',
+      //   text: 'Maintenance',
+      //   link: 'maintenance',
+      // },
+      // {
+      //   icon: 'vehicle-fill',
+      //   text: 'Equipment',
+      //   link: 'equipment',
+      // },
+      { text: 'line' },
+      { icon: 'users', text: 'User Management', link: 'users' },
+      { icon: 'users', text: 'Teams Management', link: 'teams' },
+      role === 'ADMIN'
+        ? { icon: 'settings', text: 'Settings', link: 'settings' }
+        : [],
+      // { text: 'line' },
+      // { icon: 'home', text: 'Home', link: '' },
+      // { icon: 'components', text: 'Components', link: 'components' },
+      // { text: 'Account', link: 'account' },
+    ]);
+  }
 
   function menuToggle() {
     isOpen = !isOpen;
