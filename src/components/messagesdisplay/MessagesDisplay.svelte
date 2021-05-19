@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import _ from 'lodash';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
@@ -28,6 +29,11 @@
   let attachments = [];
 
   $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
+
+  $: {
+    console.log(posts);
+    console.log(sortedPosts);
+  }
 
   const scrollToBottom = (div = undefined) => {
     if (div) {
@@ -141,7 +147,7 @@
 
     {#if !loading}
       <div class="Messages-container">
-        {#if sortedPosts && posts.length > 0}
+        {#if sortedPosts && Object.keys(sortedPosts).length > 0}
           {#each Object.keys(sortedPosts) as date}
             <div class="Messages-dateLabel">
               {#if date}

@@ -1,10 +1,37 @@
 <script>
   import Label from '../../components/label/Label.svelte';
   import Avatar from '../../components/Avatar/Avatar.svelte';
+  import Dropdown from '../../components/Dropdown/Dropdown.svelte';
   import { colors } from '../../theme/variables';
+
   export let contact;
   export let filter;
   export let handleFilter;
+  export let handlePreview;
+
+  const dropdownOpts = [
+    {
+      header: '',
+      opts: [
+        {
+          text: 'View Profile',
+          value: 'profile',
+          selected: false,
+          icon: 'user',
+        },
+      ],
+    },
+  ];
+
+  function handleSelect(v) {
+    console.log(v);
+
+    if (v === 'profile') {
+      if (contact) {
+        handlePreview();
+      }
+    }
+  }
 </script>
 
 <style src="./MessagesHeader.scss">
@@ -67,15 +94,15 @@
           iconColor={filter === 'orders' ? '#243E93' : ''}
           backgroundColor={colors.tablegray} />
       </div>
-      <div
-        on:click={() => {
-          console.log(' #TODO ');
-        }}>
-        <Label
-          status="inactive"
-          iconLeft="overflow"
-          backgroundColor={colors.tablegray} />
-      </div>
+      {#if contact}
+        <div>
+          <Label
+            status="inactive"
+            iconLeft="overflow"
+            backgroundColor={colors.tablegray} />
+          <Dropdown simpleSelect={true} data={dropdownOpts} {handleSelect} />
+        </div>
+      {/if}
     </div>
   </div>
 

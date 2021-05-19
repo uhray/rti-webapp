@@ -1,4 +1,5 @@
 <script>
+  import Icon from '../icon/Icon.svelte';
   export let data = [];
   export let handleSelect;
   export let simpleSelect = false;
@@ -47,7 +48,9 @@
 <div uk-dropdown="pos: bottom-justify; mode: click" class="Dropdown">
 
   {#each data as d}
-    <div class="Dropdown-header">{d.header}</div>
+    {#if d.header}
+      <div class="Dropdown-header">{d.header}</div>
+    {/if}
     {#if loading}
       <div class="Dropdown-loader">
         <div uk-spinner class="Loader-color" />
@@ -58,7 +61,9 @@
           <div
             class="Dropdown-selection clickable"
             on:click={() => {
-              select(d.header, opt);
+              if (!opt.link) {
+                select(d.header, opt);
+              }
             }}>
             {#if !simpleSelect}
               <div class="Dropdown-selection-check">
@@ -82,7 +87,16 @@
 
               </div>
             {/if}
-            {opt.text}
+            {#if opt.icon}
+              <div class="Dropdown-selection-check">
+
+                <Icon type={opt.icon} />
+
+              </div>
+            {/if}
+            {#if opt.link}
+              <a class="Dropdown-selection-link" href={opt.link}>{opt.text}</a>
+            {:else}{opt.text}{/if}
           </div>
         {/each}
       </div>
