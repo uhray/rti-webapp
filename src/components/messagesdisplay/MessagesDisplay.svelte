@@ -66,12 +66,6 @@
           return res._id;
         })
         .then(id => {
-          console.log(id);
-          console.log(
-            $repliesStore.replies.map(r => {
-              return r.id === id ? { ...r, display: true } : r;
-            })
-          );
           repliesStore.setReplies(
             $repliesStore.replies.map(r => {
               return r._id === id ? { ...r, display: true } : r;

@@ -77,9 +77,7 @@
       if (overlay) {
         window.removeEventListener('click', function(e) {
           if (overlay.contains(e.target)) {
-            console.log('// Clicked in box');
           } else {
-            console.log('// Clicked outside the box');
             clearOverlayData();
           }
         });
@@ -206,9 +204,7 @@
     if (overlay) {
       window.addEventListener('click', function(e) {
         if (overlay.contains(e.target)) {
-          console.log('// Clicked in box');
         } else {
-          console.log('// Clicked outside the box');
           clearOverlayData();
         }
       });

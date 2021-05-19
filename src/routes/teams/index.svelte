@@ -283,8 +283,6 @@
       ? teamToEdit.manager[0]._id
       : undefined;
 
-    console.log(oldManagerId, managerId);
-
     let t = teamToEdit.trucks.map(t => t.truckId);
 
     teamToEdit = { ...teamToEdit, manager: managerId, trucks: t };
@@ -308,7 +306,6 @@
           let updatedNewManager = _.find($contactsStore.contacts.users, {
             id: managerId,
           });
-          console.log(updatedNewManager);
           updatedNewManager.teamId = res.teamId;
           editUser(managerId, updatedNewManager).catch(err => console.log(err));
         }
@@ -353,8 +350,6 @@
             }
           }),
         });
-
-        console.log($contactsStore.contacts);
       })
       .catch(err => console.log(err));
   }

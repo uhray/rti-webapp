@@ -9,10 +9,6 @@
   export let canFormatDate = false;
   export let isAllMessages = false;
   export let userTo = undefined;
-
-  $: {
-    console.log(userTo);
-  }
 </script>
 
 <style src="./PostHeader.scss">

@@ -24,8 +24,6 @@
   ];
 
   function handleSelect(v) {
-    console.log(v);
-
     if (v === 'profile') {
       if (contact) {
         handlePreview();

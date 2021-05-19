@@ -61,7 +61,6 @@
     if (v === 'new') {
       ordersMapped = _.sortBy(ordersMapped, 'createdAt').reverse();
     } else if (v === 'old') {
-      console.log(_.sortBy(orders, 'createdAt').reverse());
       ordersMapped = _.sortBy(ordersMapped, 'createdAt');
     }
   }

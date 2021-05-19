@@ -22,15 +22,17 @@
 
   onMount(() => (showPassword = false));
 
-  const togglePass = () => console.log('toggle');
+  function togglePass() {
+    console.log('toggle');
+  }
 
   let isFocused = false;
-  const onFocus = () => {
+  function onFocus() {
     isFocused = true;
-  };
-  const onBlur = () => {
+  }
+  function onBlur() {
     isFocused = false;
-  };
+  }
 </script>
 
 <style src="./Input.scss">

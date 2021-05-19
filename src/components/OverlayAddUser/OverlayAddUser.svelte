@@ -34,8 +34,6 @@
     } else if (overlayError === 1) {
       validators.password = errorCodes[1];
     }
-
-    console.log(overlayError);
   }
 
   let inputCheck = false;
@@ -60,11 +58,6 @@
       validators.username = overlayError;
     }
 
-    console.log(
-      'validating',
-      Object.values(validators),
-      Object.values(validators).some(v => v)
-    );
     if (Object.values(validators).some(v => v)) {
       return false;
     } else {
@@ -73,7 +66,6 @@
   }
 
   function handleInput(e) {
-    console.log('e', e);
     user[e.target.name] = e.target.value;
     validators[e.target.name] = null;
     overlayError = null;
@@ -236,10 +228,8 @@
 
           <div
             on:click={() => {
-              console.log('Send clicked');
               inputCheck = true;
               if (isValid()) {
-                console.log('sending');
                 send(user);
               }
             }}>
