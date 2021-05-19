@@ -30,11 +30,6 @@
 
   $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
 
-  $: {
-    console.log(posts);
-    console.log(sortedPosts);
-  }
-
   const scrollToBottom = (div = undefined) => {
     if (div) {
     } else {
@@ -161,7 +156,10 @@
             {#each Object.values(sortedPosts[date]) as post}
               <div class="Post">
                 {#if post.postType === 'MESSAGE'}
-                  <MessageCard {post} {findContact} />
+                  <MessageCard
+                    {post}
+                    {findContact}
+                    isAllMessages={slug === 'all' ? true : false} />
                 {:else if post.postType === 'ALERT'}
                   <MessageCard isAlert={true} {post} {findContact} />
                 {:else if post.postType === 'ORDER'}
