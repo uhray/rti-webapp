@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import _ from 'lodash';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
@@ -141,7 +142,7 @@
 
     {#if !loading}
       <div class="Messages-container">
-        {#if sortedPosts && posts.length > 0}
+        {#if sortedPosts && Object.keys(sortedPosts).length > 0}
           {#each Object.keys(sortedPosts) as date}
             <div class="Messages-dateLabel">
               {#if date}
@@ -155,7 +156,10 @@
             {#each Object.values(sortedPosts[date]) as post}
               <div class="Post">
                 {#if post.postType === 'MESSAGE'}
-                  <MessageCard {post} {findContact} />
+                  <MessageCard
+                    {post}
+                    {findContact}
+                    isAllMessages={slug === 'all' ? true : false} />
                 {:else if post.postType === 'ALERT'}
                   <MessageCard isAlert={true} {post} {findContact} />
                 {:else if post.postType === 'ORDER'}

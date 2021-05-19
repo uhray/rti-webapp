@@ -1,5 +1,5 @@
 <script>
-  import { afterUpdate } from 'svelte';
+  import { onMount, afterUpdate } from 'svelte';
   import Header from './Header.svelte';
   import SearchBar from '../searchbar/SearchBar.svelte';
   import MessagesHeader from '../messagesheader/MessagesHeader.svelte';
@@ -9,6 +9,7 @@
   import Input from '../input/Input.svelte';
   import Button from '../button/Button.svelte';
   import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
+  import OverlayPreview from '../OverlayPreview/OverlayPreview.svelte';
   import _ from 'lodash';
   import moment from 'moment';
   import { addPost } from '../../tools/crudApi.ts';
@@ -48,6 +49,9 @@
   let sendConfirmation = false;
   let attachments = [];
 
+  let displayPreviewOverlay = false;
+  let overlay;
+
   afterUpdate(async () => {
     sortedPosts = _.chain(filterPosts(posts))
       .map(p => {
@@ -66,6 +70,21 @@
       .sortBy('sortDate')
       .groupBy('date')
       .value();
+  });
+
+  onMount(() => {
+    return () => {
+      if (overlay) {
+        window.removeEventListener('click', function(e) {
+          if (overlay.contains(e.target)) {
+            console.log('// Clicked in box');
+          } else {
+            console.log('// Clicked outside the box');
+            clearOverlayData();
+          }
+        });
+      }
+    };
   });
 
   const toggleReplies = id => {
@@ -176,6 +195,24 @@
     message = '';
     inputMessageType = undefined;
     displayMessageOverlay = false;
+    displayPreviewOverlay = false;
+  }
+
+  function handlePreview() {
+    displayPreviewOverlay = true;
+
+    let overlay = document.getElementById('Overlay');
+
+    if (overlay) {
+      window.addEventListener('click', function(e) {
+        if (overlay.contains(e.target)) {
+          console.log('// Clicked in box');
+        } else {
+          console.log('// Clicked outside the box');
+          clearOverlayData();
+        }
+      });
+    }
   }
 </script>
 
@@ -209,7 +246,8 @@
       <MessagesHeader
         contact={_.find(contactsList, { id: slug })}
         {filter}
-        {handleFilter} />
+        {handleFilter}
+        {handlePreview} />
 
     </div>
     <div id="Messages-Container" class="Messages-main-posts">
@@ -604,4 +642,10 @@
     </div>
 
   </div>
+{/if}
+
+{#if displayPreviewOverlay}
+  <OverlayPreview
+    user={_.find(contactsList, { id: slug })}
+    {clearOverlayData} />
 {/if}

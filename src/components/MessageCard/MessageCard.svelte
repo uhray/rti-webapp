@@ -7,14 +7,16 @@
   export let isAlert = false;
   export let post;
   export let findContact;
+  export let isAllMessages = false;
   let user = findContact(post.from);
+  let userTo = findContact(post.userId);
 </script>
 
 <style src="./MessageCard.scss">
 
 </style>
 
-<PostHeader {user} {post} />
+<PostHeader {user} {userTo} {post} {isAllMessages} />
 {#if isAlert}
   <div class="AlertCard">
     <div class="AlertCard-header">
