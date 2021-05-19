@@ -18,22 +18,22 @@
     padding-left: 12px;
   }
 
+  .Header-content-title {
+    span {
+      display: flex;
+      align-items: flex-end;
+      padding-top: 4px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+
   .Header-content-all {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
-    .Header-content-title {
-      span {
-        display: flex;
-        align-items: flex-end;
-        padding-top: 4px;
-        font-size: 18px;
-        font-weight: 500;
-      }
-    }
   }
 
   .Header-content-details {
