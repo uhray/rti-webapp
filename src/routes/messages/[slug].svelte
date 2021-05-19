@@ -47,6 +47,8 @@
     contactsList = contacts.users;
     driversList = contacts.teams;
 
+    teamsList = [];
+
     driversList.forEach(d => {
       teamsList.push(d.name);
       d.subgroups.forEach(s => {
