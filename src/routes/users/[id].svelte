@@ -310,7 +310,7 @@
       <h3>User Status</h3>
       <div class="uk-flex">
         <p class="toggle-text">Status Active (Off/On)</p>
-        <Switch {handleSwitch} checked={statusSwitch} {disabled} />
+        <Switch {handleSwitch} checked={statusSwitch} />
       </div>
 
       <br />
