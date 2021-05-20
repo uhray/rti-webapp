@@ -22,12 +22,15 @@
   import { userStore, ordersStore, postsStore } from '../../store.ts';
 
   export let id;
-  let order = undefined;
+  let posts;
+  let order;
+  let orders;
+  let me;
   let displayMessageOverlay = false;
   let sendConfirmation = false;
   let canSubmit = false;
   let message = '';
-  let posts;
+
   let attachments = [];
   const headers = [
     { header: 'filename', text: 'File Name' },
