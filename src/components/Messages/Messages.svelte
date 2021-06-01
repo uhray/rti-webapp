@@ -52,30 +52,30 @@
   let displayPreviewOverlay = false;
   let overlay;
 
-  afterUpdate(async () => {
-    sortedPosts = _.chain(filterPosts(posts))
-      .map(p => {
-        let newP = p;
+  // afterUpdate(async () => {
+  //   sortedPosts = _.chain(filterPosts(posts))
+  //     .map(p => {
+  //       let newP = p;
 
-        newP.date = moment(
-          new Date(
-            p.postType === 'ORDER' ? p.updatedAt : p.createdAt
-          ).toISOString()
-        ).format('MMM D, YYYY');
+  //       newP.date = moment(
+  //         new Date(
+  //           p.postType === 'ORDER' ? p.updatedAt : p.createdAt
+  //         ).toISOString()
+  //       ).format('MMM D, YYYY');
 
-        newP.sortDate = p.postType === 'ORDER' ? p.updatedAt : p.createdAt;
+  //       newP.sortDate = p.postType === 'ORDER' ? p.updatedAt : p.createdAt;
 
-        return newP;
-      })
-      .sortBy('sortDate')
-      .groupBy('date')
-      .value();
-  });
+  //       return newP;
+  //     })
+  //     .sortBy('sortDate')
+  //     .groupBy('date')
+  //     .value();
+  // });
 
   onMount(() => {
     return () => {
       if (overlay) {
-        window.removeEventListener('click', function(e) {
+        window.removeEventListener('click', function (e) {
           if (overlay.contains(e.target)) {
           } else {
             clearOverlayData();
@@ -202,7 +202,7 @@
     let overlay = document.getElementById('Overlay');
 
     if (overlay) {
-      window.addEventListener('click', function(e) {
+      window.addEventListener('click', function (e) {
         if (overlay.contains(e.target)) {
         } else {
           clearOverlayData();
@@ -211,10 +211,6 @@
     }
   }
 </script>
-
-<style src="./Messages.scss">
-
-</style>
 
 <svelte:head>
   <title>Messages</title>
@@ -234,7 +230,8 @@
         {toggleMessageOverlay}
         {trigger}
         {search}
-        {loading} />
+        {loading}
+      />
     </div>
   </div>
   <div class="Messages-main">
@@ -243,39 +240,40 @@
         contact={_.find(contactsList, { id: slug })}
         {filter}
         {handleFilter}
-        {handlePreview} />
-
+        {handlePreview}
+      />
     </div>
     <div id="Messages-Container" class="Messages-main-posts">
       <MessagesDisplay
         {posts}
-        {sortedPosts}
         {me}
         {toggleReplies}
         contacts={contactsList}
         {orders}
         {slug}
-        {loading} />
+        {loading}
+      />
     </div>
   </div>
 </div>
 
 {#if displayMessageOverlay}
   <div class="MessageOverlay">
-
     <div class="MessageOverlay-container">
       {#if sendConfirmation}
         <div
           class="MessageOverlay-close clickable"
           on:click={() => {
             clearOverlayData();
-          }}>
+          }}
+        >
           <svg
             width="13"
             height="13"
             viewBox="0 0 13 13"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M7.78906 6.5L11.8125 2.51562L12.6328 1.69531C12.75 1.57812
               12.75 1.38281 12.6328 1.22656L11.7734 0.367188C11.6172 0.25
@@ -287,7 +285,8 @@
               7.82812L10.4844 11.8516L11.3047 12.6719C11.4219 12.7891 11.6172
               12.7891 11.7734 12.6719L12.6328 11.8125C12.75 11.6562 12.75
               11.4609 12.6328 11.3438L7.78906 6.5Z"
-              fill="#A6ADC4" />
+              fill="#A6ADC4"
+            />
           </svg>
         </div>
         <div class="MessageOverlay-title">Confirmation</div>
@@ -299,23 +298,25 @@
             class="MessageOverlay-button"
             on:click={() => {
               clearOverlayData();
-            }}>
+            }}
+          >
             <Button primary>Got it</Button>
           </div>
-
         </div>
       {:else}
         <div
           class="MessageOverlay-close clickable"
           on:click={() => {
             clearOverlayData();
-          }}>
+          }}
+        >
           <svg
             width="13"
             height="13"
             viewBox="0 0 13 13"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M7.78906 6.5L11.8125 2.51562L12.6328 1.69531C12.75 1.57812
               12.75 1.38281 12.6328 1.22656L11.7734 0.367188C11.6172 0.25
@@ -327,7 +328,8 @@
               7.82812L10.4844 11.8516L11.3047 12.6719C11.4219 12.7891 11.6172
               12.7891 11.7734 12.6719L12.6328 11.8125C12.75 11.6562 12.75
               11.4609 12.6328 11.3438L7.78906 6.5Z"
-              fill="#A6ADC4" />
+              fill="#A6ADC4"
+            />
           </svg>
         </div>
         <div class="MessageOverlay-title">Fleet Message</div>
@@ -345,8 +347,11 @@
                   xmlns="http://www.w3.org/2000/svg"
                   class="clickable"
                   on:click={() => {
-                    teamsToMessage = teamsToMessage.filter(t => teamsToMessage != team);
-                  }}>
+                    teamsToMessage = teamsToMessage.filter(
+                      t => teamsToMessage != team
+                    );
+                  }}
+                >
                   <path
                     d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812
                     7.71875 19.75 12 19.75C16.2812 19.75 19.75 16.2812 19.75
@@ -362,7 +367,8 @@
                     14.7188L9.28125 14.9688C9.4375 15.125 9.6875 15.125 9.8125
                     14.9688L12 12.8125L14.1562 14.9688C14.3125 15.125 14.5312
                     15.125 14.6875 14.9688L14.9375 14.7188C15.0938 14.5625
-                    15.0938 14.3125 14.9375 14.1875L12.7812 12L14.9375 9.84375Z" />
+                    15.0938 14.3125 14.9375 14.1875L12.7812 12L14.9375 9.84375Z"
+                  />
                 </svg>
               </div>
             {/each}
@@ -378,8 +384,11 @@
                   xmlns="http://www.w3.org/2000/svg"
                   class="clickable"
                   on:click={() => {
-                    driverClassesToMessage = driverClassesToMessage.filter(dc => driverClassesToMessage != driverClass);
-                  }}>
+                    driverClassesToMessage = driverClassesToMessage.filter(
+                      dc => driverClassesToMessage != driverClass
+                    );
+                  }}
+                >
                   <path
                     d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812
                     7.71875 19.75 12 19.75C16.2812 19.75 19.75 16.2812 19.75
@@ -395,7 +404,8 @@
                     14.7188L9.28125 14.9688C9.4375 15.125 9.6875 15.125 9.8125
                     14.9688L12 12.8125L14.1562 14.9688C14.3125 15.125 14.5312
                     15.125 14.6875 14.9688L14.9375 14.7188C15.0938 14.5625
-                    15.0938 14.3125 14.9375 14.1875L12.7812 12L14.9375 9.84375Z" />
+                    15.0938 14.3125 14.9375 14.1875L12.7812 12L14.9375 9.84375Z"
+                  />
                 </svg>
               </div>
             {/each}
@@ -407,14 +417,15 @@
               placeholder="Type or Select Recipients"
               onInput={handleRecipientInput}
               error="A team must be selected"
-              invalid={teamsToMessage.length <= 0} />
+              invalid={teamsToMessage.length <= 0}
+            />
             <div
               uk-dropdown="pos: bottom-justify; mode: click"
-              class="Dropdown">
-
-              {#if _.some(teamsList.filter(t =>
-                  t.toLowerCase().includes(inputRecipients.toLowerCase())
-                ))}
+              class="Dropdown"
+            >
+              {#if _.some(teamsList.filter(t => t
+                    .toLowerCase()
+                    .includes(inputRecipients.toLowerCase())))}
                 <div class="Dropdown-header">Teams</div>
 
                 <div class="Dropdown-content">
@@ -423,21 +434,24 @@
                       class="Dropdown-selection clickable"
                       on:click={() => {
                         if (teamsToMessage.includes(t)) {
-                          teamsToMessage = teamsToMessage.filter(tM => tM !== t);
+                          teamsToMessage = teamsToMessage.filter(
+                            tM => tM !== t
+                          );
                         } else {
                           teamsToMessage.push(t);
                           teamsToMessage = teamsToMessage;
                         }
-                      }}>
+                      }}
+                    >
                       <div class="Dropdown-selection-check">
-
                         {#if teamsToMessage.includes(t)}
                           <svg
                             width="16"
                             height="12"
                             viewBox="0 0 16 12"
                             fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
                             <path
                               d="M13.5938 0.625L5.375 8.84375L2.375
                               5.8125C2.21875 5.6875 1.96875 5.6875 1.84375
@@ -447,7 +461,8 @@
                               2.03125C15.1562 1.90625 15.1562 1.65625 15.0312
                               1.5L14.125 0.625C14 0.46875 13.75 0.46875 13.5938
                               0.625Z"
-                              fill="#2B8AF7" />
+                              fill="#2B8AF7"
+                            />
                           </svg>
                         {/if}
                       </div>
@@ -457,34 +472,36 @@
                 </div>
               {/if}
 
-              {#if _.some(driverClassList.filter(dc =>
-                  dc.toLowerCase().includes(inputRecipients.toLowerCase())
-                ))}
+              {#if _.some(driverClassList.filter(dc => dc
+                    .toLowerCase()
+                    .includes(inputRecipients.toLowerCase())))}
                 <div class="Dropdown-header">Divisions</div>
 
                 <div class="Dropdown-content">
-                  {#each inputRecipients ? driverClassList.filter(dc =>
-                        dc.toLowerCase().includes(inputRecipients.toLowerCase())
-                      ) : driverClassList as dc}
+                  {#each inputRecipients ? driverClassList.filter(dc => dc
+                          .toLowerCase()
+                          .includes(inputRecipients.toLowerCase())) : driverClassList as dc}
                     <div
                       class="Dropdown-selection clickable"
                       on:click={() => {
                         if (driverClassesToMessage.includes(dc)) {
-                          driverClassesToMessage = driverClassesToMessage.filter(sR => sR !== dc);
+                          driverClassesToMessage =
+                            driverClassesToMessage.filter(sR => sR !== dc);
                         } else {
                           driverClassesToMessage.push(dc);
                           driverClassesToMessage = driverClassesToMessage;
                         }
-                      }}>
+                      }}
+                    >
                       <div class="Dropdown-selection-check">
-
                         {#if driverClassesToMessage.includes(dc)}
                           <svg
                             width="16"
                             height="12"
                             viewBox="0 0 16 12"
                             fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
                             <path
                               d="M13.5938 0.625L5.375 8.84375L2.375
                               5.8125C2.21875 5.6875 1.96875 5.6875 1.84375
@@ -494,7 +511,8 @@
                               2.03125C15.1562 1.90625 15.1562 1.65625 15.0312
                               1.5L14.125 0.625C14 0.46875 13.75 0.46875 13.5938
                               0.625Z"
-                              fill="#2B8AF7" />
+                              fill="#2B8AF7"
+                            />
                           </svg>
                         {/if}
                       </div>
@@ -518,8 +536,11 @@
                   xmlns="http://www.w3.org/2000/svg"
                   class="clickable"
                   on:click={() => {
-                    selectedMessageTypes = selectedMessageTypes.filter(t => selectedMessageType != t);
-                  }}>
+                    selectedMessageTypes = selectedMessageTypes.filter(
+                      t => selectedMessageType != t
+                    );
+                  }}
+                >
                   <path
                     d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25 12C4.25 16.2812
                     7.71875 19.75 12 19.75C16.2812 19.75 19.75 16.2812 19.75
@@ -535,50 +556,53 @@
                     14.7188L9.28125 14.9688C9.4375 15.125 9.6875 15.125 9.8125
                     14.9688L12 12.8125L14.1562 14.9688C14.3125 15.125 14.5312
                     15.125 14.6875 14.9688L14.9375 14.7188C15.0938 14.5625
-                    15.0938 14.3125 14.9375 14.1875L12.7812 12L14.9375 9.84375Z" />
+                    15.0938 14.3125 14.9375 14.1875L12.7812 12L14.9375 9.84375Z"
+                  />
                 </svg>
               </div>
             {/each}
           </div>
 
           <div class="MessageOverlay-input">
-
             <span class="MessageOverlay-inputLabel">Message Type</span>
             <span class="MessageOverlay-inputLabelSub">(Optional)</span>
 
             <Input
               fill
               placeholder="Choose Fleet Message Type"
-              onInput={handleMessageTypeInput} />
+              onInput={handleMessageTypeInput}
+            />
             <div
               uk-dropdown="pos: bottom-justify; mode: click"
-              class="Dropdown">
+              class="Dropdown"
+            >
               <div class="Dropdown-header">Select Message Type</div>
               <div class="Dropdown-content">
-                {#each inputMessageType ? messageTypes.filter(type =>
-                      type
+                {#each inputMessageType ? messageTypes.filter(type => type
                         .toLowerCase()
-                        .includes(inputMessageType.toLowerCase())
-                    ) : messageTypes as t}
+                        .includes(inputMessageType.toLowerCase())) : messageTypes as t}
                   <div
                     class="Dropdown-selection clickable"
                     on:click={() => {
                       if (selectedMessageTypes.includes(t)) {
-                        selectedMessageTypes = selectedMessageTypes.filter(type => type !== t);
+                        selectedMessageTypes = selectedMessageTypes.filter(
+                          type => type !== t
+                        );
                       } else {
                         selectedMessageTypes.push(t);
                         selectedMessageTypes = selectedMessageTypes;
                       }
-                    }}>
+                    }}
+                  >
                     <div class="Dropdown-selection-check">
-
                       {#if selectedMessageTypes.includes(t)}
                         <svg
                           width="16"
                           height="12"
                           viewBox="0 0 16 12"
                           fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <path
                             d="M13.5938 0.625L5.375 8.84375L2.375 5.8125C2.21875
                             5.6875 1.96875 5.6875 1.84375 5.8125L0.9375
@@ -587,7 +611,8 @@
                             5.65625 11.4062L15.0312 2.03125C15.1562 1.90625
                             15.1562 1.65625 15.0312 1.5L14.125 0.625C14 0.46875
                             13.75 0.46875 13.5938 0.625Z"
-                            fill="#2B8AF7" />
+                            fill="#2B8AF7"
+                          />
                         </svg>
                       {/if}
                     </div>
@@ -603,7 +628,8 @@
               <MessageAttachments
                 isDisplay={false}
                 {removeAttachment}
-                {attachments} />
+                {attachments}
+              />
             </div>
           {/if}
 
@@ -612,7 +638,8 @@
               id={uuid()}
               {handleInput}
               {addAttachment}
-              hideSend={true} />
+              hideSend={true}
+            />
           </div>
 
           <div class=" MessageOverlay-buttons">
@@ -620,28 +647,32 @@
               class="MessageOverlay-button"
               on:click={() => {
                 clearOverlayData();
-              }}>
+              }}
+            >
               <Button primary outline>Cancel</Button>
             </div>
 
             <div on:click={send}>
               <Button
                 primary
-                disabled={canSubmit && teamsToMessage.length > 0 ? false : true}>
+                disabled={canSubmit && teamsToMessage.length > 0 ? false : true}
+              >
                 Send Message
               </Button>
             </div>
           </div>
-
         </div>
       {/if}
     </div>
-
   </div>
 {/if}
 
 {#if displayPreviewOverlay}
   <OverlayPreview
     user={_.find(contactsList, { id: slug })}
-    {clearOverlayData} />
+    {clearOverlayData}
+  />
 {/if}
+
+<style src="./Messages.scss">
+</style>
