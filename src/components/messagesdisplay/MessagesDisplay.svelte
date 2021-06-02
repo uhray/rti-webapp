@@ -19,7 +19,6 @@
   import { getPosts } from '../../tools/crudApi';
 
   export let posts;
-  // export let sortedPosts = undefined;
   export let me;
   export let contacts = [];
   export let toggleReplies;
@@ -37,18 +36,22 @@
   let pageIndex = 1;
   let perPage = 50;
   let isMoreLoading = false;
-  let disableInfiniteScroll = false;
+  let disableInfiniteScroll = $postsStore.posts.length % 10 === 0;
 
-  // $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
+  $: {
+    console.log(disableInfiniteScroll);
+  }
 
-  // const scrollToBottom = (div = undefined) => {
-  //   if (div) {
-  //   } else {
-  //     if (messages) {
-  //       messages.scrollTo(0, messages.scrollHeight);
-  //     }
-  //   }
-  // };
+  $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
+
+  const scrollToBottom = (div = undefined) => {
+    if (div) {
+    } else {
+      if (messages) {
+        messages.scrollTo(0, messages.scrollHeight);
+      }
+    }
+  };
 
   const findContact = id => {
     return _.find(contacts, { id: id });
@@ -98,7 +101,7 @@
 
       addPost(payload)
         .then(res => {
-          postsStore.setPosts([...$postsStore.posts, res]);
+          postsStore.setPosts([res, ...$postsStore.posts]);
           repliesStore.setReplies([
             ...$repliesStore.replies,
             { id: res._id, display: false },
@@ -241,7 +244,9 @@
           {element}
           bind:intersecting
           on:intersect={e => {
-            loadMorePosts();
+            if (!disableInfiniteScroll) {
+              loadMorePosts();
+            }
           }}
         >
           <div bind:this={element} class="Infinite" />
