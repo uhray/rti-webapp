@@ -36,11 +36,7 @@
   let pageIndex = 1;
   let perPage = 50;
   let isMoreLoading = false;
-  let disableInfiniteScroll = $postsStore.posts.length % 10 === 0;
-
-  $: {
-    console.log(disableInfiniteScroll);
-  }
+  let disableInfiniteScroll = $postsStore.posts.length % 10 !== 0;
 
   $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
 
