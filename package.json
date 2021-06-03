@@ -1,7 +1,10 @@
 {
-  "name": "rti-webapp",
+  "name": "truck-ops-webapp",
   "description": "RTI Admin Panel for RTI App",
   "version": "0.0.1",
+  "engines": {
+    "node": "10.16.0"
+  },
   "scripts": {
     "dev": "sapper dev --no-hot",
     "build": "sapper build",
