@@ -31,7 +31,6 @@
   let attachments = [];
 
   onMount(() => {
-    console.log('ME', me._id);
     if (me && me._id) {
       let socket = io('http://localhost:80', {
         transports: ['websocket'],
@@ -98,7 +97,7 @@
       let payload = replyPost;
 
       editPost(replyPost._id, payload).catch(err => {
-        console.log('Error adding reply: ', err);
+        console.error('Error adding reply: ', err);
         replyPost = null;
       });
     } else {
@@ -109,7 +108,7 @@
         attachments: attachments,
       };
 
-      addPost(payload).catch(err => console.log('Error adding post: ', err));
+      addPost(payload).catch(err => console.error('Error adding post: ', err));
     }
 
     attachments = [];
