@@ -14,6 +14,8 @@
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
 
+  var io = require('socket.io-client');
+
   export let posts = undefined;
   export let sortedPosts = undefined;
   export let me;
@@ -27,6 +29,48 @@
   let input;
   let replyPost = null;
   let attachments = [];
+
+  onMount(() => {
+    console.log('ME', me._id);
+    if (me && me._id) {
+      let socket = io('http://localhost:80', {
+        transports: ['websocket'],
+        query: { userId: me._id },
+      });
+
+      socket.connect();
+
+      socket.on('connect_error', error => {
+        console.error(error);
+      });
+
+      socket.on('connect', () => {
+        socket.on('newPost', post => {
+          postsStore.setPosts([...$postsStore.posts, post]);
+          repliesStore.setReplies([
+            ...$repliesStore.replies,
+            { id: post._id, display: false },
+          ]);
+          scrollToBottom();
+        });
+
+        socket.on('addReply', post => {
+          postsStore.setPosts(
+            $postsStore.posts.map(p =>
+              p._id === post._id ? { ...p, subthread: post.subthread } : p
+            )
+          );
+
+          replyPost = null;
+        });
+      });
+
+      return () => {
+        socket.disconnect();
+        // socket.removeAllListeners();
+      };
+    }
+  });
 
   $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
 
@@ -53,29 +97,10 @@
       }
       let payload = replyPost;
 
-      editPost(replyPost._id, payload)
-        .then(res => {
-          postsStore.setPosts(
-            $postsStore.posts.map(p =>
-              p._id === res._id ? { ...p, subthread: res.subthread } : p
-            )
-          );
-
-          replyPost = null;
-
-          return res._id;
-        })
-        .then(id => {
-          repliesStore.setReplies(
-            $repliesStore.replies.map(r => {
-              return r._id === id ? { ...r, display: true } : r;
-            })
-          );
-        })
-        .catch(err => {
-          console.log('Error adding reply: ', err);
-          replyPost = null;
-        });
+      editPost(replyPost._id, payload).catch(err => {
+        console.log('Error adding reply: ', err);
+        replyPost = null;
+      });
     } else {
       let payload = {
         from: me._id,
@@ -84,16 +109,7 @@
         attachments: attachments,
       };
 
-      addPost(payload)
-        .then(res => {
-          postsStore.setPosts([...$postsStore.posts, res]);
-          repliesStore.setReplies([
-            ...$repliesStore.replies,
-            { id: res._id, display: false },
-          ]);
-          scrollToBottom();
-        })
-        .catch(err => console.log('Error adding post: ', err));
+      addPost(payload).catch(err => console.log('Error adding post: ', err));
     }
 
     attachments = [];
@@ -127,13 +143,8 @@
   }
 </script>
 
-<style src="./MessagesDisplay.scss">
-
-</style>
-
 <div class="MessagesDisplay">
   <div id="Messages" class="Messages" bind:this={messages}>
-
     {#if !loading}
       <div class="Messages-container">
         {#if sortedPosts && Object.keys(sortedPosts).length > 0}
@@ -141,9 +152,20 @@
             <div class="Messages-dateLabel">
               {#if date}
                 <Label
-                  text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
+                  text={moment(new Date(date).toISOString()).isSame(
+                    moment(),
+                    'day'
+                  )
+                    ? 'Today'
+                    : moment(new Date(date).toISOString()).isSame(
+                        moment().subtract(1, 'days'),
+                        'day'
+                      )
+                    ? 'Yesterday'
+                    : date}
                   status="disabled"
-                  backgroundColor="rgba(166, 173, 196, 0.3);" />
+                  backgroundColor="rgba(166, 173, 196, 0.3);"
+                />
               {/if}
             </div>
 
@@ -153,7 +175,8 @@
                   <MessageCard
                     {post}
                     {findContact}
-                    isAllMessages={slug === 'all' ? true : false} />
+                    isAllMessages={slug === 'all' ? true : false}
+                  />
                 {:else if post.postType === 'ALERT'}
                   <MessageCard isAlert={true} {post} {findContact} />
                 {:else if post.postType === 'ORDER'}
@@ -161,7 +184,8 @@
                     {me}
                     {post}
                     {findContact}
-                    order={_.find(orders, { orderId: post.orderId })} />
+                    order={_.find(orders, { orderId: post.orderId })}
+                  />
                 {/if}
 
                 {#if post.attachments.length > 0}
@@ -172,7 +196,8 @@
                   {post}
                   {toggleReplies}
                   {handleReplyPost}
-                  {findContact} />
+                  {findContact}
+                />
               </div>
             {/each}
           {/each}
@@ -195,12 +220,12 @@
             <MessageAttachments
               isDisplay={false}
               {removeAttachment}
-              {attachments} />
+              {attachments}
+            />
           </div>
         {/if}
         {#if replyPost}
           <div class="Input-replying">
-
             {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
               <div class="Input-info">
                 <div>Replying to: {findContact(replyPost.from).name}</div>
@@ -215,7 +240,8 @@
                     viewBox="0 0 16 11"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    class="Input-orderIcon">
+                    class="Input-orderIcon"
+                  >
                     <path
                       d="M15.6289 4.70312L12.7578 0.574219C12.5117 0.246094
                       12.1289 0 11.6641 0H4.30859C3.84375 0 3.46094 0.246094
@@ -228,7 +254,8 @@
                       4.375H2.17578L4.30859 1.3125ZM14.5625
                       9.1875H1.4375V5.6875H4.71875L5.59375
                       7.4375H10.4062L11.2812 5.6875H14.5625V9.1875Z"
-                      fill="#15224B" />
+                      fill="#15224B"
+                    />
                   </svg>
                   <div>
                     <div class="Input-orderNumber">
@@ -243,10 +270,13 @@
                 </div>
                 <Label
                   status={_.find(orders, { orderId: replyPost.orderId }).status}
-                  text={capitalize(_.find(orders, {
+                  text={capitalize(
+                    _.find(orders, {
                       orderId: replyPost.orderId,
-                    }).status)}
-                  small />
+                    }).status
+                  )}
+                  small
+                />
               </div>
             {/if}
 
@@ -254,7 +284,8 @@
               class="clickable"
               on:click={() => {
                 replyPost = null;
-              }}>
+              }}
+            >
               <Icon type="close" />
             </div>
           </div>
@@ -264,3 +295,6 @@
     </div>
   {/if}
 </div>
+
+<style src="./MessagesDisplay.scss">
+</style>
