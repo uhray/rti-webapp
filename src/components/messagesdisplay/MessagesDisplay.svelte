@@ -44,7 +44,7 @@
       });
 
       socket.on('connect', () => {
-        socket.on('newPost', post => {
+        socket.on('addPost', post => {
           postsStore.setPosts([...$postsStore.posts, post]);
           repliesStore.setReplies([
             ...$repliesStore.replies,
@@ -53,11 +53,9 @@
           scrollToBottom();
         });
 
-        socket.on('addReply', post => {
+        socket.on('updatePost', post => {
           postsStore.setPosts(
-            $postsStore.posts.map(p =>
-              p._id === post._id ? { ...p, subthread: post.subthread } : p
-            )
+            $postsStore.posts.map(p => (p._id === post._id ? post : p))
           );
 
           replyPost = null;
@@ -140,6 +138,20 @@
     );
     attachments = filteredAttachments;
   }
+
+  function readPost(post) {
+    let payload = post;
+    if (payload.toRead) {
+      payload.toRead = [...payload.toRead, me._id];
+    } else {
+      payload.toRead = [me._id];
+    }
+
+    payload.states.deliveryStatus = 'READ';
+    payload.readTime = Date.now();
+
+    editPost(post._id, payload);
+  }
 </script>
 
 <div class="MessagesDisplay">
@@ -176,6 +188,7 @@
                     {findContact}
                     isAllMessages={slug === 'all' ? true : false}
                   />
+                  <button on:click={() => readPost(post)}>READ</button>
                 {:else if post.postType === 'ALERT'}
                   <MessageCard isAlert={true} {post} {findContact} />
                 {:else if post.postType === 'ORDER'}
