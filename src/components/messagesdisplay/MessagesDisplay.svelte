@@ -153,13 +153,7 @@
       initPayload.teamIds = [];
       initPayload.toRead = [];
 
-      console.log([initPayload, ...$postsStore.posts]);
-
       postsStore.setPosts([initPayload, ...$postsStore.posts]);
-      // repliesStore.setReplies([
-      //   ...$repliesStore.replies,
-      //   { id: res._id, display: false },
-      // ]);
 
       addPost({ post: payload, initPostId: initPayload._id }).catch(err =>
         console.error('Error adding post: ', err)
