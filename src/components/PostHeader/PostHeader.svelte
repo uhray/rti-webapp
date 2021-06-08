@@ -2,22 +2,29 @@
   import Avatar from '../Avatar/Avatar.svelte';
   import Icon from '../icon/Icon.svelte';
   import { formatDate } from '../../tools/tools';
-  import { userStore } from '../../store';
+  import { userStore, contactsStore } from '../../store';
 
   export let isOrder = false;
-  export let user;
   export let post;
   export let canFormatDate = false;
   export let isAllMessages = false;
+  export let from;
   export let userTo = undefined;
+
+  // console.log(from);
 </script>
 
 <div class="PostHeader-container">
   <div class="Post-header">
-    <Avatar {user} size={40} />
+    <Avatar
+      user={_.find($contactsStore.contacts.users, { id: post.from })}
+      size={40}
+    />
     <div class="Post-header-details">
-      <div class="Post-header-name">{user.name || ''}</div>
-      {#if $userStore.user._id === post.from}
+      <div class="Post-header-name">
+        {_.find($contactsStore.contacts.users, { id: post.from }).name || ''}
+      </div>
+      {#if $userStore.user._id === post.from && post.states && post.states.deliveryStatus}
         {#if post.states.deliveryStatus === 'SENDING'}
           <div class="Post-header-timestamp">
             {formatDate(post.updatedAt, canFormatDate)} • Sending{' '}
@@ -89,7 +96,7 @@
     </div>
   </div>
 
-  {#if isAllMessages}
+  {#if isAllMessages && post.from === $userStore.user._id}
     <div class="Post-header-group">
       <div class="Post-header-spacer" />
       <div style="margin-bottom: 11px;">

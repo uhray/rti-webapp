@@ -3,16 +3,18 @@
   import PostHeader from '../PostHeader/PostHeader.svelte';
   import Label from '../label/Label.svelte';
   import _ from 'lodash';
+  import { contactsStore } from '../../store';
 
   export let isAlert = false;
   export let post;
-  export let findContact;
   export let isAllMessages = false;
-  let user = findContact(post.from);
-  let userTo = findContact(post.userId);
+  let from = _.find($contactsStore.contacts.users, { id: post.from });
+  let userTo = _.find($contactsStore.contacts.users, { id: post.userId });
+
+  // console.log('From: ' + from.name + ' To: ' + userTo.name);
 </script>
 
-<PostHeader {user} {userTo} {post} {isAllMessages} />
+<PostHeader {userTo} {post} {isAllMessages} />
 {#if isAlert}
   <div class="AlertCard">
     <div class="AlertCard-header">

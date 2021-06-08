@@ -14,6 +14,7 @@ import {
   getTeams,
   getTrucks,
 } from './crudApi';
+import { opts as varOpts } from '../tools/opts';
 
 export function formatDate(d, canFormatDate = false) {
   let datetime = '';
@@ -117,7 +118,11 @@ export async function setData(opts?) {
   }
 
   if (grabPosts) {
-    const p = await getPosts({ allMessages: true, page: 0, perPage: 50 });
+    const p = await getPosts({
+      allMessages: true,
+      page: 0,
+      perPage: varOpts.perPage,
+    });
     const r = p.map(post => {
       return { id: post._id, display: false };
     });

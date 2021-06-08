@@ -10,7 +10,6 @@
   export let orders;
   export let slug;
   export let me;
-  export let findContact;
   export let toggleReplies;
   export let handleReplyPost;
 
@@ -18,8 +17,6 @@
   let intersecting;
 
   function readPost(p) {
-    console.log('READ POST TRIGGER: ', post._id);
-
     let payload = p;
     if (payload.toRead) {
       payload.toRead = [...payload.toRead, me._id];
@@ -30,13 +27,9 @@
     payload.states.deliveryStatus = 'READ';
     payload.readTime = Date.now();
 
-    editPost(post._id, payload)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    editPost(post._id, payload).catch(err => {
+      console.error(err);
+    });
   }
 </script>
 
@@ -44,9 +37,6 @@
   {element}
   bind:intersecting
   on:intersect={e => {
-    // console.log(post.from, me._id, post.from !== me._id);
-    // console.log(post.toRead, !post.toRead.includes(me._id));
-
     if (post.postType === 'ORDER') {
       if (post.toRead && !post.toRead.includes(me._id)) {
         // UPDATE POST
@@ -66,18 +56,13 @@
 >
   <div class="Post" bind:this={element}>
     {#if post.postType === 'MESSAGE'}
-      <MessageCard
-        {post}
-        {findContact}
-        isAllMessages={slug === 'all' ? true : false}
-      />
+      <MessageCard {post} isAllMessages={slug === 'all' ? true : false} />
     {:else if post.postType === 'ALERT'}
-      <MessageCard isAlert={true} {post} {findContact} />
+      <MessageCard isAlert={true} {post} />
     {:else if post.postType === 'ORDER'}
       <OrderMessageCard
         {me}
         {post}
-        {findContact}
         order={_.find(orders, { orderId: post.orderId })}
       />
     {/if}
@@ -86,7 +71,7 @@
       <MessageAttachments attachments={post.attachments} />
     {/if}
 
-    <Replies {post} {toggleReplies} {handleReplyPost} {findContact} />
+    <Replies {post} {toggleReplies} {handleReplyPost} />
   </div>
 </IntersectionObserver>
 

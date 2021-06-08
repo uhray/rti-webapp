@@ -2,13 +2,12 @@
   import PostHeader from '../PostHeader/PostHeader.svelte';
   import PostContent from '../PostContent/PostContent.svelte';
   import Icon from '../icon/Icon.svelte';
-  import _ from 'lodash';
-  import { repliesStore } from '../../store';
+  import _, { find } from 'lodash';
+  import { contactsStore, repliesStore } from '../../store';
 
   export let post = undefined;
   export let toggleReplies = undefined;
   export let handleReplyPost = undefined;
-  export let findContact = undefined;
 
   let replies;
   $: replies = $repliesStore.replies;
@@ -32,7 +31,7 @@
         {#each post.subthread as reply}
           <div class="Post-replies-content">
             <PostHeader
-              user={findContact(reply.from)}
+              from={_.find($contactsStore.contacts.users, { id: reply.from })}
               post={reply}
               canFormatDate={true}
             />

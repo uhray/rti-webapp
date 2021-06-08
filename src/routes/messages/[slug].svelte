@@ -94,4 +94,5 @@
   {orders}
   {slug}
   {trigger}
-  {loading} />
+  {loading}
+/>

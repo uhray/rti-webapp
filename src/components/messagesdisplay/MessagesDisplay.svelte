@@ -7,11 +7,12 @@
   import RichText from '../richtext/RichText.svelte';
   import { uuid } from '../../tools/tools.ts';
   import { capitalize } from '../../tools/tools.ts';
-  import { postsStore, repliesStore } from '../../store';
+  import { postsStore, repliesStore, contactsStore } from '../../store';
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
   import { getPosts } from '../../tools/crudApi';
   import Post from '../Post/Post.svelte';
+  import { opts } from '../../tools/opts';
 
   var io = require('socket.io-client');
 
@@ -30,7 +31,7 @@
   let element;
   let intersecting;
   let pageIndex = 1;
-  let perPage = 50;
+  let perPage = opts.perPage;
   let isMoreLoading = false;
   let disableInfiniteScroll = $postsStore.posts.length % 10 !== 0;
 
@@ -48,19 +49,27 @@
       });
 
       socket.on('connect', () => {
-        socket.on('addPost', post => {
-          postsStore.setPosts([post, ...$postsStore.posts]);
+        socket.on('addPost', (post, initPostId) => {
+          if (post.from !== me._id) {
+            postsStore.setPosts([post, ...$postsStore.posts]);
+          } else {
+            postsStore.setPosts(
+              $postsStore.posts.map(p => (p._id === initPostId ? post : p))
+            );
+          }
           repliesStore.setReplies([
             ...$repliesStore.replies,
             { id: post._id, display: false },
           ]);
-          scrollToBottom();
+          // scrollToBottom();
         });
 
         socket.on('updatePost', post => {
-          postsStore.setPosts(
-            $postsStore.posts.map(p => (p._id === post._id ? post : p))
-          );
+          if (post) {
+            postsStore.setPosts(
+              $postsStore.posts.map(p => (p._id === post._id ? post : p))
+            );
+          }
 
           replyPost = null;
         });
@@ -82,10 +91,6 @@
         messages.scrollTo(0, messages.scrollHeight);
       }
     }
-  };
-
-  const findContact = id => {
-    return _.find(contacts, { id: id });
   };
 
   async function send(message) {
@@ -118,7 +123,7 @@
           );
         })
         .catch(err => {
-          console.log('Error adding reply: ', err);
+          console.error('Error adding reply: ', err);
 
           replyPost = null;
         });
@@ -129,17 +134,36 @@
         userId: slug,
         attachments: attachments,
       };
+      let initPayload = _.cloneDeep(payload);
+      let date = moment().toISOString();
 
-      addPost(payload)
-        .then(res => {
-          postsStore.setPosts([res, ...$postsStore.posts]);
-          repliesStore.setReplies([
-            ...$repliesStore.replies,
-            { id: res._id, display: false },
-          ]);
-          scrollToBottom();
-        })
-        .catch(err => console.log('Error adding post: ', err));
+      initPayload._id = uuid();
+      initPayload.createdAt = date;
+      initPayload.updatedAt = date;
+      initPayload.sortDatetime = date;
+      initPayload.postType = 'MESSAGE';
+      initPayload.states = {
+        isArchived: false,
+        isDeleted: false,
+        deliveryStatus: 'SENDING',
+      };
+      initPayload.driverClass = [];
+      initPayload.subthread = [];
+      initPayload.tags = [];
+      initPayload.teamIds = [];
+      initPayload.toRead = [];
+
+      console.log([initPayload, ...$postsStore.posts]);
+
+      postsStore.setPosts([initPayload, ...$postsStore.posts]);
+      // repliesStore.setReplies([
+      //   ...$repliesStore.replies,
+      //   { id: res._id, display: false },
+      // ]);
+
+      addPost({ post: payload, initPostId: initPayload._id }).catch(err =>
+        console.error('Error adding post: ', err)
+      );
     }
 
     attachments = [];
@@ -195,14 +219,16 @@
         const r = res.map(post => {
           return { id: post._id, display: false };
         });
-        postsStore.setPosts([...$postsStore.posts, ...res]);
-        repliesStore.setReplies([...$repliesStore.replies, ...r]);
+        postsStore.setPosts(_.uniqBy([...$postsStore.posts, ...res], '_id'));
+        repliesStore.setReplies(
+          _.uniqBy([...$repliesStore.replies, ...r], 'id')
+        );
 
         disableInfiniteScroll = res.length < 10;
         isMoreLoading = false;
       })
       .catch(err => {
-        console.log('Error fetching more posts: ', err);
+        console.error('Error fetching more posts: ', err);
 
         disableInfiniteScroll = true;
         isMoreLoading = false;
@@ -231,15 +257,7 @@
     {#if !loading}
       {#if posts && posts.length > 0}
         {#each posts as post, index}
-          <Post
-            {post}
-            {orders}
-            {slug}
-            {me}
-            {findContact}
-            {toggleReplies}
-            {handleReplyPost}
-          />
+          <Post {post} {orders} {slug} {me} {toggleReplies} {handleReplyPost} />
 
           {#if compareSortTimes(posts[index], posts[index + 1]) || posts[posts.length - 1]._id === post._id}
             <div class="Messages-dateLabel">
@@ -313,7 +331,11 @@
           <div class="Input-replying">
             {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
               <div class="Input-info">
-                <div>Replying to: {findContact(replyPost.from).name}</div>
+                <div>
+                  Replying to: {_.find($contactsStore.contacts.users, {
+                    id: replyPost.from,
+                  }).name}
+                </div>
                 <div>{removeTags(replyPost.message)}</div>
               </div>
             {:else if replyPost.postType === 'ORDER'}

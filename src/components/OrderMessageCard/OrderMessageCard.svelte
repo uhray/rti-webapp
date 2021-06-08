@@ -5,10 +5,9 @@
 
   export let me;
   export let post;
-  export let findContact;
   export let order;
 
-  let user = findContact(me._id);
+  let user = $usersStore.user;
 
   function formatAddressCSZ(addressObject) {
     if (addressObject) {
