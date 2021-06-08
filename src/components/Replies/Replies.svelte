@@ -1,6 +1,6 @@
 <script>
   import PostHeader from '../PostHeader/PostHeader.svelte';
-  import Post from '../post/Post.svelte';
+  import PostContent from '../PostContent/PostContent.svelte';
   import Icon from '../icon/Icon.svelte';
   import _ from 'lodash';
   import { repliesStore } from '../../store';
@@ -14,19 +14,14 @@
   $: replies = $repliesStore.replies;
 </script>
 
-<style src="./Replies.scss">
-
-</style>
-
 {#if post.subthread && post.subthread.length > 0}
   <div class="Post-replies">
-
-    {#if _.find(replies, {
-      id: post._id,
-    }) && _.find(replies, { id: post._id }).display}
+    {#if _.find( replies, { id: post._id } ) && _.find( replies, { id: post._id } ).display}
       <div class="Post-replies-show" on:click={() => toggleReplies(post._id)}>
         <span>
-          Hide {post.subthread.length} repl{post.subthread.length > 1 ? 'ies' : 'y'}
+          Hide {post.subthread.length} repl{post.subthread.length > 1
+            ? 'ies'
+            : 'y'}
         </span>
         <div class="Post-replies-icon">
           <Icon type="chev-up" />
@@ -39,10 +34,11 @@
             <PostHeader
               user={findContact(reply.from)}
               post={reply}
-              canFormatDate={true} />
+              canFormatDate={true}
+            />
 
             <div class="Post-message">
-              <Post message={reply.message} />
+              <PostContent message={reply.message} />
             </div>
           </div>
         {/each}
@@ -52,7 +48,8 @@
             class="Post-reply-action"
             on:click={() => {
               handleReplyPost(post);
-            }}>
+            }}
+          >
             <Icon type="reply" color="#243E93" />
             <span>Reply in the thread</span>
           </div>
@@ -61,14 +58,15 @@
     {:else}
       <div class="Post-replies-show" on:click={() => toggleReplies(post._id)}>
         <span>
-          Show {post.subthread.length} repl{post.subthread.length > 1 ? 'ies' : 'y'}
+          Show {post.subthread.length} repl{post.subthread.length > 1
+            ? 'ies'
+            : 'y'}
         </span>
         <div class="Post-replies-icon">
           <Icon type="chev-down" />
         </div>
       </div>
     {/if}
-
   </div>
 {:else}
   <div class="Post-reply">
@@ -76,9 +74,13 @@
       class="Post-reply-action"
       on:click={() => {
         handleReplyPost(post);
-      }}>
+      }}
+    >
       <Icon type="reply" color="#243E93" />
       <span>Reply in the thread</span>
     </div>
   </div>
 {/if}
+
+<style src="./Replies.scss">
+</style>

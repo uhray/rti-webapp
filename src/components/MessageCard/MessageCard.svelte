@@ -1,5 +1,5 @@
 <script>
-  import Post from '../post/Post.svelte';
+  import PostContent from '../PostContent/PostContent.svelte';
   import PostHeader from '../PostHeader/PostHeader.svelte';
   import Label from '../label/Label.svelte';
   import _ from 'lodash';
@@ -39,11 +39,11 @@
         {/each}
       </div>
     </div>
-    <Post message={post.message} />
+    <PostContent message={post.message} />
   </div>
 {:else}
   <div class="MessageCard">
-    <Post message={post.message} />
+    <PostContent message={post.message} />
   </div>
 {/if}
 

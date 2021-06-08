@@ -1,23 +1,21 @@
 <script>
+  import IntersectionObserver from 'svelte-intersection-observer';
   import { onMount } from 'svelte';
   import _ from 'lodash';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
   import RichText from '../richtext/RichText.svelte';
-  import MessageCard from '../MessageCard/MessageCard.svelte';
-  import OrderMessageCard from '../OrderMessageCard/OrderMessageCard.svelte';
-  import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
-  import Replies from '../Replies/Replies.svelte';
   import { uuid } from '../../tools/tools.ts';
   import { capitalize } from '../../tools/tools.ts';
   import { postsStore, repliesStore } from '../../store';
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
+  import { getPosts } from '../../tools/crudApi';
+  import Post from '../Post/Post.svelte';
 
   var io = require('socket.io-client');
 
-  export let posts = undefined;
-  export let sortedPosts = undefined;
+  export let posts;
   export let me;
   export let contacts = [];
   export let toggleReplies;
@@ -29,6 +27,12 @@
   let input;
   let replyPost = null;
   let attachments = [];
+  let element;
+  let intersecting;
+  let pageIndex = 1;
+  let perPage = 50;
+  let isMoreLoading = false;
+  let disableInfiniteScroll = $postsStore.posts.length % 10 !== 0;
 
   onMount(() => {
     if (me && me._id) {
@@ -94,10 +98,30 @@
       }
       let payload = replyPost;
 
-      editPost(replyPost._id, payload).catch(err => {
-        console.error('Error adding reply: ', err);
-        replyPost = null;
-      });
+      editPost(replyPost._id, payload)
+        .then(res => {
+          postsStore.setPosts(
+            $postsStore.posts.map(p =>
+              p._id === res._id ? { ...p, subthread: res.subthread } : p
+            )
+          );
+
+          replyPost = null;
+
+          return res._id;
+        })
+        .then(id => {
+          repliesStore.setReplies(
+            $repliesStore.replies.map(r => {
+              return r._id === id ? { ...r, display: true } : r;
+            })
+          );
+        })
+        .catch(err => {
+          console.log('Error adding reply: ', err);
+
+          replyPost = null;
+        });
     } else {
       let payload = {
         from: me._id,
@@ -106,7 +130,16 @@
         attachments: attachments,
       };
 
-      addPost(payload).catch(err => console.error('Error adding post: ', err));
+      addPost(payload)
+        .then(res => {
+          postsStore.setPosts([res, ...$postsStore.posts]);
+          repliesStore.setReplies([
+            ...$repliesStore.replies,
+            { id: res._id, display: false },
+          ]);
+          scrollToBottom();
+        })
+        .catch(err => console.log('Error adding post: ', err));
     }
 
     attachments = [];
@@ -152,71 +185,111 @@
 
     editPost(post._id, payload);
   }
+
+  function loadMorePosts() {
+    isMoreLoading = true;
+
+    getPosts({ allMessages: true, page: pageIndex, perPage: perPage })
+      .then(res => {
+        pageIndex++;
+        const r = res.map(post => {
+          return { id: post._id, display: false };
+        });
+        postsStore.setPosts([...$postsStore.posts, ...res]);
+        repliesStore.setReplies([...$repliesStore.replies, ...r]);
+
+        disableInfiniteScroll = res.length < 10;
+        isMoreLoading = false;
+      })
+      .catch(err => {
+        console.log('Error fetching more posts: ', err);
+
+        disableInfiniteScroll = true;
+        isMoreLoading = false;
+      });
+  }
+
+  function compareSortTimes(post1, post2) {
+    if (post1 && post2) {
+      let date1 = moment(new Date(post1.sortDatetime).toISOString()).format(
+        'MMM D, YYYY'
+      );
+      let date2 = moment(new Date(post2.sortDatetime).toISOString()).format(
+        'MMM D, YYYY'
+      );
+
+      if (date1 !== date2) {
+        return true;
+      }
+    }
+    return false;
+  }
 </script>
 
 <div class="MessagesDisplay">
   <div id="Messages" class="Messages" bind:this={messages}>
     {#if !loading}
-      <div class="Messages-container">
-        {#if sortedPosts && Object.keys(sortedPosts).length > 0}
-          {#each Object.keys(sortedPosts) as date}
+      {#if posts && posts.length > 0}
+        {#each posts as post, index}
+          <Post
+            {post}
+            {orders}
+            {slug}
+            {me}
+            {findContact}
+            {toggleReplies}
+            {handleReplyPost}
+          />
+
+          {#if compareSortTimes(posts[index], posts[index + 1]) || posts[posts.length - 1]._id === post._id}
             <div class="Messages-dateLabel">
-              {#if date}
-                <Label
-                  text={moment(new Date(date).toISOString()).isSame(
-                    moment(),
-                    'day'
-                  )
-                    ? 'Today'
-                    : moment(new Date(date).toISOString()).isSame(
-                        moment().subtract(1, 'days'),
-                        'day'
-                      )
-                    ? 'Yesterday'
-                    : date}
-                  status="disabled"
-                  backgroundColor="rgba(166, 173, 196, 0.3);"
-                />
-              {/if}
+              <Label
+                text={moment(
+                  new Date(
+                    moment(new Date(post.sortDatetime).toISOString()).format(
+                      'MMM D, YYYY'
+                    )
+                  ).toISOString()
+                ).isSame(moment(), 'day')
+                  ? 'Today'
+                  : moment(
+                      new Date(
+                        moment(
+                          new Date(post.sortDatetime).toISOString()
+                        ).format('MMM D, YYYY')
+                      ).toISOString()
+                    ).isSame(moment().subtract(1, 'days'), 'day')
+                  ? 'Yesterday'
+                  : moment(new Date(post.sortDatetime).toISOString()).format(
+                      'MMM D, YYYY'
+                    )}
+                status="disabled"
+                backgroundColor="rgba(166, 173, 196, 0.3);"
+              />
             </div>
+          {/if}
+        {/each}
 
-            {#each Object.values(sortedPosts[date]) as post}
-              <div class="Post">
-                {#if post.postType === 'MESSAGE'}
-                  <MessageCard
-                    {post}
-                    {findContact}
-                    isAllMessages={slug === 'all' ? true : false}
-                  />
-                  <button on:click={() => readPost(post)}>READ</button>
-                {:else if post.postType === 'ALERT'}
-                  <MessageCard isAlert={true} {post} {findContact} />
-                {:else if post.postType === 'ORDER'}
-                  <OrderMessageCard
-                    {me}
-                    {post}
-                    {findContact}
-                    order={_.find(orders, { orderId: post.orderId })}
-                  />
-                {/if}
+        <IntersectionObserver
+          {element}
+          bind:intersecting
+          on:intersect={e => {
+            if (!disableInfiniteScroll) {
+              loadMorePosts();
+            }
+          }}
+        >
+          <div bind:this={element} class="Infinite" />
+        </IntersectionObserver>
 
-                {#if post.attachments.length > 0}
-                  <MessageAttachments attachments={post.attachments} />
-                {/if}
-
-                <Replies
-                  {post}
-                  {toggleReplies}
-                  {handleReplyPost}
-                  {findContact}
-                />
-              </div>
-            {/each}
-          {/each}
-        {:else}
-          <div class="Messages-empty">No Messages</div>
+        {#if isMoreLoading}
+          <div class="Messages-loading">
+            <div uk-spinner class="Loader-color" />
+          </div>
         {/if}
-      </div>
+      {:else}
+        <div class="Messages-empty">No Messages</div>
+      {/if}
     {:else}
       <div class="Messages-loading">
         <div uk-spinner class="Loader-color" />
@@ -308,5 +381,4 @@
   {/if}
 </div>
 
-<style src="./MessagesDisplay.scss">
-</style>
+<style src="./MessagesDisplay.scss"></style>
