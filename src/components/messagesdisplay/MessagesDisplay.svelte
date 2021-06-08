@@ -49,7 +49,7 @@
 
       socket.on('connect', () => {
         socket.on('addPost', post => {
-          postsStore.setPosts([...$postsStore.posts, post]);
+          postsStore.setPosts([post, ...$postsStore.posts]);
           repliesStore.setReplies([
             ...$repliesStore.replies,
             { id: post._id, display: false },

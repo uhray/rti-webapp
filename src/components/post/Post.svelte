@@ -18,6 +18,8 @@
   let intersecting;
 
   function readPost(p) {
+    console.log('READ POST TRIGGER: ', post._id);
+
     let payload = p;
     if (payload.toRead) {
       payload.toRead = [...payload.toRead, me._id];
@@ -28,7 +30,13 @@
     payload.states.deliveryStatus = 'READ';
     payload.readTime = Date.now();
 
-    editPost(post._id, payload);
+    editPost(post._id, payload)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 </script>
 
@@ -36,7 +44,9 @@
   {element}
   bind:intersecting
   on:intersect={e => {
-    console.log(post._id);
+    // console.log(post.from, me._id, post.from !== me._id);
+    // console.log(post.toRead, !post.toRead.includes(me._id));
+
     if (post.postType === 'ORDER') {
       if (post.toRead && !post.toRead.includes(me._id)) {
         // UPDATE POST
