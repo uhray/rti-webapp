@@ -21,10 +21,6 @@
   }
 </script>
 
-<style src="./OrderMessageCard.scss">
-
-</style>
-
 {#if order && post}
   <PostHeader {user} {post} />
 
@@ -46,7 +42,8 @@
                   viewBox="0 0 8 12"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  class="OrderCard-svg">
+                  class="OrderCard-svg"
+                >
                   <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
@@ -68,7 +65,8 @@
                     3.75 4.75 4.08579 4.75 4.5C4.75 4.91421 4.41421 5.25 4
                     5.25C3.58579 5.25 3.25 4.91421 3.25 4.5C3.25 4.08579 3.58579
                     3.75 4 3.75Z"
-                    fill="#15224B" />
+                    fill="#15224B"
+                  />
                 </svg>
               {:else}
                 <svg
@@ -77,7 +75,8 @@
                   viewBox="0 0 12 13"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  class="OrderCard-svg">
+                  class="OrderCard-svg"
+                >
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
@@ -87,7 +86,8 @@
                     2.375C8.27817 2.375 10.125 4.22183 10.125 6.5C10.125 8.77817
                     8.27817 10.625 6 10.625C3.72183 10.625 1.875 8.77817 1.875
                     6.5C1.875 4.22183 3.72183 2.375 6 2.375Z"
-                    fill="#15224B" />
+                    fill="#15224B"
+                  />
                 </svg>
               {/if}
 
@@ -105,7 +105,8 @@
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="OrderCard-svg"
-                  viewBox="0 0 512 512">
+                  viewBox="0 0 512 512"
+                >
                   <title>Arrow Forward</title>
                   <path
                     fill="none"
@@ -113,7 +114,8 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="48"
-                    d="M268 112l144 144-144 144M392 256H100" />
+                    d="M268 112l144 144-144 144M392 256H100"
+                  />
                 </svg>
                 &nbsp;
                 <i>{formatAddressCSZ(s.address) || ''}</i>
@@ -128,3 +130,6 @@
     </a>
   </div>
 {/if}
+
+<style src="./OrderMessageCard.scss">
+</style>

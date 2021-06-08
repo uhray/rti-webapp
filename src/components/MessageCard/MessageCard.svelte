@@ -12,10 +12,6 @@
   let userTo = findContact(post.userId);
 </script>
 
-<style src="./MessageCard.scss">
-
-</style>
-
 <PostHeader {user} {userTo} {post} {isAllMessages} />
 {#if isAlert}
   <div class="AlertCard">
@@ -23,7 +19,11 @@
       <div class="AlertCard-tags">
         Fleet Message {post.tags.length > 0 ? '•' : ''}
         {#each post.tags as t, index}
-          {post.tags.length > 1 ? (index === post.tags.length - 1 ? t : t + ' - ') : t}
+          {post.tags.length > 1
+            ? index === post.tags.length - 1
+              ? t
+              : t + ' - '
+            : t}
         {/each}
       </div>
       <div class="AlertCard-labels">
@@ -46,3 +46,6 @@
     <Post message={post.message} />
   </div>
 {/if}
+
+<style src="./MessageCard.scss">
+</style>
