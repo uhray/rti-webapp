@@ -13,6 +13,8 @@
   import { getPosts } from '../../tools/crudApi';
   import Post from '../Post/Post.svelte';
   import { opts } from '../../tools/opts';
+  import OverlayDelete from '../OverlayDelete/OverlayDelete.svelte';
+  import OverlayResend from '../OverlayResend/OverlayResend.svelte';
 
   var io = require('socket.io-client');
 
@@ -34,6 +36,10 @@
   let perPage = opts.perPage;
   let isMoreLoading = false;
   let disableInfiniteScroll = $postsStore.posts.length % 10 !== 0;
+
+  let displayErrorResend = false;
+  let displayErrorDelete = false;
+  let errorPost = {};
 
   onMount(() => {
     if (me && me._id) {
@@ -157,7 +163,19 @@
 
       addPost({ post: payload, initPostId: initPayload._id }).then(res => {
         if (res.error) {
-          const localPosts = localStorage.getItem('errorPosts');
+          postsStore.setPosts(
+            $postsStore.posts.map(p =>
+              p._id === initPayload._id
+                ? {
+                    ...p,
+                    states: { ...p.states, deliveryStatus: 'ERROR' },
+                    errorTime: date,
+                  }
+                : p
+            )
+          );
+
+          const localPosts = localStorage.getItem('errorAdminPosts');
 
           localStorage.setItem(
             `errorAdminPosts`,
@@ -179,8 +197,18 @@
   }
 
   function resend(p) {
-    const post = _.cloneDeep(p);
-    const initPayload = _.cloneDeep(post);
+    errorPost = p;
+    displayErrorResend = true;
+  }
+
+  function promptDelete() {
+    displayErrorResend = false;
+    displayErrorDelete = true;
+  }
+
+  function errorResend() {
+    const post = _.cloneDeep(errorPost);
+    const initPayload = _.cloneDeep(errorPost);
 
     delete post.createdAt;
     delete post.updatedAt;
@@ -194,12 +222,29 @@
       } else {
         let localPosts = localStorage.getItem('errorAdminPosts') || '';
         localPosts = JSON.stringify(
-          JSON.parse('[' + localPosts + ']').filter(i => i._id !== p._id)
+          JSON.parse('[' + localPosts + ']').filter(
+            i => i._id !== errorPost._id
+          )
         ).slice(1, -1);
 
         localStorage.setItem('errorAdminPosts', localPosts);
+
+        clearOverlayData();
       }
     });
+  }
+
+  function errorDelete() {
+    let localPosts = localStorage.getItem('errorAdminPosts') || '';
+    localPosts = JSON.stringify(
+      JSON.parse('[' + localPosts + ']').filter(i => i._id !== errorPost._id)
+    ).slice(1, -1);
+
+    localStorage.setItem('errorAdminPosts', localPosts);
+
+    postsStore.setPosts($postsStore.posts.filter(p => p._id !== errorPost._id));
+
+    clearOverlayData();
   }
 
   function removeTags(str) {
@@ -282,6 +327,12 @@
       }
     }
     return false;
+  }
+
+  function clearOverlayData() {
+    errorPost = false;
+    displayErrorDelete = false;
+    displayErrorResend = false;
   }
 </script>
 
@@ -443,5 +494,18 @@
     </div>
   {/if}
 </div>
+
+{#if displayErrorResend}
+  <OverlayResend
+    {clearOverlayData}
+    cancel={promptDelete}
+    send={errorResend}
+    type={'message'}
+  />
+{/if}
+
+{#if displayErrorDelete}
+  <OverlayDelete {clearOverlayData} send={errorDelete} type={'message'} />
+{/if}
 
 <style src="./MessagesDisplay.scss"></style>
