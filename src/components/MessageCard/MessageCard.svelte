@@ -8,13 +8,14 @@
   export let isAlert = false;
   export let post;
   export let isAllMessages = false;
+  export let resend;
   let from = _.find($contactsStore.contacts.users, { id: post.from });
   let userTo = _.find($contactsStore.contacts.users, { id: post.userId });
 
   // console.log('From: ' + from.name + ' To: ' + userTo.name);
 </script>
 
-<PostHeader {userTo} {post} {isAllMessages} />
+<PostHeader {userTo} {post} {isAllMessages} {resend} />
 {#if isAlert}
   <div class="AlertCard">
     <div class="AlertCard-header">

@@ -15,6 +15,7 @@ import {
   getTrucks,
 } from './crudApi';
 import { opts as varOpts } from '../tools/opts';
+import _ from 'lodash';
 
 export function formatDate(d, canFormatDate = false) {
   let datetime = '';
@@ -126,7 +127,20 @@ export async function setData(opts?) {
     const r = p.map(post => {
       return { id: post._id, display: false };
     });
-    await postsStore.setPosts(p);
+
+    let localPosts: any = localStorage.getItem('errorAdminPosts');
+    if (localPosts) {
+      localPosts = JSON.parse('[' + localPosts + ']').reverse();
+    } else {
+      localPosts = [];
+    }
+
+    const posts = _.sortBy(
+      _.uniqBy([...p, ...localPosts], '_id'),
+      'sortDatetime'
+    ).reverse();
+
+    await postsStore.setPosts(posts);
     await repliesStore.setReplies(r);
   }
   if (grabContacts) {

@@ -12,6 +12,7 @@
   export let me;
   export let toggleReplies;
   export let handleReplyPost;
+  export let resend;
 
   let element;
   let intersecting;
@@ -56,14 +57,18 @@
 >
   <div class="Post" bind:this={element}>
     {#if post.postType === 'MESSAGE'}
-      <MessageCard {post} isAllMessages={slug === 'all' ? true : false} />
+      <MessageCard
+        {post}
+        isAllMessages={slug === 'all' ? true : false}
+        {resend}
+      />
     {:else if post.postType === 'ALERT'}
-      <MessageCard isAlert={true} {post} />
+      <MessageCard isAlert={true} {post} {resend} />
     {:else if post.postType === 'ORDER'}
       <OrderMessageCard
         {me}
         {post}
-        order={_.find(orders, { orderId: post.orderId })}
+        order="{_.find(orders, { orderId: post.orderId })}{resend}"
       />
     {/if}
 

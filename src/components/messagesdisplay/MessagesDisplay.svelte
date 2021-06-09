@@ -155,12 +155,51 @@
 
       postsStore.setPosts([initPayload, ...$postsStore.posts]);
 
-      addPost({ post: payload, initPostId: initPayload._id }).catch(err =>
-        console.error('Error adding post: ', err)
-      );
+      addPost({ post: payload, initPostId: initPayload._id }).then(res => {
+        if (res.error) {
+          const localPosts = localStorage.getItem('errorPosts');
+
+          localStorage.setItem(
+            `errorAdminPosts`,
+            (localPosts ? localPosts : '') +
+              (localPosts ? ', ' : '') +
+              JSON.stringify({
+                ...initPayload,
+                errorTime: moment().toISOString(),
+                states: { ...initPayload.states, deliveryStatus: 'ERROR' },
+              })
+          );
+        } else {
+          setScrollTrigger(!scrollTrigger);
+        }
+      });
     }
 
     attachments = [];
+  }
+
+  function resend(p) {
+    const post = _.cloneDeep(p);
+    const initPayload = _.cloneDeep(post);
+
+    delete post.createdAt;
+    delete post.updatedAt;
+    delete post.states;
+    delete post.sortDatetime;
+    delete post._id;
+
+    addPost({ post, initPayload, initPostId: initPayload._id }).then(res => {
+      if (res.error) {
+        console.error('error');
+      } else {
+        let localPosts = localStorage.getItem('errorAdminPosts') || '';
+        localPosts = JSON.stringify(
+          JSON.parse('[' + localPosts + ']').filter(i => i._id !== p._id)
+        ).slice(1, -1);
+
+        localStorage.setItem('errorAdminPosts', localPosts);
+      }
+    });
   }
 
   function removeTags(str) {
@@ -251,7 +290,15 @@
     {#if !loading}
       {#if posts && posts.length > 0}
         {#each posts as post, index}
-          <Post {post} {orders} {slug} {me} {toggleReplies} {handleReplyPost} />
+          <Post
+            {post}
+            {orders}
+            {slug}
+            {me}
+            {toggleReplies}
+            {handleReplyPost}
+            {resend}
+          />
 
           {#if compareSortTimes(posts[index], posts[index + 1]) || posts[posts.length - 1]._id === post._id}
             <div class="Messages-dateLabel">

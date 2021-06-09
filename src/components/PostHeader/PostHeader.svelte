@@ -10,6 +10,7 @@
   export let isAllMessages = false;
   export let from;
   export let userTo = undefined;
+  export let resend;
 
   // console.log(from);
 </script>
@@ -67,7 +68,12 @@
             </svg>
           </div>
         {:else if post.states.deliveryStatus === 'ERROR'}
-          <div class="Post-header-error">
+          <div
+            class="Post-header-error clickable"
+            on:click={() => {
+              resend(post);
+            }}
+          >
             {formatDate(post.updatedAt, canFormatDate)} • Error
             <svg
               width="14"

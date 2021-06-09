@@ -6,6 +6,7 @@
   export let me;
   export let post;
   export let order;
+  export let resend;
 
   let user = $usersStore.user;
 
@@ -21,7 +22,7 @@
 </script>
 
 {#if order && post}
-  <PostHeader {user} {post} />
+  <PostHeader {user} {post} {resend} />
 
   <div class="Card">
     <div class="Card-content">

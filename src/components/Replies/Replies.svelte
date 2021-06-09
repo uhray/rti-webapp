@@ -70,9 +70,13 @@
 {:else}
   <div class="Post-reply">
     <div
-      class="Post-reply-action"
+      class={`Post-reply-action ${
+        post.states.deliveryStatus !== 'ERROR' ? 'clickable' : ''
+      }`}
       on:click={() => {
-        handleReplyPost(post);
+        if (post.states.deliveryStatus !== 'ERROR') {
+          handleReplyPost(post);
+        }
       }}
     >
       <Icon type="reply" color="#243E93" />
