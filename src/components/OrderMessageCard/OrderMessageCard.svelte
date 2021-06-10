@@ -2,13 +2,12 @@
   import PostHeader from '../PostHeader/PostHeader.svelte';
   import Label from '../label/Label.svelte';
   import { capitalize } from '../../tools/tools.ts';
+  import { userStore } from '../../store';
 
   export let me;
   export let post;
   export let order;
   export let resend;
-
-  let user = $usersStore.user;
 
   function formatAddressCSZ(addressObject) {
     if (addressObject) {
@@ -22,7 +21,7 @@
 </script>
 
 {#if order && post}
-  <PostHeader {user} {post} {resend} />
+  <PostHeader from={me} {post} {resend} />
 
   <div class="Card">
     <div class="Card-content">

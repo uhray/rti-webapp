@@ -5,6 +5,7 @@
   import Replies from '../Replies/Replies.svelte';
   import { editPost } from '../../tools/crudApi';
   import IntersectionObserver from 'svelte-intersection-observer';
+  import { ordersStore } from '../../store';
 
   export let post;
   export let orders;
@@ -68,7 +69,8 @@
       <OrderMessageCard
         {me}
         {post}
-        order="{_.find(orders, { orderId: post.orderId })}{resend}"
+        order={_.find(orders, { orderId: post.orderId })}
+        {resend}
       />
     {/if}
 

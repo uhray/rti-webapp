@@ -15,7 +15,7 @@
   // console.log('From: ' + from.name + ' To: ' + userTo.name);
 </script>
 
-<PostHeader {userTo} {post} {isAllMessages} {resend} />
+<PostHeader {from} {userTo} {post} {isAllMessages} {resend} />
 {#if isAlert}
   <div class="AlertCard">
     <div class="AlertCard-header">

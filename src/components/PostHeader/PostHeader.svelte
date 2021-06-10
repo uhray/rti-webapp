@@ -1,29 +1,24 @@
 <script>
   import Avatar from '../Avatar/Avatar.svelte';
   import Icon from '../icon/Icon.svelte';
-  import { formatDate } from '../../tools/tools';
+  import { formatDate, getDisplayName } from '../../tools/tools';
   import { userStore, contactsStore } from '../../store';
 
   export let isOrder = false;
   export let post;
   export let canFormatDate = false;
   export let isAllMessages = false;
-  export let from;
   export let userTo = undefined;
   export let resend;
-
-  // console.log(from);
+  export let from;
 </script>
 
 <div class="PostHeader-container">
   <div class="Post-header">
-    <Avatar
-      user={_.find($contactsStore.contacts.users, { id: post.from })}
-      size={40}
-    />
+    <Avatar user={from} size={40} />
     <div class="Post-header-details">
       <div class="Post-header-name">
-        {_.find($contactsStore.contacts.users, { id: post.from }).name || ''}
+        {getDisplayName(from) || ''}
       </div>
       {#if $userStore.user._id === post.from && post.states && post.states.deliveryStatus}
         {#if post.states.deliveryStatus === 'SENDING'}
