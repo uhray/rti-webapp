@@ -188,7 +188,7 @@
               })
           );
         } else {
-          setScrollTrigger(!scrollTrigger);
+          // TODO: no error
         }
       });
     }
