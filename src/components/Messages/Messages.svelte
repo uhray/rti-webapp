@@ -17,7 +17,7 @@
   import { userStore, postsStore, repliesStore } from '../../store';
 
   export let trigger;
-  export let posts = undefined;
+  export let posts;
   export let me;
   export let contactsList = [];
   export let driversList = [];
@@ -28,7 +28,6 @@
   export let loading;
   let filter = 'all';
   let search = '';
-  let sortedPosts = undefined;
 
   // OVERLAY VARIABLES
   let displayMessageOverlay = false;
@@ -72,19 +71,6 @@
   //     .value();
   // });
 
-  onMount(() => {
-    return () => {
-      if (overlay) {
-        window.removeEventListener('click', function (e) {
-          if (overlay.contains(e.target)) {
-          } else {
-            clearOverlayData();
-          }
-        });
-      }
-    };
-  });
-
   const toggleReplies = id => {
     const r = $repliesStore.replies.map(r =>
       r.id == id ? { id: r.id, display: !r.display } : r
@@ -118,28 +104,30 @@
 
   function handleFilter(v) {
     filter = v;
+
+    filterPosts();
   }
 
   function handleSearch(v) {
     search = v;
   }
 
-  function filterPosts(v) {
+  function filterPosts() {
     let fPosts;
 
     if (filter === 'all') {
-      fPosts = posts.filter(i => !i.states.isArchived);
+      fPosts = $postsStore.posts.filter(i => !i.states.isArchived);
     } else if (filter === 'orders') {
-      fPosts = posts.filter(
+      fPosts = $postsStore.posts.filter(
         i => i.postType === 'ORDER' && !i.states.isArchived
       );
     } else if (filter === 'macros') {
-      fPosts = posts.filter(
+      fPosts = $postsStore.posts.filter(
         i => i.postType === 'MACRO' && !i.states.isArchived
       );
     }
 
-    return fPosts;
+    posts = fPosts;
   }
 
   function addAttachment() {

@@ -39,8 +39,6 @@
   let displayErrorDelete = false;
   let errorPost = {};
 
-  onMount(() => {});
-
   $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
 
   const scrollToBottom = (div = undefined) => {
