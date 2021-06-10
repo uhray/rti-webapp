@@ -9,10 +9,9 @@
   export let post;
   export let isAllMessages = false;
   export let resend;
+
   let from = _.find($contactsStore.contacts.users, { id: post.from });
   let userTo = _.find($contactsStore.contacts.users, { id: post.userId });
-
-  // console.log('From: ' + from.name + ' To: ' + userTo.name);
 </script>
 
 <PostHeader {from} {userTo} {post} {isAllMessages} {resend} />

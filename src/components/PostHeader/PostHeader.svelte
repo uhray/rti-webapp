@@ -11,14 +11,20 @@
   export let userTo = undefined;
   export let resend;
   export let from;
+  export let me;
 </script>
 
 <div class="PostHeader-container">
   <div class="Post-header">
-    <Avatar user={from} size={40} />
+    <Avatar
+      user={isOrder
+        ? me
+        : _.find($contactsStore.contacts.users, { _id: post.from })}
+      size={40}
+    />
     <div class="Post-header-details">
       <div class="Post-header-name">
-        {getDisplayName(from) || ''}
+        {isOrder ? getDisplayName(me) : getDisplayName(from)}
       </div>
       {#if $userStore.user._id === post.from && post.states && post.states.deliveryStatus}
         {#if post.states.deliveryStatus === 'SENDING'}

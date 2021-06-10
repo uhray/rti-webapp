@@ -21,7 +21,7 @@
 </script>
 
 {#if order && post}
-  <PostHeader from={me} {post} {resend} />
+  <PostHeader {me} {post} {resend} isOrder={true} />
 
   <div class="Card">
     <div class="Card-content">
