@@ -16,8 +16,6 @@
   import OverlayDelete from '../OverlayDelete/OverlayDelete.svelte';
   import OverlayResend from '../OverlayResend/OverlayResend.svelte';
 
-  var io = require('socket.io-client');
-
   export let posts;
   export let me;
   export let contacts = [];
@@ -41,52 +39,7 @@
   let displayErrorDelete = false;
   let errorPost = {};
 
-  onMount(() => {
-    if (me && me._id) {
-      let socket = io('http://localhost:80', {
-        transports: ['websocket'],
-        query: { userId: me._id },
-      });
-
-      socket.connect();
-
-      socket.on('connect_error', error => {
-        console.error(error);
-      });
-
-      socket.on('connect', () => {
-        socket.on('addPost', (post, initPostId) => {
-          if (post.from !== me._id) {
-            postsStore.setPosts([post, ...$postsStore.posts]);
-          } else {
-            postsStore.setPosts(
-              $postsStore.posts.map(p => (p._id === initPostId ? post : p))
-            );
-          }
-          repliesStore.setReplies([
-            ...$repliesStore.replies,
-            { id: post._id, display: false },
-          ]);
-          // scrollToBottom();
-        });
-
-        socket.on('updatePost', post => {
-          if (post) {
-            postsStore.setPosts(
-              $postsStore.posts.map(p => (p._id === post._id ? post : p))
-            );
-          }
-
-          replyPost = null;
-        });
-      });
-
-      return () => {
-        socket.disconnect();
-        // socket.removeAllListeners();
-      };
-    }
-  });
+  onMount(() => {});
 
   $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
 
