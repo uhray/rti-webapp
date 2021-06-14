@@ -31,7 +31,9 @@
       // },
       { text: 'line' },
       { icon: 'users', text: 'User Management', link: 'users' },
-      { icon: 'users', text: 'Teams Management', link: 'teams' },
+      role === 'ADMIN'
+        ? { icon: 'users', text: 'Teams Management', link: 'teams' }
+        : [],
       role === 'ADMIN'
         ? { icon: 'settings', text: 'Settings', link: 'settings' }
         : [],
@@ -46,10 +48,6 @@
     isOpen = !isOpen;
   }
 </script>
-
-<style src="./Nav.scss">
-
-</style>
 
 <nav class={isOpen ? 'Nav' : 'Nav-closed'}>
   <div class="collapse" on:click={menuToggle}>
@@ -69,7 +67,8 @@
           isActive={segment == item.link ? true : false}
           {isOpen}
           icon={item.icon}
-          amount={item.amount}>
+          amount={item.amount}
+        >
           <span>{item.text}</span>
         </NavItem>
       </a>
@@ -87,3 +86,6 @@
     </div>
   </div>
 </nav>
+
+<style src="./Nav.scss">
+</style>
