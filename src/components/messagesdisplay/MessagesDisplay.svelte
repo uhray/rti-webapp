@@ -15,6 +15,7 @@
   import { opts } from '../../tools/opts';
   import OverlayDelete from '../OverlayDelete/OverlayDelete.svelte';
   import OverlayResend from '../OverlayResend/OverlayResend.svelte';
+  import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
 
   export let posts;
   export let me;
