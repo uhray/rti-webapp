@@ -53,6 +53,7 @@
   function initMessagesSockets() {
     let socket = io('http://localhost:80', {
       transports: ['websocket'],
+      pingTimeout: 60000,
       query: { userId: user._id },
     });
 
