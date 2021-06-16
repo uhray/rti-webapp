@@ -6,10 +6,6 @@
   export let height = undefined;
 </script>
 
-<style src="./Card.scss">
-
-</style>
-
 <!-- HTML -->
 <section class="Card" style={height ? `height: ${height}` : ''}>
   {#if type === 'card-gray-border'}
@@ -57,3 +53,5 @@
 </section>
 
 <!-- ==== -->
+<style src="./Card.scss">
+</style>

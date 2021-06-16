@@ -10,14 +10,14 @@
     width: 250px;
     max-width: 250px;
     min-width: 250px;
-    border: 1px solid rgba(166, 173, 196, 0.5);
+    border: 1px solid $colors--grayblue-50;
     border-left: 0;
     border-bottom: 0;
 
     .Messages-nav-search {
       box-sizing: border-box;
       height: 60px;
-      border-bottom: 1px solid rgba(166, 173, 196, 0.5);
+      border-bottom: 1px solid $colors--grayblue-50;
       padding: 10px;
     }
 
@@ -34,30 +34,30 @@
 
       /* Track */
       &::-webkit-scrollbar-track {
-        background: #fff;
+        background: $colors--white;
       }
 
       /* Handle */
       &::-webkit-scrollbar-thumb {
-        background: #a6adc4;
+        background: $colors--grayblue;
       }
 
       /* Handle on hover */
       &::-webkit-scrollbar-thumb:hover {
-        background: #595f76;
+        background: $colors--medium;
       }
     }
   }
   .Messages-main {
     width: 100%;
-    border-top: 1px solid rgba(166, 173, 196, 0.5);
+    border-top: 1px solid $colors--grayblue-50;
 
     .Messages-main-header {
       display: flex;
       flex-flow: column;
       box-sizing: border-box;
       height: 60px;
-      border-bottom: 1px solid rgba(166, 173, 196, 0.5);
+      border-bottom: 1px solid $colors--grayblue-50;
       padding: 10px 30px 10px 30px;
     }
 
@@ -79,7 +79,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(22, 29, 53, 0.3);
+  background-color: $colors--darkest-30;
 
   display: flex;
   justify-content: center;
@@ -93,7 +93,7 @@
     position: relative;
     width: 600px;
     max-height: 800px;
-    background: #fff;
+    background: $colors--white;
     border-radius: 8px;
     padding: 44px 30px 30px;
   }
@@ -145,7 +145,7 @@
   .MessageOverlay-inputLabelSub {
     font-size: 12px;
     font-weight: 400;
-    color: #a6adc4;
+    color: $colors--grayblue;
   }
   .MessageOverlay-rte {
     max-height: 400px;
@@ -173,7 +173,7 @@
     align-items: center;
     height: 33px;
     padding: 4px 20px 4px 15px;
-    background: #f6f7fb;
+    background: $colors--light;
     border-radius: 2px;
     font-family: Poppins;
     font-style: normal;
@@ -183,7 +183,7 @@
 
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: #15224b;
+    color: $colors--dark;
   }
 
   .Dropdown-content {
@@ -198,8 +198,7 @@
     flex-flow: row nowrap;
     align-items: center;
 
-    color: #15224b;
-
+    color: $colors--dark;
     .Dropdown-selection-check {
       margin: 0 8px;
       width: 16px;

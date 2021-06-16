@@ -1,5 +1,3 @@
-@import '../../theme/variables.scss';
-
 .Label {
   .Label-container {
     height: 24px !important;
@@ -13,51 +11,51 @@
     font-size: 14px;
     font-weight: var(--custom-font-weight);
 
-    color: #fff;
+    color: $colors--white;
 
     &[status='active'] {
-      background-color: $color--primary;
+      background-color: $colors--primary;
     }
     &[status='success'] {
-      background-color: $color--success;
+      background-color: $colors--success;
     }
     &[status='warning'] {
-      background-color: $color--warning;
+      background-color: $colors--warning;
     }
     &[status='danger'] {
-      background-color: $color--danger;
+      background-color: $colors--danger;
     }
     &[status='disabled'] {
-      background-color: $color--disabled;
-      color: $color--darkblue;
+      background-color: $colors--primary-10;
+      color: $colors--dark;
     }
     &[status='default'] {
-      background-color: $color--default;
+      background-color: $colors--tertiary;
     }
     &[status='pending'] {
-      background-color: $color--warning;
+      background-color: $colors--warning;
     }
     &[status='completed'] {
-      background-color: $color--success;
+      background-color: $colors--success;
     }
     &[status='declined'] {
-      background-color: $color--danger;
+      background-color: $colors--danger;
     }
     &[status='dispatched'] {
-      background-color: $color--default;
+      background-color: $colors--tertiary;
     }
     &[status='inProgress'] {
-      background-color: $color--primary;
+      background-color: $colors--primary;
     }
     &[status='active'] {
-      background-color: $color--default;
+      background-color: $colors--tertiary;
     }
     &[status='inactive'] {
-      background-color: $color--disabled;
-      color: $color--darkblue;
+      background-color: $colors--primary-10;
+      color: $colors--dark;
     }
     &[status='approved'] {
-      background-color: $color--success;
+      background-color: $colors--success;
     }
 
     &[small='true'] {
@@ -74,23 +72,23 @@
       margin-right: 5px;
 
       &[statusColor='active'] {
-        background-color: $color--primary;
+        background-color: $colors--primary;
       }
       &[statusColor='success'] {
-        background-color: $color--success;
+        background-color: $colors--success;
       }
       &[statusColor='warning'] {
-        background-color: $color--warning;
+        background-color: $colors--warning;
       }
       &[statusColor='danger'] {
-        background-color: $color--danger;
+        background-color: $colors--danger;
       }
       &[statusColor='disabled'] {
-        background-color: $color--disabled;
-        color: $color--darkblue;
+        background-color: $colors--primary-10;
+        color: $colors--dark;
       }
       &[statusColor='default'] {
-        background-color: $color--default;
+        background-color: $colors--tertiary;
       }
     }
 

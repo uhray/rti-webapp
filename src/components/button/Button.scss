@@ -1,30 +1,28 @@
-@import '../../theme/variables.scss';
-
 button[primary='true'] {
-  background-color: $color--primary;
+  background-color: $colors--primary;
 }
 
 button[secondary='true'] {
-  background-color: $color--secondary;
+  background-color: $colors--secondary;
 }
 
 button[warning='true'] {
-  background-color: $color--warning;
+  background-color: $colors--warning;
 }
 
 button[success='true'] {
-  background-color: $color--success;
+  background-color: $colors--success;
 }
 
 button[danger='true'] {
-  background-color: $color--danger;
+  background-color: $colors--danger;
 }
 
 button {
   flex: 1;
   min-width: 100px;
   border-radius: 4px;
-  color: #fff;
+  color: $colors--white;
   padding: 0 10px;
   line-height: 34px;
   height: 34px;
@@ -41,44 +39,44 @@ button {
   align-items: center;
 
   &:disabled {
-    background-color: $color--disabled;
+    background-color: $colors--primary-10;
   }
 
   &[outline='true'] {
     background-color: transparent;
-    color: #15224b;
-    border: 1px solid #15224b;
+    color: $colors--dark;
+    border: 1px solid $colors--dark;
 
     &:disabled {
       background-color: transparent;
-      border: 1px solid $color--disabled;
-      color: $color--disabled;
+      border: 1px solid $colors--primary-10;
+      color: $colors--primary-10;
     }
 
     &[primary='true'] {
       background-color: transparent !important;
-      color: #15224b;
-      border: 1px solid #15224b;
+      color: $colors--dark;
+      border: 1px solid $colors--dark;
     }
     &[secondary='true'] {
       background-color: transparent !important;
-      color: #243e93;
-      border: 1px solid #243e93;
+      color: $colors--primary;
+      border: 1px solid $colors--primary;
     }
     &[warning='true'] {
       background-color: transparent !important;
-      color: $color--warning;
-      border: 1px solid $color--warning;
+      color: $colors--warning;
+      border: 1px solid $colors--warning;
     }
     &[success='true'] {
       background-color: transparent !important;
-      color: $color--success;
-      border: 1px solid $color--success;
+      color: $colors--success;
+      border: 1px solid $colors--success;
     }
     &[danger='true'] {
       background-color: transparent !important;
-      color: $color--danger;
-      border: 1px solid $color--danger;
+      color: $colors--danger;
+      border: 1px solid $colors--danger;
     }
   }
 

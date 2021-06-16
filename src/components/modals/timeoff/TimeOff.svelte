@@ -5,10 +5,6 @@
   import Button from '../../button/Button.svelte';
 </script>
 
-<style src="./TimeOff.scss">
-
-</style>
-
 <section class="TimeOff">
   <div id="TimeOff-modal" uk-modal>
     <div class="TimeOff-modalBody uk-modal-dialog uk-modal-body">
@@ -45,3 +41,6 @@
     </div>
   </div>
 </section>
+
+<style src="./TimeOff.scss">
+</style>

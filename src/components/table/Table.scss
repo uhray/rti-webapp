@@ -1,5 +1,3 @@
-@import '../../theme/variables.scss';
-
 .Table {
   box-sizing: content-box;
 
@@ -22,17 +20,17 @@
   }
 
   .Table-inner {
-    border: 4px solid $color--tablegray;
+    border: 4px solid $colors--light;
     border-radius: 8px;
     padding: 0;
-    background-color: $color--tablegray;
+    background-color: $colors--light;
   }
 
   .Table-headerRow {
     width: 100%;
 
     .Table-headerRow-headerCell {
-      color: $color--darkblue;
+      color: $colors--dark;
       font-weight: 600;
       font-size: 15px;
       overflow: hidden;
@@ -42,13 +40,13 @@
   }
 
   .Table-row {
-    border: 2px solid $color--tablegray;
+    border: 2px solid $colors--light;
     border-radius: 8px;
-    background-color: #fff;
-    color: $color--darkblue;
+    background-color: $colors--white;
+    color: $colors--dark;
 
     a {
-      color: $color--secondary;
+      color: $colors--secondary;
       text-decoration: underline;
     }
 

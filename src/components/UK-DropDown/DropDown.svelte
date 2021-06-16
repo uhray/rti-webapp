@@ -55,7 +55,10 @@
               <Icon type="user" />
               <a class="DropDown-choice" href="account">View Profile</a>
             </li>
-            <li class="uk-flex DropDown-listItem" on:click|preventDefault={userLogout}>
+            <li
+              class="uk-flex DropDown-listItem"
+              on:click|preventDefault={userLogout}
+            >
               <Icon type="logout" />
               <a class="DropDown-choice">Log Out</a>
             </li>

@@ -1,3 +1,11 @@
+<script context="module">
+  export async function preload(page, session) {
+    const { id } = page.params;
+
+    return { theme: 'dark' || 'dark' };
+  }
+</script>
+
 <script lang="ts">
   import { onMount } from 'svelte';
   import Nav from '../components/nav/Nav.svelte';
@@ -10,6 +18,7 @@
 
   var io = require('socket.io-client');
 
+  export let theme;
   export let segment: string;
   let loading = true;
   let user = undefined;
@@ -125,8 +134,8 @@
   </div>
 {/if}
 
-<style lang="scss" global>
-  @import '../theme/theme.scss';
+<style lang="scss" src="../theme/main.scss" global>
+  @import '../theme/variables.scss';
 
   .wrapper {
     min-height: 100vh;

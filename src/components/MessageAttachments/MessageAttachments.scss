@@ -22,12 +22,12 @@
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: #a6adc4;
+    background: $colors--grayblue;
   }
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: #595f76;
+    background: $colors--medium;
   }
 
   .MessageAttachments-imageContainer {
@@ -82,7 +82,7 @@
     font-weight: normal;
     font-size: 0.875rem;
     line-height: 1.125rem;
-    color: #243e93;
+    color: $colors--primary;
     margin: 4px 4px 2px 4px;
   }
   .MessageAttachments-fileSize {
@@ -91,7 +91,7 @@
     font-weight: 500;
     font-size: 0.75rem;
     line-height: 1rem;
-    color: #595f76;
+    color: $colors--medium;
     margin: 2px 4px 4px 4px;
   }
 }

@@ -28,7 +28,7 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
-    color: #15224b;
+    color: $colors--dark;
   }
   .SignInForm-subGroup {
     margin-top: 8px;
@@ -43,7 +43,7 @@
     font-weight: normal;
     font-size: 15px;
     line-height: 22px;
-    color: #15224b;
+    color: $colors--dark;
   }
   .SignInForm-forgotText {
     margin-left: auto;
@@ -55,7 +55,7 @@
     line-height: 16px;
     text-align: right;
     text-decoration-line: underline;
-    color: #243e93;
+    color: $colors--primary;
   }
   .SignInForm-button {
     margin-top: 25px;

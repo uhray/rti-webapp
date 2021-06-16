@@ -1,53 +1,51 @@
-@import '../../theme/variables.scss';
-
 .uk-checkbox {
-  color: $color--darkblue;
-  border-color: $color--lightgray;
+  color: $colors--dark;
+  border-color: $colors--medium;
   border-radius: 4px;
   margin-top: 1px;
 
   &:disabled {
     background-color: transparent;
-    border: 1px solid $color--lightgray;
-    color: $color--lightgray;
+    border: 1px solid $colors--medium;
+    color: $colors--medium;
 
     &:hover {
-      border-color: $color--lightgray;
+      border-color: $colors--medium;
     }
   }
 
   &:checked {
-    background-color: $color--darkblue;
-    border-color: $color--darkblue;
+    background-color: $colors--dark;
+    border-color: $colors--dark;
   }
 
   &:hover {
-    border-color: $color--darkblue;
+    border-color: $colors--dark;
   }
 }
 
 .uk-checkbox[primary='true'] {
-  border-color: $color--lightgray;
+  border-color: $colors--medium;
 
   &:checked {
-    background-color: $color--darkblue;
-    border-color: $color--darkblue;
+    background-color: $colors--dark;
+    border-color: $colors--dark;
   }
 
   &:hover {
-    border-color: $color--darkblue;
+    border-color: $colors--dark;
   }
 }
 
 .uk-checkbox[secondary='true'] {
-  border-color: $color--lightgray;
+  border-color: $colors--medium;
 
   &:checked {
-    background-color: $color--secondary;
-    border-color: $color--secondary;
+    background-color: $colors--secondary;
+    border-color: $colors--secondary;
   }
 
   &:hover {
-    border-color: $color--secondary;
+    border-color: $colors--secondary;
   }
 }

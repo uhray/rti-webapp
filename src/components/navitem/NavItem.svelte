@@ -8,10 +8,6 @@
   export let isActive = false;
 </script>
 
-<style src="./NavItem.scss">
-
-</style>
-
 <div class={`${isOpen ? 'NavItem' : 'NavItem closed'} ${isActive && 'active'}`}>
   {#if isActive}
     <div class="NavItem-activeBar" />
@@ -26,3 +22,6 @@
     </div>
   {/if}
 </div>
+
+<style src="./NavItem.scss">
+</style>

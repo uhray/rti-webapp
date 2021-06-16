@@ -1,5 +1,3 @@
-@import '../../theme/variables.scss';
-
 .Post-replies {
   width: 100%;
   // margin-top: 10px;
@@ -12,7 +10,7 @@
     align-items: center;
     font-weight: normal;
     font-size: 14px;
-    color: $color--primary;
+    color: $colors--primary;
 
     margin-bottom: 10px;
 
@@ -32,13 +30,13 @@
     margin-bottom: 5px;
 
     padding: 22px 15px 15px 15px;
-    background: $color--tablegray;
+    background: $colors--light;
     border-radius: 4px;
 
     .Post-replies-content-message {
       font-weight: normal;
       font-size: 15px;
-      color: $color--darkblue;
+      color: $colors--dark;
     }
   }
 }
@@ -46,8 +44,8 @@
 .Post-reply {
   padding: 7px 15px;
   border-radius: 4px;
-  background: $color--tablegray;
-  color: $color--primary;
+  background: $colors--light;
+  color: $colors--primary;
   font-weight: normal;
   font-size: 14px;
   margin-top: 10px;

@@ -4,10 +4,6 @@
   export let removeAttachment = undefined;
 </script>
 
-<style src="./MessageAttachments.scss">
-
-</style>
-
 <div class="MessageAttachments">
   {#each attachments as attachment}
     {#if attachment.format === 'image'}
@@ -16,7 +12,8 @@
           <img
             class="MessageAttachments-image"
             src={attachment.fileUrl}
-            alt={attachment.name} />
+            alt={attachment.name}
+          />
         </div>
         {#if !isDisplay}
           <svg
@@ -28,7 +25,8 @@
             class="MessageAttachments-imageIcon clickable"
             on:click={() => {
               removeAttachment(attachment);
-            }}>
+            }}
+          >
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -44,7 +42,8 @@
               9.93977L13.4704 7.4704C13.7653 7.19025 14.2297 7.1962 14.5173
               7.4838C14.8049 7.7714 14.8109 8.23584 14.5307 8.53071L12.0613
               11.0006L14.5307 13.4704Z"
-              fill="#595F76" />
+              fill="#595F76"
+            />
             <path
               d="M14.5307 13.4704L14.177 13.824L14.1863 13.8329L14.5307
               13.4704ZM13.4704 14.5307L13.833 14.1862L13.8239 14.1771L13.4704
@@ -97,10 +96,10 @@
               11.3541L14.1771 13.8239L14.8843 13.1169L12.4149 10.647L11.7077
               11.3541Z"
               fill="white"
-              opacity="100%" />
+              opacity="100%"
+            />
           </svg>
         {/if}
-
       </div>
     {:else}
       <div class="MessageAttachments-fileBox">
@@ -112,12 +111,14 @@
               viewBox="0 0 36 36"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              class="MessageAttachments-fileIcon">
+              class="MessageAttachments-fileIcon"
+            >
               <path
                 d="M0 18C0 8.05888 8.05888 0 18 0C27.9411 0 36 8.05888 36 18C36
                 27.9411 27.9411 36 18 36C8.05888 36 0 27.9411 0 18Z"
                 fill="#595F76"
-                fill-opacity="0.1" />
+                fill-opacity="0.1"
+              />
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -130,7 +131,8 @@
                 19.1203C24.654 18.7533 24.6503 18.1682 24.2879 17.8058L24.2765
                 17.7946C23.9096 17.4398 23.3244 17.4435 22.9621 17.8058L18.9375
                 21.8304V11.9062L18.9374 11.8907Z"
-                fill="#243E93" />
+                fill="#243E93"
+              />
             </svg>
 
             <div>
@@ -149,7 +151,8 @@
             class="MessageAttachments-imageIcon clickable"
             on:click={() => {
               removeAttachment(attachment);
-            }}>
+            }}
+          >
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -165,7 +168,8 @@
               9.93977L13.4704 7.4704C13.7653 7.19025 14.2297 7.1962 14.5173
               7.4838C14.8049 7.7714 14.8109 8.23584 14.5307 8.53071L12.0613
               11.0006L14.5307 13.4704Z"
-              fill="#595F76" />
+              fill="#595F76"
+            />
             <path
               d="M14.5307 13.4704L14.177 13.824L14.1863 13.8329L14.5307
               13.4704ZM13.4704 14.5307L13.833 14.1862L13.8239 14.1771L13.4704
@@ -217,10 +221,14 @@
               10.647L12.4149 11.3541L14.8843 8.88423L14.1771 8.17719ZM11.7077
               11.3541L14.1771 13.8239L14.8843 13.1169L12.4149 10.647L11.7077
               11.3541Z"
-              fill="white" />
+              fill="white"
+            />
           </svg>
         {/if}
       </div>
     {/if}
   {/each}
 </div>
+
+<style src="./MessageAttachments.scss">
+</style>

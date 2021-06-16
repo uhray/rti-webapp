@@ -30,10 +30,6 @@
   };
 </script>
 
-<style src="./TripDetails.scss">
-
-</style>
-
 <!-- HTML -->
 <div class="TripDetails">
   <div class="TripDetails-header">
@@ -84,3 +80,6 @@
 </div>
 
 <!-- ==== -->
+
+<style src="./TripDetails.scss">
+</style>

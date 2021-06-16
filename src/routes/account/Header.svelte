@@ -1,6 +1,19 @@
 <script>
-
 </script>
+
+<svelte:head>
+  <title>Orders</title>
+</svelte:head>
+
+<div class="Header">
+  <div class="Header-container">
+    <div class="Header-content">
+      <div class="Header-titles">
+        <h2 class="Header-title">My Profile</h2>
+      </div>
+    </div>
+  </div>
+</div>
 
 <style lang="scss">
   .Header {
@@ -59,19 +72,3 @@
     }
   }
 </style>
-
-<svelte:head>
-  <title>Orders</title>
-</svelte:head>
-
-<div class="Header">
-  <div class="Header-container">
-    <div class="Header-content">
-      <div class="Header-titles">
-        <h2 class="Header-title">My Profile</h2>
-
-      </div>
-
-    </div>
-  </div>
-</div>

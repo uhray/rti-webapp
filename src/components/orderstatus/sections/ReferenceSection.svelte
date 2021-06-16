@@ -4,10 +4,6 @@
   export let stop;
 </script>
 
-<style src="../OrderStatus.scss">
-
-</style>
-
 {#if stop}
   <!-- #TODO Figure out these variables -->
   <section class="OrderStatus">
@@ -34,3 +30,6 @@
     </div>
   </section>
 {/if}
+
+<style src="./Section.scss">
+</style>

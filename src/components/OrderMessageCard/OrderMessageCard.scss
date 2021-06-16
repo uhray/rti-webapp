@@ -1,11 +1,9 @@
-@import '../../theme/variables.scss';
-
 .Card {
   border: 1px solid rgba(166, 173, 196, 0.5);
   border-radius: 8px;
 
   a {
-    color: $color--darkgray;
+    color: $colors--medium;
     text-decoration: none;
   }
 
@@ -21,7 +19,7 @@
       .Card-orderNumber {
         font-weight: 500;
         font-size: 14px;
-        color: $color--darkblue;
+        color: $colors--dark;
       }
     }
 
@@ -35,7 +33,7 @@
         margin-bottom: 6px;
 
         .OrderCard-stopDetails {
-          color: $color--darkblue;
+          color: $colors--dark;
           display: flex;
           flex-flow: row nowrap;
           align-items: center;
@@ -52,7 +50,7 @@
           display: flex;
           flex-flow: row nowrap;
           align-items: center;
-          color: $color--darkgray;
+          color: $colors--medium;
           font-size: 0.8125rem;
         }
       }
@@ -64,14 +62,14 @@
     justify-content: center;
     align-items: center;
 
-    background-color: $color--lightgray-thirty;
+    background-color: $colors--medium-10;
     padding: 11px 0;
 
     font-weight: 600;
     font-size: 14px;
     letter-spacing: 0.01em;
     text-transform: capitalize;
-    color: $color--darkgray;
+    color: $colors--medium;
   }
 }
 

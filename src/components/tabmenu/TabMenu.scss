@@ -5,15 +5,15 @@
   .uk-tab {
     .uk-active {
       a {
-        border-color: #243e93, 100% !important;
-        border-bottom: 2px solid #243e93 !important;
-        color: #243e93;
+        border-color: $colors--primary, 100% !important;
+        border-bottom: 2px solid $colors--primary !important;
+        color: $colors--primary;
       }
     }
   }
   .TabMenu-linkText {
     text-transform: uppercase !important;
-    // color: #243e93;
+    // color: $colors--primary;
   }
   .TabMenu-noSpace {
     margin-bottom: 0px;

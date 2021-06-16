@@ -1,5 +1,3 @@
-@import '../../theme/variables.scss';
-
 .SearchBar {
   .SearchBar-formContainer {
     width: 100%;
@@ -21,7 +19,7 @@
     box-sizing: border-box;
     border-radius: 4px;
     width: 100%;
-    background-color: $color--tablegray;
+    background-color: $colors--light;
   }
 
   .SearchBar-close {
@@ -36,26 +34,26 @@
   font-weight: normal;
   font-size: 15px;
   line-height: 22px;
-  color: #595f76;
+  color: $colors--medium;
 }
 ::-moz-placeholder {
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 22px;
-  color: #595f76;
+  color: $colors--medium;
 }
 :-ms-input-placeholder {
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 22px;
-  color: #595f76;
+  color: $colors--medium;
 }
 :-moz-placeholder {
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 22px;
-  color: #595f76;
+  color: $colors--medium;
 }

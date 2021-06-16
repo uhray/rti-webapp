@@ -1,7 +1,5 @@
-@import '../../theme/variables.scss';
-
 .Icon {
-  fill: $color--lightgray;
+  fill: $colors--medium;
 
   &[hover='true'] {
     svg:hover {
@@ -9,7 +7,7 @@
     }
 
     & svg:hover {
-      fill: $color--secondary;
+      fill: $colors--secondary;
     }
   }
 
@@ -18,6 +16,6 @@
   }
 
   &[primary='true'] {
-    color: $color--primary;
+    color: $colors--primary;
   }
 }

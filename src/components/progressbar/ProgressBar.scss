@@ -1,14 +1,14 @@
 .ProgressBar {
   .uk-progress.ProgressBar-bar::-webkit-progress-value {
-    background-color: #a6adc4;
+    background-color: $colors--grayblue;
     border-radius: none;
   }
   .uk-progress.ProgressBar-bar::-moz-progress-bar {
-    background-color: #a6adc4;
+    background-color: $colors--grayblue;
     border-radius: none;
   }
   .uk-progress.ProgressBar-bar::-ms-fill {
-    background-color: #a6adc4;
+    background-color: $colors--grayblue;
     border-radius: none;
   }
   .ProgressBar-bar {

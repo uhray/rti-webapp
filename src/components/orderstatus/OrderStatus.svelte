@@ -25,10 +25,6 @@
   }
 </script>
 
-<style src="./OrderStatus.scss">
-
-</style>
-
 <!-- #TODO: Differentiate start time and end time per stop -->
 
 {#if order && order.stops}
@@ -42,8 +38,11 @@
             <div class="OrderStatus-cardSection">
               <!-- FOR THE ORIGIN -->
               <div
-                class={`uk-flex OrderStatus-statusCard clickable ${selectedStop === 0 ? 'active' : ''}`}
-                on:click={() => (selectedStop = 0)}>
+                class={`uk-flex OrderStatus-statusCard clickable ${
+                  selectedStop === 0 ? 'active' : ''
+                }`}
+                on:click={() => (selectedStop = 0)}
+              >
                 <div class="OrderStatus-locationIcon">
                   <Icon type="location-start" color="gray" />
                 </div>
@@ -55,12 +54,20 @@
                     </span>
                   </h4>
                   <p class="OrderStatus-cardText">
-                    {`${order.stops[0].address.city}, ${order.stops[0].address.state} ${order.stops[0].address.zipcode} • ${formatDate(order.stops[0].startTime, true)}`}
+                    {`${order.stops[0].address.city}, ${
+                      order.stops[0].address.state
+                    } ${order.stops[0].address.zipcode} • ${formatDate(
+                      order.stops[0].startTime,
+                      true
+                    )}`}
                   </p>
                   <div class="OrderStatus-label">
                     <Label
-                      status={order.stops[0].status === 'inProgress' ? 'default' : 'disabled'}
-                      text={_.startCase(order.stops[0].status)} />
+                      status={order.stops[0].status === 'inProgress'
+                        ? 'default'
+                        : 'disabled'}
+                      text={_.startCase(order.stops[0].status)}
+                    />
                   </div>
                 </div>
                 <div class="OrderStatus-cardLine">
@@ -92,8 +99,11 @@
               {#each order.stops as stop, index}
                 {#if index !== 0 && index !== order.stops.length - 1}
                   <div
-                    class={`uk-flex OrderStatus-statusCard clickable ${selectedStop === index ? 'active' : ''}`}
-                    on:click={() => (selectedStop = index)}>
+                    class={`uk-flex OrderStatus-statusCard clickable ${
+                      selectedStop === index ? 'active' : ''
+                    }`}
+                    on:click={() => (selectedStop = index)}
+                  >
                     <div class="OrderStatus-locationIcon">
                       <Icon type="indicator-outline" color="gray" />
                     </div>
@@ -105,12 +115,17 @@
                         </span>
                       </h4>
                       <p class="OrderStatus-cardText">
-                        {`${stop.address.city}, ${stop.address.state} ${stop.address.zipcode} • ${formatDate(stop.startTime, true)}`}
+                        {`${stop.address.city}, ${stop.address.state} ${
+                          stop.address.zipcode
+                        } • ${formatDate(stop.startTime, true)}`}
                       </p>
                       <div class="OrderStatus-label">
                         <Label
-                          status={stop.status === 'inProgress' ? 'default' : 'disabled'}
-                          text={_.startCase(stop.status)} />
+                          status={stop.status === 'inProgress'
+                            ? 'default'
+                            : 'disabled'}
+                          text={_.startCase(stop.status)}
+                        />
                       </div>
                     </div>
                     <div class="OrderStatus-cardLine">
@@ -142,10 +157,13 @@
 
               <!-- FOR THE DESTINATION -->
               <div
-                class={`uk-flex OrderStatus-statusCard clickable ${selectedStop === order.stops.length - 1 ? 'active' : ''}`}
+                class={`uk-flex OrderStatus-statusCard clickable ${
+                  selectedStop === order.stops.length - 1 ? 'active' : ''
+                }`}
                 on:click={() => {
                   selectedStop = order.stops.length - 1;
-                }}>
+                }}
+              >
                 <div class="OrderStatus-locationIcon">
                   <Icon type="location-end-filled" color="black" />
                 </div>
@@ -157,12 +175,25 @@
                     </span>
                   </h4>
                   <p class="OrderStatus-cardText">
-                    {`${order.stops[order.stops.length - 1].address.city}, ${order.stops[order.stops.length - 1].address.state} ${order.stops[order.stops.length - 1].address.zipcode} • ${formatDate(order.stops[order.stops.length - 1].startTime, true)}`}
+                    {`${order.stops[order.stops.length - 1].address.city}, ${
+                      order.stops[order.stops.length - 1].address.state
+                    } ${
+                      order.stops[order.stops.length - 1].address.zipcode
+                    } • ${formatDate(
+                      order.stops[order.stops.length - 1].startTime,
+                      true
+                    )}`}
                   </p>
                   <div class="OrderStatus-label">
                     <Label
-                      status={order.stops[order.stops.length - 1].status === 'inProgress' ? 'default' : 'disabled'}
-                      text={_.startCase(order.stops[order.stops.length - 1].status)} />
+                      status={order.stops[order.stops.length - 1].status ===
+                      'inProgress'
+                        ? 'default'
+                        : 'disabled'}
+                      text={_.startCase(
+                        order.stops[order.stops.length - 1].status
+                      )}
+                    />
                   </div>
                 </div>
               </div>
@@ -178,14 +209,16 @@
                   type="default"
                   tabs={['TIMELINE', 'CUSTOMER INFO', 'REFERENCE NUMBERS']}
                   {selectedTab}
-                  {handleTab} />
+                  {handleTab}
+                />
 
                 {#if selectedTab === 'TIMELINE'}
                   <!-- TIMELINE SECTION -->
                   <TimelineSection
                     documents={order.documents}
                     stop={order.stops[selectedStop]}
-                    index={selectedStop} />
+                    index={selectedStop}
+                  />
                 {:else if selectedTab === 'CUSTOMER INFO'}
                   <!-- CUSTOMER INFO SECTION -->
                   <CustomerSection stop={order.stops[selectedStop]} />
@@ -195,10 +228,12 @@
                 {/if}
               </div>
             </Card>
-
           </div>
         </div>
       </div>
     </Card>
   </section>
 {/if}
+
+<style src="./OrderStatus.scss">
+</style>

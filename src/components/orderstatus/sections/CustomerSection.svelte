@@ -4,10 +4,6 @@
   export let stop;
 </script>
 
-<style src="../OrderStatus.scss">
-
-</style>
-
 {#if stop}
   <section class="OrderStatus">
     <div class="OrderStatus-timelineSection">
@@ -48,3 +44,6 @@
     </div>
   </section>
 {/if}
+
+<style src="./Section.scss">
+</style>

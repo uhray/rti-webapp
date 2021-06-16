@@ -8,12 +8,7 @@
   export let index;
 </script>
 
-<style src="../OrderStatus.scss">
-
-</style>
-
 {#if stop && documents}
-
   <section class="OrderStatus">
     <div class="OrderStatus-timelineSection">
       <div class="uk-flex">
@@ -74,3 +69,6 @@
     </div>
   </section>
 {/if}
+
+<style src="./Section.scss">
+</style>
