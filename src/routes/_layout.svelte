@@ -6,6 +6,7 @@
   import { auth, editUser } from '../tools/crudApi';
   import moment from 'moment';
   import { setData } from '../tools/tools';
+  import _ from 'lodash';
 
   var io = require('socket.io-client');
 
@@ -61,12 +62,13 @@
 
     socket.on('connect_error', error => {
       console.error(error);
+      window.location.reload();
     });
 
     socket.on('connect', () => {
       socket.on('addPost', (post, initPostId) => {
         if (post.from !== user._id) {
-          postsStore.setPosts([post, ...$postsStore.posts]);
+          postsStore.setPosts(_.uniqBy([post, ...$postsStore.posts], '_id'));
         } else {
           postsStore.setPosts(
             $postsStore.posts.map(p => (p._id === initPostId ? post : p))
@@ -88,9 +90,13 @@
       });
     });
 
+    socket.on('disconnect', () => {
+      console.log('socket disconnected');
+    });
+
     return () => {
       socket.disconnect();
-      // socket.removeAllListeners();
+      socket.removeAllListeners();
     };
   }
 </script>
