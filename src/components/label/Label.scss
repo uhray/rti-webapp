@@ -29,7 +29,7 @@
     }
     &[status='disabled'] {
       background-color: $colors--primary-10;
-      color: $colors--dark;
+      color: $colors--darkblue;
     }
     &[status='default'] {
       background-color: $colors--tertiary;
@@ -54,7 +54,7 @@
     }
     &[status='inactive'] {
       background-color: $colors--primary-10;
-      color: $colors--dark;
+      color: $colors--darkblue;
     }
     &[status='approved'] {
       background-color: $colors--success;
@@ -87,7 +87,7 @@
       }
       &[statusColor='disabled'] {
         background-color: $colors--primary-10;
-        color: $colors--dark;
+        color: $colors--darkblue;
       }
       &[statusColor='default'] {
         background-color: $colors--tertiary;

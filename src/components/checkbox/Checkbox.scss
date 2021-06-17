@@ -1,7 +1,7 @@
 @import '../../theme/variables.scss';
 
 .uk-checkbox {
-  color: $colors--dark;
+  color: $colors--darkblue;
   border-color: $colors--medium;
   border-radius: 4px;
   margin-top: 1px;
@@ -17,12 +17,12 @@
   }
 
   &:checked {
-    background-color: $colors--dark;
-    border-color: $colors--dark;
+    background-color: $colors--darkblue;
+    border-color: $colors--darkblue;
   }
 
   &:hover {
-    border-color: $colors--dark;
+    border-color: $colors--darkblue;
   }
 }
 
@@ -30,12 +30,12 @@
   border-color: $colors--medium;
 
   &:checked {
-    background-color: $colors--dark;
-    border-color: $colors--dark;
+    background-color: $colors--darkblue;
+    border-color: $colors--darkblue;
   }
 
   &:hover {
-    border-color: $colors--dark;
+    border-color: $colors--darkblue;
   }
 }
 

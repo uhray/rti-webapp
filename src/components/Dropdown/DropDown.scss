@@ -30,7 +30,7 @@
 
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: $colors--dark;
+    color: $colors--darkblue;
   }
 
   .Dropdown-content {
@@ -45,10 +45,10 @@
     flex-flow: row nowrap;
     align-items: center;
 
-    color: $colors--dark;
+    color: $colors--darkblue;
 
     .Dropdown-selection-link {
-      color: $colors--dark;
+      color: $colors--darkblue;
       text-decoration: none;
     }
 

@@ -21,7 +21,7 @@
       .Card-orderNumber {
         font-weight: 500;
         font-size: 14px;
-        color: $colors--dark;
+        color: $colors--darkblue;
       }
     }
 
@@ -35,7 +35,7 @@
         margin-bottom: 6px;
 
         .OrderCard-stopDetails {
-          color: $colors--dark;
+          color: $colors--darkblue;
           display: flex;
           flex-flow: row nowrap;
           align-items: center;

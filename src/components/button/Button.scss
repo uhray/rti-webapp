@@ -46,8 +46,8 @@ button {
 
   &[outline='true'] {
     background-color: transparent;
-    color: $colors--dark;
-    border: 1px solid $colors--dark;
+    color: $colors--darkblue;
+    border: 1px solid $colors--darkblue;
 
     &:disabled {
       background-color: transparent;
@@ -57,8 +57,8 @@ button {
 
     &[primary='true'] {
       background-color: transparent !important;
-      color: $colors--dark;
-      border: 1px solid $colors--dark;
+      color: $colors--darkblue;
+      border: 1px solid $colors--darkblue;
     }
     &[secondary='true'] {
       background-color: transparent !important;

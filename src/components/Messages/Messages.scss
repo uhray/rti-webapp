@@ -81,7 +81,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: $colors--darkest-30;
+  background-color: $colors--dark-30;
 
   display: flex;
   justify-content: center;
@@ -185,7 +185,7 @@
 
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: $colors--dark;
+    color: $colors--darkblue;
   }
 
   .Dropdown-content {
@@ -200,7 +200,7 @@
     flex-flow: row nowrap;
     align-items: center;
 
-    color: $colors--dark;
+    color: $colors--darkblue;
     .Dropdown-selection-check {
       margin: 0 8px;
       width: 16px;

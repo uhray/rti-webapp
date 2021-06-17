@@ -8,7 +8,7 @@
       width: 40px;
       height: 40px;
       background: $colors--light;
-      border: 0.5px solid $colors--dark;
+      border: 0.5px solid $colors--darkblue;
       border-left: none;
       box-sizing: border-box;
       border-bottom-right-radius: 5px;
@@ -57,7 +57,7 @@
     align-items: center;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: $colors--dark;
+    color: $colors--darkblue;
   }
   .DropDown-text {
     font-family: SF Pro Display;
@@ -68,7 +68,7 @@
     &.forlogo {
       width: 40px;
       height: 40px;
-      border: 0.5px solid $colors--dark;
+      border: 0.5px solid $colors--darkblue;
       box-sizing: border-box;
       border-bottom-left-radius: 5px;
       border-top-left-radius: 5px;
@@ -80,7 +80,7 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
-    color: $colors--dark;
+    color: $colors--darkblue;
     margin-left: 9px;
   }
   .DropDown-spacing {
