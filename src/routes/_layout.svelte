@@ -62,7 +62,7 @@
 
     socket.on('connect_error', error => {
       console.error(error);
-      window.location.reload();
+      // window.location.reload();
     });
 
     socket.on('connect', () => {

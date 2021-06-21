@@ -171,6 +171,8 @@
     addPost({ post, initPayload, initPostId: initPayload._id }).then(res => {
       if (res.error) {
         console.error('error');
+
+        clearOverlayData();
       } else {
         let localPosts = localStorage.getItem('errorAdminPosts') || '';
         localPosts = JSON.stringify(

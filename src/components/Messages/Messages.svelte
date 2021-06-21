@@ -156,21 +156,56 @@
       teamIds: teamsToMessage,
       driverClass: driverClassesToMessage,
     };
+    let initPayload = _.cloneDeep(payload);
+    let date = moment().toISOString();
 
-    addPost(payload)
-      .then(res => {
-        postsStore.setPosts([...$postsStore.posts, res]);
-        repliesStore.setReplies([
-          ...$repliesStore.replies,
-          { id: res._id, display: false },
-        ]);
-        sendConfirmation = true;
-      })
-      .catch(err => {
-        console.log('Error sending alert: ', err);
-      });
+    initPayload._id = uuid();
+    initPayload.createdAt = date;
+    initPayload.updatedAt = date;
+    initPayload.sortDatetime = date;
+    initPayload.states = {
+      isArchived: false,
+      isDeleted: false,
+      deliveryStatus: 'SENDING',
+    };
+    initPayload.driverClass = [];
+    initPayload.subthread = [];
+    initPayload.attachments = [];
 
-    // clearOverlayData();
+    postsStore.setPosts([initPayload, ...$postsStore.posts]);
+
+    addPost({ post: payload, initPostId: initPayload._id }).then(res => {
+      if (res.error) {
+        postsStore.setPosts(
+          $postsStore.posts.map(p =>
+            p._id === initPayload._id
+              ? {
+                  ...p,
+                  states: { ...p.states, deliveryStatus: 'ERROR' },
+                  errorTime: date,
+                }
+              : p
+          )
+        );
+
+        const localPosts = localStorage.getItem('errorAdminPosts');
+
+        localStorage.setItem(
+          `errorAdminPosts`,
+          (localPosts ? localPosts : '') +
+            (localPosts ? ', ' : '') +
+            JSON.stringify({
+              ...initPayload,
+              errorTime: moment().toISOString(),
+              states: { ...initPayload.states, deliveryStatus: 'ERROR' },
+            })
+        );
+      } else {
+        // TODO: no error
+      }
+    });
+
+    clearOverlayData();
   }
 
   function clearOverlayData() {
