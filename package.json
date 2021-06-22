@@ -9,7 +9,7 @@
     "dev": "sapper dev --no-hot",
     "build": "sapper build",
     "export": "sapper export",
-    "start": "node __sapper__/build",
+    "start": "npx serve __sapper__/export",
     "validate": "svelte-check --ignore src/node_modules/@sapper --compiler-warnings 'css-unused-selector:ignore,unused-export-let:ignore'"
   },
   "dependencies": {
