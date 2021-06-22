@@ -7,10 +7,10 @@
   },
   "scripts": {
     "dev": "sapper dev --no-hot",
-    "build": "npm run sapper:build --max_old_space_size=4096",
+    "build": "npm run sapper:build --max_old_space_size=8192",
     "sapper:build": "sapper build",
     "export": "sapper export",
-    "start": "node __sapper__/build --max_old_space_size=4096",
+    "start": "node __sapper__/build --max_old_space_size=8192",
     "validate": "svelte-check --ignore src/node_modules/@sapper --compiler-warnings 'css-unused-selector:ignore,unused-export-let:ignore'"
   },
   "dependencies": {
