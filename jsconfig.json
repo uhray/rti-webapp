@@ -1,0 +1,25 @@
+{
+    "include": ["src/**"],
+    "exclude": [
+      "**/node_modules/**",
+      "**/__sapper__/**",
+      "**/.git/objects/**",
+      "**/.hg/store/**",
+      "**/app/www/**",
+      "**/serverless-image-processor/compiled/**",
+      "**/serverless-image-processor/tests/**",
+      "**/.storybook/**",
+      "**/.build/**",
+      "**/build/**",
+      "**/bower/**",
+      "**/__sapper__/**",
+      "**/custom_cordova_plugins/**",
+      "**/app/font-awesome/**",
+      "**/white-labels/vit/src/assets/pickadate/**",
+      "**/.server/**",
+      "**/dist/**",
+      "**/.dist/**",
+      "**/.sass-cache/**",
+      "**/static/**"
+    ]
+  }
