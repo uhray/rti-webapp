@@ -13,7 +13,7 @@
   import Icon from '../../components/icon/Icon.svelte';
   import Divider from '../../components/divider/Divider.svelte';
   import Input from '../../components/input/Input.svelte';
-  import Dropdown from '../../components/Dropdown/Dropdown.svelte';
+  import Dropdown from '../../components/Dropdown/DropDown.svelte';
   import ProfileHeader from './ProfileHeader.svelte';
   import { editUser, getTeamTruckIds } from '../../tools/crudApi.ts';
   import { contactsStore, trucksStore, userStore } from '../../store';
