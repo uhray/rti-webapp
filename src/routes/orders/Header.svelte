@@ -1,7 +1,7 @@
 <script>
   import Button from '../../components/button/Button.svelte';
   import SearchBar from '../../components/searchbar/SearchBar.svelte';
-  import Dropdown from '../../components/Dropdown/Dropdown.svelte';
+  import Dropdown from '../../components/Dropdown/DropDown.svelte';
 
   export let handleSort;
 

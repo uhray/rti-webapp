@@ -5,7 +5,7 @@ const path = require('path');
 const config = require('sapper/config/webpack.js');
 const pkg = require('./package.json');
 
-const mode = process.env.NODE_ENV;
+const mode = process.env.NODE_ENV || 'production';
 const dev = mode === 'development';
 
 const alias = { svelte: path.resolve('node_modules', 'svelte') };
@@ -34,8 +34,19 @@ module.exports = {
             options: {
               dev,
               hydratable: true,
+              // include: 'src/components/**/*.svelte',
               preprocess: sveltePreprocess({ sourceMap: dev }),
               hotReload: false, // pending https://github.com/sveltejs/svelte/issues/2377
+              emitCss: false,
+              onwarn: (warning, handler) => {
+                // e.g. don't warn on <marquee> elements, cos they're cool
+                console.warn('warn', warning.code);
+                // if (warning.code === 'PLUGIN_WARNING') return;
+
+                // let Rollup handle all other warnings normally
+                // handler(warning);
+                // return;
+              }
             },
           },
         },
@@ -73,9 +84,21 @@ module.exports = {
             options: {
               css: false,
               generate: 'ssr',
-              hydratable: true,
-              preprocess: sveltePreprocess({ sourceMap: dev }),
               dev,
+              hydratable: true,
+              // include: 'src/components/**/*.svelte',
+              preprocess: sveltePreprocess({ sourceMap: dev }),
+              hotReload: false, // pending https://github.com/sveltejs/svelte/issues/2377
+              emitCss: false,
+              onwarn: (warning, handler) => {
+                // e.g. don't warn on <marquee> elements, cos they're cool
+                console.warn('warn', warning.code);
+                // if (warning.code === 'PLUGIN_WARNING') return;
+
+                // let Rollup handle all other warnings normally
+                // handler(warning);
+                // return;
+              }
             },
           },
         },

@@ -7,9 +7,10 @@
   },
   "scripts": {
     "dev": "sapper dev --no-hot",
-    "build": "sapper build",
+    "build": "npm run sapper:build --max_old_space_size=4096",
+    "sapper:build": "sapper build",
     "export": "sapper export",
-    "start": "node __sapper__/build",
+    "start": "node __sapper__/build --max_old_space_size=4096",
     "validate": "svelte-check --ignore src/node_modules/@sapper --compiler-warnings 'css-unused-selector:ignore,unused-export-let:ignore'"
   },
   "dependencies": {
@@ -42,7 +43,7 @@
     "ts-loader": "^8.0.4",
     "tslib": "^2.0.1",
     "typescript": "^4.0.3",
-    "webpack": "^4.7.0",
+    "webpack": "^4.46.0",
     "webpack-modules": "^1.0.0"
   }
 }
