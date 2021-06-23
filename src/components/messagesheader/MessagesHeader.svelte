@@ -1,6 +1,6 @@
 <script>
-  import Label from '../../label/Label.svelte';
-  import Avatar from '../../Avatar/Avatar.svelte';
+  import Label from '../label/Label.svelte';
+  import Avatar from '../Avatar/Avatar.svelte';
   import Dropdown from '../Dropdown/Dropdown.svelte';
   import { colors } from '../../theme/variables';
 
