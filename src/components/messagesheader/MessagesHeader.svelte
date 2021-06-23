@@ -1,7 +1,7 @@
 <script>
-  import Label from '../../components/label/Label.svelte';
-  import Avatar from '../../components/Avatar/Avatar.svelte';
-  import Dropdown from '../../components/Dropdown/Dropdown.svelte';
+  import Label from '../../label/Label.svelte';
+  import Avatar from '../../Avatar/Avatar.svelte';
+  import Dropdown from '../Dropdown/Dropdown.svelte';
   import { colors } from '../../theme/variables';
 
   export let contact;
