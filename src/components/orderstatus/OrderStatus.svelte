@@ -34,7 +34,7 @@
 {#if order && order.stops}
   <section class="OrderStatus">
     <Card type="card-gray-bg">
-      <h6 class="OrderStatus-headerText">Order Status</h6>
+      <h6 class="OrderStatus-headerText">Order Status </h6>
 
       <div class="uk-flex">
         <div class="uk-width-1-4">
