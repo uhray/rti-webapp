@@ -11,7 +11,7 @@
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
   import { getPosts } from '../../tools/crudApi';
-  import Post from '../Post/Post.svelte';
+  import Post from '../post/Post.svelte';
   import { opts } from '../../tools/opts';
   import OverlayDelete from '../OverlayDelete/OverlayDelete.svelte';
   import OverlayResend from '../OverlayResend/OverlayResend.svelte';

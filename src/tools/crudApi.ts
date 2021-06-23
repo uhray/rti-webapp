@@ -4,7 +4,7 @@ import { goto } from '@sapper/app';
 import { userStore } from '../store';
 
 const tools: any = {};
-const env: string = 'staging';
+const env: string = 'dev';
 
 export default tools;
 
