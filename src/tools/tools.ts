@@ -117,7 +117,7 @@ export async function setData(opts?) {
   }
 
   if (grabPosts) {
-    const p = await getPosts({ allMessages: true });
+    const p = await getPosts({ allMessages: true, page: 0, perPage: 10 });
     const r = p.map(post => {
       return { id: post._id, display: false };
     });

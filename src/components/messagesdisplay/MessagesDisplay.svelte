@@ -1,4 +1,6 @@
 <script>
+  import IntersectionObserver from 'svelte-intersection-observer';
+
   import { onMount } from 'svelte';
   import _ from 'lodash';
   import Label from '../label/Label.svelte';
@@ -13,9 +15,10 @@
   import { postsStore, repliesStore } from '../../store';
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
+  import Post from '../post/Post.svelte';
+  import { getPosts } from '../../tools/crudApi';
 
-  export let posts = undefined;
-  export let sortedPosts = undefined;
+  export let posts;
   export let me;
   export let contacts = [];
   export let toggleReplies;
@@ -27,6 +30,13 @@
   let input;
   let replyPost = null;
   let attachments = [];
+
+  let element;
+  let intersecting;
+  let pageIndex = 1;
+  let perPage = 50;
+  let isMoreLoading = false;
+  let disableInfiniteScroll = $postsStore.posts.length % 10 !== 0;
 
   $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
 
@@ -74,6 +84,7 @@
         })
         .catch(err => {
           console.log('Error adding reply: ', err);
+
           replyPost = null;
         });
     } else {
@@ -86,7 +97,7 @@
 
       addPost(payload)
         .then(res => {
-          postsStore.setPosts([...$postsStore.posts, res]);
+          postsStore.setPosts([res, ...$postsStore.posts]);
           repliesStore.setReplies([
             ...$repliesStore.replies,
             { id: res._id, display: false },
@@ -125,61 +136,126 @@
     );
     attachments = filteredAttachments;
   }
+
+  function loadMorePosts() {
+    isMoreLoading = true;
+
+    getPosts({ allMessages: true, page: pageIndex, perPage: perPage })
+      .then(res => {
+        pageIndex++;
+        const r = res.map(post => {
+          return { id: post._id, display: false };
+        });
+        postsStore.setPosts([...$postsStore.posts, ...res]);
+        repliesStore.setReplies([...$repliesStore.replies, ...r]);
+
+        disableInfiniteScroll = res.length < 10;
+        isMoreLoading = false;
+      })
+      .catch(err => {
+        console.log('Error fetching more posts: ', err);
+
+        disableInfiniteScroll = true;
+        isMoreLoading = false;
+      });
+  }
+
+  function compareSortTimes(post1, post2) {
+    if (post1 && post2) {
+      let date1 = moment(new Date(post1.sortDatetime).toISOString()).format(
+        'MMM D, YYYY'
+      );
+      let date2 = moment(new Date(post2.sortDatetime).toISOString()).format(
+        'MMM D, YYYY'
+      );
+
+      if (date1 !== date2) {
+        return true;
+      }
+    }
+    return false;
+  }
 </script>
-
-<style src="./MessagesDisplay.scss">
-
-</style>
 
 <div class="MessagesDisplay">
   <div id="Messages" class="Messages" bind:this={messages}>
-
     {#if !loading}
-      <div class="Messages-container">
-        {#if sortedPosts && Object.keys(sortedPosts).length > 0}
-          {#each Object.keys(sortedPosts) as date}
+      {#if posts && posts.length > 0}
+        {#each posts as post, index}
+          <div class="Post">
+            {#if post.postType === 'MESSAGE'}
+              <MessageCard
+                {post}
+                {findContact}
+                isAllMessages={slug === 'all' ? true : false}
+              />
+            {:else if post.postType === 'ALERT'}
+              <MessageCard isAlert={true} {post} {findContact} />
+            {:else if post.postType === 'ORDER'}
+              <OrderMessageCard
+                {me}
+                {post}
+                {findContact}
+                order={_.find(orders, { orderId: post.orderId })}
+              />
+            {/if}
+
+            {#if post.attachments.length > 0}
+              <MessageAttachments attachments={post.attachments} />
+            {/if}
+
+            <Replies {post} {toggleReplies} {handleReplyPost} {findContact} />
+          </div>
+
+          {#if compareSortTimes(posts[index], posts[index + 1]) || posts[posts.length - 1]._id === post._id}
             <div class="Messages-dateLabel">
-              {#if date}
-                <Label
-                  text={moment(new Date(date).toISOString()).isSame(moment(), 'day') ? 'Today' : moment(new Date(date).toISOString()).isSame(moment().subtract(1, 'days'), 'day') ? 'Yesterday' : date}
-                  status="disabled"
-                  backgroundColor="rgba(166, 173, 196, 0.3);" />
-              {/if}
+              <Label
+                text={moment(
+                  new Date(
+                    moment(new Date(post.sortDatetime).toISOString()).format(
+                      'MMM D, YYYY'
+                    )
+                  ).toISOString()
+                ).isSame(moment(), 'day')
+                  ? 'Today'
+                  : moment(
+                      new Date(
+                        moment(
+                          new Date(post.sortDatetime).toISOString()
+                        ).format('MMM D, YYYY')
+                      ).toISOString()
+                    ).isSame(moment().subtract(1, 'days'), 'day')
+                  ? 'Yesterday'
+                  : moment(new Date(post.sortDatetime).toISOString()).format(
+                      'MMM D, YYYY'
+                    )}
+                status="disabled"
+                backgroundColor="rgba(166, 173, 196, 0.3);"
+              />
             </div>
+          {/if}
+        {/each}
 
-            {#each Object.values(sortedPosts[date]) as post}
-              <div class="Post">
-                {#if post.postType === 'MESSAGE'}
-                  <MessageCard
-                    {post}
-                    {findContact}
-                    isAllMessages={slug === 'all' ? true : false} />
-                {:else if post.postType === 'ALERT'}
-                  <MessageCard isAlert={true} {post} {findContact} />
-                {:else if post.postType === 'ORDER'}
-                  <OrderMessageCard
-                    {me}
-                    {post}
-                    {findContact}
-                    order={_.find(orders, { orderId: post.orderId })} />
-                {/if}
+        <IntersectionObserver
+          {element}
+          bind:intersecting
+          on:intersect={e => {
+            if (!disableInfiniteScroll) {
+              loadMorePosts();
+            }
+          }}
+        >
+          <div bind:this={element} class="Infinite" />
+        </IntersectionObserver>
 
-                {#if post.attachments.length > 0}
-                  <MessageAttachments attachments={post.attachments} />
-                {/if}
-
-                <Replies
-                  {post}
-                  {toggleReplies}
-                  {handleReplyPost}
-                  {findContact} />
-              </div>
-            {/each}
-          {/each}
-        {:else}
-          <div class="Messages-empty">No Messages</div>
+        {#if isMoreLoading}
+          <div class="Messages-loading">
+            <div uk-spinner class="Loader-color" />
+          </div>
         {/if}
-      </div>
+      {:else}
+        <div class="Messages-empty">No Messages</div>
+      {/if}
     {:else}
       <div class="Messages-loading">
         <div uk-spinner class="Loader-color" />
@@ -195,12 +271,12 @@
             <MessageAttachments
               isDisplay={false}
               {removeAttachment}
-              {attachments} />
+              {attachments}
+            />
           </div>
         {/if}
         {#if replyPost}
           <div class="Input-replying">
-
             {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
               <div class="Input-info">
                 <div>Replying to: {findContact(replyPost.from).name}</div>
@@ -215,7 +291,8 @@
                     viewBox="0 0 16 11"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    class="Input-orderIcon">
+                    class="Input-orderIcon"
+                  >
                     <path
                       d="M15.6289 4.70312L12.7578 0.574219C12.5117 0.246094
                       12.1289 0 11.6641 0H4.30859C3.84375 0 3.46094 0.246094
@@ -228,7 +305,8 @@
                       4.375H2.17578L4.30859 1.3125ZM14.5625
                       9.1875H1.4375V5.6875H4.71875L5.59375
                       7.4375H10.4062L11.2812 5.6875H14.5625V9.1875Z"
-                      fill="#15224B" />
+                      fill="#15224B"
+                    />
                   </svg>
                   <div>
                     <div class="Input-orderNumber">
@@ -243,10 +321,13 @@
                 </div>
                 <Label
                   status={_.find(orders, { orderId: replyPost.orderId }).status}
-                  text={capitalize(_.find(orders, {
+                  text={capitalize(
+                    _.find(orders, {
                       orderId: replyPost.orderId,
-                    }).status)}
-                  small />
+                    }).status
+                  )}
+                  small
+                />
               </div>
             {/if}
 
@@ -254,7 +335,8 @@
               class="clickable"
               on:click={() => {
                 replyPost = null;
-              }}>
+              }}
+            >
               <Icon type="close" />
             </div>
           </div>
@@ -264,3 +346,5 @@
     </div>
   {/if}
 </div>
+
+<style src="./MessagesDisplay.scss"></style>

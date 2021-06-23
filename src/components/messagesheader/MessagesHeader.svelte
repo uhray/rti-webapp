@@ -1,7 +1,7 @@
 <script>
   import Label from '../label/Label.svelte';
   import Avatar from '../Avatar/Avatar.svelte';
-  import DropDown from '../Dropdown/DropDown.svelte';
+  import Dropdown from '../Dropdown/DropDown.svelte';
   import { colors } from '../../theme/variables';
 
   export let contact;
@@ -32,10 +32,6 @@
   }
 </script>
 
-<style src="./MessagesHeader.scss">
-
-</style>
-
 <div class="Header">
   {#if contact}
     <Avatar user={contact} size={40} />
@@ -62,35 +58,41 @@
       <div
         on:click={() => {
           handleFilter('all');
-        }}>
+        }}
+      >
         <Label
           status="inactive"
           text="All Messages"
           iconLeft="message"
           iconColor={filter === 'all' ? '#243E93' : ''}
-          backgroundColor={colors.tablegray} />
+          backgroundColor={colors.tablegray}
+        />
       </div>
       <div
         on:click={() => {
           handleFilter('macros');
-        }}>
+        }}
+      >
         <Label
           status="inactive"
           text="Macros"
           iconLeft="macro"
           iconColor={filter === 'macros' ? '#243E93' : ''}
-          backgroundColor={colors.tablegray} />
+          backgroundColor={colors.tablegray}
+        />
       </div>
       <div
         on:click={() => {
           handleFilter('orders');
-        }}>
+        }}
+      >
         <Label
           status="inactive"
           text="Orders"
           iconLeft="orders"
           iconColor={filter === 'orders' ? '#243E93' : ''}
-          backgroundColor={colors.tablegray} />
+          backgroundColor={colors.tablegray}
+        />
       </div>
       {#if contact}
         <div>
@@ -98,10 +100,12 @@
             status="inactive"
             iconLeft="overflow"
             backgroundColor={colors.tablegray} />
-          <DropDown simpleSelect={true} data={dropdownOpts} {handleSelect} />
+          <Dropdown simpleSelect={true} data={dropdownOpts} {handleSelect} />
         </div>
       {/if}
     </div>
   </div>
-
 </div>
+
+<style src="./MessagesHeader.scss">
+</style>

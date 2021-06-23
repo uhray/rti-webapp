@@ -3,7 +3,6 @@
 #Messages {
   overflow-y: auto;
   overflow-x: hidden;
-
   /* width */
   &::-webkit-scrollbar {
     width: 2px;
@@ -31,9 +30,14 @@
   flex-flow: column;
 
   .Messages {
+    display: flex;
+    flex-flow: column-reverse;
+    padding: 15px 30px 10px 30px;
     flex-grow: 1;
-    overflow: auto;
+    box-sizing: border-box;
 
+    width: 100%;
+    max-width: calc(100vw - 505px);
     .Messages-loading {
       height: 100%;
       display: flex;
@@ -41,32 +45,30 @@
       padding: 10px;
     }
 
-    .Messages-container {
+    .Messages-dateLabel {
       display: flex;
-      flex-flow: column;
-      padding: 15px 30px 0px 30px;
-      box-sizing: border-box;
-
+      justify-content: center;
       width: 100%;
-      max-width: calc(100vw - 505px);
+      margin: 10px 0;
+    }
 
-      .Messages-dateLabel {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        margin: 10px 0;
-      }
+    .Messages-empty {
+      margin-top: 30px;
+      font-size: 16px;
+      display: flex;
+      flex-grow: 1;
+      align-items: flex-start;
+      justify-content: center;
+    }
 
-      .Messages-empty {
-        margin-top: 30px;
-        font-size: 16px;
-        display: flex;
-        justify-content: center;
-      }
+    .Post {
+      margin-bottom: 41px;
+    }
 
-      .Post {
-        margin-bottom: 41px;
-      }
+    .Infinite {
+      height: 10px;
+      margin: 10px;
+      padding: 10px;
     }
   }
   .Input {
