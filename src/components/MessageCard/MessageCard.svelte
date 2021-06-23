@@ -1,29 +1,31 @@
 <script>
-  import Post from '../post/Post.svelte';
+  import PostContent from '../PostContent/PostContent.svelte';
   import PostHeader from '../PostHeader/PostHeader.svelte';
   import Label from '../label/Label.svelte';
   import _ from 'lodash';
+  import { contactsStore } from '../../store';
 
   export let isAlert = false;
   export let post;
-  export let findContact;
   export let isAllMessages = false;
-  let user = findContact(post.from);
-  let userTo = findContact(post.userId);
+  export let resend;
+
+  let from = _.find($contactsStore.contacts.users, { id: post.from });
+  let userTo = _.find($contactsStore.contacts.users, { id: post.userId });
 </script>
 
-<style src="./MessageCard.scss">
-
-</style>
-
-<PostHeader {user} {userTo} {post} {isAllMessages} />
+<PostHeader {from} {userTo} {post} {isAllMessages} {resend} />
 {#if isAlert}
   <div class="AlertCard">
     <div class="AlertCard-header">
       <div class="AlertCard-tags">
         Fleet Message {post.tags.length > 0 ? '•' : ''}
         {#each post.tags as t, index}
-          {post.tags.length > 1 ? (index === post.tags.length - 1 ? t : t + ' - ') : t}
+          {post.tags.length > 1
+            ? index === post.tags.length - 1
+              ? t
+              : t + ' - '
+            : t}
         {/each}
       </div>
       <div class="AlertCard-labels">
@@ -39,10 +41,13 @@
         {/each}
       </div>
     </div>
-    <Post message={post.message} />
+    <PostContent message={post.message} />
   </div>
 {:else}
   <div class="MessageCard">
-    <Post message={post.message} />
+    <PostContent message={post.message} />
   </div>
 {/if}
+
+<style src="./MessageCard.scss">
+</style>

@@ -49,6 +49,7 @@
       display: flex;
       justify-content: center;
       width: 100%;
+      // max-width: calc(100vw - 505px);
       margin: 10px 0;
     }
 
@@ -59,10 +60,6 @@
       flex-grow: 1;
       align-items: flex-start;
       justify-content: center;
-    }
-
-    .Post {
-      margin-bottom: 41px;
     }
 
     .Infinite {

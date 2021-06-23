@@ -1,22 +1,21 @@
 <script>
   import IntersectionObserver from 'svelte-intersection-observer';
-
   import { onMount } from 'svelte';
   import _ from 'lodash';
   import Label from '../label/Label.svelte';
   import Icon from '../icon/Icon.svelte';
   import RichText from '../richtext/RichText.svelte';
-  import MessageCard from '../MessageCard/MessageCard.svelte';
-  import OrderMessageCard from '../OrderMessageCard/OrderMessageCard.svelte';
-  import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
-  import Replies from '../Replies/Replies.svelte';
   import { uuid } from '../../tools/tools.ts';
   import { capitalize } from '../../tools/tools.ts';
-  import { postsStore, repliesStore } from '../../store';
+  import { postsStore, repliesStore, contactsStore } from '../../store';
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
-  import Post from '../post/Post.svelte';
   import { getPosts } from '../../tools/crudApi';
+  import Post from '../Post/Post.svelte';
+  import { opts } from '../../tools/opts';
+  import OverlayDelete from '../OverlayDelete/OverlayDelete.svelte';
+  import OverlayResend from '../OverlayResend/OverlayResend.svelte';
+  import MessageAttachments from '../MessageAttachments/MessageAttachments.svelte';
 
   export let posts;
   export let me;
@@ -30,13 +29,16 @@
   let input;
   let replyPost = null;
   let attachments = [];
-
   let element;
   let intersecting;
   let pageIndex = 1;
-  let perPage = 50;
+  let perPage = opts.perPage;
   let isMoreLoading = false;
   let disableInfiniteScroll = $postsStore.posts.length % 10 !== 0;
+
+  let displayErrorResend = false;
+  let displayErrorDelete = false;
+  let errorPost = {};
 
   $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
 
@@ -47,10 +49,6 @@
         messages.scrollTo(0, messages.scrollHeight);
       }
     }
-  };
-
-  const findContact = id => {
-    return _.find(contacts, { id: id });
   };
 
   async function send(message) {
@@ -83,7 +81,7 @@
           );
         })
         .catch(err => {
-          console.log('Error adding reply: ', err);
+          console.error('Error adding reply: ', err);
 
           replyPost = null;
         });
@@ -94,20 +92,113 @@
         userId: slug,
         attachments: attachments,
       };
+      let initPayload = _.cloneDeep(payload);
+      let date = moment().toISOString();
 
-      addPost(payload)
-        .then(res => {
-          postsStore.setPosts([res, ...$postsStore.posts]);
-          repliesStore.setReplies([
-            ...$repliesStore.replies,
-            { id: res._id, display: false },
-          ]);
-          scrollToBottom();
-        })
-        .catch(err => console.log('Error adding post: ', err));
+      initPayload._id = uuid();
+      initPayload.createdAt = date;
+      initPayload.updatedAt = date;
+      initPayload.sortDatetime = date;
+      initPayload.postType = 'MESSAGE';
+      initPayload.states = {
+        isArchived: false,
+        isDeleted: false,
+        deliveryStatus: 'SENDING',
+      };
+      initPayload.driverClass = [];
+      initPayload.subthread = [];
+      initPayload.tags = [];
+      initPayload.teamIds = [];
+      initPayload.toRead = [];
+
+      postsStore.setPosts([initPayload, ...$postsStore.posts]);
+
+      addPost({ post: payload, initPostId: initPayload._id }).then(res => {
+        if (res.error) {
+          postsStore.setPosts(
+            $postsStore.posts.map(p =>
+              p._id === initPayload._id
+                ? {
+                    ...p,
+                    states: { ...p.states, deliveryStatus: 'ERROR' },
+                    errorTime: date,
+                  }
+                : p
+            )
+          );
+
+          const localPosts = localStorage.getItem('errorAdminPosts');
+
+          localStorage.setItem(
+            `errorAdminPosts`,
+            (localPosts ? localPosts : '') +
+              (localPosts ? ', ' : '') +
+              JSON.stringify({
+                ...initPayload,
+                errorTime: moment().toISOString(),
+                states: { ...initPayload.states, deliveryStatus: 'ERROR' },
+              })
+          );
+        } else {
+          // TODO: no error
+        }
+      });
     }
 
     attachments = [];
+  }
+
+  function resend(p) {
+    errorPost = p;
+    displayErrorResend = true;
+  }
+
+  function promptDelete() {
+    displayErrorResend = false;
+    displayErrorDelete = true;
+  }
+
+  function errorResend() {
+    const post = _.cloneDeep(errorPost);
+    const initPayload = _.cloneDeep(errorPost);
+
+    delete post.createdAt;
+    delete post.updatedAt;
+    delete post.states;
+    delete post.sortDatetime;
+    delete post._id;
+
+    addPost({ post, initPayload, initPostId: initPayload._id }).then(res => {
+      if (res.error) {
+        console.error('error');
+
+        clearOverlayData();
+      } else {
+        let localPosts = localStorage.getItem('errorAdminPosts') || '';
+        localPosts = JSON.stringify(
+          JSON.parse('[' + localPosts + ']').filter(
+            i => i._id !== errorPost._id
+          )
+        ).slice(1, -1);
+
+        localStorage.setItem('errorAdminPosts', localPosts);
+
+        clearOverlayData();
+      }
+    });
+  }
+
+  function errorDelete() {
+    let localPosts = localStorage.getItem('errorAdminPosts') || '';
+    localPosts = JSON.stringify(
+      JSON.parse('[' + localPosts + ']').filter(i => i._id !== errorPost._id)
+    ).slice(1, -1);
+
+    localStorage.setItem('errorAdminPosts', localPosts);
+
+    postsStore.setPosts($postsStore.posts.filter(p => p._id !== errorPost._id));
+
+    clearOverlayData();
   }
 
   function removeTags(str) {
@@ -137,6 +228,20 @@
     attachments = filteredAttachments;
   }
 
+  function readPost(post) {
+    let payload = post;
+    if (payload.toRead) {
+      payload.toRead = [...payload.toRead, me._id];
+    } else {
+      payload.toRead = [me._id];
+    }
+
+    payload.states.deliveryStatus = 'READ';
+    payload.readTime = Date.now();
+
+    editPost(post._id, payload);
+  }
+
   function loadMorePosts() {
     isMoreLoading = true;
 
@@ -146,14 +251,16 @@
         const r = res.map(post => {
           return { id: post._id, display: false };
         });
-        postsStore.setPosts([...$postsStore.posts, ...res]);
-        repliesStore.setReplies([...$repliesStore.replies, ...r]);
+        postsStore.setPosts(_.uniqBy([...$postsStore.posts, ...res], '_id'));
+        repliesStore.setReplies(
+          _.uniqBy([...$repliesStore.replies, ...r], 'id')
+        );
 
         disableInfiniteScroll = res.length < 10;
         isMoreLoading = false;
       })
       .catch(err => {
-        console.log('Error fetching more posts: ', err);
+        console.error('Error fetching more posts: ', err);
 
         disableInfiniteScroll = true;
         isMoreLoading = false;
@@ -175,6 +282,12 @@
     }
     return false;
   }
+
+  function clearOverlayData() {
+    errorPost = false;
+    displayErrorDelete = false;
+    displayErrorResend = false;
+  }
 </script>
 
 <div class="MessagesDisplay">
@@ -182,30 +295,15 @@
     {#if !loading}
       {#if posts && posts.length > 0}
         {#each posts as post, index}
-          <div class="Post">
-            {#if post.postType === 'MESSAGE'}
-              <MessageCard
-                {post}
-                {findContact}
-                isAllMessages={slug === 'all' ? true : false}
-              />
-            {:else if post.postType === 'ALERT'}
-              <MessageCard isAlert={true} {post} {findContact} />
-            {:else if post.postType === 'ORDER'}
-              <OrderMessageCard
-                {me}
-                {post}
-                {findContact}
-                order={_.find(orders, { orderId: post.orderId })}
-              />
-            {/if}
-
-            {#if post.attachments.length > 0}
-              <MessageAttachments attachments={post.attachments} />
-            {/if}
-
-            <Replies {post} {toggleReplies} {handleReplyPost} {findContact} />
-          </div>
+          <Post
+            {post}
+            {orders}
+            {slug}
+            {me}
+            {toggleReplies}
+            {handleReplyPost}
+            {resend}
+          />
 
           {#if compareSortTimes(posts[index], posts[index + 1]) || posts[posts.length - 1]._id === post._id}
             <div class="Messages-dateLabel">
@@ -279,7 +377,11 @@
           <div class="Input-replying">
             {#if replyPost.postType === 'MESSAGE' || replyPost.postType === 'ALERT'}
               <div class="Input-info">
-                <div>Replying to: {findContact(replyPost.from).name}</div>
+                <div>
+                  Replying to: {_.find($contactsStore.contacts.users, {
+                    id: replyPost.from,
+                  }).name}
+                </div>
                 <div>{removeTags(replyPost.message)}</div>
               </div>
             {:else if replyPost.postType === 'ORDER'}
@@ -346,5 +448,18 @@
     </div>
   {/if}
 </div>
+
+{#if displayErrorResend}
+  <OverlayResend
+    {clearOverlayData}
+    cancel={promptDelete}
+    send={errorResend}
+    type={'message'}
+  />
+{/if}
+
+{#if displayErrorDelete}
+  <OverlayDelete {clearOverlayData} send={errorDelete} type={'message'} />
+{/if}
 
 <style src="./MessagesDisplay.scss"></style>

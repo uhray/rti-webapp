@@ -49,5 +49,15 @@
     font-weight: normal;
     font-size: 12px;
     color: $color--darkgray;
+
+    .Post-header-loader {
+      margin-left: 5px;
+    }
+  }
+
+  .Post-header-error {
+    font-weight: normal;
+    font-size: 12px;
+    color: $color--danger;
   }
 }

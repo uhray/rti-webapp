@@ -123,13 +123,19 @@ export const getPosts = async query => {
 };
 
 export const addPost = async data => {
-  const res = await tools.fetch(options().baseUrl + '/posts', {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
-  });
+  try {
+    const res = await tools.fetch(options().baseUrl + '/posts', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+    });
 
-  return res;
+    return { data: res, error: null };
+  } catch (err) {
+    console.log('addposterr', err);
+
+    return { data: null, error: 'Error adding post' };
+  }
 };
 
 export const editPost = async (postId, data) => {
