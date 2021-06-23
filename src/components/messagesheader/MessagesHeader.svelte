@@ -1,7 +1,7 @@
 <script>
   import Label from '../label/Label.svelte';
   import Avatar from '../Avatar/Avatar.svelte';
-  import Dropdown from '../Dropdown/Dropdown.svelte';
+  import DropDown from '../Dropdown/DropDown.svelte';
   import { colors } from '../../theme/variables';
 
   export let contact;
@@ -98,7 +98,7 @@
             status="inactive"
             iconLeft="overflow"
             backgroundColor={colors.tablegray} />
-          <Dropdown simpleSelect={true} data={dropdownOpts} {handleSelect} />
+          <DropDown simpleSelect={true} data={dropdownOpts} {handleSelect} />
         </div>
       {/if}
     </div>

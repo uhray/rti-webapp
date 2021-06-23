@@ -8,7 +8,7 @@
   import { formatDate } from '../../tools/tools.ts';
   import moment from 'moment';
   import NavItem from '../navitem/NavItem.svelte';
-  import Dropdown from '../Dropdown/Dropdown.svelte';
+  import Dropdown from '../Dropdown/DropDown.svelte';
   import Input from '../input/Input.svelte';
   import { values } from 'lodash';
 
