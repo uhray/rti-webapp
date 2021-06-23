@@ -180,7 +180,7 @@
         </div>
       </div>
       <br />
-      <Button primary>Save Password</Button>
+      <Button primary>Save Passwordd</Button>
     </div>
   </form>
 </div>
