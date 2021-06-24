@@ -1,3 +1,12 @@
+<script context="module">
+  export async function preload(page, session) {
+    console.log(session);
+    const { PORT, RANDOM, NODE_ENV } = session;
+
+    return { env: PORT, RANDOM, NODE_ENV };
+  }
+</script>
+
 <script lang="ts">
   import { onMount } from 'svelte';
   import Nav from '../components/nav/Nav.svelte';
@@ -10,11 +19,13 @@
 
   var io = require('socket.io-client');
 
+  export let env;
   export let segment: string;
   let loading = true;
   let user = undefined;
 
   onMount(async () => {
+    console.log(env);
     user = await auth();
 
     if (user) {
