@@ -4,6 +4,7 @@ const sveltePreprocess = require('svelte-preprocess');
 const path = require('path');
 const config = require('sapper/config/webpack.js');
 const pkg = require('./package.json');
+const Dotenv = require('dotenv-webpack');
 
 const mode = process.env.NODE_ENV || 'production';
 const dev = mode === 'development';
@@ -46,7 +47,7 @@ module.exports = {
                 // let Rollup handle all other warnings normally
                 // handler(warning);
                 // return;
-              }
+              },
             },
           },
         },
@@ -61,6 +62,7 @@ module.exports = {
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
+      new Dotenv(),
     ].filter(Boolean),
     devtool: dev && 'inline-source-map',
   },
@@ -98,7 +100,7 @@ module.exports = {
                 // let Rollup handle all other warnings normally
                 // handler(warning);
                 // return;
-              }
+              },
             },
           },
         },
@@ -130,4 +132,6 @@ module.exports = {
     },
     mode,
   },
+
+  target: 'node',
 };

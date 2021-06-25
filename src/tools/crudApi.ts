@@ -4,12 +4,11 @@ import { goto } from '@sapper/app';
 import { userStore } from '../store';
 
 const tools: any = {};
-const env: string = 'dev';
+const env: string = process.env.ENV || 'dev';
 
 export default tools;
 
 export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
-
   fetchOpts = merge(
     {
       method: 'GET',
@@ -317,14 +316,15 @@ export function changePageIfDifferent(url, page) {
   }
 }
 
-const options = () => { 
-  const host = env === 'prod' ? 
-  'https://truck-ops-api--production.herokuapp.com' : 
-    env === 'staging' ? 
-      'https://truck-ops-api--staging.herokuapp.com' : 
-    env === 'dev' ? 
-      'https://truck-ops-api--dev.herokuapp.com' : 
-      'http://localhost:5000';
+const options = () => {
+  const host =
+    env === 'prod'
+      ? 'https://truck-ops-api--production.herokuapp.com'
+      : env === 'staging'
+      ? 'https://truck-ops-api--staging.herokuapp.com'
+      : env === 'dev'
+      ? 'https://truck-ops-api--dev.herokuapp.com'
+      : 'http://localhost:5000';
 
   return {
     baseUrl: host + '/api/v1',

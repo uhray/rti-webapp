@@ -1,9 +1,8 @@
 <script context="module">
   export async function preload(page, session) {
-    console.log(session);
-    const { PORT, RANDOM, NODE_ENV } = session;
+    const { PORT, ENV } = session;
 
-    return { env: PORT, RANDOM, NODE_ENV };
+    return { env: PORT, ENV };
   }
 </script>
 
@@ -25,7 +24,6 @@
   let user = undefined;
 
   onMount(async () => {
-    console.log(env);
     user = await auth();
 
     if (user) {

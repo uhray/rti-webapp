@@ -1,12 +1,10 @@
-require('dotenv').config();
-
 import sirv from 'sirv';
 import polka from 'polka';
 import compression from 'compression';
 import * as sapper from '@sapper/server';
 
-const { PORT, NODE_ENV, RANDOM } = process.env;
-const isDev = NODE_ENV === 'development';
+const { PORT, ENV } = process.env;
+const isDev = ENV === 'dev' || ENV === 'local';
 
 polka() // You can also use Express
   .use(
@@ -14,12 +12,11 @@ polka() // You can also use Express
     sirv('static', { dev: isDev }),
     sapper.middleware({
       session: () => ({
-        NODE_ENV,
+        ENV,
         PORT,
-        RANDOM,
       }),
     })
   )
-  .listen(PORT || 3001, err => {
+  .listen(PORT || 3000, err => {
     if (err) console.log('error', err);
   });
