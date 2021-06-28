@@ -71,11 +71,17 @@
     if (me.role === 'ADMIN') {
       posts =
         id === 'all'
-          ? allPosts.filter(p => p.from === me._id || p.userId === me._id)
+          ? allPosts.filter(
+              p =>
+                p.from === me._id ||
+                p.userId === me._id ||
+                p.postType === 'ALERT'
+            )
           : allPosts.filter(
               p =>
-                (p.from === me._id || p.userId === me._id) &&
-                (p.userId === id || p.from === id)
+                ((p.from === me._id || p.userId === me._id) &&
+                  (p.userId === id || p.from === id)) ||
+                p.postType === 'ALERT'
             );
     } else {
       posts =
