@@ -67,6 +67,7 @@
   }
 
   async function sortPosts(id) {
+    console.log(me.role);
     if (me.role === 'ADMIN') {
       posts =
         id === 'all'
@@ -78,9 +79,8 @@
             )
           : allPosts.filter(
               p =>
-                ((p.from === me._id || p.userId === me._id) &&
-                  (p.userId === id || p.from === id)) ||
-                p.postType === 'ALERT'
+                (p.from === me._id || p.userId === me._id) &&
+                (p.userId === id || p.from === id)
             );
     } else {
       posts =
