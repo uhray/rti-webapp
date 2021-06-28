@@ -407,7 +407,6 @@
     {clearOverlayData}
     send={addTeam} />
 {/if} -->
-
 <style lang="scss">
   .TeamsPage {
     box-sizing: border-box;
@@ -430,4 +429,4 @@
       margin-bottom: auto;
     }
   }
-</svelte:head>
+</style>
