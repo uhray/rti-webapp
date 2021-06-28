@@ -10,7 +10,7 @@
   import { onMount } from 'svelte';
   import Nav from '../components/nav/Nav.svelte';
   import TopNav from '../components/topnav/TopNav.svelte';
-  import { userStore, postsStore, repliesStore } from '../store';
+  import { userStore, postsStore, repliesStore, ordersStore } from '../store';
   import { auth, editUser } from '../tools/crudApi';
   import moment from 'moment';
   import { setData } from '../tools/tools';
@@ -88,6 +88,15 @@
           { id: post._id, display: false },
         ]);
         // scrollToBottom();
+      });
+
+      socket.on('addOrderPost', (order: any, post: any) => {
+        ordersStore.setOrders(_.uniqBy([...$ordersStore.orders, order], '_id'));
+        postsStore.setPosts(_.uniqBy([post, ...$postsStore.posts], '_id'));
+        repliesStore.setReplies([
+          ...$repliesStore.replies,
+          { id: post._id, display: false },
+        ]);
       });
 
       socket.on('updatePost', post => {
