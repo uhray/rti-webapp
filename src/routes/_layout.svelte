@@ -26,11 +26,12 @@
   onMount(async () => {
     user = await auth();
 
-    if (user) {
-      userStore.setCurrent(user);
+    if (user.data) {
+      userStore.setCurrent(user.data);
       await setData();
       initMessagesSockets();
     } else {
+      console.error('Error: ', user.error);
       segment = 'signin';
     }
     loading = false;

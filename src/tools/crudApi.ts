@@ -58,7 +58,15 @@ export const auth = async () => {
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
 
-  return res;
+  if (res) {
+    if (res.role === 'ADMIN' || res.role === 'MANAGER') {
+      return { data: res, error: null };
+    } else {
+      return { data: null, error: 'User is not an admin or a manager' };
+    }
+  } else {
+    return { data: null, error: 'Error logging in' };
+  }
 };
 
 export const userSignup = async data => {
