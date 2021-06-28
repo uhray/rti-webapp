@@ -29,9 +29,11 @@
           orderId: o.orderId,
           createdAt: o.createdAt,
           status: o.status,
-          assignedTruck: o.assignedTruck,
+          assignedTruckId: o.assignedTruckId,
           startPoint: `${o.stops[0].address.city}, ${o.stops[0].address.state} ${o.stops[0].address.zipcode}`,
-          endPoint: `${o.stops[o.stops.length - 1].address.city}, ${o.stops[o.stops.length - 1].address.state} ${o.stops[o.stops.length - 1].address.zipcode}`,
+          endPoint: `${o.stops[o.stops.length - 1].address.city}, ${
+            o.stops[o.stops.length - 1].address.state
+          } ${o.stops[o.stops.length - 1].address.zipcode}`,
         };
       }),
       'createdAt'
@@ -43,7 +45,7 @@
   export const headers = [
     { header: 'order', text: 'Order' },
     { header: 'status', text: 'Status' },
-    { header: 'assignedTruck', text: 'Vehicle' },
+    { header: 'assignedTruckId', text: 'Vehicle' },
     { header: 'startPoint', text: 'Start Point' },
     { header: 'endPoint', text: 'End Point' },
     { header: 'view', text: 'View' },
@@ -115,12 +117,6 @@
   }
 </script>
 
-<style lang="scss">
-  .Orders {
-    padding: 2em;
-  }
-</style>
-
 <svelte:head>
   <title>Orders</title>
 </svelte:head>
@@ -135,7 +131,8 @@
     {handleCheck}
     selected={ordersToDelete}
     height={'100vh'}
-    {headerHeight} />
+    {headerHeight}
+  />
 </div>
 
 {#if displayOverlayDelete}
@@ -143,5 +140,12 @@
     {clearOverlayData}
     send={deleteOrders}
     type={'order'}
-    {isMultiple} />
+    {isMultiple}
+  />
 {/if}
+
+<style lang="scss">
+  .Orders {
+    padding: 2em;
+  }
+</style>
