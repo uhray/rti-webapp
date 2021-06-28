@@ -67,7 +67,6 @@
   }
 
   async function sortPosts(id) {
-    console.log(me.role);
     if (me.role === 'ADMIN') {
       posts =
         id === 'all'
