@@ -3,6 +3,14 @@
 .Icon {
   fill: $color--lightgray;
 
+  min-width: 24px;
+  min-height: 24px;
+
+  svg {
+    min-width: 24px;
+    min-height: 24px;
+  }
+
   &[hover='true'] {
     svg:hover {
       cursor: pointer;
