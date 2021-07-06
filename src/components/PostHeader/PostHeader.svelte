@@ -103,7 +103,7 @@
     </div>
   </div>
 
-  {#if isAllMessages && post.from === $userStore.user._id}
+  {#if isAllMessages && post.from !== post.userId}
     <div class="Post-header-group">
       <div class="Post-header-spacer" />
       <div style="margin-bottom: 11px;">

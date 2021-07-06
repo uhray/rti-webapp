@@ -3,15 +3,20 @@ import polka from 'polka';
 import compression from 'compression';
 import * as sapper from '@sapper/server';
 
-const { PORT, NODE_ENV } = process.env;
-const dev = NODE_ENV === 'development';
+const { PORT, ENV } = process.env;
+const isDev = ENV === 'dev' || ENV === 'local';
 
 polka() // You can also use Express
-	.use(
-		compression({ threshold: 0 }),
-		sirv('static', { dev }),
-		sapper.middleware()
-	)
-	.listen(PORT, err => {
-		if (err) console.log('error', err);
-	});
+  .use(
+    compression({ threshold: 0 }),
+    sirv('static', { dev: isDev }),
+    sapper.middleware({
+      session: () => ({
+        ENV,
+        PORT,
+      }),
+    })
+  )
+  .listen(PORT || 3000, err => {
+    if (err) console.log('error', err);
+  });

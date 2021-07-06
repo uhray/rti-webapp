@@ -30,10 +30,6 @@
   };
 </script>
 
-<style src="./TripDetails.scss">
-
-</style>
-
 <!-- HTML -->
 <div class="TripDetails">
   <div class="TripDetails-header">
@@ -68,7 +64,7 @@
         </div>
         <div class="TripDetails-content-cell">
           <h4>Vehicle Number</h4>
-          <span>{order.assignedTruck}</span>
+          <span>{order.assignedTruckId}</span>
         </div>
         <div class="TripDetails-content-cell">
           <h4>Total Miles</h4>
@@ -84,3 +80,6 @@
 </div>
 
 <!-- ==== -->
+
+<style src="./TripDetails.scss">
+</style>

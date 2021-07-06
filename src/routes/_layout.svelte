@@ -1,8 +1,16 @@
+<script context="module">
+  export async function preload(page, session) {
+    const { PORT, ENV } = session;
+
+    return { env: PORT, ENV };
+  }
+</script>
+
 <script lang="ts">
   import { onMount } from 'svelte';
   import Nav from '../components/nav/Nav.svelte';
   import TopNav from '../components/topnav/TopNav.svelte';
-  import { userStore, postsStore, repliesStore } from '../store';
+  import { userStore, postsStore, repliesStore, ordersStore } from '../store';
   import { auth, editUser } from '../tools/crudApi';
   import moment from 'moment';
   import { setData } from '../tools/tools';
@@ -10,6 +18,7 @@
 
   var io = require('socket.io-client');
 
+  export let env;
   export let segment: string;
   let loading = true;
   let user = undefined;
@@ -17,11 +26,12 @@
   onMount(async () => {
     user = await auth();
 
-    if (user) {
-      userStore.setCurrent(user);
+    if (user.data) {
+      userStore.setCurrent(user.data);
       await setData();
       initMessagesSockets();
     } else {
+      console.error('Error: ', user.error);
       segment = 'signin';
     }
     loading = false;
@@ -79,6 +89,15 @@
           { id: post._id, display: false },
         ]);
         // scrollToBottom();
+      });
+
+      socket.on('addOrderPost', (order: any, post: any) => {
+        ordersStore.setOrders(_.uniqBy([...$ordersStore.orders, order], '_id'));
+        postsStore.setPosts(_.uniqBy([post, ...$postsStore.posts], '_id'));
+        repliesStore.setReplies([
+          ...$repliesStore.replies,
+          { id: post._id, display: false },
+        ]);
       });
 
       socket.on('updatePost', post => {

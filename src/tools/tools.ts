@@ -73,12 +73,23 @@ export function formatInitials(name) {
 }
 
 export const getDisplayName = user => {
-  if (!user.contactInfo?.firstName) {
-    return user.username;
-  } else if (user.contactInfo?.firstName && !user.contactInfo?.lastName) {
-    return user.contactInfo.firstName;
+  if (!_.get(user, 'contactInfo.firstName')) {
+    if (!_.get(user, 'username')) {
+      return 'NO NAME FOUND';
+    } else {
+      return _.get(user, 'username');
+    }
+  } else if (
+    _.get(user, 'contactInfo.firstName') &&
+    !_.get(user, 'contactInfo.lastName')
+  ) {
+    return _.get(user, 'contactInfo.firstName');
   } else {
-    return user.contactInfo.firstName + ' ' + user.contactInfo.lastName;
+    return (
+      _.get(user, 'contactInfo.firstName') +
+      ' ' +
+      _.get(user, 'contactInfo.lastName')
+    );
   }
 };
 

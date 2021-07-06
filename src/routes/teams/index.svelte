@@ -21,9 +21,9 @@
   let managerOpts = [];
 
   let headers = [
-    { header: 'name', text: 'Team Name' },
+    { header: 'name', text: 'Team Name', size: 'auto' },
     { header: 'dm', text: 'Driver Manager' },
-    { header: 'trucks', text: 'Trucks' },
+    { header: 'trucks', text: 'Trucks', size: 'auto' },
     { header: 'actions', text: 'Actions' },
   ];
 
@@ -355,6 +355,58 @@
   }
 </script>
 
+<svelte:head>
+  <title>Teams</title>
+</svelte:head>
+
+<Header
+  {role}
+  {handleSort}
+  {selectedTab}
+  {handleTab}
+  {search}
+  {handleSearch}
+  {handleFilter}
+  {handleAdd}
+/>
+
+<section class="TeamsPage">
+  <Table
+    {headers}
+    data={teamsMapped}
+    {handleDelete}
+    {handleDeleteSelected}
+    {handleCheck}
+    selected={teamsToDelete}
+    height={'100vh'}
+    {headerHeight}
+    {removeTruckFromTeam}
+    {truckOpts}
+    {managerOpts}
+    {handleSelectTruck}
+    {handleSelectManager}
+    {role}
+  />
+  <br />
+</section>
+
+{#if displayOverlayDelete}
+  <OverlayDelete
+    {clearOverlayData}
+    send={deleteTeams}
+    type={'team'}
+    {isMultiple}
+  />
+{/if}
+
+<!-- {#if displayOverlayAdd}
+  <OverlayAddTeam
+    {overlayError}
+    {addTeamType}
+    {sendConfirmation}
+    {clearOverlayData}
+    send={addTeam} />
+{/if} -->
 <style lang="scss">
   .TeamsPage {
     box-sizing: border-box;
@@ -378,53 +430,3 @@
     }
   }
 </style>
-
-<svelte:head>
-  <title>Teams</title>
-</svelte:head>
-
-<Header
-  {role}
-  {handleSort}
-  {selectedTab}
-  {handleTab}
-  {search}
-  {handleSearch}
-  {handleFilter}
-  {handleAdd} />
-
-<section class="TeamsPage">
-  <Table
-    {headers}
-    data={teamsMapped}
-    {handleDelete}
-    {handleDeleteSelected}
-    {handleCheck}
-    selected={teamsToDelete}
-    height={'100vh'}
-    {headerHeight}
-    {removeTruckFromTeam}
-    {truckOpts}
-    {managerOpts}
-    {handleSelectTruck}
-    {handleSelectManager}
-    {role} />
-  <br />
-</section>
-
-{#if displayOverlayDelete}
-  <OverlayDelete
-    {clearOverlayData}
-    send={deleteTeams}
-    type={'team'}
-    {isMultiple} />
-{/if}
-
-<!-- {#if displayOverlayAdd}
-  <OverlayAddTeam
-    {overlayError}
-    {addTeamType}
-    {sendConfirmation}
-    {clearOverlayData}
-    send={addTeam} />
-{/if} -->

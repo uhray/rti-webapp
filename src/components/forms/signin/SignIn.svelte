@@ -38,10 +38,6 @@
   };
 </script>
 
-<style src="./SignIn.scss">
-
-</style>
-
 <section class="SignInForm">
   <div class="SignInForm-formContainer">
     <form class="SignInForm-form">
@@ -58,7 +54,8 @@
         placeholder=""
         value={username}
         icon="user"
-        on:input={e => (username = e.target.value.toLowerCase())} />
+        on:input={e => (username = e.target.value.toLowerCase())}
+      />
       <br />
       <span class="SignInForm-inputLabel">Password</span>
       <Input
@@ -66,7 +63,8 @@
         placeholder=""
         value={password}
         type="password"
-        on:input={e => (password = e.target.value)} />
+        on:input={e => (password = e.target.value)}
+      />
       <div class="uk-flex">
         <div class="uk-flex SignInForm-subGroup">
           <Checkbox secondary />
@@ -76,7 +74,8 @@
       </div>
       <div
         class="SignInForm-button"
-        on:click|preventDefault={() => handleLogin({ username, password })}>
+        on:click|preventDefault={() => handleLogin({ username, password })}
+      >
         <Button primary fill large disabled={isDisabled}>Sign In</Button>
       </div>
       
@@ -84,3 +83,6 @@
     </form>
   </div>
 </section>
+
+<style src="./SignIn.scss">
+</style>

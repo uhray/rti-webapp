@@ -48,26 +48,33 @@
   }
 </script>
 
-<style src="./Table.scss">
-
-</style>
-
 {#if data}
   <section class="Table">
-
     <div class="Table-outer">
       <div
         class="Table-inner"
-        style={height ? `height: calc(${height} - ${headerHeight}px)` : ''}>
+        style={height ? `height: calc(${height} - ${headerHeight}px)` : ''}
+      >
         <table
-          class={`uk-table uk-table-middle Table-container ${height ? 'uk-table-scrollable' : ''}`}>
+          class={`uk-table uk-table-middle Table-container ${
+            height ? 'uk-table-scrollable' : ''
+          }`}
+        >
           <thead>
             <tr class="Table-headerRow">
               {#each headers as header}
                 <th
                   scope="col"
-                  class={`Table-headerRow-headerCell ${getHeaderSize(header.size)}
-                  ${header.header === 'actions' || header.header === 'userActions' ? 'alignRight' : ''}`}>
+                  class={`Table-headerRow-headerCell ${getHeaderSize(
+                    header.size
+                  )}
+                  ${
+                    header.header === 'actions' ||
+                    header.header === 'userActions'
+                      ? 'alignRight'
+                      : ''
+                  }`}
+                >
                   {#if header.header == 'view'}
                     {''}
                   {:else if header.header == 'actions' || header.header == 'userActions'}
@@ -76,7 +83,8 @@
                         on:click={() => {
                           handleDeleteSelected();
                         }}
-                        class="Table-deleteAll">
+                        class="Table-deleteAll"
+                      >
                         <Icon color="#e86172" type="delete" hover />
                       </div>
                     {/if}
@@ -109,14 +117,16 @@
                               value={item[header.header]}
                               icon="caretdown"
                               disabled
-                              noborder />
+                              noborder
+                            />
 
                             <Dropdown
                               simpleSelect={true}
                               data={managerOpts}
                               handleSelect={v => {
                                 handleSelectManager(item.id, v);
-                              }} />
+                              }}
+                            />
                           {:else}{item[header.header]}{/if}
                         </div>
                       {:else if header.header == 'trucks'}
@@ -134,7 +144,8 @@
                                   class="clickable"
                                   on:click={() => {
                                     removeTruckFromTeam(item.id, truck);
-                                  }}>
+                                  }}
+                                >
                                   <path
                                     d="M12 4.25C7.71875 4.25 4.25 7.71875 4.25
                                     12C4.25 16.2812 7.71875 19.75 12
@@ -156,7 +167,8 @@
                                     14.9688C14.3125 15.125 14.5312 15.125
                                     14.6875 14.9688L14.9375 14.7188C15.0938
                                     14.5625 15.0938 14.3125 14.9375
-                                    14.1875L12.7812 12L14.9375 9.84375Z" />
+                                    14.1875L12.7812 12L14.9375 9.84375Z"
+                                  />
                                 </svg>
                               </div>
                               &nbsp;
@@ -169,7 +181,8 @@
                                 height="24"
                                 viewBox="0 0 24 24"
                                 fill={'#15224B'}
-                                xmlns="http://www.w3.org/2000/svg">
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
                                 <path
                                   d="M17.75 11.25H12.75V6.25C12.75 6.125 12.625
                                   6 12.5 6H11.5C11.3438 6 11.25 6.125 11.25
@@ -178,17 +191,17 @@
                                   12.75H11.25V17.75C11.25 17.9062 11.3438 18
                                   11.5 18H12.5C12.625 18 12.75 17.9062 12.75
                                   17.75V12.75H17.75C17.875 12.75 18 12.6562 18
-                                  12.5V11.5C18 11.375 17.875 11.25 17.75 11.25Z" />
+                                  12.5V11.5C18 11.375 17.875 11.25 17.75 11.25Z"
+                                />
                               </svg>
-
                             </div>
                             <Dropdown
                               simpleSelect={true}
                               data={truckOpts}
                               handleSelect={v => {
                                 handleSelectTruck(item.id, v);
-                              }} />
-
+                              }}
+                            />
                           </div>
                         {/if}
                       {:else if header.header == 'view'}
@@ -201,17 +214,27 @@
                         <div class="Table-row-actions alignRight">
                           <div
                             on:click={() => {
-                              item.id && item.orderId ? handleDelete(item.id, item.orderId) : item.id ? handleDelete(item.id) : handleDelete(index);
-                            }}>
+                              item.id && item.orderId
+                                ? handleDelete(item.id, item.orderId)
+                                : item.id
+                                ? handleDelete(item.id)
+                                : handleDelete(index);
+                            }}
+                          >
                             <Icon type="delete" hover />
                           </div>
                           <div style="margin-left: 10px;" />
                           <div class="Table-checkbox">
                             <Checkbox
                               on:click={() => {
-                                item.id && item.orderId ? handleCheck(item.id, item.orderId) : item.id ? handleCheck(item.id) : handleCheck(index);
+                                item.id && item.orderId
+                                  ? handleCheck(item.id, item.orderId)
+                                  : item.id
+                                  ? handleCheck(item.id)
+                                  : handleCheck(index);
                               }}
-                              secondary />
+                              secondary
+                            />
                           </div>
                         </div>
                       {:else if header.header == 'userActions'}
@@ -223,17 +246,23 @@
                           <div style="margin-left: 10px;" />
                           <div
                             on:click={() => {
-                              item.id ? handleDelete(item.id) : handleDelete(index);
-                            }}>
+                              item.id
+                                ? handleDelete(item.id)
+                                : handleDelete(index);
+                            }}
+                          >
                             <Icon type="delete" hover />
                           </div>
                           <div style="margin-left: 10px;" />
                           <div class="Table-checkbox">
                             <Checkbox
                               on:click={() => {
-                                item.id ? handleCheck(item.id) : handleCheck(index);
+                                item.id
+                                  ? handleCheck(item.id)
+                                  : handleCheck(index);
                               }}
-                              secondary />
+                              secondary
+                            />
                           </div>
                         </div>
                       {:else if header.header == 'filename'}
@@ -260,6 +289,8 @@
         </table>
       </div>
     </div>
-
   </section>
 {/if}
+
+<style src="./Table.scss">
+</style>

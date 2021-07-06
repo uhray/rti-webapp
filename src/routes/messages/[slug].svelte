@@ -67,14 +67,30 @@
   }
 
   async function sortPosts(id) {
-    posts =
-      id === 'all'
-        ? allPosts
-        : allPosts.filter(
-            p =>
-              p.userId == id ||
-              p.truckId == _.find(contactsList, { id: id }).truckId
-          );
+    if (me.role === 'ADMIN') {
+      posts =
+        id === 'all'
+          ? allPosts.filter(
+              p =>
+                p.from === me._id ||
+                p.userId === me._id ||
+                p.postType === 'ALERT'
+            )
+          : allPosts.filter(
+              p =>
+                (p.from === me._id || p.userId === me._id) &&
+                (p.userId === id || p.from === id)
+            );
+    } else {
+      posts =
+        id === 'all'
+          ? allPosts
+          : allPosts.filter(
+              p =>
+                p.userId == id ||
+                p.truckId == _.find(contactsList, { id: id }).truckId
+            );
+    }
     posts = posts;
   }
 
