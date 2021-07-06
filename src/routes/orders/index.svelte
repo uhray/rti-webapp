@@ -22,7 +22,7 @@
   $: {
     orders = $ordersStore.orders;
     ordersMapped = _.sortBy(
-      orders.map(o => {
+      _.map(orders, o => {
         return {
           id: o._id,
           type: 'orders',
