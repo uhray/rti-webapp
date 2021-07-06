@@ -27,7 +27,7 @@
         <div class="uk-width-1-1">
           <h4 class="OrderStatus-timelineHeader">Order Marks</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">Hello</p>
+            <p class="OrderStatus-timelineContentText">-</p>
           </div>
         </div>
       </div>

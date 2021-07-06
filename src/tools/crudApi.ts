@@ -4,7 +4,7 @@ import { goto } from '@sapper/app';
 import { userStore } from '../store';
 
 const tools: any = {};
-const env: string = process.env.ENV || 'dev';
+const env: string = process.env.ENV || 'staging';
 
 export default tools;
 
@@ -65,6 +65,9 @@ export const auth = async () => {
       return { data: null, error: 'User is not an admin or a manager' };
     }
   } else {
+    if (window.location.pathname !== '/signin') {
+      window.location.pathname = '/signin';  
+    }
     return { data: null, error: 'Error logging in' };
   }
 };

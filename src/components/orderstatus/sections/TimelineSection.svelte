@@ -20,13 +20,13 @@
         <div class="uk-width-1-2">
           <h4 class="OrderStatus-timelineHeader">Trailer #</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">{stop.trailerId}</p>
+            <p class="OrderStatus-timelineContentText">{stop.trailerId || '-'}</p>
           </div>
         </div>
         <div class="uk-width-1-2">
           <h4 class="OrderStatus-timelineHeader">Event</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">{stop.stopType}</p>
+            <p class="OrderStatus-timelineContentText">{stop.stopType || '-'}</p>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
           <h4 class="OrderStatus-timelineHeader">Appointment Time</h4>
           <div class="OrderStatus-timelineContent">
             <p class="OrderStatus-timelineContentText">
-              {moment(stop.appointmentTime).format('MMM D, YYYY • h:mm a')}
+              {moment(stop.startTime).format('MMM D, YYYY • h:mm a') || '-'}
             </p>
           </div>
         </div>
@@ -44,32 +44,32 @@
           <h4 class="OrderStatus-timelineHeader">Arrival Time</h4>
           <div class="OrderStatus-timelineContent">
             <p class="OrderStatus-timelineContentText">
-              {moment(stop.endTime).format('MMM D, YYYY • h:mm a')}
+              {moment(stop.endTime).format('MMM D, YYYY • h:mm a') || '-'}
             </p>
           </div>
         </div>
       </div>
       <Divider />
+      {#if documents.length}
       <h4 class=" OrderStatus-timelineHeader">Uploaded Documents</h4>
       <div class="OrderStatus-documents uk-flex">
-        {#if documents}
           {#each documents as document}
             {#if document.stopIndex === index}
               <div class="OrderStatus-file">
                 <Icon type="file" color="#161D35" />
               </div>
               <span class="OrderStatus-timelineContentText">
-                {document.fileName}
-                <span class="OrderStatus-filesize">({document.size})</span>
+                {document.fileName || '-'}
+                <span class="OrderStatus-filesize">({document.size || '-'})</span>
               </span>
             {/if}
           {/each}
-        {/if}
-      </div>
+        </div>
+      {/if}
       <Divider />
       <h4 class="OrderStatus-timelineHeader">Driver / Delivery Notes</h4>
       <div class="OrderStatus-timelineContent">
-        <p class="OrderStatus-timelineContentText">{stop.driverNotes}</p>
+        <p class="OrderStatus-timelineContentText">{stop.driverNotes || '-'}</p>
       </div>
     </div>
   </section>

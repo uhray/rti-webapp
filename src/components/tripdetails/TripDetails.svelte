@@ -64,15 +64,15 @@
         </div>
         <div class="TripDetails-content-cell">
           <h4>Vehicle Number</h4>
-          <span>{order.assignedTruckId}</span>
+          <span>{order.assignedTruckId || '-'}</span>
         </div>
         <div class="TripDetails-content-cell">
           <h4>Total Miles</h4>
-          <span>{order.mileage} mi</span>
+          <span>{order.mileage || '-'} mi</span>
         </div>
         <div class="TripDetails-content-cell">
           <h4>Est. Weight</h4>
-          <span>{order.currentWeight} lbs</span>
+          <span>{order.currentWeight ? order.currentWeight + ' lbs' : '-'}</span>
         </div>
       </div>
     </div>

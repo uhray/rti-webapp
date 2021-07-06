@@ -161,6 +161,7 @@
 
   function handleAdd(role) {
     console.log('#todo');
+    alert('TODO');
     // displayOverlayAdd = true;
   }
 
