@@ -19,10 +19,11 @@ import _ from 'lodash';
 
 export function formatDate(d, canFormatDate = false) {
   let datetime = '';
+  console.log('data',d);
 
-  d = new Date(d);
-
+  
   if (d) {
+    d = new Date(d);
     if (canFormatDate) {
       if (moment(new Date(d).toISOString()).isSame(moment(), 'day')) {
         datetime = 'Today ' + moment(d).format('h:mm A');
