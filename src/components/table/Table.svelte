@@ -98,7 +98,11 @@
               {#each data as item, index}
                 <tr class="Table-row">
                   {#each headers as header}
-                    <td class={`Table-cell ${getHeaderSize(header.size)}`}>
+                    <td
+                      class={`Table-cell ${
+                        header.header === 'trucks' ? 'Table-trucks' : ''
+                      } ${getHeaderSize(header.size)}`}
+                    >
                       {#if header.header == 'status'}
                         <OrderStatusLabel status={item.status} />
                       {:else if header.header == 'order'}
@@ -131,7 +135,7 @@
                         </div>
                       {:else if header.header == 'trucks'}
                         {#if item.trucks}
-                          <div class="uk-flex">
+                          <div class="uk-flex Table-trucks">
                             {#each item.trucks as truck}
                               <div class="Table-label uk-flex">
                                 {truck}
