@@ -87,7 +87,7 @@
 
       editPost(p._id, payload)
         .then(res => {
-          posts = posts.map(p => (p._id === res._id ? res : p));
+          posts = _.map(posts, p => (p._id === res._id ? res : p));
           postsStore.setPosts(posts);
           sendConfirmation = true;
         })

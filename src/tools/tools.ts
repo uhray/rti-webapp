@@ -19,10 +19,11 @@ import _ from 'lodash';
 
 export function formatDate(d, canFormatDate = false) {
   let datetime = '';
+  console.log('data',d);
 
-  d = new Date(d);
-
+  
   if (d) {
+    d = new Date(d);
     if (canFormatDate) {
       if (moment(new Date(d).toISOString()).isSame(moment(), 'day')) {
         datetime = 'Today ' + moment(d).format('h:mm A');
@@ -58,18 +59,13 @@ export function formatDate(d, canFormatDate = false) {
   return datetime;
 }
 
-export function formatInitials(name) {
-  if (name) {
-    var names = name.split(' '),
-      initials = names[0].substring(0, 1).toUpperCase();
+export function formatInitials(user) {
+  const firstName = _.get(user, 'contactInfo.firstName');
+  const lastName = _.get(user, 'contactInfo.lastName');
+  const finitial = firstName.substring(0, 1).toUpperCase();
+  const linitial = lastName.substring(0, 1).toUpperCase();
 
-    if (names.length > 1) {
-      initials += names[names.length - 1].substring(0, 1).toUpperCase();
-    }
-
-    return initials;
-  }
-  return;
+  return (finitial + linitial) || '';
 }
 
 export const getDisplayName = user => {

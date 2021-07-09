@@ -49,7 +49,7 @@
                 </div>
                 <div class="uk-width-1-1 uk-margin-small-right">
                   <h4 class="OrderStatus-cardHeader">
-                    {order.stops[0].company}
+                    {order.stops[0].company || order.stops[0].address.city || '-' }
                     <span style="height: 2em; width: 2em;">
                       <Icon type="chev-right" color="black" />
                     </span>
@@ -60,7 +60,7 @@
                   <div class="OrderStatus-label">
                     <Label
                       status={order.stops[0].status === 'inProgress' ? 'default' : 'disabled'}
-                      text={_.startCase(order.stops[0].status)} />
+                      text={_.startCase(order.stops[0].status) || 'Order Pending'} />
                   </div>
                 </div>
                 <div class="OrderStatus-cardLine">
@@ -99,7 +99,7 @@
                     </div>
                     <div class="uk-width-1-1 uk-margin-small-right">
                       <h4 class="OrderStatus-cardHeader">
-                        {stop.company}
+                        {stop.company || stop.address.city || '-' }
                         <span style="height: 2em; width: 2em;">
                           <Icon type="chev-right" color="black" />
                         </span>
@@ -110,7 +110,7 @@
                       <div class="OrderStatus-label">
                         <Label
                           status={stop.status === 'inProgress' ? 'default' : 'disabled'}
-                          text={_.startCase(stop.status)} />
+                          text={_.startCase(stop.status) || 'Order Pending'} />
                       </div>
                     </div>
                     <div class="OrderStatus-cardLine">
@@ -151,7 +151,7 @@
                 </div>
                 <div class="uk-width-1-1 uk-margin-small-right">
                   <h4 class="OrderStatus-cardHeader">
-                    {order.stops[order.stops.length - 1].company}
+                    {order.stops[order.stops.length - 1].company || order.stops[order.stops.length - 1].address.city || '-'}
                     <span style="height: 2em; width: 2em;">
                       <Icon type="chev-right" color="black" />
                     </span>
@@ -162,7 +162,7 @@
                   <div class="OrderStatus-label">
                     <Label
                       status={order.stops[order.stops.length - 1].status === 'inProgress' ? 'default' : 'disabled'}
-                      text={_.startCase(order.stops[order.stops.length - 1].status)} />
+                      text={_.startCase(order.stops[order.stops.length - 1].status) || 'Order Pending'} />
                   </div>
                 </div>
               </div>

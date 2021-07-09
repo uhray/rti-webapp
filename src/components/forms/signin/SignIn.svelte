@@ -18,19 +18,22 @@
 
   const handleLogin = async data => {
     if (!isDisabled) {
-      const response = await userLogin(data);
-      if (!response.error) {
-        localStorage.setItem('turnkey', response);
-        const user = await auth();
-        if (user.data) {
-          userStore.setCurrent(user.data);
-
-          await setData();
-          goto('/');
-        } else {
-          console.error('Error: ', user.error);
-        }
-      }
+        userLogin(data)
+        .then(async res => {
+          console.log('response', res);
+          localStorage.setItem('turnkey', res);
+          const user = await auth();
+          if (user) {
+            userStore.setCurrent(user);
+  
+            await setData();
+            goto('/');
+          }
+        })
+        .catch(e => {
+          console.log('error', e);
+          alert(e);
+        })
     }
   };
 </script>
@@ -75,6 +78,8 @@
       >
         <Button primary fill large disabled={isDisabled}>Sign In</Button>
       </div>
+      
+      <!-- <div>Error: </div> -->
     </form>
   </div>
 </section>

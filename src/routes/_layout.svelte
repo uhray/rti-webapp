@@ -62,10 +62,17 @@
   }
 
   function initMessagesSockets() {
-    let socket = io('http://localhost:80', {
+
+    const userId = _.get(user, '_id') || _.get(user, 'data._id');
+
+    if (!userId) {
+      return;
+    }
+
+    let socket = io('http://localhost:8001', {
       transports: ['websocket'],
       pingTimeout: 60000,
-      query: { userId: user._id },
+      query: { userId: userId },
     });
 
     socket.connect();
@@ -77,7 +84,7 @@
 
     socket.on('connect', () => {
       socket.on('addPost', (post, initPostId) => {
-        if (post.from !== user._id) {
+        if (post.from !== userId) {
           postsStore.setPosts(_.uniqBy([post, ...$postsStore.posts], '_id'));
         } else {
           postsStore.setPosts(

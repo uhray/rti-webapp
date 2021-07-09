@@ -244,6 +244,7 @@
       <div
         on:click={() => {
           console.log('#TODO');
+          alert('TODO');
         }}>
         <Button primary outline>
           Upload New Image

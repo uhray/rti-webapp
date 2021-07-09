@@ -2,9 +2,10 @@ import set from 'lodash/set';
 import merge from 'lodash/merge';
 import { goto } from '@sapper/app';
 import { userStore } from '../store';
+import * as _ from 'lodash';
 
 const tools: any = {};
-const env: string = process.env.ENV || 'dev';
+const env: string = process.env.ENV || 'staging';
 
 export default tools;
 
@@ -65,6 +66,9 @@ export const auth = async () => {
       return { data: null, error: 'User is not an admin or a manager' };
     }
   } else {
+    if (window.location.pathname !== '/signin') {
+      window.location.pathname = '/signin';  
+    }
     return { data: null, error: 'Error logging in' };
   }
 };
@@ -325,14 +329,18 @@ export function changePageIfDifferent(url, page) {
 }
 
 const options = () => {
+  const override = localStorage.getItem('TRUCK_OPS_CONFIG_API');
+  const envCheck = override || env;
   const host =
-    env === 'prod'
+  envCheck === 'prod'
       ? 'https://truck-ops-api--production.herokuapp.com'
-      : env === 'staging'
+      : envCheck === 'staging'
       ? 'https://truck-ops-api--staging.herokuapp.com'
-      : env === 'dev'
+      : envCheck === 'dev'
       ? 'https://truck-ops-api--dev.herokuapp.com'
-      : 'http://localhost:5000';
+      : envCheck === 'local'
+      ? 'http://localhost:5000'
+      : 'https://truck-ops-api--staging.herokuapp.com';
 
   return {
     baseUrl: host + '/api/v1',
