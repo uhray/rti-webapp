@@ -41,7 +41,7 @@
         <div class="uk-width-1-2">
           <h4 class="OrderStatus-timelineHeader">Phone Number</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">{stop.phone || '-'}</p>
+            <p class="OrderStatus-timelineContentText">{stop.companyPhoneNumber || '-'}</p>
           </div>
         </div>
       </div>
