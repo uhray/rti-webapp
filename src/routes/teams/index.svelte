@@ -21,7 +21,7 @@
   let managerOpts = [];
 
   let headers = [
-    { header: 'name', text: 'Team Name', size: 'auto' },
+    { header: 'name', text: 'Team Name', size: 'small' },
     { header: 'dm', text: 'Driver Manager' },
     { header: 'trucks', text: 'Trucks', size: 'auto' },
     { header: 'actions', text: 'Actions' },
