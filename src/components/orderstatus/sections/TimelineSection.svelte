@@ -2,31 +2,41 @@
   import Divider from '../../divider/Divider.svelte';
   import Icon from '../../icon/Icon.svelte';
   import moment from 'moment';
+  import { eventCodes } from '../../../tools/values';
+  import _ from 'lodash';
 
   export let documents;
   export let stop;
   export let index;
+  let event = '';
+
+  $: {
+    if (eventCodes[`${stop.event}`]) {
+      event = eventCodes[`${stop.event}`];
+    } else {
+      event = stop.event;
+    }
+  }
 </script>
 
-<style src="../OrderStatus.scss">
-
-</style>
-
 {#if stop && documents}
-
   <section class="OrderStatus">
     <div class="OrderStatus-timelineSection">
       <div class="uk-flex">
         <div class="uk-width-1-2">
           <h4 class="OrderStatus-timelineHeader">Trailer #</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">{stop.trailerId || '-'}</p>
+            <p class="OrderStatus-timelineContentText">
+              {stop.trailerId || '-'}
+            </p>
           </div>
         </div>
         <div class="uk-width-1-2">
           <h4 class="OrderStatus-timelineHeader">Event</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">{stop.stopType || '-'}</p>
+            <p class="OrderStatus-timelineContentText">
+              {event}
+            </p>
           </div>
         </div>
       </div>
@@ -51,8 +61,8 @@
       </div>
       <Divider />
       {#if documents.length}
-      <h4 class=" OrderStatus-timelineHeader">Uploaded Documents</h4>
-      <div class="OrderStatus-documents uk-flex">
+        <h4 class=" OrderStatus-timelineHeader">Uploaded Documents</h4>
+        <div class="OrderStatus-documents uk-flex">
           {#each documents as document}
             {#if document.stopIndex === index}
               <div class="OrderStatus-file">
@@ -60,7 +70,9 @@
               </div>
               <span class="OrderStatus-timelineContentText">
                 {document.fileName || '-'}
-                <span class="OrderStatus-filesize">({document.size || '-'})</span>
+                <span class="OrderStatus-filesize"
+                  >({document.size || '-'})</span
+                >
               </span>
             {/if}
           {/each}
@@ -74,3 +86,6 @@
     </div>
   </section>
 {/if}
+
+<style src="../OrderStatus.scss">
+</style>
