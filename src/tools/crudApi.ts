@@ -253,6 +253,16 @@ export const deleteTeam = async id => {
   return res;
 };
 
+export const createOrder = async (data) => {
+  const res = await tools.fetch(options().baseUrl + '/orders', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
 /******************** FUNCTIONS ********************/
 export function serialize(obj, prefix?) {
   var str = [],
