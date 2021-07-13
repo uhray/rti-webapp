@@ -15,8 +15,6 @@
     user = $userStore;
     counts = $notificationsStore.counts;
 
-    console.log(counts);
-
     if (user && user.user) role = user.user.role;
 
     items = flatMap([
