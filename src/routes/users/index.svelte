@@ -18,6 +18,7 @@
   let usersMapped;
   let driverHeaders = [
     { header: 'name', text: 'Full Name', size: 'large' },
+    { header: 'createdAt', text: 'Date Created' },
     { header: 'username', text: 'User ID' },
     { header: 'teamId', text: 'Driver Manager' },
     { header: 'truckId', text: 'Vehicle' },
@@ -103,9 +104,11 @@
           truckId: u.truckId || '',
           status: u.states.isActive ? 'active' : 'inactive',
           email: u.contactInfo.email || '',
+          createdAt: u.createdAt || '',
           lastLogin: u.lastLogin
             ? moment(u.lastLogin).format('MMM D YYYY • h:mm a')
             : '',
+          nameSort: _.toLower(u.name),
         };
       })
       .filter(u => (filter ? (u.status === filter ? true : false) : true))
@@ -136,11 +139,11 @@
     } else if (v === 'old') {
       usersMapped = _.sortBy(usersMapped, 'createdAt');
     } else if (v === 'aToZ') {
-      usersMapped = _.sortBy(usersMapped, 'name');
+      usersMapped = _.sortBy(usersMapped, 'nameSort');
     } else if (v === 'zToA') {
-      usersMapped = _.sortBy(usersMapped, 'name').reverse();
+      usersMapped = _.sortBy(usersMapped, 'nameSort').reverse();
     } else {
-      usersMapped = _.sortBy(usersMapped, 'name');
+      usersMapped = _.sortBy(usersMapped, 'nameSort');
     }
   }
 
@@ -265,6 +268,58 @@
   }
 </script>
 
+<svelte:head>
+  <title>Users</title>
+</svelte:head>
+
+<Header
+  {role}
+  {handleSort}
+  {selectedTab}
+  {handleTab}
+  {search}
+  {handleSearch}
+  {handleFilter}
+  {handleAdd}
+/>
+<!-- Show This Link Tag Only If Users/Admins are Selected -->
+<!-- <div class="uk-flex uk-align-right delete-section">
+  <a class="delete-link">Delete Selections</a>
+  <Icon type="delete" color="#2b8af7" />
+</div> -->
+<section class="ManagePage">
+  <Table
+    {headers}
+    data={usersMapped}
+    {handleDelete}
+    {handleDeleteSelected}
+    {handleCheck}
+    selected={usersToDelete}
+    height={'100vh'}
+    {headerHeight}
+  />
+  <br />
+</section>
+
+{#if displayOverlayDelete}
+  <OverlayDelete
+    {clearOverlayData}
+    send={deleteUsers}
+    type={'user'}
+    {isMultiple}
+  />
+{/if}
+
+{#if displayOverlayAdd}
+  <OverlayAddUser
+    {overlayError}
+    {addUserType}
+    {sendConfirmation}
+    {clearOverlayData}
+    send={addUser}
+  />
+{/if}
+
 <style lang="scss">
   .ManagePage {
     box-sizing: border-box;
@@ -289,51 +344,3 @@
     }
   }
 </style>
-
-<svelte:head>
-  <title>Users</title>
-</svelte:head>
-
-<Header
-  {role}
-  {handleSort}
-  {selectedTab}
-  {handleTab}
-  {search}
-  {handleSearch}
-  {handleFilter}
-  {handleAdd} />
-<!-- Show This Link Tag Only If Users/Admins are Selected -->
-<!-- <div class="uk-flex uk-align-right delete-section">
-  <a class="delete-link">Delete Selections</a>
-  <Icon type="delete" color="#2b8af7" />
-</div> -->
-<section class="ManagePage">
-  <Table
-    {headers}
-    data={usersMapped}
-    {handleDelete}
-    {handleDeleteSelected}
-    {handleCheck}
-    selected={usersToDelete}
-    height={'100vh'}
-    {headerHeight} />
-  <br />
-</section>
-
-{#if displayOverlayDelete}
-  <OverlayDelete
-    {clearOverlayData}
-    send={deleteUsers}
-    type={'user'}
-    {isMultiple} />
-{/if}
-
-{#if displayOverlayAdd}
-  <OverlayAddUser
-    {overlayError}
-    {addUserType}
-    {sendConfirmation}
-    {clearOverlayData}
-    send={addUser} />
-{/if}
