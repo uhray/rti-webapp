@@ -237,6 +237,21 @@ export const getTeamTruckIds = async id => {
   return res;
 };
 
+export const addTeam = async data => {
+  try {
+    const res = await tools.fetch(options().baseUrl + '/teams', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+    });
+
+    return { data: res, error: null };
+  } catch (err) {
+    console.error('addteamerr', err);
+
+    return { data: null, error: err };
+  }
+};
 export const editTeam = async (id, data) => {
   const res = await tools.fetch(options().baseUrl + '/teams/' + id, {
     method: 'PUT',
