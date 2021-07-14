@@ -1,12 +1,17 @@
 <script>
   import _ from 'lodash';
+  import moment from 'moment';
+  import { default as addresses } from './address';
+  import { default as events } from './events';
+  import { default as trucks } from './trucks';
+  import { createOrder } from '../../tools/crudApi';
 
-  let orderNumber = '123';
+  let orderId = '123';
   let assignedTruckId = '321';
   let stops = [{
     stopType: '',
-    appointmentTimeStart: '',
-    appointmentTimeEnd: '',
+    appointmentTimeStart: moment().format('YYYY-MM-DDTHH:MM'),
+    appointmentTimeEnd: moment().format('YYYY-MM-DDTHH:MM'),
     notes: '',
     reference: '',
     DICT: '',
@@ -34,12 +39,12 @@
   };
 
   const submit = () => {
-    console.log('submitting', orderNumber);
+    console.log('submitting', orderId);
     console.log('submitting', assignedTruckId);
     console.log('submitting', stops);
 
     createOrder({
-      orderNumber,
+      orderId,
       assignedTruckId,
       stops
     })
@@ -69,10 +74,13 @@
     .Order-data {
       max-width: 300px;
     }
-    .Order-addStop {
+    .Order-buttons {
       position: absolute;
       top: 4em;
       right: 2em;
+      display: flex;
+    }
+    .Order-addStop {
       padding: 1em;
       border-radius: 10px;
       background-color: #233e93;
@@ -107,7 +115,7 @@
       <div>Order Number</div>
       <input
       placeholder="ex 10000"
-      bind:value={orderNumber}
+      bind:value={orderId}
       />
     </label>
     <label>
@@ -118,17 +126,43 @@
       />
     </label>
   </div>
-  <button 
-    class="Order-addStop"
-    on:click={() => {
-      const newStops = _.cloneDeep(stops);
-      newStops.push(_.last(stops))
-      stops = [];
-      stops = newStops;
-    }}
-  >
-    Add Stop +
-  </button>
+  <div class="Order-buttons">
+    <button 
+      class="Order-addStop"
+      on:click={() => {
+        _.each(stops, (stop,i) => {
+          const random = addresses[_.random(0, 26)];
+          console.log('random address', random);
+          stop.address = {
+            addressLine1: random.address,
+            city: random.city,
+            state: random.state,
+            zipcode: random.zipcode,
+          }
+          stop.company = random.company;
+          stop.companyId = random.companyId;
+          stop.companyPhoneNumber = random.phone;
+          stop.event = events[_.random(0, 18)]
+          stops[i] = stop;
+        });
+        orderId = _.random(0, 1000000);
+        assignedTruckId = trucks[_.random(0, 2)];
+      }}
+    >
+      Randomise
+    </button>
+    <button 
+      class="Order-addStop"
+      on:click={() => {
+        const newStops = _.cloneDeep(stops);
+        newStops.push(_.last(stops))
+        stops = [];
+        stops = newStops;
+      }}
+    >
+      Add Stop +
+    </button>
+  </div>
   <div class="Order-stops">
     {#each stops as stop, i}
       <div style={'padding: 1em; background: #fff; width: 40%; margin: 1em;'}>
@@ -143,6 +177,7 @@
         <label>
           <div>appointmentTimeStart</div>
           <input
+            type="datetime-local"
             placeholder="ex 2021-10-07T10:00:00.000Z"
             bind:value={stop.appointmentTimeStart}
           />
@@ -150,6 +185,7 @@
         <label>
           <div>appointmentTimeEnd</div>
           <input
+            type="datetime-local"
             placeholder="ex 2021-10-07T11:00:00.000Z"
             bind:value={stop.appointmentTimeEnd}
           />
@@ -215,6 +251,41 @@
           <input
             placeholder="DICT"
             bind:value={stop.notes}
+          />
+        </label>
+        <label>
+          <div>addressLine1</div>
+          <input
+            placeholder="Address"
+            bind:value={stop.address.addressLine1}
+          />
+        </label>
+        <label>
+          <div>addressLine2</div>
+          <input
+            placeholder="Address 2"
+            bind:value={stop.address.addressLine2}
+          />
+        </label>
+        <label>
+          <div>city</div>
+          <input
+            placeholder="Oakland"
+            bind:value={stop.address.city}
+          />
+        </label>
+        <label>
+          <div>State</div>
+          <input
+            placeholder="MO"
+            bind:value={stop.address.state}
+          />
+        </label>
+        <label>
+          <div>Zipcode</div>
+          <input
+            placeholder="64111"
+            bind:value={stop.address.zipcode}
           />
         </label>
       </div>
