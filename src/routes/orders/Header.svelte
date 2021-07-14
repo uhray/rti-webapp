@@ -105,6 +105,9 @@
           <Button height="40px" outline icon="sortup" fill>Sort By</Button>
           <Dropdown data={dropdownOpts} {handleSelect} />
         </div>
+        <div style="margin-left: 1em">
+          <Button height="40px" outline fill on:click={() => window.location.pathname = '/newOrder'}>New Order</Button>
+        </div>
 
       </div>
     </div>
