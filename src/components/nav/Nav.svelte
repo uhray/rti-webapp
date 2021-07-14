@@ -1,7 +1,7 @@
 <script>
   import NavItem from '../navitem/NavItem.svelte';
   import Logo from '../../../static/images/rti.png';
-  import { userStore } from '../../store';
+  import { notificationsStore, userStore } from '../../store';
   import { flatMap } from 'lodash';
   export let segment;
   export let isOpen = true;
@@ -9,15 +9,27 @@
   export let role;
 
   let items = [];
+  let counts = {};
 
   $: {
     user = $userStore;
+    counts = $notificationsStore.counts;
 
     if (user && user.user) role = user.user.role;
 
     items = flatMap([
-      { icon: 'orders', text: 'Orders', link: 'orders' },
-      { icon: 'message', text: 'Messages', link: 'messages', amount: 999 },
+      {
+        icon: 'orders',
+        text: 'Orders',
+        link: 'orders',
+        amount: counts && counts.orders ? counts.orders : 0,
+      },
+      {
+        icon: 'message',
+        text: 'Messages',
+        link: 'messages',
+        amount: counts && counts.posts ? counts.posts : 0,
+      },
       // { icon: 'macro', text: 'Driver Macros', link: 'macros', amount: 3 },
       // {
       //   icon: 'maintenance',

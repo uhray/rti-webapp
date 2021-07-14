@@ -44,7 +44,7 @@
           <h4 class="OrderStatus-timelineHeader">Phone Number</h4>
           <div class="OrderStatus-timelineContent">
             <p class="OrderStatus-timelineContentText">
-              {formatPhoneNumber(stop.phone) || '-'}
+              {formatPhoneNumber(stop.companyPhoneNumber) || '-'}
             </p>
           </div>
         </div>

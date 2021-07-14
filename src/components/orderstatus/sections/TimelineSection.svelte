@@ -81,7 +81,8 @@
       <Divider />
       <h4 class="OrderStatus-timelineHeader">Driver / Delivery Notes</h4>
       <div class="OrderStatus-timelineContent">
-        <p class="OrderStatus-timelineContentText">{stop.driverNotes || '-'}</p>
+        <p class="OrderStatus-timelineContentText">{stop.notes? 'Dilvery: ' : ''} {stop.notes || '-'}</p>
+        <p class="OrderStatus-timelineContentText">{stop.driverNotes? 'Driver: ' : ''} {stop.driverNotes || ''}</p>
       </div>
     </div>
   </section>

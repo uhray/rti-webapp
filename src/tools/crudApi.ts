@@ -7,6 +7,8 @@ import * as _ from 'lodash';
 const tools: any = {};
 const env: string = process.env.ENV || 'staging';
 
+console.log('process.env', process.env);
+
 export default tools;
 
 export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
@@ -67,7 +69,7 @@ export const auth = async () => {
     }
   } else {
     if (window.location.pathname !== '/signin') {
-      window.location.pathname = '/signin';  
+      window.location.pathname = '/signin';
     }
     return { data: null, error: 'Error logging in' };
   }
@@ -253,6 +255,24 @@ export const deleteTeam = async id => {
   return res;
 };
 
+export const createOrder = async data => {
+  const res = await tools.fetch(options().baseUrl + '/orders', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+
+  return res;
+};
+
+/******************** NOTIFICATIONS ********************/
+export const getNotificationsCount = async () => {
+  const res = await tools.fetch(options().baseUrl + '/notifications/counts/', {
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  return res;
+};
+
 /******************** FUNCTIONS ********************/
 export function serialize(obj, prefix?) {
   var str = [],
@@ -332,7 +352,7 @@ const options = () => {
   const override = localStorage.getItem('TRUCK_OPS_CONFIG_API');
   const envCheck = override || env;
   const host =
-  envCheck === 'prod'
+    envCheck === 'prod'
       ? 'https://truck-ops-api--production.herokuapp.com'
       : envCheck === 'staging'
       ? 'https://truck-ops-api--staging.herokuapp.com'
