@@ -61,6 +61,7 @@ module.exports = {
       new webpack.DefinePlugin({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.ENV': process.env.ENV,
       }),
       new Dotenv(),
     ].filter(Boolean),
