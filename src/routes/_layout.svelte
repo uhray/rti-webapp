@@ -62,7 +62,6 @@
   }
 
   function initMessagesSockets() {
-
     const userId = _.get(user, '_id') || _.get(user, 'data._id');
 
     if (!userId) {

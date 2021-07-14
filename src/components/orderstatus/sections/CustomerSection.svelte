@@ -1,12 +1,10 @@
 <script>
+  import { formatPhoneNumber } from '../../../tools/tools';
+
   import Divider from '../../divider/Divider.svelte';
 
   export let stop;
 </script>
-
-<style src="../OrderStatus.scss">
-
-</style>
 
 {#if stop}
   <section class="OrderStatus">
@@ -15,13 +13,17 @@
         <div class="uk-width-1-2">
           <h4 class="OrderStatus-timelineHeader">Customer</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">{stop.company || stop.address.city || '-'}</p>
+            <p class="OrderStatus-timelineContentText">
+              {stop.company || stop.address.city || '-'}
+            </p>
           </div>
         </div>
         <div class="uk-width-1-2">
           <h4 class="OrderStatus-timelineHeader">Customer ID</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">{stop.companyId || '-'}</p>
+            <p class="OrderStatus-timelineContentText">
+              {stop.companyId || '-'}
+            </p>
           </div>
         </div>
       </div>
@@ -41,10 +43,15 @@
         <div class="uk-width-1-2">
           <h4 class="OrderStatus-timelineHeader">Phone Number</h4>
           <div class="OrderStatus-timelineContent">
-            <p class="OrderStatus-timelineContentText">{stop.companyPhoneNumber || '-'}</p>
+            <p class="OrderStatus-timelineContentText">
+              {formatPhoneNumber(stop.companyPhoneNumber) || '-'}
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
 {/if}
+
+<style src="../OrderStatus.scss">
+</style>

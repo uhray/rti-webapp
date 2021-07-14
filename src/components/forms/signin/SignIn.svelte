@@ -18,14 +18,14 @@
 
   const handleLogin = async data => {
     if (!isDisabled) {
-        userLogin(data)
+      userLogin(data)
         .then(async res => {
           console.log('response', res);
           localStorage.setItem('turnkey', res);
           const user = await auth();
           if (user) {
-            userStore.setCurrent(user);
-  
+            userStore.setCurrent(user.data);
+
             await setData();
             goto('/');
           }
@@ -33,7 +33,7 @@
         .catch(e => {
           console.log('error', e);
           alert(e);
-        })
+        });
     }
   };
 </script>
@@ -78,7 +78,7 @@
       >
         <Button primary fill large disabled={isDisabled}>Sign In</Button>
       </div>
-      
+
       <!-- <div>Error: </div> -->
     </form>
   </div>
