@@ -1,6 +1,7 @@
 import moment from 'moment';
 import {
   contactsStore,
+  notificationsStore,
   ordersStore,
   postsStore,
   repliesStore,
@@ -9,6 +10,7 @@ import {
 } from '../store';
 import {
   getContacts,
+  getNotificationsCount,
   getOrders,
   getPosts,
   getTeams,
@@ -19,9 +21,7 @@ import _ from 'lodash';
 
 export function formatDate(d, canFormatDate = false) {
   let datetime = '';
-  console.log('data',d);
 
-  
   if (d) {
     d = new Date(d);
     if (canFormatDate) {
@@ -65,7 +65,7 @@ export function formatInitials(user) {
   const finitial = firstName.substring(0, 1).toUpperCase();
   const linitial = lastName.substring(0, 1).toUpperCase();
 
-  return (finitial + linitial) || '';
+  return finitial + linitial || '';
 }
 
 export const getDisplayName = user => {
@@ -111,18 +111,21 @@ export async function setData(opts?) {
   let grabOrders;
   let grabTrucks;
   let grabTeams;
+  let grabNotificationsCount;
   if (!opts) {
     grabPosts = true;
     grabContacts = true;
     grabOrders = true;
     grabTrucks = true;
     grabTeams = true;
+    grabNotificationsCount = true;
   } else {
     grabPosts = opts.posts === true ? true : false;
     grabContacts = opts.contacts === true ? true : false;
     grabOrders = opts.orders === true ? true : false;
     grabTrucks = opts.trucks === true ? true : false;
     grabTeams = opts.teams === true ? true : false;
+    grabNotificationsCount = opts.notificationsCount === true ? true : false;
   }
 
   if (grabPosts) {
@@ -165,5 +168,9 @@ export async function setData(opts?) {
   if (grabTeams) {
     const m = await getTeams({ noAggregate: true });
     await teamsStore.setTeams(m);
+  }
+  if (grabNotificationsCount) {
+    const n = await getNotificationsCount();
+    await notificationsStore.setCounts(n);
   }
 }

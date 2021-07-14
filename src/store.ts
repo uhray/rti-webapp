@@ -8,6 +8,7 @@ const contacts = writable({});
 const orders = writable({});
 const trucks = writable({});
 const teams = writable({});
+const notifications = writable({});
 const data = writable({});
 
 export const userStore = {
@@ -44,6 +45,15 @@ export const trucksStore = {
 export const teamsStore = {
   subscribe: teams.subscribe,
   setTeams: t => teams.set({ teams: t }),
+};
+
+export const notificationsStore = {
+  subscribe: notifications.subscribe,
+  notifications: [],
+  counts: { total: 0, orders: 0, posts: 0 },
+  setNotifications: n =>
+    notifications.set({ ...notificationsStore, notifications: n }),
+  setCounts: n => notifications.set({ ...notificationsStore, counts: n }),
 };
 
 export const dataStore = {
