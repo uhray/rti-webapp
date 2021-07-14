@@ -21,6 +21,7 @@ import _ from 'lodash';
 
 export function formatDate(d, canFormatDate = false) {
   let datetime = '';
+  console.log('data', d);
 
   if (d) {
     d = new Date(d);
@@ -67,6 +68,18 @@ export function formatInitials(user) {
 
   return finitial + linitial || '';
 }
+
+export const formatPhoneNumber = p => {
+  let phone = '';
+
+  var cleaned = ('' + p).replace(/\D/g, '');
+  var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+  if (match) {
+    var intlCode = match[1] ? '+1 ' : '';
+    return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+  }
+  return '';
+};
 
 export const getDisplayName = user => {
   if (!_.get(user, 'contactInfo.firstName')) {
