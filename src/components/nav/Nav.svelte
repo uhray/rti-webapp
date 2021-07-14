@@ -3,13 +3,21 @@
   import Logo from '../../../static/images/rti.png';
   import { notificationsStore, userStore } from '../../store';
   import { flatMap } from 'lodash';
+  import { clearNotifications } from '../../tools/crudApi';
   export let segment;
   export let isOpen = true;
   export let user = undefined;
   export let role;
 
   let items = [];
-  let counts = {};
+  let counts = $notificationsStore.counts;
+
+  function clickOrders() {
+    if (counts.orders !== 0) {
+      const counts = clearNotifications('order');
+      notificationsStore.setCounts(counts);
+    }
+  }
 
   $: {
     user = $userStore;
@@ -23,6 +31,7 @@
         text: 'Orders',
         link: 'orders',
         amount: counts && counts.orders ? counts.orders : 0,
+        onClick: clickOrders,
       },
       {
         icon: 'message',
@@ -74,7 +83,7 @@
     {#if item.text == 'line'}
       <div class="line" />
     {:else}
-      <a rel="prefetch" href={item.link}>
+      <a rel="prefetch" href={item.link} on:click={item.onClick}>
         <NavItem
           isActive={segment == item.link ? true : false}
           {isOpen}

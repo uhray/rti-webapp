@@ -1,7 +1,7 @@
 import set from 'lodash/set';
 import merge from 'lodash/merge';
 import { goto } from '@sapper/app';
-import { userStore } from '../store';
+import { notificationsStore, userStore } from '../store';
 import * as _ from 'lodash';
 
 const tools: any = {};
@@ -268,6 +268,15 @@ export const createOrder = async data => {
 /******************** NOTIFICATIONS ********************/
 export const getNotificationsCount = async () => {
   const res = await tools.fetch(options().baseUrl + '/notifications/counts/', {
+    headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+  });
+  return res;
+};
+
+export const clearNotifications = async notificationType => {
+  const res = await tools.fetch(options().baseUrl + '/notifications/clear/', {
+    method: 'POST',
+    body: { notificationType },
     headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
   });
   return res;

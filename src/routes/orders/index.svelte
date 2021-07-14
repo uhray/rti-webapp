@@ -7,7 +7,8 @@
 
   import Header from './Header.svelte';
 
-  import { ordersStore, postsStore } from '../../store';
+  import { notificationsStore, ordersStore, postsStore } from '../../store';
+  import { clearNotifications } from '../../tools/crudApi';
 
   let orders;
   let posts;
@@ -52,10 +53,15 @@
     { header: 'actions', text: 'Actions', size: 'auto' },
   ];
 
-  onMount(() => {
+  onMount(async () => {
     if (document) {
       headerHeight = document.getElementById('Header').offsetHeight;
       headerHeight = headerHeight + 75;
+    }
+
+    if ($notificationsStore.counts.orders !== 0) {
+      const counts = clearNotifications('order');
+      notificationsStore.setCounts(counts);
     }
   });
 
