@@ -68,7 +68,7 @@
       return;
     }
 
-    let socket = io('https://truck-ops-api-sockets--dev.herokuapp.com:8000', {
+    let socket = io('https://truck-ops-api-sockets--dev.herokuapp.com', {
       transports: ['websocket'],
       pingTimeout: 60000,
       query: { userId: userId },
