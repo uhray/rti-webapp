@@ -68,8 +68,7 @@
       return;
     }
 
-    let socket = io('https://truck-ops-api--dev.herokuapp.com', {
-      port: '8001',
+    let socket = io('https://truck-ops-api--dev.herokuapp.com:8001', {
       transports: ['websocket'],
       pingTimeout: 60000,
       query: { userId: userId },
@@ -83,6 +82,7 @@
     });
 
     socket.on('connect', () => {
+      console.log('CONNECTED!!!!!!');
       socket.on('addPost', (post, initPostId) => {
         if (post.from !== userId) {
           postsStore.setPosts(_.uniqBy([post, ...$postsStore.posts], '_id'));
