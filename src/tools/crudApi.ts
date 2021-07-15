@@ -7,8 +7,6 @@ import * as _ from 'lodash';
 const tools: any = {};
 const env: string = process.env.ENV || 'staging';
 
-console.log('process.env', process.env);
-
 export default tools;
 
 export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {

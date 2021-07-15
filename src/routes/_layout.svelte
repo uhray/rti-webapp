@@ -68,7 +68,7 @@
       return;
     }
 
-    let socket = io('http://localhost:8001', {
+    let socket = io('https://truck-ops-api--dev.herokuapp.com:8001', {
       transports: ['websocket'],
       pingTimeout: 60000,
       query: { userId: userId },
