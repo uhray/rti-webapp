@@ -67,7 +67,7 @@
     if (!userId) {
       return;
     }
-    const socketUrl = this.ENV !== 'staging' ?
+    const socketUrl = env !== 'staging' ?
           'https://truck-ops-api-sockets--dev.herokuapp.com' :
           'https://truck-ops-api-sockets--staging.herokuapp.com';
     console.log('socketUrl', socketUrl);
