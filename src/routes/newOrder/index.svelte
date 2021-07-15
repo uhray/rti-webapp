@@ -19,7 +19,7 @@
     companyId: '',
     companyOrderId: '',
     companyPhoneNumber: '',
-    trailerNumber: '',
+    trailerId: '',
     trailerWeight: '',
     address: {
       addressLine1: '',
@@ -219,10 +219,10 @@
           />
         </label>
         <label>
-          <div>trailerNumber</div>
+          <div>trailerId</div>
           <input
             placeholder="ex 1234"
-            bind:value={stop.trailerNumber}
+            bind:value={stop.trailerId}
           />
         </label>
         <label>
