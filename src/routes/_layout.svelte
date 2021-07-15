@@ -67,8 +67,11 @@
     if (!userId) {
       return;
     }
-
-    let socket = io('http://localhost:8001', {
+    const socketUrl = this.ENV !== 'staging' ?
+          'https://truck-ops-api-sockets--dev.herokuapp.com' :
+          'https://truck-ops-api-sockets--staging.herokuapp.com';
+    console.log('socketUrl', socketUrl);
+    let socket = io('https://truck-ops-api-sockets--dev.herokuapp.com', {
       transports: ['websocket'],
       pingTimeout: 60000,
       query: { userId: userId },
@@ -82,6 +85,7 @@
     });
 
     socket.on('connect', () => {
+      console.log('CONNECTED!!!!!!');
       socket.on('addPost', (post, initPostId) => {
         if (post.from !== userId) {
           postsStore.setPosts(_.uniqBy([post, ...$postsStore.posts], '_id'));

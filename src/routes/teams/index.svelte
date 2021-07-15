@@ -2,8 +2,14 @@
   import { onMount } from 'svelte';
   import Header from './Header.svelte';
   import Table from '../../components/table/Table.svelte';
+  import OverlayAddTeam from '../../components/OverlayAddTeam/OverlayAddTeam.svelte';
   import OverlayDelete from '../../components/OverlayDelete/OverlayDelete.svelte';
-  import { deleteTeam, editTeam, editUser } from '../../tools/crudApi.ts';
+  import {
+    addTeam,
+    deleteTeam,
+    editTeam,
+    editUser,
+  } from '../../tools/crudApi.ts';
   import { getDisplayName } from '../../tools/tools.ts';
   import {
     contactsStore,
@@ -35,6 +41,7 @@
   let displayOverlayAdd = false;
   let isMultiple = false;
   let sendConfirmation = false;
+  let overlayError = '';
 
   let headerHeight = 0;
 
@@ -61,13 +68,15 @@
     truckOpts = [
       {
         header: 'Available Trucks',
-        opts: trucks
-          .flatMap(t =>
-            !unavailableTrucks.includes(t.truckId) ? t.truckId : []
-          )
-          .map(o => {
-            return { text: o, value: o, selected: false };
-          }),
+        opts: [{ text: 'None', value: null, selected: false }].concat(
+          trucks
+            .flatMap(t =>
+              !unavailableTrucks.includes(t.truckId) ? t.truckId : []
+            )
+            .map(o => {
+              return { text: o, value: o, selected: false };
+            })
+        ),
       },
     ];
 
@@ -90,8 +99,9 @@
           type: 'teams',
           id: t._id,
           name: t.teamId,
-          dm: t.manager[0] ? getDisplayName(t.manager[0]) : 'None',
+          dm: t.manager && t.manager[0] ? getDisplayName(t.manager[0]) : 'None',
           trucks: t.trucks.map(tr => tr.truckId),
+          createdAt: t.createdAt,
         };
       })
       .filter(u =>
@@ -159,10 +169,8 @@
     isMultiple = true;
   }
 
-  function handleAdd(role) {
-    console.log('#todo');
-    alert('TODO');
-    // displayOverlayAdd = true;
+  function handleAdd() {
+    displayOverlayAdd = true;
   }
 
   function clearOverlayData() {
@@ -175,35 +183,21 @@
     sendConfirmation = false;
   }
 
-  function addTeam(data) {
+  function send(data) {
     overlayError = null;
     const team = {
-      contactInfo: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-      },
-      teamname: data.teamname,
-      password: data.password,
-      role: data.role,
       teamId: data.teamId,
+      trucks: [],
     };
 
-    teamSignup(team)
-      .then(res => {
+    addTeam(team).then(res => {
+      if (res && res.data) {
+        teamsStore.setTeams([...$teamsStore.teams, res.data]);
         sendConfirmation = true;
-
-        contactsStore.setContacts({
-          ...$contactsStore.contacts,
-          users: [
-            ...$contactsStore.contacts.users,
-            { ...res, name: getDisplayName(res) },
-          ],
-        });
-      })
-      .catch(err => {
-        overlayError = err.code;
-      });
+      } else if (res && res.error) {
+        overlayError = res.error.code;
+      }
+    });
   }
 
   async function deleteTeams() {
@@ -249,110 +243,120 @@
   }
 
   function handleSelectTruck(teamId, truckId) {
-    let teamToEdit = _.find(teams, { _id: teamId });
-    let t = teamToEdit.trucks.map(t => t.truckId);
+    if (teamId && truckId) {
+      let teamToEdit = _.find(teams, { _id: teamId });
+      let t = teamToEdit.trucks.map(t => t.truckId);
 
-    teamToEdit = {
-      ...teamToEdit,
-      manager: teamToEdit.manager.map(m => m._id),
-      trucks: [...t, truckId],
-    };
+      teamToEdit = {
+        ...teamToEdit,
+        manager: teamToEdit.manager.map(m => m._id),
+        trucks: [...t, truckId],
+      };
 
-    delete teamToEdit.truckIds;
-    delete teamToEdit.__v;
+      delete teamToEdit.truckIds;
+      delete teamToEdit.__v;
 
-    editTeam(teamToEdit.teamId, teamToEdit).then(res => {
-      teamsStore.setTeams(
-        $teamsStore.teams.map(t => {
-          if (t._id == teamId) {
-            let newTruck = _.find($trucksStore.trucks, { truckId: truckId });
-            return {
-              ...t,
-              trucks: [...t.trucks, newTruck],
-            };
-          } else {
-            return t;
-          }
-        })
-      );
-    });
-  }
-
-  function handleSelectManager(teamId, managerId) {
-    let teamToEdit = _.find(teams, { _id: teamId });
-    let oldManagerId = teamToEdit.manager[0]
-      ? teamToEdit.manager[0]._id
-      : undefined;
-
-    let t = teamToEdit.trucks.map(t => t.truckId);
-
-    teamToEdit = { ...teamToEdit, manager: managerId, trucks: t };
-
-    delete teamToEdit.truckIds;
-    delete teamToEdit.__v;
-
-    editTeam(teamToEdit.teamId, teamToEdit)
-      .then(res => {
-        if (oldManagerId) {
-          let updatedOldManager = _.find($contactsStore.contacts.users, {
-            id: oldManagerId,
-          });
-          updatedOldManager.teamId = '';
-          editUser(oldManagerId, updatedOldManager).catch(err =>
-            console.log(err)
-          );
-        }
-
-        if (managerId) {
-          let updatedNewManager = _.find($contactsStore.contacts.users, {
-            id: managerId,
-          });
-          updatedNewManager.teamId = res.teamId;
-          editUser(managerId, updatedNewManager).catch(err => console.log(err));
-        }
-
+      editTeam(teamToEdit.teamId, teamToEdit).then(res => {
         teamsStore.setTeams(
           $teamsStore.teams.map(t => {
             if (t._id == teamId) {
+              let newTruck = _.find($trucksStore.trucks, { truckId: truckId });
               return {
                 ...t,
-                manager: res.manager,
+                trucks: [...t.trucks, newTruck],
               };
             } else {
               return t;
             }
           })
         );
+      });
+    } else {
+      console.error('no teamid or truckid');
+    }
+  }
 
-        contactsStore.setContacts({
-          ...$contactsStore.contacts,
-          teams: $contactsStore.contacts.teams.map(t => {
-            if (t.id === teamId) {
-              return {
-                ...t,
-                subgroups: t.subgroups.map(s => {
-                  if (s.name === 'Driver Manager') {
-                    if (managerId === null) {
-                      return { ...s, contacts: [] };
+  function handleSelectManager(teamId, managerId) {
+    if (teamId && managerId) {
+      let teamToEdit = _.find(teams, { _id: teamId });
+      let oldManagerId = teamToEdit.manager[0]
+        ? teamToEdit.manager[0]._id
+        : undefined;
+
+      let t = teamToEdit.trucks.map(t => t.truckId);
+
+      teamToEdit = { ...teamToEdit, manager: managerId, trucks: t };
+
+      delete teamToEdit.truckIds;
+      delete teamToEdit.__v;
+
+      editTeam(teamToEdit.teamId, teamToEdit)
+        .then(res => {
+          if (oldManagerId) {
+            let updatedOldManager = _.find($contactsStore.contacts.users, {
+              id: oldManagerId,
+            });
+            updatedOldManager.teamId = '';
+            editUser(oldManagerId, updatedOldManager).catch(err =>
+              console.error(err)
+            );
+          }
+
+          if (managerId) {
+            let updatedNewManager = _.find($contactsStore.contacts.users, {
+              id: managerId,
+            });
+            updatedNewManager.teamId = res.teamId;
+            editUser(managerId, updatedNewManager).catch(err =>
+              console.error(err)
+            );
+          }
+
+          teamsStore.setTeams(
+            $teamsStore.teams.map(t => {
+              if (t._id == teamId) {
+                return {
+                  ...t,
+                  manager: res.manager,
+                };
+              } else {
+                return t;
+              }
+            })
+          );
+
+          contactsStore.setContacts({
+            ...$contactsStore.contacts,
+            teams: $contactsStore.contacts.teams.map(t => {
+              if (t.id === teamId) {
+                return {
+                  ...t,
+                  subgroups: t.subgroups.map(s => {
+                    if (s.name === 'Driver Manager') {
+                      if (managerId === null) {
+                        return { ...s, contacts: [] };
+                      } else {
+                        let m = res.manager[0];
+                        m.id = m._id;
+                        m.name = getDisplayName(m);
+
+                        return { ...s, contacts: [m] };
+                      }
                     } else {
-                      let m = res.manager[0];
-                      m.id = m._id;
-                      m.name = getDisplayName(m);
-
-                      return { ...s, contacts: [m] };
+                      return s;
                     }
-                  } else {
-                    return s;
-                  }
-                }),
-              };
-            } else {
-              return t;
-            }
-          }),
-        });
-      })
-      .catch(err => console.log(err));
+                  }),
+                };
+              } else {
+                return t;
+              }
+            }),
+          });
+        })
+        .catch(err => console.error(err));
+    } else {
+      console.error('no teamid or managerid');
+    }
   }
 </script>
 
@@ -390,6 +394,10 @@
   />
   <br />
 </section>
+
+{#if displayOverlayAdd}
+  <OverlayAddTeam {overlayError} {sendConfirmation} {clearOverlayData} {send} />
+{/if}
 
 {#if displayOverlayDelete}
   <OverlayDelete

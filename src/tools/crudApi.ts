@@ -7,8 +7,6 @@ import * as _ from 'lodash';
 const tools: any = {};
 const env: string = process.env.ENV || 'staging';
 
-console.log('process.env', process.env);
-
 export default tools;
 
 export const crudApi = (tools.fetch = function (src, fetchOpts, opts) {
@@ -237,6 +235,21 @@ export const getTeamTruckIds = async id => {
   return res;
 };
 
+export const addTeam = async data => {
+  try {
+    const res = await tools.fetch(options().baseUrl + '/teams', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Turnkey-Auth': localStorage.getItem('turnkey') || '' },
+    });
+
+    return { data: res, error: null };
+  } catch (err) {
+    console.error('addteamerr', err);
+
+    return { data: null, error: err };
+  }
+};
 export const editTeam = async (id, data) => {
   const res = await tools.fetch(options().baseUrl + '/teams/' + id, {
     method: 'PUT',
