@@ -67,7 +67,10 @@
     if (!userId) {
       return;
     }
-
+    const socketUrl = this.ENV !== 'staging' ?
+          'https://truck-ops-api-sockets--dev.herokuapp.com' :
+          'https://truck-ops-api-sockets--staging.herokuapp.com';
+    console.log('socketUrl', socketUrl);
     let socket = io('https://truck-ops-api-sockets--dev.herokuapp.com', {
       transports: ['websocket'],
       pingTimeout: 60000,
