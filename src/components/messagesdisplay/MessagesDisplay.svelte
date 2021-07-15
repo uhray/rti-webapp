@@ -56,11 +56,15 @@
       orderId: replyPost.orderId,
     });
 
-    const s = _.find(o.stops, { status: 'inProgress' }) || _.first(o.stops);
-    const p = _.find(o.stops, { stopIndex: s.stopIndex - 1 });
-    const n = _.find(o.stops, { stopIndex: s.stopIndex + 1 });
+    if (o) {
+      const s = _.find(o.stops, { status: 'inProgress' }) || _.first(o.stops);
+      const p = _.find(o.stops, { stopIndex: s.stopIndex - 1 });
+      const n = _.find(o.stops, { stopIndex: s.stopIndex + 1 });
 
-    return { previous: p, current: s, next: n };
+      return { previous: p, current: s, next: n };
+    } else {
+      return { previous: undefined, current: undefined, next: undefined };
+    }
   }
 
   const scrollToBottom = (div = undefined) => {
