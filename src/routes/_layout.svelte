@@ -69,8 +69,8 @@
     }
 
     let socket = io('https://truck-ops-api--dev.herokuapp.com', {
-      // port: '8001',
-      // transports: ['websocket'],
+      port: '8001',
+      transports: ['websocket'],
       pingTimeout: 60000,
       query: { userId: userId },
     });
