@@ -44,7 +44,7 @@
 
         <div class="Post-reply">
           <div
-            class="Post-reply-action"
+            class="Post-reply-action clickable"
             on:click={() => {
               handleReplyPost(post);
             }}
