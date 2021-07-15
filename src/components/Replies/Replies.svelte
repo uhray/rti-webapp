@@ -36,7 +36,16 @@
               canFormatDate={true}
             />
 
-            <div class="Post-message">
+            <div
+              class={`Post-message ${
+                reply.replyType === 'DRIVER_UPDATE' ? 'notification' : ''
+              }`}
+            >
+              {#if reply.notificationType !== 'REPLY'}<div
+                  class="Post-message-subject"
+                >
+                  {reply.subject || _.startCase(_.lowerCase(reply.replyType))}
+                </div>{/if}
               <PostContent message={reply.message} />
             </div>
           </div>
@@ -44,7 +53,7 @@
 
         <div class="Post-reply">
           <div
-            class="Post-reply-action"
+            class="Post-reply-action clickable"
             on:click={() => {
               handleReplyPost(post);
             }}

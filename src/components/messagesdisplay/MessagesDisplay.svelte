@@ -7,7 +7,12 @@
   import RichText from '../richtext/RichText.svelte';
   import { uuid } from '../../tools/tools.ts';
   import { capitalize } from '../../tools/tools.ts';
-  import { postsStore, repliesStore, contactsStore } from '../../store';
+  import {
+    postsStore,
+    repliesStore,
+    contactsStore,
+    ordersStore,
+  } from '../../store';
   import { addPost, editPost } from '../../tools/crudApi.ts';
   import moment from 'moment';
   import { getPosts } from '../../tools/crudApi';
@@ -39,8 +44,24 @@
   let displayErrorResend = false;
   let displayErrorDelete = false;
   let errorPost = {};
+  let stopsInfo = {};
 
   $: if (!loading && slug) requestAnimationFrame(() => scrollToBottom());
+  $: {
+    if (replyPost) stopsInfo = getStops();
+  }
+
+  function getStops() {
+    const o = _.find($ordersStore.orders, {
+      orderId: replyPost.orderId,
+    });
+
+    const s = _.find(o.stops, { status: 'inProgress' }) || _.first(o.stops);
+    const p = _.find(o.stops, { stopIndex: s.stopIndex - 1 });
+    const n = _.find(o.stops, { stopIndex: s.stopIndex + 1 });
+
+    return { previous: p, current: s, next: n };
+  }
 
   const scrollToBottom = (div = undefined) => {
     if (div) {
@@ -414,10 +435,18 @@
                     <div class="Input-orderNumber">
                       Order #{replyPost.orderId}
                     </div>
-                    <!-- #TODO CHANGE THIS TO REPRESENT DATA -->
                     <div class="Input-orderDetails">
-                      Trip Started: COOCAR - AMRLAW • Appointment Time: Jan 25,
-                      9:45 am
+                      {`Trip Started: ${
+                        stopsInfo.previous
+                          ? stopsInfo.previous.companyId + ' - '
+                          : ''
+                      }${
+                        stopsInfo.current && stopsInfo.current.companyId
+                          ? stopsInfo.current.companyId
+                          : ''
+                      } • Appointment Time: ${moment(
+                        stopsInfo.current.appointmentTimeEnd
+                      ).format('MMM D, h:mm a')}`}
                     </div>
                   </div>
                 </div>

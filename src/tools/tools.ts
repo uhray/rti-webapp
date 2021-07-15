@@ -63,10 +63,15 @@ export function formatDate(d, canFormatDate = false) {
 export function formatInitials(user) {
   const firstName = _.get(user, 'contactInfo.firstName');
   const lastName = _.get(user, 'contactInfo.lastName');
-  const finitial = firstName.substring(0, 1).toUpperCase();
-  const linitial = lastName.substring(0, 1).toUpperCase();
 
-  return finitial + linitial || '';
+  if (firstName && lastName) {
+    const finitial = firstName.substring(0, 1).toUpperCase();
+    const linitial = lastName.substring(0, 1).toUpperCase();
+
+    return finitial + linitial;
+  }
+
+  return '';
 }
 
 export const formatPhoneNumber = p => {
