@@ -99,7 +99,11 @@
                   Stop {index}:&nbsp;&nbsp;
                 </span>
               {/if}
-              {s.company || _.get(s, 'address.addressLine1') + ' ' + _.get(s, 'address.addressLine2') || 'n/a'}
+              {_.get(s, 'company.name') ||
+                _.get(s, 'address.addressLine1') +
+                  ' ' +
+                  _.get(s, 'address.addressLine2') ||
+                'n/a'}
               <span class="OrderCard-address">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

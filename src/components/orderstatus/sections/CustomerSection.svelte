@@ -14,7 +14,7 @@
           <h4 class="OrderStatus-timelineHeader">Customer</h4>
           <div class="OrderStatus-timelineContent">
             <p class="OrderStatus-timelineContentText">
-              {stop.company || stop.address.city || '-'}
+              {_.get(stop, 'company.name') || '-'}
             </p>
           </div>
         </div>
@@ -22,7 +22,7 @@
           <h4 class="OrderStatus-timelineHeader">Customer ID</h4>
           <div class="OrderStatus-timelineContent">
             <p class="OrderStatus-timelineContentText">
-              {stop.companyId || '-'}
+              {stop.company.companyId || '-'}
             </p>
           </div>
         </div>
@@ -44,7 +44,7 @@
           <h4 class="OrderStatus-timelineHeader">Phone Number</h4>
           <div class="OrderStatus-timelineContent">
             <p class="OrderStatus-timelineContentText">
-              {formatPhoneNumber(stop.companyPhoneNumber) || '-'}
+              {formatPhoneNumber(stop.company.phoneNumber) || '-'}
             </p>
           </div>
         </div>
