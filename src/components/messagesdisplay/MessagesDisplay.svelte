@@ -437,12 +437,16 @@
                     </div>
                     <div class="Input-orderDetails">
                       {`Trip Started: ${
-                        stopsInfo.previous
-                          ? stopsInfo.previous.companyId + ' - '
+                        stopsInfo.previous &&
+                        stopsInfo.previous.company &&
+                        stopsInfo.previous.company.companyId
+                          ? stopsInfo.previous.company.companyId + ' - '
                           : ''
                       }${
-                        stopsInfo.current && stopsInfo.current.companyId
-                          ? stopsInfo.current.companyId
+                        stopsInfo.current &&
+                        stopsInfo.current.company &&
+                        stopsInfo.current.company.companyId
+                          ? stopsInfo.current.company.companyId
                           : ''
                       } • Appointment Time: ${moment(
                         stopsInfo.current.appointmentTimeEnd

@@ -117,7 +117,7 @@
   function mapDocs(docs) {
     return docs.map(d => {
       if (d.stopIndex !== undefined && d.stopIndex !== null) {
-        return { ...d, location: order.stops[d.stopIndex].companyId };
+        return { ...d, location: order.stops[d.stopIndex].company.companyId };
       } else {
         return { ...d, location: '' };
       }
@@ -167,6 +167,169 @@
     clearOverlayDeleteData();
   }
 </script>
+
+<svelte:head>
+  <title>Order #{order && order.orderId ? order.orderId : ''}</title>
+</svelte:head>
+
+{#if order}
+  <OrderHeader {order} {toggleMessage} />
+
+  <div class="Order">
+    <TripDetails {order} />
+
+    <!-- #TODO MAP DOCUMENTS BASED ON UPLOAD -->
+    {#if order.documents && order.documents.length > 0}
+      <h3>Uploaded Documents</h3>
+
+      <Table
+        {headers}
+        data={mapDocs(order.documents)}
+        {handleDelete}
+        {handleDeleteSelected}
+        {handleCheck}
+        selected={docsToDelete}
+        height={'267px'}
+      />
+    {/if}
+
+    <div style="margin-top: 18px;" />
+
+    <OrderStatus {order} />
+  </div>
+{:else}
+  <div class="Loader">
+    <div uk-spinner="ratio: 2" class="Loader-color" />
+  </div>
+{/if}
+
+{#if displayMessageOverlay}
+  <div class="MessageOverlay">
+    <div class="MessageOverlay-container">
+      {#if sendConfirmation}
+        <div
+          class="MessageOverlay-close clickable"
+          on:click={() => {
+            clearOverlayData();
+          }}
+        >
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 13 13"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7.78906 6.5L11.8125 2.51562L12.6328 1.69531C12.75 1.57812
+              12.75 1.38281 12.6328 1.22656L11.7734 0.367188C11.6172 0.25
+              11.4219 0.25 11.3047 0.367188L6.5 5.21094L1.65625 0.367188C1.53906
+              0.25 1.34375 0.25 1.1875 0.367188L0.328125 1.22656C0.210938
+              1.38281 0.210938 1.57812 0.328125 1.69531L5.17188 6.5L0.328125
+              11.3438C0.210938 11.4609 0.210938 11.6562 0.328125 11.8125L1.1875
+              12.6719C1.34375 12.7891 1.53906 12.7891 1.65625 12.6719L6.5
+              7.82812L10.4844 11.8516L11.3047 12.6719C11.4219 12.7891 11.6172
+              12.7891 11.7734 12.6719L12.6328 11.8125C12.75 11.6562 12.75
+              11.4609 12.6328 11.3438L7.78906 6.5Z"
+              fill="#A6ADC4"
+            />
+          </svg>
+        </div>
+        <div class="MessageOverlay-title">Confirmation</div>
+
+        <div class="MessageOverlay-message">Message was sent successfully.</div>
+
+        <div class=" MessageOverlay-buttons">
+          <div
+            class="MessageOverlay-button"
+            on:click={() => {
+              clearOverlayData();
+            }}
+          >
+            <Button primary>Got it</Button>
+          </div>
+        </div>
+      {:else}
+        <div
+          class="MessageOverlay-close clickable"
+          on:click={() => {
+            clearOverlayData();
+          }}
+        >
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 13 13"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7.78906 6.5L11.8125 2.51562L12.6328 1.69531C12.75 1.57812
+              12.75 1.38281 12.6328 1.22656L11.7734 0.367188C11.6172 0.25
+              11.4219 0.25 11.3047 0.367188L6.5 5.21094L1.65625 0.367188C1.53906
+              0.25 1.34375 0.25 1.1875 0.367188L0.328125 1.22656C0.210938
+              1.38281 0.210938 1.57812 0.328125 1.69531L5.17188 6.5L0.328125
+              11.3438C0.210938 11.4609 0.210938 11.6562 0.328125 11.8125L1.1875
+              12.6719C1.34375 12.7891 1.53906 12.7891 1.65625 12.6719L6.5
+              7.82812L10.4844 11.8516L11.3047 12.6719C11.4219 12.7891 11.6172
+              12.7891 11.7734 12.6719L12.6328 11.8125C12.75 11.6562 12.75
+              11.4609 12.6328 11.3438L7.78906 6.5Z"
+              fill="#A6ADC4"
+            />
+          </svg>
+        </div>
+        <div class="MessageOverlay-title">
+          Send Message to Order #{order.orderId}
+        </div>
+
+        <div class="MessageOverlay-form">
+          {#if attachments.length > 0}
+            <div class="MessageOverlay-attachments">
+              <MessageAttachments
+                isDisplay={false}
+                {removeAttachment}
+                {attachments}
+              />
+            </div>
+          {/if}
+
+          <div class="MessageOverlay-rte">
+            <RichText
+              id={uuid()}
+              {addAttachment}
+              {handleInput}
+              hideSend={true}
+            />
+          </div>
+
+          <div class=" MessageOverlay-buttons">
+            <div
+              class="MessageOverlay-button"
+              on:click={() => {
+                clearOverlayData();
+              }}
+            >
+              <Button primary outline>Cancel</Button>
+            </div>
+
+            <div on:click={send}>
+              <Button primary disabled={!canSubmit}>Send Message</Button>
+            </div>
+          </div>
+        </div>
+      {/if}
+    </div>
+  </div>
+{/if}
+
+{#if displayOverlayDelete}
+  <OverlayDelete
+    clearOverlayData={clearOverlayDeleteData}
+    send={deleteDocs}
+    type={'document'}
+    {isMultiple}
+  />
+{/if}
 
 <style lang="scss">
   .Order {
@@ -267,154 +430,3 @@
     }
   }
 </style>
-
-<svelte:head>
-  <title>Order #{order && order.orderId ? order.orderId : ''}</title>
-</svelte:head>
-
-{#if order}
-  <OrderHeader {order} {toggleMessage} />
-
-  <div class="Order">
-    <TripDetails {order} />
-
-    <!-- #TODO MAP DOCUMENTS BASED ON UPLOAD -->
-    {#if order.documents && order.documents.length > 0}
-      <h3>Uploaded Documents</h3>
-
-      <Table
-        {headers}
-        data={mapDocs(order.documents)}
-        {handleDelete}
-        {handleDeleteSelected}
-        {handleCheck}
-        selected={docsToDelete}
-        height={'267px'} />
-    {/if}
-
-    <div style="margin-top: 18px;" />
-
-    <OrderStatus {order} />
-  </div>
-{:else}
-  <div class="Loader">
-    <div uk-spinner="ratio: 2" class="Loader-color" />
-  </div>
-{/if}
-
-{#if displayMessageOverlay}
-  <div class="MessageOverlay">
-    <div class="MessageOverlay-container">
-      {#if sendConfirmation}
-        <div
-          class="MessageOverlay-close clickable"
-          on:click={() => {
-            clearOverlayData();
-          }}>
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 13 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M7.78906 6.5L11.8125 2.51562L12.6328 1.69531C12.75 1.57812
-              12.75 1.38281 12.6328 1.22656L11.7734 0.367188C11.6172 0.25
-              11.4219 0.25 11.3047 0.367188L6.5 5.21094L1.65625 0.367188C1.53906
-              0.25 1.34375 0.25 1.1875 0.367188L0.328125 1.22656C0.210938
-              1.38281 0.210938 1.57812 0.328125 1.69531L5.17188 6.5L0.328125
-              11.3438C0.210938 11.4609 0.210938 11.6562 0.328125 11.8125L1.1875
-              12.6719C1.34375 12.7891 1.53906 12.7891 1.65625 12.6719L6.5
-              7.82812L10.4844 11.8516L11.3047 12.6719C11.4219 12.7891 11.6172
-              12.7891 11.7734 12.6719L12.6328 11.8125C12.75 11.6562 12.75
-              11.4609 12.6328 11.3438L7.78906 6.5Z"
-              fill="#A6ADC4" />
-          </svg>
-        </div>
-        <div class="MessageOverlay-title">Confirmation</div>
-
-        <div class="MessageOverlay-message">Message was sent successfully.</div>
-
-        <div class=" MessageOverlay-buttons">
-          <div
-            class="MessageOverlay-button"
-            on:click={() => {
-              clearOverlayData();
-            }}>
-            <Button primary>Got it</Button>
-          </div>
-        </div>
-      {:else}
-        <div
-          class="MessageOverlay-close clickable"
-          on:click={() => {
-            clearOverlayData();
-          }}>
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 13 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M7.78906 6.5L11.8125 2.51562L12.6328 1.69531C12.75 1.57812
-              12.75 1.38281 12.6328 1.22656L11.7734 0.367188C11.6172 0.25
-              11.4219 0.25 11.3047 0.367188L6.5 5.21094L1.65625 0.367188C1.53906
-              0.25 1.34375 0.25 1.1875 0.367188L0.328125 1.22656C0.210938
-              1.38281 0.210938 1.57812 0.328125 1.69531L5.17188 6.5L0.328125
-              11.3438C0.210938 11.4609 0.210938 11.6562 0.328125 11.8125L1.1875
-              12.6719C1.34375 12.7891 1.53906 12.7891 1.65625 12.6719L6.5
-              7.82812L10.4844 11.8516L11.3047 12.6719C11.4219 12.7891 11.6172
-              12.7891 11.7734 12.6719L12.6328 11.8125C12.75 11.6562 12.75
-              11.4609 12.6328 11.3438L7.78906 6.5Z"
-              fill="#A6ADC4" />
-          </svg>
-        </div>
-        <div class="MessageOverlay-title">
-          Send Message to Order #{order.orderId}
-        </div>
-
-        <div class="MessageOverlay-form">
-          {#if attachments.length > 0}
-            <div class="MessageOverlay-attachments">
-              <MessageAttachments
-                isDisplay={false}
-                {removeAttachment}
-                {attachments} />
-            </div>
-          {/if}
-
-          <div class="MessageOverlay-rte">
-            <RichText
-              id={uuid()}
-              {addAttachment}
-              {handleInput}
-              hideSend={true} />
-          </div>
-
-          <div class=" MessageOverlay-buttons">
-            <div
-              class="MessageOverlay-button"
-              on:click={() => {
-                clearOverlayData();
-              }}>
-              <Button primary outline>Cancel</Button>
-            </div>
-
-            <div on:click={send}>
-              <Button primary disabled={!canSubmit}>Send Message</Button>
-            </div>
-          </div>
-        </div>
-      {/if}
-    </div>
-  </div>
-{/if}
-
-{#if displayOverlayDelete}
-  <OverlayDelete
-    clearOverlayData={clearOverlayDeleteData}
-    send={deleteDocs}
-    type={'document'}
-    {isMultiple} />
-{/if}
